@@ -1,17 +1,21 @@
 ﻿using System;
-partial class Program
+
+namespace Stage0
 {
-    static void Main(string[] args)
+    partial class Program
     {
-        Welcome3410();
-        Welcome8613();
-        Console.ReadKey();
-    }
-    static partial void Welcome8613();
-    private static void Welcome3410()
-    {
-        Console.WriteLine("Enter your name: ");
-        string userName = Console.ReadLine();
-        Console.WriteLine("{0}, welcome to my first console application", userName);
+        static void Main(string[] args)
+        {
+            Welcome3410();
+            Welcome8613();
+            Console.ReadKey();
+        }
+        static partial void Welcome8613();
+        private static void Welcome3410()
+        {
+            Console.WriteLine("Enter your name: ");
+            string userName = Console.ReadLine();
+            Console.WriteLine("{0}, welcome to my first console application", userName);
+        }
     }
 }
