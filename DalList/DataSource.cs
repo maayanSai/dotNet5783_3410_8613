@@ -20,12 +20,12 @@ internal static class DataSource
         // order
        
         internal const int s_startOrderNumber = 0;
-        private static int s_NextOrderNumber = s_startOrderNumber;
+        internal static int s_NextOrderNumber = s_startOrderNumber;
         internal static int NextOrderNumber { get => s_NextOrderNumber++; }
         // orderItem
         
         internal const int s_startOrderItemNumber = 0;
-        private static int s_NextOrderItemNumber = s_startOrderItemNumber;
+        internal static int s_NextOrderItemNumber = s_startOrderItemNumber;
         internal static int NextOrderItemArr { get => s_NextOrderItemNumber++; }
         // Product
         internal static int ArrProductIndex = 0;
