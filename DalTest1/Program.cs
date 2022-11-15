@@ -1,13 +1,13 @@
 ﻿using Dal;
 using DO;
-using System.Data.Common;
-using System.Runtime.CompilerServices;
-using System.Security.AccessControl;
+using System;
+
 
 namespace DalTest
 {
-    public class Class1
+    public class Program
     {
+        
         private static DalProduct dalProduct = new DalProduct();
         private static DalOrder dalOrder = new DalOrder();
         private static DalOrderItem dalOrderItem = new DalOrderItem();
@@ -21,7 +21,7 @@ namespace DalTest
             Console.WriteLine("2: to order");
             Console.WriteLine("3: to orderItem");
             chooseEntity = Convert.ToChar(Console.ReadLine());
-            while(chooseEntity != '0')
+            while (chooseEntity != '0')
             {
                 try
                 {
@@ -47,7 +47,7 @@ namespace DalTest
                                     Console.WriteLine("enter price of product");
                                     p.Price = Convert.ToDouble(Console.ReadLine());
                                     Console.WriteLine("enter category of product");
-                                    p.Category = (Enums.Category)Convert.ToInt32(Console.ReadLine());
+                                    p.Category = (Category)Convert.ToInt32(Console.ReadLine());
                                     Console.WriteLine("enter inStock of product");
                                     p.InStock = Convert.ToInt32(Console.ReadLine());
                                     Dal.DalProduct.AddToProduct(p);
@@ -73,7 +73,7 @@ namespace DalTest
                                     Console.WriteLine("enter price of product");
                                     p1.Price = Convert.ToDouble(Console.ReadLine());
                                     Console.WriteLine("enter category of product");
-                                    p1.Category = (Enums.Category)Convert.ToInt32(Console.ReadLine());
+                                    p1.Category = (Category)Convert.ToInt32(Console.ReadLine());
                                     Console.WriteLine("enter inStock of product");
                                     p1.InStock = Convert.ToInt32(Console.ReadLine());
                                     if (p1.Name.Length > 0)
@@ -203,10 +203,10 @@ namespace DalTest
                             break;
                     }
                 }
-                catch (FormatException str)
+                catch (Exception str)
                 {
                     Console.WriteLine(str);
-                } 
+                }
             }
         }
     }

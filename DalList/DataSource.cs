@@ -4,29 +4,34 @@ using DO;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 
 namespace Dal;
 
 internal static class DataSource
 {
-    static DataSource() { s_Initialize(); }
+    static DataSource() { s_Initialize();}
     private static readonly Random rnd = new();
     internal static Order[] orderArr = new Order[100];
     internal static OrderItem[] orderItemArr = new OrderItem[200];
+
+
+
+
     internal static Product[] productArr = new Product[50];
     internal static class Config
     {
         // order
-       
-        internal const int s_startOrderNumber = 0;
-        internal static int s_NextOrderNumber = s_startOrderNumber;
-        internal static int NextOrderNumber { get => s_NextOrderNumber++; }
+
+        // internal const int s_startOrderNumber = 0;
+        internal static int s_NextOrderNumber = 0; //s_startOrderNumber;
+        internal static int NextOrderNumber  => s_NextOrderNumber++; 
         // orderItem
-        
-        internal const int s_startOrderItemNumber = 0;
-        internal static int s_NextOrderItemNumber = s_startOrderItemNumber;
-        internal static int NextOrderItemArr { get => s_NextOrderItemNumber++; }
+
+        // internal const int s_startOrderItemNumber = 0;
+        internal static int s_NextOrderItemNumber = 0; //s_startOrderItemNumber;
+        internal static int NextOrderItemArr => s_NextOrderItemNumber++; 
         // Product
         internal static int ArrProductIndex = 0;
 
@@ -61,15 +66,26 @@ internal static class DataSource
             }
             while (isExist);
 
-            p.Category = (Enums.Category)rnd.Next(5);
+            p.Category = (Category)rnd.Next(5);
             p.Name = productNames[(int)p.Category,rnd.Next(5)];
             p.Price = rnd.Next(500, 5000);
             if (i == 1) p.InStock = 0;//חמש אחוז אפס
             else
-                rnd.Next(50);
-            DalProduct.AddToProduct(p);
+                rnd.Next(4);
+            try
+            {
+                DalProduct.AddToProduct(p);
+                
+            }
+            catch(Exception str)
+            {
+                Console.WriteLine( str);
+                i--;
+            }
+            
+            
         }
-        
+        Console.WriteLine("eee");
     }
     private static void createAndInitOrders()
     {
@@ -98,7 +114,15 @@ internal static class DataSource
                 TimeSpan deliverTime = new TimeSpan(days, 0, 0, 0);
                 ord.DeliveryrDate = ord.ShipDate + deliverTime;
             }
-            DalOrder.addToOrder(ord);
+            try
+            {
+                DalOrder.addToOrder(ord);
+            }
+            catch(Exception str)
+            {
+                Console.WriteLine(str);
+                i--;
+            }
         }
     }
     private static void createAndInitOrderItem()
@@ -117,16 +141,26 @@ internal static class DataSource
                    oi.ProductID = DataSource.productArr[y].ID;
                 oi.OrderID = DataSource.orderArr[i].ID;
                 oi.Price = DataSource.productArr[y].Price;
-                DalOrderItem.addToOrderItem(oi);
+                try
+                {
+                    DalOrderItem.addToOrderItem(oi);
+                }
+                catch(Exception str)
+                {
+                    Console.WriteLine(str);
+                    i--;
+                }
             }  
         }
      
     }
     private static void s_Initialize()
     {
+
         createAndInitProducts();
         createAndInitOrders();
         createAndInitOrderItem();
+
     }
 }
 

@@ -1,7 +1,4 @@
-﻿
-
-using DO;
-
+﻿using DO;
 namespace Dal;
 
 public class DalOrder
@@ -63,5 +60,4 @@ public class DalOrder
         if (!isFind)
             throw new Exception("the object was not found");
     }
-
 }
