@@ -1,10 +1,9 @@
 ﻿using DO;
-using System.Diagnostics.Contracts;
-
 namespace Dal;
 
 public class DalProduct
 {
+    int x = DataSource.productArr.Length;
     public static void AddToProduct(Product p)
     {
         for (int i = 0; i < DataSource.Config.ArrProductIndex; i++)
@@ -14,13 +13,14 @@ public class DalProduct
                 throw new Exception("the ID is already exists");
             }
         }
-        
-            DataSource.productArr[DataSource.Config.ArrProductIndex] = p;
-            DataSource.Config.ArrProductIndex++;
-        
+
+        DataSource.productArr[DataSource.Config.ArrProductIndex] = p;
+        DataSource.Config.ArrProductIndex++;
+
     }
     public static Product getProduct(int id)
     {
+        int x = DataSource.productArr.Length;
         for (int i = 0; i < DataSource.Config.ArrProductIndex; i++)
             if (DataSource.productArr[i].ID == id)
                 return DataSource.productArr[i];
@@ -28,14 +28,16 @@ public class DalProduct
     }
     public static Product[] allProduct()
     {
+        int x = DataSource.productArr.Length;
         Product[] Arr = new Product[DataSource.Config.ArrProductIndex];
-     
-        for (int i = 0; i<DataSource.Config.ArrProductIndex; i++)
-          Arr[i]=DataSource.productArr[i];  
-       return Arr;
+
+        for (int i = 0; i < DataSource.Config.ArrProductIndex; i++)
+            Arr[i] = DataSource.productArr[i];
+        return Arr;
     }
     public static void deleteProcuct(int id)
     {
+        int x = DataSource.productArr.Length;
         bool isFind = false;
         for (int i = 0; i < DataSource.Config.ArrProductIndex; i++)
         {
@@ -46,11 +48,12 @@ public class DalProduct
                 isFind = true;
             }
         }
-        if(!isFind)
+        if (!isFind)
             throw new Exception("the object was not found");
     }
     public static void updateProcuct(Product p)
     {
+        int x = DataSource.productArr.Length;
         bool isFind = false;
         for (int i = 0; i < DataSource.Config.ArrProductIndex; i++)
         {

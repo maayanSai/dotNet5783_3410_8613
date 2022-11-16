@@ -1,20 +1,21 @@
 ﻿using DO;
 namespace Dal;
-
 public class DalOrder
 {
     public static int addToOrder(Order ord)
     {
-        for (int i = 0; i < DataSource.Config.s_NextOrderNumber; i++)
-            if(ord.ID == DataSource.orderArr[i].ID)
+        int x = DataSource.orderArr.Length;
+        for (int i = 0; i <= DataSource.Config.s_NextOrderNumber; i++)
+            if (ord.ID == DataSource.orderArr[i].ID)
                 throw new Exception("the object is allreay exists");
-        int x = DataSource.Config.NextOrderNumber;
-        ord.ID = x;
-        DataSource.orderArr[x] = ord;
-        return ord.ID; 
+        int id = DataSource.Config.NextOrderNumber;
+        ord.ID = id;
+        DataSource.orderArr[id] = ord;
+        return ord.ID;
     }
     public static Order getOrder(int id)
     {
+        int x = DataSource.orderArr.Length;
         for (int i = 0; i < DataSource.Config.s_NextOrderNumber; i++)
         {
             if (id == DataSource.orderArr[i].ID)
@@ -24,6 +25,7 @@ public class DalOrder
     }
     public static Order[] allOrder()
     {
+        int x = DataSource.orderArr.Length;
         Order[] Arr = new Order[DataSource.Config.s_NextOrderNumber];
         for (int i = 0; i < DataSource.Config.s_NextOrderNumber; i++)
         {
@@ -33,6 +35,7 @@ public class DalOrder
     }
     public static void deleteOrder(int id)
     {
+        int x = DataSource.orderArr.Length;
         bool isFind = false;
         for (int i = 0; i < DataSource.Config.s_NextOrderNumber; i++)
         {
@@ -48,6 +51,7 @@ public class DalOrder
     }
     public static void updateOrder(Order ord)
     {
+        int x = DataSource.orderArr.Length;
         bool isFind = false;
         for (int i = 0; i < DataSource.Config.s_NextOrderNumber; i++)
         {
@@ -61,3 +65,4 @@ public class DalOrder
             throw new Exception("the object was not found");
     }
 }
+

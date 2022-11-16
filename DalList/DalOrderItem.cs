@@ -5,18 +5,20 @@ namespace Dal;
 
 public class DalOrderItem
 {
-    public static int addToOrderItem(OrderItem oi) 
+    int x = DataSource.orderItemArr.Length;
+    public static int addToOrderItem(OrderItem oi)
     {
         for (int i = 0; i < DataSource.Config.s_NextOrderItemNumber; i++)
             if (oi.ID == DataSource.orderItemArr[i].ID)
                 throw new Exception("the object is allreay exists");
-        int x = DataSource.Config.NextOrderItemArr;
-        oi.ID = x;
-        DataSource.orderItemArr[x] = oi;
+        int id = DataSource.Config.NextOrderItemArr;
+        oi.ID = id;
+        DataSource.orderItemArr[id] = oi;
         return oi.ID;
     }
     public static OrderItem getOrderItem(int id)
     {
+        int x = DataSource.orderItemArr.Length;
         for (int i = 0; i < DataSource.Config.s_NextOrderItemNumber; i++)
             if (id == DataSource.orderItemArr[i].ID)
                 return DataSource.orderItemArr[i];
@@ -24,6 +26,7 @@ public class DalOrderItem
     }
     public static OrderItem[] allOrderItem()
     {
+        int x = DataSource.orderItemArr.Length;
         OrderItem[] Arr = new OrderItem[DataSource.Config.s_NextOrderItemNumber];
         for (int i = 0; i < DataSource.Config.s_NextOrderItemNumber; i++)
             Arr[i] = DataSource.orderItemArr[i];
@@ -31,20 +34,22 @@ public class DalOrderItem
     }
     public static void deleteOrederItem(int id)
     {
+        int x = DataSource.orderItemArr.Length;
         bool isFind = false;
         for (int i = 0; i < DataSource.Config.s_NextOrderItemNumber; i++)
-            if(id== DataSource.orderItemArr[i].ID)
+            if (id == DataSource.orderItemArr[i].ID)
             {
                 DataSource.orderItemArr[i] = DataSource.orderItemArr[DataSource.Config.s_NextOrderItemNumber];
                 DataSource.Config.s_NextOrderItemNumber--;
                 isFind = true;
             }
-                // האם צריך לשנות Id
-       if(!isFind)
+        // האם צריך לשנות Id
+        if (!isFind)
             throw new Exception("the object was not found");
     }
     public static void updateOrederItem(OrderItem oi)
     {
+        int x = DataSource.orderItemArr.Length;
         bool isFind = false;
         for (int i = 0; i < DataSource.Config.s_NextOrderItemNumber; i++)
             if (oi.ID == DataSource.orderItemArr[i].ID)
