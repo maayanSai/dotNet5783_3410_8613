@@ -1,63 +1,67 @@
 ﻿using DO;
-using System.Security.Cryptography;
-
 namespace Dal;
-
 public class DalOrderItem
 {
-    int x = DataSource.orderItemArr.Length;
-    public static int addToOrderItem(OrderItem oi)
+    /// <summary>
+    /// A function that adds an additional item to the order
+    /// </summary>
+    public static int AddToOrderItem(OrderItem oi)
     {
-        //for (int i = 0; i < DataSource.Config.s_NextOrderItemNumber; i++)
-        //    if (oi.ID == DataSource.orderItemArr[i].ID)
-        //        throw new Exception("the object is allreay exists");
-        int id = DataSource.Config.NextOrderItemArr;
+        int id = DataSource._nextOrderItemArr; // We will set the ID to the last empty place
         oi.ID = id;
-        DataSource.orderItemArr[id] = oi;
+        DataSource._orderItemArr[id] = oi; // We will insert the new item into the array
         return oi.ID;
     }
-    public static OrderItem getOrderItem(int id)
+    /// <summary>
+    /// A function that returns an item by item number
+    /// </summary>
+    public static OrderItem GetOrderItem(int id)
     {
-        int x = DataSource.orderItemArr.Length;
-        for (int i = 0; i < DataSource.Config.s_NextOrderItemNumber; i++)
-            if (id == DataSource.orderItemArr[i].ID)
-                return DataSource.orderItemArr[i];
-        throw new Exception("the object was not found");
+        for (int i = 0; i < DataSource._sNextOrderItemNumber; i++) // A loop that goes through all the items
+            if (id == DataSource._orderItemArr[i].ID) // If the item exists, it returns it
+                return DataSource._orderItemArr[i];
+        throw new Exception("the object was not found"); // If the item does not exist, it returns an error
     }
-    public static OrderItem[] allOrderItem()
+    /// <summary>
+    /// A function that returns the entire array of items
+    /// </summary>
+    public static OrderItem[] AllOrderItem()
     {
-        int x = DataSource.orderItemArr.Length;
-        OrderItem[] Arr = new OrderItem[DataSource.Config.s_NextOrderItemNumber];
-        for (int i = 0; i < DataSource.Config.s_NextOrderItemNumber; i++)
-            Arr[i] = DataSource.orderItemArr[i];
-        return Arr;
+        OrderItem[] Arr = new OrderItem[DataSource._sNextOrderItemNumber]; // A new array will be built the size of the number of existing items
+        for (int i = 0; i < DataSource._sNextOrderItemNumber; i++) // A loop that goes through all the items
+            Arr[i] = DataSource._orderItemArr[i]; // We will copy the items
+        return Arr; // We will return the copied array
     }
-    public static void deleteOrederItem(int id)
+    /// <summary>
+    /// A function that deletes an item by item number
+    /// </summary>
+    public static void DeleteOrederItem(int id)
     {
-        int x = DataSource.orderItemArr.Length;
-        bool isFind = false;
-        for (int i = 0; i < DataSource.Config.s_NextOrderItemNumber; i++)
-            if (id == DataSource.orderItemArr[i].ID)
+        bool isFind = false; // Checks if the item is found
+        for (int i = 0; i < DataSource._sNextOrderItemNumber; i++) // A loop that goes through all the items
+            if (id == DataSource._orderItemArr[i].ID) // If the item exists
             {
-                DataSource.orderItemArr[i] = DataSource.orderItemArr[DataSource.Config.s_NextOrderItemNumber];
-                DataSource.Config.s_NextOrderItemNumber--;
-                isFind = true;
+                // We will insert the last item in the array instead of the deleted item
+                DataSource._orderItemArr[i] = DataSource._orderItemArr[DataSource._sNextOrderItemNumber];
+                DataSource._sNextOrderItemNumber--; // We will reduce the number of items
+                isFind = true; // the item exists
             }
-        // האם צריך לשנות Id
-        if (!isFind)
+        if (!isFind) // if not
             throw new Exception("the object was not found");
     }
-    public static void updateOrederItem(OrderItem oi)
+    /// <summary>
+    /// A function that updates an item
+    /// </summary>
+    public static void UpdateOrederItem(OrderItem oi)
     {
-        int x = DataSource.orderItemArr.Length;
-        bool isFind = false;
-        for (int i = 0; i < DataSource.Config.s_NextOrderItemNumber; i++)
-            if (oi.ID == DataSource.orderItemArr[i].ID)
+        bool isFind = false; // Checks if the item is found
+        for (int i = 0; i < DataSource._sNextOrderItemNumber; i++) // A loop that goes through all the items
+            if (oi.ID == DataSource._orderItemArr[i].ID) // If the item exists
             {
-                isFind = true;
-                DataSource.orderItemArr[i] = oi;
+                isFind = true; // the item exists
+                DataSource._orderItemArr[i] = oi; // We will insert the new item
             }
-        if (!isFind)
+        if (!isFind) // if not
             throw new Exception("the object was not found");
     }
 }

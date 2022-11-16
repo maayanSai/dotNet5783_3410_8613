@@ -2,67 +2,71 @@
 namespace Dal;
 public class DalOrder
 {
-    public static int addToOrder(Order ord)
+    /// <summary>
+    /// A function that adds a new order to the order array
+    /// </summary>
+    public static int AddToOrder(Order ord) 
     {
-        int x = DataSource.orderArr.Length;
-        //for (int i = 0; i <= DataSource.Config.s_NextOrderNumber; i++)
-        //    if (ord.ID == DataSource.orderArr[i].ID)
-        //        throw new Exception("the object is allreay exists");
-        int id = DataSource.Config.NextOrderNumber;
-        ord.ID = id;
-        DataSource.orderArr[id] = ord;
+        int id = DataSource._nextOrderNumber; // The ID will be equal to the last empty place in the array
+        ord.ID = id; // Enter the ID
+        DataSource._orderArr[id] = ord; // We will insert the new order into the order array
         return ord.ID;
     }
-    public static Order getOrder(int id)
+    /// <summary>
+    /// A function that receives an ID and returns the order
+    /// </summary>
+    public static Order GetOrder(int id)
     {
-        int x = DataSource.orderArr.Length;
-        for (int i = 0; i < DataSource.Config.s_NextOrderNumber; i++)
-        {
-            if (id == DataSource.orderArr[i].ID)
-                return DataSource.orderArr[i];
-        }
-        throw new Exception("the object was not found");
+        for (int i = 0; i < DataSource._sNextOrderNumber; i++) // A loop that goes through the orders array
+            if (id == DataSource._orderArr[i].ID) // If the order is found
+                return DataSource._orderArr[i]; // Return the order
+        throw new Exception("the object was not found"); // If the order is not found an error will be sent
     }
-    public static Order[] allOrder()
+    /// <summary>
+    /// A function that returns the entire array of orders
+    /// </summary>
+    public static Order[] AllOrder()
     {
-        int x = DataSource.orderArr.Length;
-        Order[] Arr = new Order[DataSource.Config.s_NextOrderNumber];
-        for (int i = 0; i < DataSource.Config.s_NextOrderNumber; i++)
-        {
-            Arr[i] = DataSource.orderArr[i];
-        }
-        return Arr;
+        Order[] Arr = new Order[DataSource._sNextOrderNumber]; // We will create a new array with the largest number of existing orders
+        for (int i = 0; i < DataSource._sNextOrderNumber; i++) // A loop that goes through the orders array
+            Arr[i] = DataSource._orderArr[i]; // We will copy the orders
+        return Arr; // We will return a copy array
     }
-    public static void deleteOrder(int id)
+    /// <summary>
+    /// A function that receives an order number and deletes it
+    /// </summary>
+    public static void DeleteOrder(int id)
     {
-        int x = DataSource.orderArr.Length;
-        bool isFind = false;
-        for (int i = 0; i < DataSource.Config.s_NextOrderNumber; i++)
+        bool isFind = false; // Checks if the order is found
+        for (int i = 0; i < DataSource._sNextOrderNumber; i++) // A loop that goes through the orders array
         {
-            if (id == DataSource.orderArr[i].ID)
+            if (id == DataSource._orderArr[i].ID) // If the order is found
             {
-                DataSource.orderArr[i] = DataSource.orderArr[DataSource.Config.s_NextOrderNumber];
-                DataSource.Config.s_NextOrderNumber--;
-                isFind = true;
+                //We will insert the last order in the array, in the place of the order that is deleted
+                DataSource._orderArr[i] = DataSource._orderArr[DataSource._sNextOrderNumber];
+                DataSource._sNextOrderNumber--; // We will reduce the number of existing orders
+                isFind = true; // Order found
             }
         }
-        if (!isFind)
-            throw new Exception("the object was not found");
+        if (!isFind) // Order not found
+            throw new Exception("the object was not found"); // throws an error
     }
-    public static void updateOrder(Order ord)
+    /// <summary>
+    /// A function that updates an order
+    /// </summary>
+    public static void UpdateOrder(Order ord)
     {
-        int x = DataSource.orderArr.Length;
-        bool isFind = false;
-        for (int i = 0; i < DataSource.Config.s_NextOrderNumber; i++)
+        bool isFind = false; // Checks if the order is found
+        for (int i = 0; i < DataSource._sNextOrderNumber; i++) // A loop that goes through the orders array
         {
-            if (ord.ID == DataSource.orderArr[i].ID)
+            if (ord.ID == DataSource._orderArr[i].ID) // If the order is found
             {
-                DataSource.orderArr[i] = ord;
-                isFind = true;
+                DataSource._orderArr[i] = ord; // We will enter the new order instead
+                isFind = true; // Order found
             }
         }
-        if (!isFind)
-            throw new Exception("the object was not found");
+        if (!isFind) // Order not found
+            throw new Exception("the object was not found"); // throws an error
     }
 }
 

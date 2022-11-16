@@ -1,19 +1,19 @@
-﻿
-namespace DO;
-
+﻿namespace DO;
+/// <summary>
+/// struct of order
+/// </summary>
 public struct Order
 {
-    /// <summary>
-    /// The ID number of the order
-    /// </summary>
-    public int ID { get; set; }
-    public string CustomerName { get; set; }
-    public string CustomerEmail { get; set; }
-    public string CustomerAdress { get; set; }
-    public DateTime OrderDate { get; set; }
-    public DateTime ShipDate { get; set; }
-    public DateTime DeliveryrDate { get; set; }
-    public override string ToString() => $@"
+    public int ID { get; set; } /// The ID number of the order
+    public string CustomerName { get; set; } /// The name of customer of the order
+    public string CustomerEmail { get; set; } /// The email of customer of the order
+    public string CustomerAdress { get; set; } /// The adress of customer of the order
+    public DateTime OrderDate { get; set; } /// Time of placing the order                                     
+    public DateTime ShipDate { get; set; } /// Delivery time
+    public DateTime DeliveryrDate { get; set; } /// Shipping arrival time
+
+    /// An action that prints the order
+    public override string ToString() => $@" 
       Order ID: {ID}
       Customer's Name: {CustomerName}
       Customer's Email: {CustomerEmail}
