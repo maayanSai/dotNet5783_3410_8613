@@ -8,9 +8,9 @@ public class DalOrderItem
     int x = DataSource.orderItemArr.Length;
     public static int addToOrderItem(OrderItem oi)
     {
-        for (int i = 0; i < DataSource.Config.s_NextOrderItemNumber; i++)
-            if (oi.ID == DataSource.orderItemArr[i].ID)
-                throw new Exception("the object is allreay exists");
+        //for (int i = 0; i < DataSource.Config.s_NextOrderItemNumber; i++)
+        //    if (oi.ID == DataSource.orderItemArr[i].ID)
+        //        throw new Exception("the object is allreay exists");
         int id = DataSource.Config.NextOrderItemArr;
         oi.ID = id;
         DataSource.orderItemArr[id] = oi;

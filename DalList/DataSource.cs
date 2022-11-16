@@ -103,7 +103,7 @@ internal static class DataSource
                 TimeSpan deliverTime = new TimeSpan(days, 0, 0, 0);
                 ord.DeliveryrDate = ord.ShipDate + deliverTime;
             }
-            orderArr[i] = ord;
+            DalOrder.addToOrder(ord);
 
         }
     }
@@ -123,7 +123,7 @@ internal static class DataSource
                 oi.ProductID = DataSource.productArr[y].ID;
                 oi.OrderID = DataSource.orderArr[i].ID;
                 oi.Price = DataSource.productArr[y].Price;
-                orderItemArr[i + j] = oi;
+                DalOrderItem.addToOrderItem(oi);
             }
         }
 

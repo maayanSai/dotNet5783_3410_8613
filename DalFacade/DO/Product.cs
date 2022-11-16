@@ -10,7 +10,8 @@ public struct Product
     public int InStock { get; set; }
 
     public override string ToString() => $@"
-      Product ID: {ID}: {Name}
+      product ID: {ID}
+      name:{Name}
       category: {Category}
       Price: {Price}
       Amount in stock: {InStock}";

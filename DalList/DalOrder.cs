@@ -5,9 +5,9 @@ public class DalOrder
     public static int addToOrder(Order ord)
     {
         int x = DataSource.orderArr.Length;
-        for (int i = 0; i <= DataSource.Config.s_NextOrderNumber; i++)
-            if (ord.ID == DataSource.orderArr[i].ID)
-                throw new Exception("the object is allreay exists");
+        //for (int i = 0; i <= DataSource.Config.s_NextOrderNumber; i++)
+        //    if (ord.ID == DataSource.orderArr[i].ID)
+        //        throw new Exception("the object is allreay exists");
         int id = DataSource.Config.NextOrderNumber;
         ord.ID = id;
         DataSource.orderArr[id] = ord;

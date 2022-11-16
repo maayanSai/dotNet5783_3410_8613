@@ -113,9 +113,7 @@ namespace DalTest
                                 case 1:
                                     Order order = new Order();
                                     int id;
-                                    Console.WriteLine("enter id of order");
-                                    int.TryParse(Console.ReadLine(),out id);
-                                    order.ID = id; 
+                                    order.ID =1; 
                                     Console.WriteLine("enter customer name of order");
                                     order.CustomerName = Console.ReadLine();
                                     Console.WriteLine("enter customer email of order");
@@ -173,21 +171,19 @@ namespace DalTest
                                     OrderItem orderItem = new OrderItem();
                                     int id, idProduct, idOrder, amount;
                                     double price;
-                                    Console.WriteLine("enter id of orderItem");
-                                    int.TryParse(Console.ReadLine(), out id);
-                                    orderItem.ID = id; 
+                                    
+                                    orderItem.ID = 1;
                                     Console.WriteLine("enter product ID of orderItem");
                                     int.TryParse(Console.ReadLine(), out idProduct);
                                     orderItem.ProductID = idProduct;
                                     Console.WriteLine("enter order ID of orderItem");
                                     int.TryParse(Console.ReadLine(), out idOrder);
                                     orderItem.OrderID = idOrder;
-                                    Console.WriteLine("enter price of orderItem");
-                                    double.TryParse(Console.ReadLine(), out price); 
-                                    orderItem.Price = price;
+                                    
+                                    orderItem.Price = Dal.DalProduct.getProduct(orderItem.ProductID).Price;
                                     Console.WriteLine("enter amount of orderItem");
                                     int.TryParse(Console.ReadLine(), out amount);
-                                    orderItem.Amount = Convert.ToInt32(Console.ReadLine());
+                                    orderItem.Amount = amount;
                                     Dal.DalOrderItem.addToOrderItem(orderItem);
                                     break;
                                 case 2:
@@ -213,12 +209,11 @@ namespace DalTest
                                     Console.WriteLine("enter order ID of orderItem");
                                     int.TryParse(Console.ReadLine(), out idOrder);
                                     orderItem1.OrderID = idOrder;
-                                    Console.WriteLine("enter price of orderItem");
-                                    double.TryParse(Console.ReadLine(), out price);
-                                    orderItem1.Price = price;
+                                    
+                                    orderItem1.Price = Dal.DalProduct.getProduct(orderItem1.ProductID).Price;
                                     Console.WriteLine("enter amount of orderItem");
                                     int.TryParse(Console.ReadLine(), out amount);
-                                    orderItem1.Amount = Convert.ToInt32(Console.ReadLine());
+                                    orderItem1.Amount=amount;
                                     if (orderItem1.ProductID > 0)
                                         Dal.DalOrderItem.updateOrederItem(orderItem1);
                                     break;
