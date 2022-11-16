@@ -1,4 +1,6 @@
-﻿using Dal;
+﻿
+// We did the bonus - we used TryParse for the conversions
+using Dal;
 using DO;
 namespace DalTest
 {
