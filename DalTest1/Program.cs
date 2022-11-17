@@ -7,9 +7,9 @@ namespace DalTest
     public class Program
     {
         // We will create the entity objects
-        private static DalProduct DalProduct = new DalProduct(); // product
-        private static DalOrder DalOrder = new DalOrder(); // Order
-        private static DalOrderItem DalOrderItem = new DalOrderItem(); // Order item
+        private static DalProduct _dalProduct = new DalProduct(); // product
+        private static DalOrder _dalOrder = new DalOrder(); // Order
+        private static DalOrderItem _dalOrderItem = new DalOrderItem(); // Order item
 
         //MAIN
         static void Main(String[] args)
