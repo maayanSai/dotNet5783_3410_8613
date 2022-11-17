@@ -4,7 +4,7 @@ using System;
 namespace Dal;
 internal static class DataSource
 {   
-    static DataSource() { _sInitialize(); } // A constructive operation, which initializes the entity arrays
+    static DataSource() { s_Initialize(); } // A constructive operation, which initializes the entity arrays
     private static readonly Random _rnd = new(); // lottery variable
     internal static Order[] _orderArr = new Order[100]; // An array of orders
     internal static OrderItem[] _orderItemArr = new OrderItem[200]; // An array of items
@@ -39,7 +39,7 @@ internal static class DataSource
     /// <summary>
     /// A function that creates and inserts a new product
     /// </summary>
-    private static void _createAndInitProducts()
+    private static void createAndInitProducts()
     {
         for (int i = 0; i < 20; i++) // We will initialize 20 products
         {
@@ -75,7 +75,7 @@ internal static class DataSource
     /// <summary>
     /// A function that creates and adds the orders
     /// </summary>
-    private static void _createAndInitOrders()
+    private static void createAndInitOrders()
     {
         for (int i = 0; i < 20; i++) // We will initialize 20 orders
         {
@@ -107,7 +107,7 @@ internal static class DataSource
     /// <summary>
     /// A function that creates and adds the order details
     /// </summary>
-    private static void _createAndInitOrderItem()
+    private static void createAndInitOrderItem()
     {
         int y;
         int x;
@@ -131,11 +131,11 @@ internal static class DataSource
     /// <summary>
     /// The action calls the actions that initialize the arrays
     /// </summary>
-    private static void _sInitialize()  
+    private static void s_Initialize()  
     {
-        _createAndInitProducts();
-        _createAndInitOrders();
-        _createAndInitOrderItem();
+        createAndInitProducts();
+        createAndInitOrders();
+        createAndInitOrderItem();
     }
 }
 
