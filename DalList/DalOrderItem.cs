@@ -1,6 +1,4 @@
 ﻿using DO;
-using System.Security.Cryptography;
-
 namespace Dal;
 public class DalOrderItem
 {

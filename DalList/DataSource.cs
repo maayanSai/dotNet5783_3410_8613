@@ -1,39 +1,48 @@
 ﻿using DO;
 namespace Dal;
+using System;
+
 internal static class DataSource
-{   
-    static DataSource() { _sInitialize(); }
-    private static readonly Random _rnd = new();
-    internal static List<Product?> ProductsList { get; } = new List<Product?>();
-    internal static List<Order?> OrdersList { get; } = new List<Order?>();
-    internal static List<OrderItem?> OrderItemsList { get; } = new List<OrderItem?>();
+{
+    static DataSource() { _sInitialize(); } // A constructive operation, which initializes the entity arrays
+    private static readonly Random _rnd = new(); // lottery variable
+    internal static List<Product?> ProductsList = new List<Product?>(); // An array of orders
+    internal static List<Order?> OrdersList = new List<Order?>(); // An array of items
+    // product
+    internal static List<OrderItem?> OrderItemsList = new List<OrderItem?>(); // array of products
 
-    // order
-    // internal const int s_startOrderNumber = 0;
-    internal static int _sNextOrderNumber = 0; //s_startOrderNumber;
-    internal static int _nextOrderNumber { get=>_sNextOrderNumber++; }
+    //order
+    internal static int _sNextOrderNumber = 0; // Saves the first position of the order array
+    internal static int _nextOrderNumber { get => _sNextOrderNumber++; } // Increases the number of orders
+
     // orderItem
-    // internal const int s_startOrderItemNumber = 0;
-    internal static int _sNextOrderItemNumber = 0; //s_startOrderItemNumber;
-    internal static int _nextOrderItem { get => _sNextOrderItemNumber++; }
-        // Product
-    internal static int _ProductIndex = 0;
+    internal static int _sNextOrderItemNumber = 0; // Saves the first position of the orderItem array
+    internal static int _nextOrderItem { get => _sNextOrderItemNumber++; } //  Increases the number of orderItems
 
+    //product                                                                     
+    internal static int _ProductIndex = 0; // Index, by number of products
+
+    // Matrix of product names
     private static string[,] _productNames = new string[5, 5]
         {{"diamond ring", "wedding ring", "pearl ring","double ring","climbing ring" }, // rings
         {"pearl necklace", "long necklace", "tight necklace","diamond necklace","diamond necklace" }, // necklaces
         {"Pearl bracelet","Diamond bracelet","double bracelet","Hard bracelet","Link bracelet"}, // bracelets
         {"Pearl anklet", "Diamond anklet","Double ankle","Stiff ankle","Snake ankle"}, // foot bracelets
         {"falling earings", "hoop earings", "tight earings", "climbing earings", "clip earings" }}; // earings
+
     private static string[,] _orderNameEmailAdress = new string[3, 3]
     {
         { "Avigail Haim","avi@gmail.com","Hadasim 3 Bney-Brak " },
         {"Ayala Coen","aya@gmail.com","Hpalmach 15 Tel-Aviv" },
         {"Maayan Levi","maayan@gmail.com","Hashikma 12 Or-Yehuda" }
     };
-    private static void _createAndInitProducts()
+
+    /// <summary>
+    /// A function that creates and inserts a new product
+    /// </summary>
+    private static void createAndInitProducts()
     {
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 20; i++) // We will initialize 20 products
         {
             Product p = new Product();
             p.ID = i + 100000;
@@ -42,11 +51,11 @@ internal static class DataSource
             p.Price = _rnd.Next(500, 5000);
             if (i == 1) p.InStock = 0; //חמש אחוז אפס
             else
-               p.InStock= _rnd.Next(4);
+                p.InStock = _rnd.Next(4);
             ProductsList.Add(p);
         }
     }
-    private static void _createAndInitOrders()
+    private static void createAndInitOrders()
     {
         for (int i = 0; i < 20; i++)
         {
@@ -55,7 +64,7 @@ internal static class DataSource
             ord.ID = _nextOrderNumber;
             int x = _rnd.Next(3);
             ord.CustomerName = _orderNameEmailAdress[x, 0];
-            ord.CustomerEmail =_orderNameEmailAdress[x, 1];
+            ord.CustomerEmail = _orderNameEmailAdress[x, 1];
             ord.CustomerAdress = _orderNameEmailAdress[x, 2];
             ord.OrderDate = DateTime.Now.AddDays(-days);
             ord.ShipDate = DateTime.MinValue;
@@ -75,7 +84,7 @@ internal static class DataSource
             DalOrder.Add(ord);
         }
     }
-    private static void _createAndInitOrderItem()
+    private static void createAndInitOrderItem()
     {
         int x, y;
         for (int i = 0; i < 20; i++)
@@ -90,14 +99,13 @@ internal static class DataSource
                 oi.OrderID = 100000 + i;
                 oi.Price = _rnd.Next(500, 5000);
             }
-            DalOrderItem.Add(oi);
         }
     }
     private static void _sInitialize()
     {
-        _createAndInitProducts();
-        _createAndInitOrders();
-        _createAndInitOrderItem();
+        createAndInitProducts();
+        createAndInitOrders();
+        createAndInitOrderItem();
     }
 }
 
