@@ -2,6 +2,7 @@
 namespace Dal;
 using System;
 
+namespace Dal;
 internal static class DataSource
 {
     static DataSource() { _sInitialize(); } // A constructive operation, which initializes the entity arrays
@@ -55,6 +56,9 @@ internal static class DataSource
             ProductsList.Add(p);
         }
     }
+    /// <summary>
+    /// A function that creates and adds the orders
+    /// </summary>
     private static void createAndInitOrders()
     {
         for (int i = 0; i < 20; i++)
@@ -84,6 +88,9 @@ internal static class DataSource
             DalOrder.Add(ord);
         }
     }
+    /// <summary>
+    /// A function that creates and adds the order details
+    /// </summary>
     private static void createAndInitOrderItem()
     {
         int x, y;
