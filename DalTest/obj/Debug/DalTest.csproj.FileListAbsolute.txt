@@ -1,0 +1,13 @@
+C:\Users\Maayan\source\repos\maayanSai\dotNet5783_3410_8613\bin\DalTest.deps.json
+C:\Users\Maayan\source\repos\maayanSai\dotNet5783_3410_8613\bin\DalTest.dll
+C:\Users\Maayan\source\repos\maayanSai\dotNet5783_3410_8613\bin\DalTest.pdb
+C:\Users\Maayan\source\repos\maayanSai\dotNet5783_3410_8613\DalTest\obj\Debug\DalTest.csproj.AssemblyReference.cache
+C:\Users\Maayan\source\repos\maayanSai\dotNet5783_3410_8613\DalTest\obj\Debug\DalTest.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Maayan\source\repos\maayanSai\dotNet5783_3410_8613\DalTest\obj\Debug\DalTest.AssemblyInfoInputs.cache
+C:\Users\Maayan\source\repos\maayanSai\dotNet5783_3410_8613\DalTest\obj\Debug\DalTest.AssemblyInfo.cs
+C:\Users\Maayan\source\repos\maayanSai\dotNet5783_3410_8613\DalTest\obj\Debug\DalTest.csproj.CoreCompileInputs.cache
+C:\Users\Maayan\source\repos\maayanSai\dotNet5783_3410_8613\DalTest\obj\Debug\DalTest.csproj.CopyComplete
+C:\Users\Maayan\source\repos\maayanSai\dotNet5783_3410_8613\DalTest\obj\Debug\DalTest.dll
+C:\Users\Maayan\source\repos\maayanSai\dotNet5783_3410_8613\DalTest\obj\Debug\refint\DalTest.dll
+C:\Users\Maayan\source\repos\maayanSai\dotNet5783_3410_8613\DalTest\obj\Debug\DalTest.pdb
+C:\Users\Maayan\source\repos\maayanSai\dotNet5783_3410_8613\DalTest\obj\Debug\ref\DalTest.dll

@@ -70,7 +70,7 @@ namespace DalTest
                                     Console.WriteLine(Dal.DalProduct.GetProduct(id1)); // We will call get
                                     break;
                                 case 3: // get all products
-                                    IEnumerable<Product> list = Dal.DalProduct.AllProduct();
+                                    IEnumerable<Product?> list = Dal.DalProduct.AllProduct();
                                     foreach (Product pro in list) // We will go through all the products and copy to the new system
                                     {
                                         Console.WriteLine(pro);
@@ -143,8 +143,8 @@ namespace DalTest
                                     Console.WriteLine(Dal.DalOrder.GetOrder(id)); // We will call get
                                     break;
                                 case 3: // get all orders
-                                    Order[] ord = DalOrder.AllOrder(); // We will create a new array
-                                    foreach (Order o in ord) // We will copy the entire array of orders
+                                    IEnumerable<Order?> list = DalOrder.AllOrder(); // We will create a new array
+                                    foreach (Order o in list) // We will copy the entire array of orders
                                     {
                                         Console.WriteLine(o);
                                     }
@@ -214,8 +214,8 @@ namespace DalTest
                                     Console.WriteLine(Dal.DalOrderItem.GetOrderItem(id)); // We will call get
                                     break;
                                 case 3: // get all orderItems
-                                    OrderItem[] ord = DalOrderItem.AllOrderItem(); // We will create a new array
-                                    foreach (OrderItem o in ord) // We will copy all the items
+                                    IEnumerable<OrderItem?> list = DalOrderItem.AllOrderItem(); // We will create a new array
+                                    foreach (OrderItem o in list) // We will copy all the items
                                     {
                                         Console.WriteLine(o);
                                     }
