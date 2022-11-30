@@ -1,69 +1,45 @@
 ﻿using DO;
 namespace Dal;
-
 public class DalProduct
 {
-    int x = DataSource.productArr.Length;
-    public static void AddToProduct(Product p)
+    public static int Add(Product p)
     {
-        for (int i = 0; i < DataSource.Config.ArrProductIndex; i++)
+        if ((DataSource.ProductsList.Exists(x => x?.ID == p.ID)))
+            throw new Exception("the ID is already exists");
+        else
         {
-            if (p.ID == DataSource.productArr[i].ID)
-            {
-                throw new Exception("the ID is already exists");
-            }
+            DataSource.ProductsList.Add(p);
+            return p.ID;
         }
-
-        DataSource.productArr[DataSource.Config.ArrProductIndex] = p;
-        DataSource.Config.ArrProductIndex++;
-
     }
-    public static Product getProduct(int id)
+    public static Product GetProduct(int id)
     {
-        int x = DataSource.productArr.Length;
-        for (int i = 0; i < DataSource.Config.ArrProductIndex; i++)
-            if (DataSource.productArr[i].ID == id)
-                return DataSource.productArr[i];
-        throw new Exception("the object was not found");
+        return DataSource.ProductsList.Find(x => x?.ID == id) ?? throw new Exception("product doesnt exist");
     }
-    public static Product[] allProduct()
+    public static IEnumerable<Product?> AllProduct()
     {
-        int x = DataSource.productArr.Length;
-        Product[] Arr = new Product[DataSource.Config.ArrProductIndex];
+        List<Product?> list = new List<Product?>();
+        foreach (var product in DataSource.ProductsList)
+            list.Add(product);
+        return list;
+    }
+    public static void DeleteProcuct(int id)
+    {
+        if (DataSource.ProductsList.Exists(x => x?.ID == id))
+            DataSource.ProductsList.RemoveAll(x => x?.ID == id);
+        else
+            throw new Exception("product doesnt exist");
+    }
 
-        for (int i = 0; i < DataSource.Config.ArrProductIndex; i++)
-            Arr[i] = DataSource.productArr[i];
-        return Arr;
-    }
-    public static void deleteProcuct(int id)
+    public static void UpdateProcuct(Product p)
     {
-        int x = DataSource.productArr.Length;
-        bool isFind = false;
-        for (int i = 0; i < DataSource.Config.ArrProductIndex; i++)
+        if (DataSource.ProductsList.Exists(x => x?.ID == p.ID))
         {
-            if (DataSource.productArr[i].ID == id)
-            {
-                DataSource.productArr[i] = DataSource.productArr[DataSource.Config.ArrProductIndex];
-                DataSource.Config.ArrProductIndex--;
-                isFind = true;
-            }
+            p.ID = GetProduct(p.ID).ID;
+            DataSource.ProductsList.RemoveAll(x => x?.ID == p.ID);
+            DataSource.ProductsList.Add(p);
         }
-        if (!isFind)
-            throw new Exception("the object was not found");
-    }
-    public static void updateProcuct(Product p)
-    {
-        int x = DataSource.productArr.Length;
-        bool isFind = false;
-        for (int i = 0; i < DataSource.Config.ArrProductIndex; i++)
-        {
-            if (DataSource.productArr[i].ID == p.ID)
-            {
-                isFind = true;
-                DataSource.productArr[i] = p;
-            }
-        }
-        if (!isFind)
-            throw new Exception("the object was not found");
+        else
+            throw new Exception("product doesnt exist");
     }
 }

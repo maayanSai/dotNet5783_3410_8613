@@ -1,16 +1,13 @@
 ﻿using Dal;
 using DO;
 using System;
-
-
 namespace DalTest
 {
     public class Program
     {
-        
-        private static DalProduct dalProduct = new DalProduct();
-        private static DalOrder dalOrder = new DalOrder();
-        private static DalOrderItem dalOrderItem = new DalOrderItem();
+        private static DalProduct DalProduct = new DalProduct();
+        private static DalOrder DalOrder = new DalOrder();
+        private static DalOrderItem DalOrderItem = new DalOrderItem();
         static void Main(String[] args)
         {
             int chooseEntity;
@@ -23,7 +20,6 @@ namespace DalTest
             int.TryParse(Console.ReadLine(),out chooseEntity);
             while (chooseEntity != '0')
             {
-
                 try
                 { 
                     switch (chooseEntity)
@@ -56,19 +52,19 @@ namespace DalTest
                                     Console.WriteLine("enter inStock of product");
                                     int.TryParse(Console.ReadLine(), out stock);
                                     p.InStock = stock;
-                                    Dal.DalProduct.AddToProduct(p);
+                                    Dal.DalProduct.Add(p);
                                     break;
                                 case 2:
                                     int id1;
                                     Console.WriteLine("enter id of product");
                                     int.TryParse(Console.ReadLine(), out id1);
-                                    Console.WriteLine(Dal.DalProduct.getProduct(id1));
+                                    Console.WriteLine(Dal.DalProduct.GetProduct(id1));
                                     break;
                                 case 3:
-                                    Product[] prod = DalProduct.allProduct();
-                                    foreach (Product pro in prod)
+                                    List<Product?> prod = (List<Product?>)DalProduct.AllProduct();
+                                    foreach (Product p in prod)
                                     {
-                                        Console.WriteLine(pro);
+                                        Console.WriteLine(p);
                                     }
                                     break;
                                 case 4:
@@ -90,13 +86,13 @@ namespace DalTest
                                     int.TryParse(Console.ReadLine(), out stock1);
                                     p1.InStock = stock1;
                                     if (p1.Name.Length > 0)
-                                        Dal.DalProduct.updateProcuct(p1);
+                                        Dal.DalProduct.UpdateProcuct(p1);
                                     break;
                                 case 5:
                                     int id3;
                                     Console.WriteLine("enter id of product");
                                     int.TryParse(Console.ReadLine(), out id3);
-                                    Dal.DalProduct.deleteProcuct(id3);
+                                    Dal.DalProduct.DeleteProcuct(id3);
                                     break;
                             }
                             break;
@@ -121,15 +117,15 @@ namespace DalTest
                                     Console.WriteLine("enter customer adress of order");
                                     order.CustomerAdress = Console.ReadLine();
                                     order.OrderDate = DateTime.Now;
-                                    Dal.DalOrder.addToOrder(order);
+                                    Dal.DalOrder.Add(order);
                                     break;
                                 case 2:
                                     Console.WriteLine("enter id of order");
                                     int.TryParse(Console.ReadLine(), out id);
-                                    Console.WriteLine(Dal.DalOrder.getOrder(id));
+                                    Console.WriteLine(Dal.DalOrder.GetOrder(id));
                                     break;
                                 case 3:
-                                    Order[] ord = DalOrder.allOrder();
+                                    List<Order> ord = DalOrder.AllOrder();
                                     foreach (Order o in ord)
                                     {
                                         Console.WriteLine(o);
@@ -148,12 +144,12 @@ namespace DalTest
                                     order1.CustomerAdress = Console.ReadLine();
                                     order1.OrderDate = DateTime.Now;
                                     if (order1.CustomerName.Length > 0)
-                                        Dal.DalOrder.updateOrder(order1);
+                                        Dal.DalOrder.UpdateOrder(order1);
                                     break;
                                 case 5:
                                     Console.WriteLine("enter id of order");
                                     int.TryParse(Console.ReadLine(), out id);
-                                    Dal.DalOrder.deleteOrder(id);
+                                    Dal.DalOrder.DeleteOrder(id);
                                     break;
                             }
                             break;
@@ -171,7 +167,6 @@ namespace DalTest
                                     OrderItem orderItem = new OrderItem();
                                     int id, idProduct, idOrder, amount;
                                     double price;
-                                    
                                     orderItem.ID = 1;
                                     Console.WriteLine("enter product ID of orderItem");
                                     int.TryParse(Console.ReadLine(), out idProduct);
@@ -180,19 +175,19 @@ namespace DalTest
                                     int.TryParse(Console.ReadLine(), out idOrder);
                                     orderItem.OrderID = idOrder;
                                     
-                                    orderItem.Price = Dal.DalProduct.getProduct(orderItem.ProductID).Price;
+                                    orderItem.Price = Dal.DalProduct.GetProduct(orderItem.ProductID).Price;
                                     Console.WriteLine("enter amount of orderItem");
                                     int.TryParse(Console.ReadLine(), out amount);
                                     orderItem.Amount = amount;
-                                    Dal.DalOrderItem.addToOrderItem(orderItem);
+                                    Dal.DalOrderItem.Add(orderItem);
                                     break;
                                 case 2:
                                     Console.WriteLine("enter id of orderItem");
                                     int.TryParse(Console.ReadLine(), out id);
-                                    Console.WriteLine(Dal.DalOrderItem.getOrderItem(id));
+                                    Console.WriteLine(Dal.DalOrderItem.GetOrderItem(id));
                                     break;
                                 case 3:
-                                    OrderItem[] ord = DalOrderItem.allOrderItem();
+                                    OrderItem[] ord = DalOrderItem.AllOrderItem();
                                     foreach (OrderItem o in ord)
                                     {
                                         Console.WriteLine(o);
@@ -210,18 +205,17 @@ namespace DalTest
                                     int.TryParse(Console.ReadLine(), out idOrder);
                                     orderItem1.OrderID = idOrder;
                                     
-                                    orderItem1.Price = Dal.DalProduct.getProduct(orderItem1.ProductID).Price;
+                                    orderItem1.Price = Dal.DalProduct.GetProduct(orderItem1.ProductID).Price;
                                     Console.WriteLine("enter amount of orderItem");
                                     int.TryParse(Console.ReadLine(), out amount);
                                     orderItem1.Amount=amount;
                                     if (orderItem1.ProductID > 0)
-                                        Dal.DalOrderItem.updateOrederItem(orderItem1);
+                                        Dal.DalOrderItem.UpdateOrederItem(orderItem1);
                                     break;
-
                                 case 5:
                                     Console.WriteLine("enter id of orderItem");
                                     int.TryParse(Console.ReadLine(), out id);
-                                    Dal.DalOrderItem.deleteOrederItem(id);
+                                    Dal.DalOrderItem.DeleteOrederItem(id);
                                     break;
                             }
                             break;

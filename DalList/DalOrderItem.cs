@@ -2,62 +2,43 @@
 using System.Security.Cryptography;
 
 namespace Dal;
-
 public class DalOrderItem
 {
-    int x = DataSource.orderItemArr.Length;
-    public static int addToOrderItem(OrderItem oi)
+    public static int Add(OrderItem oi)
     {
-        //for (int i = 0; i < DataSource.Config.s_NextOrderItemNumber; i++)
-        //    if (oi.ID == DataSource.orderItemArr[i].ID)
-        //        throw new Exception("the object is allreay exists");
-        int id = DataSource.Config.NextOrderItemArr;
-        oi.ID = id;
-        DataSource.orderItemArr[id] = oi;
+        int id = DataSource._nextOrderItem; // The ID of the order will be according to the last empty place in the array
+        oi.ID = id; //We will insert the ID into the object
+        DataSource.OrderItemsList.Add(oi); // We will insert the order into the last empty place in the array
         return oi.ID;
     }
-    public static OrderItem getOrderItem(int id)
+    public static OrderItem GetOrderItem(int id)
     {
-        int x = DataSource.orderItemArr.Length;
-        for (int i = 0; i < DataSource.Config.s_NextOrderItemNumber; i++)
-            if (id == DataSource.orderItemArr[i].ID)
-                return DataSource.orderItemArr[i];
-        throw new Exception("the object was not found");
+        return DataSource.OrderItemsList.Find(x => x?.ID == id) ?? throw new Exception("product doesnt exist");
+
     }
-    public static OrderItem[] allOrderItem()
+    public static IEnumerable<OrderItem?> AllOrderItem()
     {
-        int x = DataSource.orderItemArr.Length;
-        OrderItem[] Arr = new OrderItem[DataSource.Config.s_NextOrderItemNumber];
-        for (int i = 0; i < DataSource.Config.s_NextOrderItemNumber; i++)
-            Arr[i] = DataSource.orderItemArr[i];
-        return Arr;
+        List<OrderItem?> list = new List<OrderItem?>();
+        foreach (var orderItem in DataSource.OrderItemsList)
+            list.Add(orderItem);
+        return list;
     }
-    public static void deleteOrederItem(int id)
+    public static void DeleteOrederItem(int id)
     {
-        int x = DataSource.orderItemArr.Length;
-        bool isFind = false;
-        for (int i = 0; i < DataSource.Config.s_NextOrderItemNumber; i++)
-            if (id == DataSource.orderItemArr[i].ID)
-            {
-                DataSource.orderItemArr[i] = DataSource.orderItemArr[DataSource.Config.s_NextOrderItemNumber];
-                DataSource.Config.s_NextOrderItemNumber--;
-                isFind = true;
-            }
-        // האם צריך לשנות Id
-        if (!isFind)
-            throw new Exception("the object was not found");
+        if (DataSource.OrderItemsList.Exists(x => x?.ID == id))
+            DataSource.OrderItemsList.RemoveAll(x => x?.ID == id);
+        else
+            throw new Exception("product doesnt exist");
     }
-    public static void updateOrederItem(OrderItem oi)
+    public static void UpdateOrederItem(OrderItem oi)
     {
-        int x = DataSource.orderItemArr.Length;
-        bool isFind = false;
-        for (int i = 0; i < DataSource.Config.s_NextOrderItemNumber; i++)
-            if (oi.ID == DataSource.orderItemArr[i].ID)
-            {
-                isFind = true;
-                DataSource.orderItemArr[i] = oi;
-            }
-        if (!isFind)
-            throw new Exception("the object was not found");
+        if (DataSource.OrderItemsList.Exists(x => x?.ID == oi.ID))
+        {
+            oi.ID = GetOrderItem(oi.ID).ID;
+            DataSource.OrderItemsList.RemoveAll(x => x?.ID == oi.ID);
+            DataSource.OrderItemsList.Add(oi);
+        }
+        else
+            throw new Exception("product doesnt exist");
     }
 }

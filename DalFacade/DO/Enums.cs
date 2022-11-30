@@ -1,4 +1,7 @@
-﻿
-namespace DO;
+﻿namespace DO;
 
-    public enum Category { Ring, Necklace, Bracelet, FootBracelet, Earings };
+/// <summary>
+/// ENum class
+/// </summary>
+public enum Category { Ring, Necklace, Bracelet, FootBracelet, Earings }; // ENum of categories
+
