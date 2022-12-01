@@ -5,21 +5,18 @@ internal static class DataSource
 {
     static DataSource() { _sInitialize(); } // A constructive operation, which initializes the entity arrays
     private static readonly Random _rnd = new(); // lottery variable
+
     internal static List<Product?> ProductsList = new List<Product?>(); // An array of orders
     internal static List<Order?> OrdersList = new List<Order?>(); // An array of items
-    // product
     internal static List<OrderItem?> OrderItemsList = new List<OrderItem?>(); // array of products
 
-    //order
-    internal static int _sNextOrderNumber = 0; // Saves the first position of the order array
-    internal static int _nextOrderNumber { get => _sNextOrderNumber++; } // Increases the number of orders
+    internal const int s_startOrderNumber= 1000;
+    private static int s_nextOrderNumber = s_startOrderNumber;
+    internal static int NextOrderNumber { get => s_nextOrderNumber++; }
 
-    // orderItem
-    internal static int _sNextOrderItemNumber = 0; // Saves the first position of the orderItem array
-    internal static int _nextOrderItem { get => _sNextOrderItemNumber++; } //  Increases the number of orderItems
-
-    //product                                                                     
-    internal static int _ProductIndex = 0; // Index, by number of products
+    internal const int s_startOrderItemNumber = 1000;
+    private static int s_nextOrderItemNumber = s_startOrderItemNumber;
+    internal static int NextOrderItemNumber { get => s_nextOrderItemNumber++; }
 
     // Matrix of product names
     private static string[,] _productNames = new string[5, 5]
@@ -63,7 +60,7 @@ internal static class DataSource
         {
             int days = _rnd.Next(21, 200);
             Order ord = new Order();
-            ord.ID = _nextOrderNumber;
+            ord.ID = NextOrderNumber;
             int x = _rnd.Next(3);
             ord.CustomerName = _orderNameEmailAdress[x, 0];
             ord.CustomerEmail = _orderNameEmailAdress[x, 1];
@@ -83,7 +80,7 @@ internal static class DataSource
                 TimeSpan deliverTime = new TimeSpan(days, 0, 0, 0);
                 ord.DeliveryrDate = ord.ShipDate + deliverTime;
             }
-            DalOrder.Add(ord);
+            OrdersList.Add(ord);
         }
     }
     /// <summary>
@@ -98,12 +95,13 @@ internal static class DataSource
             OrderItem oi = new OrderItem();
             for (int j = 0; j < x; j++)
             {
-                oi.ID = _nextOrderItem;
+                oi.ID = NextOrderItemNumber;
                 oi.Amount = _rnd.Next(1, 4);
                 oi.ProductID = 100000 + _rnd.Next(0, 20);
                 oi.OrderID = 100000 + i;
                 oi.Price = _rnd.Next(500, 5000);
             }
+            OrderItemsList.Add(oi); 
         }
     }
     private static void _sInitialize()
