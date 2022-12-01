@@ -14,12 +14,9 @@ public struct Order
     public DateTime DeliveryrDate { get; set; } // Shipping arrival time
 
     // An action that prints the order
-    public override string ToString() => $@" 
-      Order ID: {ID}
-      Customer's Name: {CustomerName}
-      Customer's Email: {CustomerEmail}
-      Order Date: {OrderDate}
-      Ship Date: {ShipDate}
-      Delivery Date: {DeliveryrDate}";
+    public override string ToString()
+    {
+        return this.ToStringProperty();
+    }
 }
 

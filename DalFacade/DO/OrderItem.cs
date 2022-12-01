@@ -10,13 +10,11 @@ public struct OrderItem
     public int OrderID { get; set; } // The ID order of the orderItem
     public double Price { get; set; } // The price of the orderItem
     public int Amount { get; set; } // The amounr of the orderItem
+    
 
     // An action that prints the orderItem
-    public override string ToString() => $@"
-order item
-      Id:{ID}
-      ProductID: {ProductID}
-      Order ID: {OrderID}
-      Price: {Price}
-      Amount in stock: {Amount}";
+    public override string ToString()
+    {
+        return this.ToStringProperty();
+    }
 }
