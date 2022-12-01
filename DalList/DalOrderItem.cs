@@ -26,7 +26,7 @@ public class DalOrderItem
         if (DataSource.OrderItemsList.Exists(x => x?.ID == id))
             DataSource.OrderItemsList.RemoveAll(x => x?.ID == id);
         else
-            throw new Exception("product doesnt exist");
+            throw new Exception("orderItem doesnt exist");
     }
     public static void UpdateOrederItem(OrderItem oi)
     {
@@ -37,6 +37,6 @@ public class DalOrderItem
             DataSource.OrderItemsList.Add(oi);
         }
         else
-            throw new Exception("product doesnt exist");
+            throw new Exception("orderItem doesnt exist");
     }
 }

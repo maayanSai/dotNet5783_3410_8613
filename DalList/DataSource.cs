@@ -1,8 +1,6 @@
-﻿using DO;
+﻿ using DO;
 namespace Dal;
 using System;
-
-namespace Dal;
 internal static class DataSource
 {
     static DataSource() { _sInitialize(); } // A constructive operation, which initializes the entity arrays
