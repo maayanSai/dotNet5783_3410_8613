@@ -11,6 +11,19 @@
         "runtime": {
           "bin/placeholder/DalFacade.dll": {}
         }
+      },
+      "DalList/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "DalFacade": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/DalList.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DalList.dll": {}
+        }
       }
     }
   },
@@ -19,11 +32,17 @@
       "type": "project",
       "path": "../DalFacade/DalFacade.csproj",
       "msbuildProject": "../DalFacade/DalFacade.csproj"
+    },
+    "DalList/1.0.0": {
+      "type": "project",
+      "path": "../DalList/DalList.csproj",
+      "msbuildProject": "../DalList/DalList.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "DalFacade >= 1.0.0"
+      "DalFacade >= 1.0.0",
+      "DalList >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -32,11 +51,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\source\\repos\\dotNet5783_3410_8613\\DalList\\DalList.csproj",
-      "projectName": "DalList",
-      "projectPath": "C:\\Users\\User\\source\\repos\\dotNet5783_3410_8613\\DalList\\DalList.csproj",
+      "projectUniqueName": "C:\\Users\\User\\source\\repos\\dotNet5783_3410_8613\\DalTest1\\DalTest.csproj",
+      "projectName": "DalTest",
+      "projectPath": "C:\\Users\\User\\source\\repos\\dotNet5783_3410_8613\\DalTest1\\DalTest.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\source\\repos\\dotNet5783_3410_8613\\DalList\\obj\\",
+      "outputPath": "C:\\Users\\User\\source\\repos\\dotNet5783_3410_8613\\DalTest1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -55,6 +74,9 @@
           "projectReferences": {
             "C:\\Users\\User\\source\\repos\\dotNet5783_3410_8613\\DalFacade\\DalFacade.csproj": {
               "projectPath": "C:\\Users\\User\\source\\repos\\dotNet5783_3410_8613\\DalFacade\\DalFacade.csproj"
+            },
+            "C:\\Users\\User\\source\\repos\\dotNet5783_3410_8613\\DalList\\DalList.csproj": {
+              "projectPath": "C:\\Users\\User\\source\\repos\\dotNet5783_3410_8613\\DalList\\DalList.csproj"
             }
           }
         }

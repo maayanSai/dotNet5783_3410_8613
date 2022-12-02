@@ -1,0 +1,27 @@
+<<<<<<< HEAD
+=======
+C:\Users\Maayan\source\repos\maayanSai\dotNet5783_3410_8613\bin\DalFacade.deps.json
+C:\Users\Maayan\source\repos\maayanSai\dotNet5783_3410_8613\bin\DalFacade.dll
+C:\Users\Maayan\source\repos\maayanSai\dotNet5783_3410_8613\bin\DalFacade.pdb
+C:\Users\Maayan\source\repos\maayanSai\dotNet5783_3410_8613\DalFacade\obj\Debug\DalFacade.csproj.AssemblyReference.cache
+C:\Users\Maayan\source\repos\maayanSai\dotNet5783_3410_8613\DalFacade\obj\Debug\DalFacade.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Maayan\source\repos\maayanSai\dotNet5783_3410_8613\DalFacade\obj\Debug\DalFacade.AssemblyInfoInputs.cache
+C:\Users\Maayan\source\repos\maayanSai\dotNet5783_3410_8613\DalFacade\obj\Debug\DalFacade.AssemblyInfo.cs
+C:\Users\Maayan\source\repos\maayanSai\dotNet5783_3410_8613\DalFacade\obj\Debug\DalFacade.csproj.CoreCompileInputs.cache
+C:\Users\Maayan\source\repos\maayanSai\dotNet5783_3410_8613\DalFacade\obj\Debug\DalFacade.dll
+C:\Users\Maayan\source\repos\maayanSai\dotNet5783_3410_8613\DalFacade\obj\Debug\refint\DalFacade.dll
+C:\Users\Maayan\source\repos\maayanSai\dotNet5783_3410_8613\DalFacade\obj\Debug\DalFacade.pdb
+C:\Users\Maayan\source\repos\maayanSai\dotNet5783_3410_8613\DalFacade\obj\Debug\ref\DalFacade.dll
+C:\Users\User\source\repos\dotNet5783_3410_8613\bin\DalFacade.deps.json
+C:\Users\User\source\repos\dotNet5783_3410_8613\bin\DalFacade.dll
+C:\Users\User\source\repos\dotNet5783_3410_8613\bin\DalFacade.pdb
+C:\Users\User\source\repos\dotNet5783_3410_8613\DalFacade\obj\Debug\DalFacade.csproj.AssemblyReference.cache
+C:\Users\User\source\repos\dotNet5783_3410_8613\DalFacade\obj\Debug\DalFacade.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\source\repos\dotNet5783_3410_8613\DalFacade\obj\Debug\DalFacade.AssemblyInfoInputs.cache
+C:\Users\User\source\repos\dotNet5783_3410_8613\DalFacade\obj\Debug\DalFacade.AssemblyInfo.cs
+C:\Users\User\source\repos\dotNet5783_3410_8613\DalFacade\obj\Debug\DalFacade.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\dotNet5783_3410_8613\DalFacade\obj\Debug\DalFacade.dll
+C:\Users\User\source\repos\dotNet5783_3410_8613\DalFacade\obj\Debug\refint\DalFacade.dll
+C:\Users\User\source\repos\dotNet5783_3410_8613\DalFacade\obj\Debug\DalFacade.pdb
+C:\Users\User\source\repos\dotNet5783_3410_8613\DalFacade\obj\Debug\ref\DalFacade.dll
+>>>>>>> ff4b92915292e95645f6d938cd8815c4bfd12bab
