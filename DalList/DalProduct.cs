@@ -17,13 +17,8 @@ internal class DalProduct : IProduct
     {
         return DataSource.ProductsList.Find(x => x?.ID == id) ?? throw new Exception("product doesnt exist");
     }
-    public IEnumerable<Product?> GetAll()
-    {
-        List<Product?> list = new List<Product?>();
-        foreach (var product in DataSource.ProductsList)
-            list.Add(product);
-        return list;
-    }
+    public IEnumerable<Product?> GetAll() => new List<Product?>(DataSource.ProductsList);
+
     public void Delete(int id)
     {
         if (DataSource.ProductsList.Exists(x => x?.ID == id))

@@ -1,7 +1,14 @@
 ﻿namespace BO;
+
+/// <summary>
+/// 
+/// </summary>
 public class Order
 {
-    public int ID { get; set; } // The ID number of the order
+    /// <summary>
+    /// The ID number of the order
+    /// </summary>
+    public int ID { get; set; }
     public string? CustomerName { get; set; } // The name of customer of the order
     public string? CustomerEmail { get; set; } // The email of customer of the order
     public string? CustomerAdress { get; set; } // The adress of customer of the order
@@ -11,8 +18,5 @@ public class Order
     public DateTime? DeliveryrDate { get; set; } // Shipping arrival time
     public double TotalPrice { set; get; }
     public IEnumerable<OrderItem>? Items { set; get; }
-    public override string ToString()
-    {
-        return this.DaLFacade.DO.ToStringProperty();
-    }
+    public override string ToString() => this.ToStringProperty();
 }

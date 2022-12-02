@@ -12,6 +12,6 @@ internal class OrderForList
     // An action that prints the orderItem
     public override string ToString()
     {
-        return this.DO.ToStringProperty();
+        return this.ToStringProperty();
     }
 }

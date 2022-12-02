@@ -9,9 +9,6 @@ internal class Cart
     public IEnumerable<OrderItem>? Items { set; get; }
     public double TotalPrice { set; get; }
     // An action that prints the order
-    public override string ToString()
-    {
-        return this.ToStringProperty();
-    }
+    public override string ToString() => this.ToStringProperty();
 
 }

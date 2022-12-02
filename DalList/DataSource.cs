@@ -1,16 +1,16 @@
-﻿ using DO;
+﻿using DO;
 namespace Dal;
 using System;
 internal static class DataSource
 {
-    static DataSource() { _sInitialize(); } // A constructive operation, which initializes the entity arrays
+    static DataSource() { s_Initialize(); } // A constructive operation, which initializes the entity arrays
     private static readonly Random _rnd = new(); // lottery variable
 
-    internal static List<Product?> ProductsList = new List<Product?>(); // An array of orders
-    internal static List<Order?> OrdersList = new List<Order?>(); // An array of items
-    internal static List<OrderItem?> OrderItemsList = new List<OrderItem?>(); // array of products
+    internal static List<Product?> ProductsList = new(); // An array of orders
+    internal static List<Order?> OrdersList = new(); // An array of items
+    internal static List<OrderItem?> OrderItemsList = new(); // array of products
 
-    internal const int s_startOrderNumber= 1000;
+    internal const int s_startOrderNumber = 1000;
     private static int s_nextOrderNumber = s_startOrderNumber;
     internal static int NextOrderNumber { get => s_nextOrderNumber++; }
 
@@ -19,14 +19,14 @@ internal static class DataSource
     internal static int NextOrderItemNumber { get => s_nextOrderItemNumber++; }
 
     // Matrix of product names
-    private static string[,] _productNames = new string[5, 5]
+    private static readonly string[,] _productNames = new string[5, 5]
         {{"diamond ring", "wedding ring", "pearl ring","double ring","climbing ring" }, // rings
         {"pearl necklace", "long necklace", "tight necklace","diamond necklace","diamond necklace" }, // necklaces
         {"Pearl bracelet","Diamond bracelet","double bracelet","Hard bracelet","Link bracelet"}, // bracelets
         {"Pearl anklet", "Diamond anklet","Double ankle","Stiff ankle","Snake ankle"}, // foot bracelets
         {"falling earings", "hoop earings", "tight earings", "climbing earings", "clip earings" }}; // earings
 
-    private static string[,] _orderNameEmailAdress = new string[3, 3]
+    private static readonly string[,] _orderNameEmailAdress = new string[3, 3]
     {
         { "Avigail Haim","avi@gmail.com","Hadasim 3 Bney-Brak " },
         {"Ayala Coen","aya@gmail.com","Hpalmach 15 Tel-Aviv" },
@@ -40,47 +40,43 @@ internal static class DataSource
     {
         for (int i = 0; i < 20; i++) // We will initialize 20 products
         {
-            Product p = new Product();
-            p.ID = i + 100000;
-            p.Category = (Category)_rnd.Next(5);
-            p.Name = _productNames[(int)p.Category, _rnd.Next(5)];
-            p.Price = _rnd.Next(500, 5000);
-            if (i == 1) p.InStock = 0; //חמש אחוז אפס
-            else
-                p.InStock = _rnd.Next(4);
-            ProductsList.Add(p);
+            int r1 = _rnd.Next(5);
+            ProductsList.Add(new()
+            {
+                ID = i + 100000,
+                Category = (Category)r1,
+                Name = _productNames[r1, _rnd.Next(5)],
+                Price = _rnd.Next(500, 5000),
+                InStock = i == 1 ? 0 : _rnd.Next(4),
+            });
         }
     }
+
     /// <summary>
     /// A function that creates and adds the orders
     /// </summary>
     private static void createAndInitOrders()
     {
+        Order order;
         for (int i = 0; i < 20; i++)
         {
             int days = _rnd.Next(21, 200);
-            Order ord = new Order();
-            ord.ID = NextOrderNumber;
             int x = _rnd.Next(3);
-            ord.CustomerName = _orderNameEmailAdress[x, 0];
-            ord.CustomerEmail = _orderNameEmailAdress[x, 1];
-            ord.CustomerAdress = _orderNameEmailAdress[x, 2];
-            ord.OrderDate = DateTime.Now.AddDays(-days);
-            ord.ShipDate = DateTime.MinValue;
-            ord.DeliveryrDate = DateTime.MinValue;
+            order = new()
+            {
+                ID = NextOrderNumber,
+                CustomerName = _orderNameEmailAdress[x, 0],
+                CustomerEmail = _orderNameEmailAdress[x, 1],
+                CustomerAdress = _orderNameEmailAdress[x, 2],
+                OrderDate = DateTime.Now.AddDays(-days),
+                ShipDate = DateTime.MinValue,
+                DeliveryrDate = DateTime.MinValue,
+            };
             if (i < 0.8 * 20)
-            {
-                days = _rnd.Next(10, 20);
-                TimeSpan shipTime = new TimeSpan(days, 0, 0, 0);
-                ord.ShipDate = ord.OrderDate + shipTime;
-            }
+                order.ShipDate = order.OrderDate + new TimeSpan(_rnd.Next(10, 20), 0, 0, 0);
             if (i < 0.8 * 0.6 * 20)
-            {
-                days = _rnd.Next(1, 10);
-                TimeSpan deliverTime = new TimeSpan(days, 0, 0, 0);
-                ord.DeliveryrDate = ord.ShipDate + deliverTime;
-            }
-            OrdersList.Add(ord);
+                order.DeliveryrDate = order.ShipDate + new TimeSpan(_rnd.Next(1, 10), 0, 0, 0);
+            OrdersList.Add(order);
         }
     }
     /// <summary>
@@ -88,11 +84,11 @@ internal static class DataSource
     /// </summary>
     private static void createAndInitOrderItem()
     {
-        int x, y;
+        int x;
         for (int i = 0; i < 20; i++)
         {
             x = _rnd.Next(1, 5);
-            OrderItem oi = new OrderItem();
+            OrderItem oi = new ();
             for (int j = 0; j < x; j++)
             {
                 oi.ID = NextOrderItemNumber;
@@ -101,10 +97,10 @@ internal static class DataSource
                 oi.OrderID = 100000 + i;
                 oi.Price = _rnd.Next(500, 5000);
             }
-            OrderItemsList.Add(oi); 
+            OrderItemsList.Add(oi);
         }
     }
-    private static void _sInitialize()
+    private static void s_Initialize()
     {
         createAndInitProducts();
         createAndInitOrders();

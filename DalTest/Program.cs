@@ -1,6 +1,4 @@
 ﻿// We did the bonus - we used TryParse for the conversions
-using Dal;
-using DalList;
 using DO;
 using DalApi;
 namespace DalTest
@@ -8,18 +6,18 @@ namespace DalTest
     public class Program
     {
         //MAIN
-        static void Main(String[] args)
+        static void Main()
         {
             IDal dal = new Dal.DalList();
-            int chooseEntity; // entity selection
-            int chooseMenu; // function selection
+            int chooseMenu, chooseEntity; // function and entity selection
             Console.WriteLine("Choose an entity:");
             Console.WriteLine("0: to exit");
             Console.WriteLine("1: to product");
             Console.WriteLine("2: to order");
             Console.WriteLine("3: to orderItem");
-            int.TryParse(Console.ReadLine(), out chooseEntity); // absorption of an entity
-            while (chooseEntity != '0') // As long as 0 is not pressed
+            while (!int.TryParse(Console.ReadLine(), out chooseEntity)) // absorption of an entity
+                Console.Write("Please enter a number (your choice):");
+            while (chooseEntity != 0) // As long as 0 is not pressed
             {
                 try
                 {
@@ -32,11 +30,12 @@ namespace DalTest
                             Console.WriteLine("3: to get all products");
                             Console.WriteLine("4: to update");
                             Console.WriteLine("5: to delete");
-                            int.TryParse(Console.ReadLine(), out chooseMenu); // We will take a function number
+                            while (!int.TryParse(Console.ReadLine(), out chooseMenu)) // We will take a function number
+                                Console.Write("Please enter a number (your choice):");
                             switch (chooseMenu)
                             {
                                 case 1: // Add
-                                    Product p = new Product(); // We will create an object
+                                    Product p = new(); // We will create an object
                                     int id, stock; double price;
                                     Category category;
                                     // We will collect the ID
@@ -45,7 +44,7 @@ namespace DalTest
                                     p.ID = id;
                                     // We will collect the name
                                     Console.WriteLine("enter name of product");
-                                    p.Name = Console.ReadLine();
+                                    p.Name = Console.ReadLine() ?? "";
                                     // We will collect the price
                                     Console.WriteLine("enter price of product");
                                     double.TryParse(Console.ReadLine(), out price);
@@ -69,13 +68,13 @@ namespace DalTest
                                     break;
                                 case 3: // get all products
                                     IEnumerable<Product?> list = dal.Product.GetAll();
-                                    foreach (Product pro in list) // We will go through all the products and copy to the new system
+                                    foreach (var pro in list) // We will go through all the products and copy to the new system
                                     {
                                         Console.WriteLine(pro);
                                     }
                                     break;
                                 case 4: //  to update
-                                    Product p1 = new Product(); // We will create an object
+                                    Product p1 = new(); // We will create an object
                                     int id2, stock1; double price1;
                                     Category category1;
                                     // We will collect the ID
@@ -84,7 +83,7 @@ namespace DalTest
                                     p1.ID = id2;
                                     // We will collect the name
                                     Console.WriteLine("enter name of product");
-                                    p1.Name = Console.ReadLine();
+                                    p1.Name = Console.ReadLine() ?? "";
                                     // We will collect the price
                                     Console.WriteLine("enter price of product");
                                     double.TryParse(Console.ReadLine(), out price1);
@@ -97,7 +96,7 @@ namespace DalTest
                                     Console.WriteLine("enter inStock of product");
                                     int.TryParse(Console.ReadLine(), out stock1);
                                     p1.InStock = stock1;
-                                    if (p1.Name.Length > 0) // If no blank input is entered
+                                    if (p1.Name?.Length > 0) // If no blank input is entered
                                         dal.Product.Update(p1); // We will activate the update function
                                     break;
                                 case 5: // to delete
@@ -120,18 +119,18 @@ namespace DalTest
                             switch (chooseMenu)
                             {
                                 case 1: // Add
-                                    Order order = new Order(); // We will create an object
+                                    Order order = new(); // We will create an object
                                     int id;
                                     order.ID = 1;
                                     // We will collect the name
                                     Console.WriteLine("enter customer name of order");
-                                    order.CustomerName = Console.ReadLine();
+                                    order.CustomerName = Console.ReadLine() ?? "";
                                     // We will collect the Email
                                     Console.WriteLine("enter customer email of order");
-                                    order.CustomerEmail = Console.ReadLine();
+                                    order.CustomerEmail = Console.ReadLine() ?? "";
                                     // We will collect the adress
                                     Console.WriteLine("enter customer adress of order");
-                                    order.CustomerAdress = Console.ReadLine();
+                                    order.CustomerAdress = Console.ReadLine() ?? "";
                                     order.OrderDate = DateTime.Now; // We will enter the date
                                     dal.Order.Add(order); // we call to add function
                                     break;
@@ -142,28 +141,28 @@ namespace DalTest
                                     break;
                                 case 3: // get all orders
                                     IEnumerable<Order?> list = dal.Order.GetAll(); // We will create a new array
-                                    foreach (Order o in list) // We will copy the entire array of orders
+                                    foreach (var o in list) // We will copy the entire array of orders
                                     {
                                         Console.WriteLine(o);
                                     }
                                     break;
                                 case 4: // update
-                                    Order order1 = new Order(); //  We will create an object
+                                    Order order1 = new(); //  We will create an object
                                     // We will collect the ID
                                     Console.WriteLine("enter id of order");
                                     int.TryParse(Console.ReadLine(), out id);
                                     order1.ID = id;
                                     // We will collect the name
                                     Console.WriteLine("enter customer name of order");
-                                    order1.CustomerName = Console.ReadLine();
+                                    order1.CustomerName = Console.ReadLine() ?? "";
                                     // We will collect the Email
                                     Console.WriteLine("enter customer email of order");
-                                    order1.CustomerEmail = Console.ReadLine();
+                                    order1.CustomerEmail = Console.ReadLine() ?? "";
                                     // We will collect the adress
                                     Console.WriteLine("enter customer adress of order");
-                                    order1.CustomerAdress = Console.ReadLine();
+                                    order1.CustomerAdress = Console.ReadLine() ?? "";
                                     order1.OrderDate = DateTime.Now; // We will enter the date
-                                    if (order1.CustomerName.Length > 0) // If no blank input is entered
+                                    if (order1.CustomerName?.Length > 0) // If no blank input is entered
                                         dal.Order.Update(order1); // We will activate the update function
                                     break;
                                 case 5: // delete
@@ -185,9 +184,8 @@ namespace DalTest
                             switch (chooseMenu)
                             {
                                 case 1: // Add
-                                    OrderItem orderItem = new OrderItem(); // We will create an object
+                                    OrderItem orderItem = new(); // We will create an object
                                     int id, idProduct, idOrder, amount;
-                                    double price;
                                     orderItem.ID = 1;
                                     // We will collect the ID
                                     Console.WriteLine("enter product ID of orderItem");
@@ -213,13 +211,13 @@ namespace DalTest
                                     break;
                                 case 3: // get all orderItems
                                     IEnumerable<OrderItem?> list = dal.OrderItem.GetAll(); // We will create a new array
-                                    foreach (OrderItem o in list) // We will copy all the items
+                                    foreach (var o in list) // We will copy all the items
                                     {
                                         Console.WriteLine(o);
                                     }
                                     break;
                                 case 4: // update
-                                    OrderItem orderItem1 = new OrderItem(); //  We will create an object
+                                    OrderItem orderItem1 = new(); //  We will create an object
                                     // We will collect the ID
                                     Console.WriteLine("enter id of orderItem");
                                     int.TryParse(Console.ReadLine(), out id);
