@@ -1,7 +1,7 @@
 ﻿
 namespace BO;
 
-internal class ProductItem
+public class ProductItem
 {
     public int ID { get; set; } // The ID number of the orderItem
     public string? Name { get; set; } // The name of the product

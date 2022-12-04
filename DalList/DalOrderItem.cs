@@ -1,62 +1,41 @@
 ﻿using DalApi;
 using DO;
+using System.Data;
+
 namespace Dal;
 internal class DalOrderItem : IOrderItem
 {
     public int Add(OrderItem oi)
     {
-        int id = DataSource.NextOrderItemNumber; // The ID of the order will be according to the last empty place in the array
-        oi.ID = id; //We will insert the ID into the object
+        oi.ID = DataSource.NextOrderItemNumber; //We will insert the ID into the object
         DataSource.OrderItemsList.Add(oi); // We will insert the order into the last empty place in the array
         return oi.ID;
     }
-    public OrderItem GetById(int id)
-    {
-        return DataSource.OrderItemsList.Find(x => x?.ID == id) ?? throw new Exception("product doesnt exist");
+    public OrderItem GetById(int id)=> DataSource.OrderItemsList.Find(x => x?.ID == id)
+        ?? throw new DalDoesNotExistException("product does not exist");
+    public IEnumerable<OrderItem?> GetAll() => new List<OrderItem?>(DataSource.OrderItemsList);
 
-    }
-    public IEnumerable<OrderItem?> GetAll()
-    {
-        List<OrderItem?> list = new List<OrderItem?>();
-        foreach (var orderItem in DataSource.OrderItemsList)
-            list.Add(orderItem);
-        return list;
-    }
     public void Delete(int id)
     {
-        if (DataSource.OrderItemsList.Exists(x => x?.ID == id))
-            DataSource.OrderItemsList.RemoveAll(x => x?.ID == id);
-        else
-            throw new Exception("orderItem doesnt exist");
+        if (DataSource.OrderItemsList.RemoveAll(x => x?.ID == id)==0)
+            throw new DalDoesNotExistException("orderItem does not exist");
     }
     public void Update(OrderItem oi)
     {
-        if (DataSource.OrderItemsList.Exists(x => x?.ID == oi.ID))
-        {
-            oi.ID = GetById(oi.ID).ID;
-            DataSource.OrderItemsList.RemoveAll(x => x?.ID == oi.ID);
-            DataSource.OrderItemsList.Add(oi);
-        }
-        else
-            throw new Exception("orderItem doesnt exist");
+        Delete(oi.ID); // if not found - exception is thrown from this method
+        DataSource.OrderItemsList.Add(oi);
     }
     public OrderItem? GetByTwoId(int idProduct, int idOrder)
     {
-        OrderItem? oi;
-        if (DataSource.OrderItemsList.Exists(x => x?.ProductID == idProduct) && (DataSource.OrderItemsList.Exists(x => x?.OrderID == idOrder)))
-        {
-            oi = DataSource.OrderItemsList.Find((x => (x?.ProductID == idProduct) && (x?.OrderID == idOrder)));
-            return oi;
-        }
+        foreach (var item in DataSource.OrderItemsList.Where(x => x?.OrderID == idOrder).Where(x => x?.ProductID == idProduct))
+            return item;
         return null;
     }
     public IEnumerable<OrderItem?> GetByOrderId (int idOrder)
     {
-        List<OrderItem?> ordi = new List<OrderItem?>();
+        List<OrderItem?> ordi = new();
         foreach (var item in DataSource.OrderItemsList.Where(x => x?.ID == idOrder))
-        {
             ordi.Add(item);
-        }
         return ordi;
     }
 }

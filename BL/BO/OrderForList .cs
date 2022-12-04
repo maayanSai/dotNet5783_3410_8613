@@ -1,7 +1,7 @@
 ﻿
 namespace BO;
 
-internal class OrderForList
+public class OrderForList
 {
     public int ID { get; set; }
     public string? CustomerName { get; set; } // The name of customer of the order

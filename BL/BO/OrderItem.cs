@@ -1,6 +1,7 @@
-﻿using DO;
+﻿namespace BO;
+using DO;
 
-namespace BO;
+
 public class OrderItem
 {
     public int ID { get; set; } // The ID number of the orderItem

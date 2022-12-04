@@ -1,6 +1,7 @@
-﻿using DO;
+﻿namespace BO;
+using DO;
 
-namespace BO;
+
 public class Product
 {
     public int ID { get; set; } // The ID number of the product

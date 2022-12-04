@@ -1,7 +1,7 @@
 ﻿
 namespace BO;
 
-internal class Cart
+public class Cart
 {
     public string? CustomerName { get; set; } // The name of customer of the order
     public string? CustomerEmail { get; set; } // The email of customer of the order

@@ -9,9 +9,7 @@
     }
     public enum OrderStatus
     {
-        Initiated,
-        Paid,
-        Ordered,
+        confirmed,
         Shipped,
-        Delivered
+        Provided
     }

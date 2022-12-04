@@ -12,16 +12,15 @@ internal class DalOrder : IOrder
         DataSource.OrdersList.Add(ord); // We will insert the order into the last empty place in the array
         return ord.ID;
     }
-
     public Order GetById(int id) => DataSource.OrdersList.Find(x => x?.ID == id)
-        ?? throw new Exception("product doesnt exist");
+        ?? throw new DalDoesNotExistException("order doesnt exist");
 
     public IEnumerable<Order?> GetAll()=>new List<Order?>(DataSource.OrdersList); 
 
     public void Delete(int id)
     {
         if (DataSource.OrdersList.RemoveAll(x => x?.ID == id) == 0)
-            throw new Exception("order doesnt exist");
+            throw new DalDoesNotExistException("order doesnt exist");
     }
 
     public void Update(Order ord)

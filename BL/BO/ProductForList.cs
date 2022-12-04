@@ -1,7 +1,7 @@
 ﻿
 namespace BO;
 
-internal class ProductForList
+public class ProductForList
 {
     public int ID { set; get; }
     public string? Name { set; get; }
