@@ -164,8 +164,8 @@ namespace DalTest
                                     break;
                                 case 5: // delete
                                     // We will collect the ID
-                                    Console.WriteLine("enter id of order");
-                                    int.TryParse(Console.ReadLine(), out id);
+                                    do { Console.WriteLine("enter id of order"); }
+                                    while(!int.TryParse(Console.ReadLine(), out id));
                                     dal.Order.Delete(id); // We will activate the delete function
                                     break;
                             }
