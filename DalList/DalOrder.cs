@@ -16,7 +16,7 @@ internal class DalOrder : IOrder
     public Order GetById(int id) => DataSource.OrdersList.Find(x => x?.ID == id)
         ?? throw new Exception("product doesnt exist");
 
-    public IEnumerable<Order?> GetAll() => new List<Order?>(DataSource.OrdersList);
+    public IEnumerable<Order?> GetAll()=>new List<Order?>(DataSource.OrdersList); 
 
     public void Delete(int id)
     {
