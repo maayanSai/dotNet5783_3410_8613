@@ -3,7 +3,7 @@
 /// <summary>
 /// struct of product
 /// </summary>
-public struct Product
+public class Product
 {
     public int ID { get; set; } // The ID number of the product
     public string Name { get; set; } // The name of the product

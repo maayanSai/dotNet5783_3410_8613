@@ -3,7 +3,7 @@
 /// <summary>
 /// struct of order
 /// </summary>
-public struct Order
+public class Order
 {
     /// <summary>
     /// The ID number of the order

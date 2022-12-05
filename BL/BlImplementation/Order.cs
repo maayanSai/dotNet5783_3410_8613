@@ -1,10 +1,8 @@
-﻿using BlApi;
-
-
+﻿
 
 namespace BlImplementation;
-
-internal class BL:IBL
+using BlApi;
+internal class Order:IOrder
 {
     DalApi.IDal Dal = new Dal.DalList();
 }

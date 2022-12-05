@@ -1,10 +1,11 @@
-﻿using BlApi;
-
-
+﻿
 
 namespace BlImplementation;
+using BlApi;
 
-internal class BL:IBL
-{
+internal class Cart:ICart
+    {
     DalApi.IDal Dal = new Dal.DalList();
+
 }
+

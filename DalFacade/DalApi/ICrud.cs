@@ -8,7 +8,7 @@
 ///    D - Delete request
 /// </summary>
 /// <typeparam name="T">Entity type</typeparam>
-public interface ICrud<T> where T : struct
+public interface ICrud<T> where T : class
 {
     /// <summary>
     /// Request creating a new instance of an entity
