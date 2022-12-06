@@ -137,7 +137,7 @@ internal class Product:IProduct
         int amount=0;
         if (cart.Items != null)
         {
-            BO.OrderItem itemIn = cart.Items?.FirstOrDefault(item => item.ProductID == id);//if items in cart null error in runtime!!!!
+            BO.OrderItem? itemIn = cart.Items?.FirstOrDefault(item => item.ProductID == id);//if items in cart null error in runtime!!!!
 
             if (itemIn != null)
                 amount = itemIn.Amount;
