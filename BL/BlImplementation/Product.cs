@@ -81,7 +81,7 @@ internal class Product:IProduct
             ID = pr?.ID??throw new Exception("missing id"),
             Name = pr?.Name??throw new Exception("missing name"),
             Price = pr?.Price??throw new Exception("missing price"),
-            Category = (BO.Category)pr.Category,
+            Category = (BO.Category?)pr.Category?? throw new Exception("missing price")
         });
         
        
