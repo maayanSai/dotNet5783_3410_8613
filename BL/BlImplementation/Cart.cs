@@ -23,7 +23,7 @@ internal class Cart:ICart
         if(amount <boOrdi .Amount )
         {
             cart?.Items?.Remove(boOrdi);
-            cart.TotalPrice-=(boOrdi.Amount-amount)*boOrdi.Price;
+            cart!.TotalPrice-=(boOrdi.Amount-amount)*boOrdi.Price;
             boOrdi.Amount = amount;
             boOrdi.Totalprice=boOrdi.Price*amount;
             cart?.Items?.Add(boOrdi); 
@@ -31,7 +31,7 @@ internal class Cart:ICart
         if (amount >boOrdi.Amount)
         {
             cart?.Items?.Remove(boOrdi);
-            cart.TotalPrice+=(amount-boOrdi.Amount)*boOrdi.Price;  
+            cart!.TotalPrice+=(amount-boOrdi.Amount)*boOrdi.Price;  
             boOrdi.Amount = amount;
             boOrdi.Totalprice=boOrdi.Price*amount;
             cart?.Items?.Add(boOrdi);
@@ -70,7 +70,7 @@ internal class Cart:ICart
                     Totalprice = pro.Price
                     //ID??
                 });
-                cart.TotalPrice = (cart?.TotalPrice ?? 0) + pro.Price;//?
+                cart!.TotalPrice = (cart?.TotalPrice ?? 0) + pro.Price;//?
             }
 
             else//האורדראייטם קיים
@@ -79,7 +79,7 @@ internal class Cart:ICart
                 boOrderItem.Amount++;
                 boOrderItem.Totalprice += pro.Price;
                 cart?.Items?.Add(boOrderItem);
-                cart.TotalPrice += pro.Price;
+                cart!.TotalPrice += pro.Price;
 
             }
         }
@@ -103,7 +103,7 @@ internal class Cart:ICart
         {
             throw new Exceptions.BODoesNotExistException(exp.Message);   
         }
-        if (cart.Items.Exists(x => x.Amount<=0))
+        if (cart!.Items!.Exists(x => x.Amount<=0))
             throw new Exceptions.BlInvalidInputException("negetive amount");
         if (cart.Items.Exists(x => x.Amount>Dal.Product.GetById(x.ProductID).InStock))
             throw new Exception("therse not enogth instook");

@@ -63,7 +63,7 @@ internal class Order: IOrder
                 DeliveryrDate = orderD.DeliveryrDate,
                 Status = GetStatus(orderD),
                 Items = items,
-                TotalPrice= items.Sum(x=> x.Totalprice),
+                TotalPrice= items!.Sum(x=> x.Totalprice),
             };
         }
         catch( DO.DalDoesNotExistException exp)
