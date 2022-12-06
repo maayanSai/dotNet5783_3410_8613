@@ -6,8 +6,7 @@ using BO;
 using System.Transactions;
 
 internal class Cart:ICart
-    {
-    private static readonly Random _rnd = new();
+{
     DalApi.IDal Dal = new Dal.DalList();
     public BO.Cart? Update(BO.Cart cart, int id, int amount)
     {
