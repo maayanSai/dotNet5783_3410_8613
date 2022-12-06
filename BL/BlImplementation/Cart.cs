@@ -7,32 +7,33 @@ using System.Transactions;
 
 internal class Cart:ICart
 {
+    private static readonly Random _rnd = new();
     DalApi.IDal Dal = new Dal.DalList();
     public BO.Cart? Update(BO.Cart cart, int id, int amount)
     {
-        BO.OrderItem boOrdi = cart.Items.FirstOrDefault(x => x.ProductID == id);
+        BO.OrderItem? boOrdi = cart?.Items?.FirstOrDefault(x => x.ProductID == id);
         if (boOrdi == null)
             throw new Exceptions.BlInvalidInputException("prodcut  dose not exists in cart");
 
         if( amount<0)
             throw new Exception("invlavel amaunt");
         if (amount == 0)
-            cart.Items.Remove(boOrdi);
+            cart?.Items?.Remove(boOrdi);
         if(amount <boOrdi .Amount )
         {
-            cart.Items.Remove(boOrdi);
+            cart?.Items?.Remove(boOrdi);
             cart.TotalPrice-=(boOrdi.Amount-amount)*boOrdi.Price;
             boOrdi.Amount = amount;
             boOrdi.Totalprice=boOrdi.Price*amount;
-            cart.Items.Add(boOrdi); 
+            cart?.Items?.Add(boOrdi); 
         }
         if (amount >boOrdi.Amount)
         {
-            cart.Items.Remove(boOrdi);
+            cart?.Items?.Remove(boOrdi);
             cart.TotalPrice+=(amount-boOrdi.Amount)*boOrdi.Price;  
             boOrdi.Amount = amount;
             boOrdi.Totalprice=boOrdi.Price*amount;
-            cart.Items.Add(boOrdi);
+            cart?.Items?.Add(boOrdi);
 
         }
         return cart;
@@ -73,10 +74,10 @@ internal class Cart:ICart
 
             else//האורדראייטם קיים
             {
-                cart.Items.Remove(boOrderItem);
+                cart?.Items?.Remove(boOrderItem);
                 boOrderItem.Amount++;
                 boOrderItem.Totalprice += pro.Price;
-                cart.Items.Add(boOrderItem);
+                cart?.Items?.Add(boOrderItem);
                 cart.TotalPrice += pro.Price;
 
             }
