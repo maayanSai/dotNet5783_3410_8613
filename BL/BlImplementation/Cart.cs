@@ -3,6 +3,7 @@
 namespace BlImplementation;
 using BlApi;
 using BO;
+using System.ComponentModel.DataAnnotations;
 using System.Transactions;
 
 internal class Cart:ICart
@@ -112,8 +113,8 @@ internal class Cart:ICart
             throw new Exceptions.BlInvalidInputException("missing adress");
         if(cart .CustomerEmail==null)
             throw new Exceptions.BlInvalidInputException("missing Email");
-        // if(cart.CustomerEmail)-כתובת לפי פורמט
-        // throw new Exceptions.BlInvalidInputException("invlavel email");
+        if (!new EmailAddressAttribute().IsValid(cart.CustomerEmail))
+            throw new Exceptions.BlInvalidInputException("invlavel email");
         int days = _rnd.Next(21, 200);
         int orderId;
         DO.Order ord = new()
