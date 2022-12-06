@@ -123,9 +123,9 @@ internal class Cart:ICart
             CustomerEmail=cart.CustomerEmail,
             CustomerName=cart.CustomerName,
             ID=1,
-            OrderDate=DateTime.Now.AddDays(-days),
-            ShipDate=DateTime.MinValue,
-            DeliveryrDate=DateTime.MinValue,
+            OrderDate=DateTime.Now,
+            ShipDate=null,
+            DeliveryrDate=null,
             Amount=cart.Items.Select(x => x.Amount).Sum(),
         };
 
