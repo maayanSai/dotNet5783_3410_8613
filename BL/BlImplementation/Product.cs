@@ -14,40 +14,43 @@ internal class Product:IProduct
 
     public void Add(BO.Product p)
     {
-        if (p.ID>0&&p.Name!=""&&p.Price>0&&p.InStock>0)
+        if (p.ID <= 0)//negative id
+            throw new BO.Exceptions.BlInvalidInputException("product ID");
+            if(p.InStock< 0)//negative amount
+                throw new BO.Exceptions.BlInvalidInputException("product amount");
+            if (p.Price< 0)//negative price
+                throw new BO.Exceptions.BlInvalidInputException("product price");
+            if (p.Name == "")//empty string
+                throw new BO.Exceptions.BlInvalidInputException("product name");
+        try
         {
             DO.Product p1 = new()
             {
                 ID = p.ID,
-                Name=p?.Name??throw new Exception("missing name"),//לשנות לסוג אקספשיון הנדרש
-                Price=p?.Price??throw new Exception("missing price"),
+                Name=p?.Name?? throw new Exceptions.BlInvalidInputException("missing product name"),//לשנות לסוג אקספשיון הנדרש
+                Price=p.Price,
                 Category=(DO.Category)p.Category,//צריך לבדוק אם הומר תקין?
-                InStock=p?.InStock??throw new Exception("missing in stok"),
+                InStock=p.InStock,
             };
-            try
-            {
-                Dal.Product.Add(p1);
-            }
-            catch (DO.DalAlreadyExistsException exp)
-            {
-                throw new Exceptions.BOAlreadyExistsException(exp.Message);//לשנות לסוג אקספשיון הנדרש
-            }
-           
         }
-        else
-            throw new Exception("inncorrect input");//לשנות לסוג אקספשיון הנדרש
+        catch (DO.DalAlreadyExistsException exp)
+              {
+                  throw new Exceptions.BOAlreadyExistsException(exp.Message);//לשנות לסוג אקספשיון הנדרש
+             }
+     
+        }
 
-    }
-
-    public void Delete(int id)
+     public void Delete(int id)
     {
-        bool exist = false;
+        if (id<=0)
+            throw new Exceptions.BlInvalidInputException("negative id");
+            bool exist = false;
         
-            IEnumerable<DO.Order?> orders = new List<DO.Order?>(Dal.Order.GetAll());
+        IEnumerable<DO.Order?> orders = new List<DO.Order?>(Dal.Order.GetAll());
         foreach (var ord in orders)
-        {
+        { 
             IEnumerable<DO.OrderItem?> ordi = new List<DO.OrderItem?>();
-            ordi=Dal.OrderItem.GetByOrderId(ord?.ID??throw new Exception("order id is missing"));
+            ordi=Dal.OrderItem.GetByOrderId(ord?.ID??throw new Exceptions.BlInvalidInputException("order id is missing"));
             foreach (var oi in ordi)
             {
                 if (oi?.ID==id)
@@ -70,7 +73,7 @@ internal class Product:IProduct
 
     }
         
-    
+   
 
     public IEnumerable<ProductForList?> GetProducts()
     {
@@ -78,92 +81,108 @@ internal class Product:IProduct
 
         return pro.Select(pr => new BO.ProductForList
         {
-            ID = pr?.ID??throw new Exception("missing id"),
-            Name = pr?.Name??throw new Exception("missing name"),
-            Price = pr?.Price??throw new Exception("missing price"),
-            Category = (BO.Category?)pr.Category?? throw new Exception("missing price")
+            ID = pr?.ID??throw new Exceptions.BlNullPropertyException("missing id"),
+            Name = pr?.Name??throw new Exceptions.BlNullPropertyException("missing name"),
+            Price = pr?.Price??0,
+            Category = (BO.Category?)pr?.Category??throw new Exception("wrong cayegory"),
         });
         
        
         
     }
 
-    public BO.Product? ItemProduct(int id)
+    public BO.Product ItemProduct(int id)
     {
-        if(id>0)
+        if(id<=0)
         {
-            DO.Product? dopro;
-            try
-            {
-                dopro = Dal.Product.GetById(id);
-            }
-            catch(DO.DalDoesNotExistException exp)
-            {
-                throw new Exception(exp.Message); //לשנות לסוג אקספשיון הנדרש
-            }
-            BO.Product? bopro = new()
-            {
-                ID=dopro?.ID??throw new Exception("ID is missing"),  //לשנות לסוג אקספשיון הנדרש
-                Name =dopro?.Name??throw new Exception("Name is missing"),  //לשנות לסוג אקספשיון הנדרש
-                Price =dopro?.Price??0,
-                Category=(BO.Category?)dopro?.Category??throw new Exception("category is missing"),
-                InStock=dopro?.InStock??0,//??
-            };
-            return bopro;
+            throw new Exceptions.BlInvalidInputException("inncorrect id");
         }
-        return null;    
+        DO.Product dopro;
+        try
+        {
+            dopro = Dal.Product.GetById(id);
+        }
+        catch (DO.DalDoesNotExistException exp)
+        {
+            throw new Exception(exp.Message); //לשנות לסוג אקספשיון הנדרש
+        }
+       BO.Product bopro = new()
+        {
+            ID = dopro.ID,
+            Name = dopro.Name,
+            Price = dopro.Price,
+            Category = (BO.Category)dopro.Category,
+            InStock = dopro.InStock,//??
+        };
+        return bopro;
     }
 
-    public BO.ProductItem? ItemProduct(int id, BO.Cart cart)
+    public BO.ProductItem ItemProduct(int id, BO.Cart cart)
     {
-        if(id>0)
+        if(id<=0)
         {
-            DO.Product p;
-            try
-            {
-              p = Dal.Product.GetById(id);
-            }
-            catch(DO.DalDoesNotExistException exp)
-            {
-                throw new Exceptions.BODoesNotExistException(exp.Message);
-            }
-            BO.ProductItem? proi = new()
-            {
-                ID = p.ID,
-                Name = p.Name,
-                Price = p.Price,
-                isStock = p.InStock > 0 ? true : false,
-                AmountCart = 0,//לשנות!
-            };
-            return proi;    
+            throw new Exceptions.BlInvalidInputException("incorrct id");
           
         }
-        return null;
+        DO.Product p;
+        try
+        {
+            p = Dal.Product.GetById(id);
+        }
+        catch (DO.DalDoesNotExistException exp)
+        {
+            throw new Exceptions.BODoesNotExistException(exp.Message);
+        }
+        //לחזור
+        int amount=0;
+        if (cart.Items != null)
+        {
+            BO.OrderItem itemIn = cart.Items?.FirstOrDefault(item => item.ProductID == id);//if items in cart null error in runtime!!!!
+
+            if (itemIn != null)
+                amount = itemIn.Amount;
+
+        }
+        BO.ProductItem proi = new()
+        {
+            ID = p.ID,
+            Name = p.Name,
+            Price = p.Price,
+            isStock = p.InStock > 0 ,
+            AmountCart = amount ,//לשנות!
+        };
+        return proi;
+        
     }
 
     public void Update(BO.Product p)
     {
-        if (p.ID > 0 && p.Name != "" && p.Name != null && p.Price > 0 && p.InStock > 0)
+        //input validation
+        if (p.ID <= 0)//negative id
+            throw new Exceptions.BlInvalidInputException("product ID");
+        if (p.InStock < 0)//negative amount
+            throw new Exceptions.BlInvalidInputException("product amount");
+        if (p.Price < 0)//negative price
+            throw new Exceptions.BlInvalidInputException("product price");
+        if (p.Name == "")//empty string
+            throw new Exceptions.BlInvalidInputException("product name");
+
+        try
         {
             DO.Product dp = new()
             {
                 ID = p.ID,
-                Name = p.Name,
+                Name = p.Name ?? throw new Exceptions.BlInvalidInputException("product name"),
                 Price = p.Price,
                 InStock = p.InStock,
                 Category = (DO.Category)p.Category
             };
-            try
-            {
-                Dal.Product.Update(dp);
-            }
-            catch (DO.DalDoesNotExistException exp)
-            {
-                throw new Exceptions.BODoesNotExistException(exp.Message);
-            }
-
+            Dal.Product.Update(dp);
         }
-        else
-            throw new Exception("inncorrect input");
+         catch (DO.DalDoesNotExistException exp)
+        {
+            throw new Exceptions.BODoesNotExistException(exp.Message);
+        }
+ 
     }
 }
