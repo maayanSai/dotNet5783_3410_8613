@@ -17,6 +17,6 @@ public class Order
     public DateTime? ShipDate { get; set; } // Delivery time
     public DateTime? DeliveryrDate { get; set; } // Shipping arrival time
     public double TotalPrice { set; get; }
-    public IEnumerable<OrderItem>? Items { set; get; }
+    public List<OrderItem> ?Items { set; get; }
     public override string ToString() => this.ToStringProperty();
 }

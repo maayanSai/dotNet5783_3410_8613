@@ -14,15 +14,15 @@ internal class Product:IProduct
 
     public void Add(BO.Product p)
     {
-        if (p.ID>0&&p.Name!=""&&p.Name!=null&&p.Price>0&&p.InStock>0)
+        if (p.ID>0&&p.Name!=""&&p.Price>0&&p.InStock>0)
         {
             DO.Product p1 = new()
             {
                 ID = p.ID,
-                Name=p.Name,//לשנות לסוג אקספשיון הנדרש
-                Price=p.Price,
+                Name=p?.Name??throw new Exception("missing name"),//לשנות לסוג אקספשיון הנדרש
+                Price=p?.Price??throw new Exception("missing price"),
                 Category=(DO.Category)p.Category,//צריך לבדוק אם הומר תקין?
-                InStock=p.InStock,
+                InStock=p?.InStock??throw new Exception("missing in stok"),
             };
             try
             {
@@ -78,10 +78,10 @@ internal class Product:IProduct
 
         return pro.Select(pr => new BO.ProductForList
         {
-            ID = pr!.Value.ID,
-            Name = pr!.Value.Name,
-            Price = pr!.Value.Price,
-            Category = (BO.Category)pr!.Value.Category,
+            ID = pr?.ID??throw new Exception("missing id"),
+            Name = pr?.Name??throw new Exception("missing name"),
+            Price = pr?.Price??throw new Exception("missing price"),
+            Category = (BO.Category)pr.Category,
         });
         
        
