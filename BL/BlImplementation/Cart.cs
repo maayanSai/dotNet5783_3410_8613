@@ -9,6 +9,15 @@ internal class Cart:ICart
 {
     private static readonly Random _rnd = new();
     DalApi.IDal Dal = new Dal.DalList();
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="cart"></param>
+    /// <param name="id"></param>
+    /// <param name="amount"></param>
+    /// <returns></returns>
+    /// <exception cref="BO.Exceptions.BlInvalidInputException"></exception>
+    /// <exception cref="Exception"></exception>
     public BO.Cart? Update(BO.Cart cart, int id, int amount)
     {
         OrderItem ?boOrdi = cart?.Items?.FirstOrDefault(x => x.ProductID == id);
@@ -34,21 +43,23 @@ internal class Cart:ICart
             boOrdi.Amount = amount;
             boOrdi.Totalprice=boOrdi.Price*amount;
             cart?.Items?.Add(boOrdi);
-
         }
         return cart;
-
-
-
-
     }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="cart"></param>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
     public BO.Cart? Add(BO.Cart cart, int id)
     {
         if (id <= 0)
             throw new BO.BlInCorrectException("wrong negative id");
         DO.Product pro;
         try
-        {
+        { 
             pro = Dal.Product.GetById(id);
         }
         catch (DO.DalMissingIdException exp)
@@ -71,7 +82,6 @@ internal class Cart:ICart
                 });
                 cart!.TotalPrice +=pro.Price;//?
             }
-
             else//האורדראייטם קיים
             {
                 cart?.Items?.Remove(boOrderItem);
@@ -79,7 +89,6 @@ internal class Cart:ICart
                 boOrderItem.Totalprice += pro.Price;
                 cart?.Items?.Add(boOrderItem);
                 cart!.TotalPrice += pro.Price;
-
             }
         }
         else

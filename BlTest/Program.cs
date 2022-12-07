@@ -3,7 +3,7 @@ using BO;
 using BlApi;
 using BlImplementation;
 
-public class Program
+ public class Program
 {
     static IBl bl = new Bl();
     static void Main()
@@ -37,8 +37,8 @@ public class Program
                         switch (chooseMenu)
                         {
                             case 1:
-                                var list = bl.Order.GetOrders();
-                                foreach (var item in list)
+                                var list= bl.Order.GetOrders();
+                                foreach(var item in list)
                                     Console.WriteLine(item);
                                 break;
                             case 2:

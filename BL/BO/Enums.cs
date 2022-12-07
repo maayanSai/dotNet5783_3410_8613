@@ -9,7 +9,6 @@
     }
     public enum OrderStatus
     {
-        Initiated,
         Ordered,
         Shipped,
         Delivered

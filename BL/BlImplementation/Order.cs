@@ -5,8 +5,14 @@ using System.Collections.Generic;
 internal class Order: IOrder
 {
      DalApi.IDal Dal = new Dal.DalList();
+    /// <summary>
+    /// order list request (admin screen)
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
     public IEnumerable<BO.OrderForList?> GetOrders()
     {
+
         return Dal.Order.GetAll().Select(order => new BO.OrderForList
         {
             ID = order?.ID ?? throw new BO.BlNullPropertyException("missing order id"),
@@ -16,6 +22,11 @@ internal class Order: IOrder
             Amount = Dal.OrderItem?.GetByOrderId(order?.ID ?? 1).Count()??0,
         }) ;
     }
+    /// <summary>
+    /// A private helper function, that returns the state of the order 
+    /// </summary>
+    /// <param name="order"></param>
+    /// <returns></returns>
     private BO.OrderStatus GetStatus(DO.Order? order)
     {
         if (order?.ShipDate != null)
@@ -40,7 +51,7 @@ internal class Order: IOrder
         {
             throw new BO.BlMissingEntityException("the order does not exsists",exp);
         }
-
+        //  Create a collection of order items
         var items = Dal.OrderItem?.GetByOrderId(orderD.ID).Select(x => new BO.OrderItem
         {
             ID = x?.ID ?? throw new BO.BlNullPropertyException("missing order item id"),
@@ -102,9 +113,18 @@ internal class Order: IOrder
             };
             return ortk;
         }
-
-
-
+        catch (DO.DalDoesNotExistException exp)
+        {
+            throw new BO.Exceptions.BODoesNotExistException(exp.Message);
+        }
+    }
+    /// <summary>
+    /// Order shipping update (Admin order management screen)
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    /// <exception cref="BO.Exceptions.BODoesNotExistException"></exception>
     public BO.Order? Updateshipping(int id)
     {
         DO.Order order;
@@ -137,6 +157,13 @@ internal class Order: IOrder
         }
 
     }
+    /// <summary>
+    /// Order Delivery Update (Admin Order Management Screen)
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    /// <exception cref="BO.Exceptions.BODoesNotExistException"></exception>
     public BO.Order? Updatesupply(int id)
     {
         DO.Order order;
