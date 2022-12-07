@@ -1,9 +1,7 @@
-﻿
-
-namespace BlImplementation;
+﻿namespace BlImplementation;
 using BlApi;
-using BO;
 using System.Transactions;
+using System.Collections.Generic;
 
 internal class Cart:ICart
 {
@@ -12,7 +10,7 @@ internal class Cart:ICart
     {
         BO.OrderItem boOrdi = cart.Items.FirstOrDefault(x => x.ProductID == id);
         if (boOrdi == null)
-            throw new Exceptions.BlInvalidInputException("prodcut  dose not exists in cart");
+            throw new BO.Exceptions.BlInvalidInputException("prodcut  dose not exists in cart");
 
         if( amount<0)
             throw new Exception("invlavel amaunt");

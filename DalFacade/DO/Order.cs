@@ -15,7 +15,7 @@ public struct Order
     public DateTime OrderDate { get; set; } // Time of placing the order                                     
     public DateTime ShipDate { get; set; } // Delivery time
     public DateTime DeliveryrDate { get; set; } // Shipping arrival time
-    public object? Amount { get; set; }
+    public int? Amount { get; set; }
 
     // An action that prints the order
     public override string ToString()

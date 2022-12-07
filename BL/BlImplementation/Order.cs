@@ -1,7 +1,5 @@
 ﻿namespace BlImplementation;
-
 using BlApi;
-using BO;
 using System.Collections.Generic;
 
 internal class Order: IOrder
@@ -23,10 +21,10 @@ internal class Order: IOrder
         if(order?.OrderDate== DateTime.MinValue)
             return BO.OrderStatus.Initiated;
         if(order?.ShipDate== DateTime.MinValue)
-            return OrderStatus.Ordered;
+            return BO.OrderStatus.Ordered;
         if (order?.DeliveryrDate == DateTime.MinValue)
-            return OrderStatus.Shipped;
-        return OrderStatus.Delivered;
+            return BO.OrderStatus.Shipped;
+        return BO.OrderStatus.Delivered;
     }
     public BO.Order ItemOrder(int id)
     {
@@ -72,10 +70,9 @@ internal class Order: IOrder
         }
     }
 
-    public OrderTracking? Tracking(int id)
+    public BO.OrderTracking Tracking(int id)
     {
         DO.Order order;
-
         if (id < 0)
             throw new Exception("id is negative");
         try
@@ -88,7 +85,7 @@ internal class Order: IOrder
                 tracking.Add(new Tuple<DateTime, string>(order.ShipDate, " the order has been sent"));
             if (order.DeliveryrDate != DateTime.MinValue)
                 tracking.Add(new Tuple<DateTime, string>(order.ShipDate, " the order has been delivered"));
-            return new OrderTracking
+            return new BO.OrderTracking
             {
                 ID = id,
                 Status = GetStatus(order),
@@ -97,7 +94,7 @@ internal class Order: IOrder
         }
         catch (DO.DalDoesNotExistException exp)
         {
-            throw new Exceptions.BODoesNotExistException(exp.Message);
+            throw new BO.Exceptions.BODoesNotExistException(exp.Message);
         }
     }
 
