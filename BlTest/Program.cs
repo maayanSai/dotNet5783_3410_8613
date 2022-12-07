@@ -152,7 +152,9 @@ using BlImplementation;
                         switch (chooseMenu)
                         {
                             case 1:
-                                Console.WriteLine(bl.Product.GetProducts());
+                                var list = bl.Product.GetProducts();
+                                foreach (var item in list)
+                                    Console.WriteLine(item);
                                 break;
                             case 2:
                                 do { Console.WriteLine("enter id of product"); }

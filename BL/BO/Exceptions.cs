@@ -84,24 +84,13 @@ namespace BO;
 
             }
         }
-        /// <summary>
-        /// if the date in correct throw an exception
-        /// </summary>
-        [Serializable]
-        public class BlIncorrectDatesException : Exception
-        {
-            public BlIncorrectDatesException(string message) : base(message)
-            {
 
-            }
-        }
+}
+/// <summary>
+/// if there is an empty string throw an exception
+/// </summary>
 
-    }
-    /// <summary>
-    /// if there is an empty string throw an exception
-    /// </summary>
-
-    [Serializable]
+[Serializable]
     public class BlEmptyStringException : Exception
     {
         public BlEmptyStringException(string? message) : base(message)
