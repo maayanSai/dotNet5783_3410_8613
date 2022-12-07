@@ -5,27 +5,46 @@ using System.Collections.Generic;
 internal class Order: IOrder
 {
      DalApi.IDal Dal = new Dal.DalList();
+    /// <summary>
+    /// order list request (admin screen)
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
     public IEnumerable<BO.OrderForList?> GetOrders()
     {
+
         return Dal.Order.GetAll().Select(order => new BO.OrderForList
         {
             ID = order?.ID ?? throw new Exception("missing id"),
             CustomerName = order?.CustomerName ?? " ",
             Status = GetStatus(order),
-            TotalPrice = Dal.OrderItem.GetByOrderId(order?.ID?? throw new Exception("missing id")).Sum(x => x?.Price * x?.Amount),
-            Amount = Dal.OrderItem.GetByOrderId(order?.ID ?? throw new Exception("missing id")).Count(),
+            TotalPrice = Dal.OrderItem?.GetByOrderId(order?.ID??1).Sum(x => x?.Price * x?.Amount) ?? 0,
+            Amount = Dal.OrderItem?.GetByOrderId(order?.ID ?? 1).Count() ?? 0,
         }) ;
     }
+    /// <summary>
+    /// A private helper function, that returns the state of the order 
+    /// </summary>
+    /// <param name="order"></param>
+    /// <returns></returns>
     private BO.OrderStatus GetStatus(DO.Order? order)
     {
-        if(order?.OrderDate== DateTime.MinValue)
-            return BO.OrderStatus.Initiated;
-        if(order?.ShipDate== DateTime.MinValue)
-            return BO.OrderStatus.Ordered;
-        if (order?.DeliveryrDate == DateTime.MinValue)
+        if (order?.ShipDate != null)
+        {
+            if (order?.DeliveryrDate != null && order?.DeliveryrDate < DateTime.Now)
+                return BO.OrderStatus.Delivered;
             return BO.OrderStatus.Shipped;
-        return BO.OrderStatus.Delivered;
+        }
+        else
+            return BO.OrderStatus.Ordered;
     }
+    /// <summary>
+    /// Order details request (for manager screen and buyer screen)
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    /// <exception cref="BO.Exceptions.BODoesNotExistException"></exception>
     public BO.Order ItemOrder(int id)
     {
         DO.Order orderD;
@@ -39,6 +58,7 @@ internal class Order: IOrder
         {
             throw new BO.Exceptions.BODoesNotExistException(exp.Message);
         }
+        //  Create a collection of order items
         var items = Dal.OrderItem?.GetByOrderId(orderD.ID).Select(x => new BO.OrderItem
         {
             ID = x?.ID ?? throw new Exception("missing id"),
@@ -50,7 +70,8 @@ internal class Order: IOrder
         }).ToList();
         try
         {
-           return new BO.Order
+            // Creating and returning an order
+            return new BO.Order
             {
                 ID = orderD.ID,
                 CustomerName = orderD.CustomerName,
@@ -69,7 +90,13 @@ internal class Order: IOrder
             throw new BO.Exceptions.BODoesNotExistException(exp.Message);
         }
     }
-
+    /// <summary>
+    /// Order tracking (admin order management screen)
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    /// <exception cref="BO.Exceptions.BODoesNotExistException"></exception>
     public BO.OrderTracking Tracking(int id)
     {
         DO.Order order;
@@ -85,7 +112,7 @@ internal class Order: IOrder
                 tracking.Add(new Tuple<DateTime?, string?>(order.ShipDate, " the order has been sent"));
             if (order.DeliveryrDate != null)
                 tracking.Add(new Tuple<DateTime?, string?>(order.ShipDate, " the order has been delivered"));
-            OrderTracking? ortk=new ()
+            BO.OrderTracking? ortk=new ()
             {
                 ID = id,
                 Status = GetStatus(order),
@@ -98,7 +125,13 @@ internal class Order: IOrder
             throw new BO.Exceptions.BODoesNotExistException(exp.Message);
         }
     }
-
+    /// <summary>
+    /// Order shipping update (Admin order management screen)
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    /// <exception cref="BO.Exceptions.BODoesNotExistException"></exception>
     public BO.Order? Updateshipping(int id)
     {
         DO.Order order;
@@ -127,6 +160,13 @@ internal class Order: IOrder
             throw new BO.Exceptions.BODoesNotExistException(exp.Message);
         }
     }
+    /// <summary>
+    /// Order Delivery Update (Admin Order Management Screen)
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    /// <exception cref="BO.Exceptions.BODoesNotExistException"></exception>
     public BO.Order? Updatesupply(int id)
     {
         DO.Order order;

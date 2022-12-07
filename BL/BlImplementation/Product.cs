@@ -1,10 +1,7 @@
-﻿
-
-namespace BlImplementation;
+﻿namespace BlImplementation;
 using BlApi;
 using BO;
 using DO;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 

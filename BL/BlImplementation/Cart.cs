@@ -2,19 +2,25 @@
 using BlApi;
 using BO;
 using System.ComponentModel.DataAnnotations;
-using System.Transactions;
-using System.Collections.Generic;
 
 internal class Cart:ICart
 {
     private static readonly Random _rnd = new();
     DalApi.IDal Dal = new Dal.DalList();
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="cart"></param>
+    /// <param name="id"></param>
+    /// <param name="amount"></param>
+    /// <returns></returns>
+    /// <exception cref="BO.Exceptions.BlInvalidInputException"></exception>
+    /// <exception cref="Exception"></exception>
     public BO.Cart? Update(BO.Cart cart, int id, int amount)
     {
         BO.OrderItem? boOrdi = cart?.Items?.FirstOrDefault(x => x.ProductID == id);
         if (boOrdi == null)
             throw new BO.Exceptions.BlInvalidInputException("prodcut  dose not exists in cart");
-
         if( amount<0)
             throw new Exception("invlavel amaunt");
         if (amount == 0)
@@ -34,23 +40,25 @@ internal class Cart:ICart
             boOrdi.Amount = amount;
             boOrdi.Totalprice=boOrdi.Price*amount;
             cart?.Items?.Add(boOrdi);
-
         }
         return cart;
-
-
-
-
     }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="cart"></param>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
     public BO.Cart? Add(BO.Cart cart, int id)
     {
         if (id <= 0)
             throw new Exception("wrong id");
         DO.Product pro;
         try
-        {
+        { 
             pro = Dal.Product.GetById(id);
-        }
+        }    
         catch (DO.DalDoesNotExistException exp)
         {
             throw new Exception(exp.Message);  //!!! 
@@ -71,7 +79,6 @@ internal class Cart:ICart
                 });
                 cart!.TotalPrice = (cart?.TotalPrice ?? 0) + pro.Price;//?
             }
-
             else//האורדראייטם קיים
             {
                 cart?.Items?.Remove(boOrderItem);
@@ -79,15 +86,10 @@ internal class Cart:ICart
                 boOrderItem.Totalprice += pro.Price;
                 cart?.Items?.Add(boOrderItem);
                 cart!.TotalPrice += pro.Price;
-
             }
         }
         else
             throw new Exception("not in stock");
-       
-
-            
-
         return cart;
     }
 
