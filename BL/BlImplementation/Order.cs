@@ -113,11 +113,7 @@ internal class Order: IOrder
             };
             return ortk;
         }
-        catch (DO.DalDoesNotExistException exp)
-        {
-            throw new BO.Exceptions.BODoesNotExistException(exp.Message);
-        }
-    }
+  
     /// <summary>
     /// Order shipping update (Admin order management screen)
     /// </summary>
