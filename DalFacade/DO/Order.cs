@@ -12,10 +12,10 @@ public struct Order
     public string CustomerName { get; set; } // The name of customer of the order
     public string CustomerEmail { get; set; } // The email of customer of the order
     public string CustomerAdress { get; set; } // The adress of customer of the order
-    public DateTime OrderDate { get; set; } // Time of placing the order                                     
-    public DateTime ShipDate { get; set; } // Delivery time
-    public DateTime DeliveryrDate { get; set; } // Shipping arrival time
-    public int? Amount { get; set; }
+    public DateTime? OrderDate { get; set; } // Time of placing the order                                     
+    public DateTime? ShipDate { get; set; } // Delivery time
+    public DateTime? DeliveryrDate { get; set; } // Shipping arrival time
+    public int Amount { get; set; }
 
     // An action that prints the order
     public override string ToString()

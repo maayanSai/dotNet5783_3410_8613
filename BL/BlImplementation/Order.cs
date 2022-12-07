@@ -61,7 +61,7 @@ internal class Order: IOrder
                 DeliveryrDate = orderD.DeliveryrDate,
                 Status = GetStatus(orderD),
                 Items = items,
-                TotalPrice= items.Sum(x=> x.Totalprice),
+                TotalPrice= items!.Sum(x=> x.Totalprice),
             };
         }
         catch( DO.DalDoesNotExistException exp)
@@ -78,19 +78,20 @@ internal class Order: IOrder
         try
         {
             order = Dal.Order.GetById(id);
-            List<Tuple<DateTime, string>> tracking = new();
-            if (order.OrderDate != DateTime.MinValue)
-                tracking.Add(new Tuple<DateTime, string>(order.OrderDate, "the order allready exist"));
-            if (order.ShipDate != DateTime.MinValue)
-                tracking.Add(new Tuple<DateTime, string>(order.ShipDate, " the order has been sent"));
-            if (order.DeliveryrDate != DateTime.MinValue)
-                tracking.Add(new Tuple<DateTime, string>(order.ShipDate, " the order has been delivered"));
-            return new BO.OrderTracking
+            List<Tuple<DateTime?, string?>> tracking = new();
+            if (order.OrderDate != null)
+                tracking.Add(new Tuple<DateTime?, string?>(order.OrderDate, "the order allready exist"));
+            if (order.ShipDate != null)
+                tracking.Add(new Tuple<DateTime?, string?>(order.ShipDate, " the order has been sent"));
+            if (order.DeliveryrDate != null)
+                tracking.Add(new Tuple<DateTime?, string?>(order.ShipDate, " the order has been delivered"));
+            OrderTracking? ortk=new ()
             {
                 ID = id,
                 Status = GetStatus(order),
                 Tracking = tracking,
             };
+            return ortk;
         }
         catch (DO.DalDoesNotExistException exp)
         {
