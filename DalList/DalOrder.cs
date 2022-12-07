@@ -13,14 +13,14 @@ internal class DalOrder : IOrder
         return ord.ID;
     }
     public Order GetById(int id) => DataSource.OrdersList.Find(x => x?.ID == id)
-        ?? throw new DalDoesNotExistException("order doesnt exist");
+        ?? throw new DalMissingIdException(id,"order");
 
     public IEnumerable<Order?> GetAll()=>new List<Order?>(DataSource.OrdersList); 
 
     public void Delete(int id)
     {
         if (DataSource.OrdersList.RemoveAll(x => x?.ID == id) == 0)
-            throw new DalDoesNotExistException("order doesnt exist");
+            throw new DalMissingIdException(id,"order");
     }
 
     public void Update(Order ord)

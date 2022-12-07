@@ -12,13 +12,13 @@ internal class DalOrderItem : IOrderItem
         return oi.ID;
     }
     public OrderItem GetById(int id)=> DataSource.OrderItemsList.Find(x => x?.ID == id)
-        ?? throw new DalDoesNotExistException("product does not exist");
+        ?? throw new DalMissingIdException(id,"product");
     public IEnumerable<OrderItem?> GetAll() => new List<OrderItem?>(DataSource.OrderItemsList);
 
     public void Delete(int id)
     {
         if (DataSource.OrderItemsList.RemoveAll(x => x?.ID == id)==0)
-            throw new DalDoesNotExistException("orderItem does not exist");
+            throw new DalMissingIdException(id,"order item");
     }
     public void Update(OrderItem oi)
     {
@@ -29,6 +29,7 @@ internal class DalOrderItem : IOrderItem
     {
         foreach (var item in DataSource.OrderItemsList.Where(x => x?.OrderID == idOrder).Where(x => x?.ProductID == idProduct))
             return item;
+      //  throw new DalDoesNotExistException()???!!!!
         return null;
     }
     public IEnumerable<OrderItem?> GetByOrderId (int idOrder)

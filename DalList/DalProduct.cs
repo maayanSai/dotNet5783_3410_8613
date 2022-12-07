@@ -6,7 +6,7 @@ internal class DalProduct : IProduct
     public int Add(Product p)
     {
         if ((DataSource.ProductsList.Exists(x => x?.ID == p.ID)))
-            throw new DalAlreadyExistsException("the product is already exists");
+            throw new DalAlreadyExistsException(p.ID,"product");
         else
         {
             DataSource.ProductsList.Add(p);
@@ -14,13 +14,13 @@ internal class DalProduct : IProduct
         }
     }
     public Product GetById(int id)=> DataSource.ProductsList.Find(x => x?.ID == id)
-        ?? throw new DalDoesNotExistException("product does not exist");
+        ?? throw new DalMissingIdException(id,"product");
     public IEnumerable<Product?> GetAll() => new List<Product?>(DataSource.ProductsList);
 
     public void Delete(int id)
     {
         if (DataSource.ProductsList.RemoveAll(x => x?.ID == id)==0)
-            throw new DalDoesNotExistException("product does not exist");
+            throw new DalMissingIdException(id,"product");
     }
 
     public void Update(Product p)
