@@ -11,7 +11,7 @@ internal class Cart:ICart
     DalApi.IDal Dal = new Dal.DalList();
     public BO.Cart? Update(BO.Cart cart, int id, int amount)
     {
-        BO.OrderItem? boOrdi = cart?.Items?.FirstOrDefault(x => x.ProductID == id);
+        OrderItem boOrdi = cart.Items.FirstOrDefault(x => x.ProductID == id);
         if (boOrdi == null)
             throw new BO.Exceptions.BlInvalidInputException("prodcut  dose not exists in cart");
 
@@ -22,7 +22,7 @@ internal class Cart:ICart
         if(amount <boOrdi .Amount )
         {
             cart?.Items?.Remove(boOrdi);
-            cart!.TotalPrice-=(boOrdi.Amount-amount)*boOrdi.Price;
+            cart.TotalPrice-=(boOrdi.Amount-amount)*boOrdi.Price;
             boOrdi.Amount = amount;
             boOrdi.Totalprice=boOrdi.Price*amount;
             cart?.Items?.Add(boOrdi); 
