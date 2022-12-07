@@ -84,17 +84,7 @@ namespace BO;
 
             }
         }
-        /// <summary>
-        /// if the date in correct throw an exception
-        /// </summary>
-        [Serializable]
-        public class BlIncorrectDatesException : Exception
-        {
-            public BlIncorrectDatesException(string message) : base(message)
-            {
-
-            }
-        }
+       
 
     }
     /// <summary>
