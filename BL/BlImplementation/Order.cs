@@ -27,7 +27,7 @@ internal class Order: IOrder
     /// </summary>
     /// <param name="order"></param>
     /// <returns></returns>
-    private BO.OrderStatus GetStatus(DO.Order? order)
+    private static BO.OrderStatus GetStatus(DO.Order? order)
     {
         if (order?.ShipDate != null)
         {
@@ -105,6 +105,13 @@ internal class Order: IOrder
         try
         {
             order = Dal.Order.GetById(id);
+        }
+        catch (DO.DalDoesNotExistException exp)
+        {
+            throw new BO.Exceptions.BODoesNotExistException(exp.Message);
+        }
+        try
+        {
             List<Tuple<DateTime?, string?>> tracking = new();
             if (order.OrderDate != null)
                 tracking.Add(new Tuple<DateTime?, string?>(order.OrderDate, "the order allready exist"));
@@ -112,7 +119,7 @@ internal class Order: IOrder
                 tracking.Add(new Tuple<DateTime?, string?>(order.ShipDate, " the order has been sent"));
             if (order.DeliveryrDate != null)
                 tracking.Add(new Tuple<DateTime?, string?>(order.ShipDate, " the order has been delivered"));
-            BO.OrderTracking? ortk=new ()
+            BO.OrderTracking? ortk = new()
             {
                 ID = id,
                 Status = GetStatus(order),
@@ -124,6 +131,9 @@ internal class Order: IOrder
         {
             throw new BO.Exceptions.BODoesNotExistException(exp.Message);
         }
+
+    }
+
     }
     /// <summary>
     /// Order shipping update (Admin order management screen)
@@ -139,8 +149,8 @@ internal class Order: IOrder
             throw new Exception("id is negative");
         try
         {
-            order = Dal.Order.GetById(id);
-            if(order.ShipDate==DateTime.MinValue)
+            order = Dal..GetById(id);
+            if(order.ShipDate!=null)
             {
                 Dal.Order.Update(new DO.Order
                 {

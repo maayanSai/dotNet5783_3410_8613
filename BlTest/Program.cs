@@ -64,6 +64,8 @@ using BlImplementation;
                                 break;
                             case 6:
                                 break;
+                            default:
+                                throw new Exception("the choice has not correct");
                         }
                         break;
                     case 2:
@@ -132,6 +134,8 @@ using BlImplementation;
                                 break;
                             case 4:
                                 break;
+                            default:
+                                throw new Exception("the choice has not correct");
                         }
                         break;
                     case 3:
@@ -219,8 +223,14 @@ using BlImplementation;
                                 break;
                             case 7:
                                 break;
+                            default:
+                                throw new Exception("the choice has not correct");
                         }
                         break;
+                    case 0:
+                        break;
+                    default:
+                        throw new Exception("the choice has not correct");
                 }
             }
             catch (Exception str) // catches the error

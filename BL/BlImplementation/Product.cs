@@ -8,7 +8,13 @@ using System.Linq;
 internal class Product:IProduct
 {
     DalApi.IDal Dal = new Dal.DalList();
-
+    /// <summary>
+    /// Adding a product (for the manager screen)
+    /// </summary>
+    /// <param name="p"></param>
+    /// <exception cref="BO.Exceptions.BlInvalidInputException"></exception>
+    /// <exception cref="Exceptions.BlInvalidInputException"></exception>
+    /// <exception cref="Exceptions.BOAlreadyExistsException"></exception>
     public void Add(BO.Product p)
     {
         if (p.ID <= 0)//negative id
@@ -31,13 +37,18 @@ internal class Product:IProduct
             };
         }
         catch (DO.DalAlreadyExistsException exp)
-              {
+        {
                   throw new Exceptions.BOAlreadyExistsException(exp.Message);//לשנות לסוג אקספשיון הנדרש
-             }
-     
         }
-
-     public void Delete(int id)
+}
+    /// <summary>
+    /// Product deletion (for manager screen)
+    /// </summary>
+    /// <param name="id"></param>
+    /// <exception cref="Exceptions.BlInvalidInputException"></exception>
+    /// <exception cref="Exceptions.BODoesNotExistException"></exception>
+    /// <exception cref="Exception"></exception>
+    public void Delete(int id)
     {
         if (id<=0)
             throw new Exceptions.BlInvalidInputException("negative id");
@@ -69,9 +80,12 @@ internal class Product:IProduct
             throw new Exception("the product is exsist in order/s so that can not be deleated");//לשנות לסוג אקספשיון הנדרש
 
     }
-        
-   
-
+    /// <summary>
+    /// Product list request (for manager screen and buyer's catalog screen)
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="Exceptions.BlNullPropertyException"></exception>
+    /// <exception cref="Exception"></exception>
     public IEnumerable<ProductForList?> GetProducts()
     {
         IEnumerable<DO.Product?> pro=Dal.Product.GetAll();

@@ -8,7 +8,7 @@ internal class Cart:ICart
     private static readonly Random _rnd = new();
     DalApi.IDal Dal = new Dal.DalList();
     /// <summary>
-    /// 
+    /// Updating the quantity of a product in the shopping cart (for the shopping cart screen)
     /// </summary>
     /// <param name="cart"></param>
     /// <param name="id"></param>
@@ -44,7 +44,7 @@ internal class Cart:ICart
         return cart;
     }
     /// <summary>
-    /// 
+    /// Adding a product to the shopping cart (for catalog screen and product details screen)
     /// </summary>
     /// <param name="cart"></param>
     /// <param name="id"></param>
@@ -92,7 +92,13 @@ internal class Cart:ICart
             throw new Exception("not in stock");
         return cart;
     }
-
+    /// <summary>
+    /// Confirmation for the order basket (for the shopping basket screen)
+    /// </summary>
+    /// <param name="cart"></param>
+    /// <exception cref="Exceptions.BODoesNotExistException"></exception>
+    /// <exception cref="Exceptions.BlInvalidInputException"></exception>
+    /// <exception cref="Exception"></exception>
     public void MakeAnOrder(BO.Cart cart)
     {
         //כל המוצרים קיימים(לפי התעודת זהות,למרות שיכול להיות שהם קיימים עם כמות אפס
