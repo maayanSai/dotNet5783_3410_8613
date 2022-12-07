@@ -1,11 +1,13 @@
 ﻿using DalApi;
 using BlApi;
 using BO;
-internal class Program
+public class Program
 {
-    private static void Main(string[] args)
+    //MAIN
+    static void Main()
     {
-        IBl bl = new Bllmplementaion.Bl();
+        IBl bl = new IBl();
+        int id;
         int chooseMenu, chooseEntity; // function and entity selection
         Console.WriteLine("Choose an entity:");
         Console.WriteLine("0: to exit");
@@ -34,31 +36,29 @@ internal class Program
                         switch (chooseMenu)
                         { 
                             case 1:
-                                bl.Order.GetOrders();
+                                IEnumerable<OrderForList?> list = bl.Order.GetOrders();
+                                foreach (var order in list) // We will go through all the products and copy to the new system
+                                    Console.WriteLine(order);
                                 break;
                             case 2:
-                                int id;
                                 do { Console.WriteLine("enter id of order"); }
                                 while (!int.TryParse(Console.ReadLine(), out id));
-                                bl.Order.ItemOrder(id);
+                                Console.WriteLine(bl.Order.ItemOrder(id).ToString()); 
                                 break;
                             case 3:
-                                int id1;
                                 do { Console.WriteLine("enter id of order"); }
-                                while (!int.TryParse(Console.ReadLine(), out id1));
-                                bl.Order.Updateshipping(id1);
+                                while (!int.TryParse(Console.ReadLine(), out id));
+                                bl.Order.Updateshipping(id);
                                 break;
                             case 4:
-                                int id2;
                                 do { Console.WriteLine("enter id of order"); }
-                                while (!int.TryParse(Console.ReadLine(), out id2));
-                                bl.Order.Updatesupply(id2);
+                                while (!int.TryParse(Console.ReadLine(), out id));
+                                bl.Order.Updatesupply(id);
                                 break;
                             case 5:
-                                int id3;
                                 do { Console.WriteLine("enter id of order"); }
-                                while (!int.TryParse(Console.ReadLine(), out id3));
-                                bl.Order.Updatesupply(id3);
+                                while (!int.TryParse(Console.ReadLine(), out id));
+                                bl.Order.Updatesupply(id);
                                 break;
                             case 6:
                                 break;
@@ -75,7 +75,10 @@ internal class Program
                         switch (chooseMenu)
                         {
                             case 1:
+                                int idProduct;
                                 Cart c = new();
+                                do { Console.WriteLine("enter id of product"); }
+                                while (!int.TryParse(Console.ReadLine(), out idProduct));
                                 Console.WriteLine("enter name of customer ");
                                 c.CustomerName = Console.ReadLine() ?? "";
                                 Console.WriteLine("enter email of customer");
@@ -83,7 +86,7 @@ internal class Program
                                 Console.WriteLine("enter adress of customer");
                                 c.CustomerAdress = Console.ReadLine() ?? " ";
                                 c.TotalPrice=
-                                bl.Cart.Add();
+                                bl.Cart.Add(c,idProduct);
 
                                 break;
                         }
