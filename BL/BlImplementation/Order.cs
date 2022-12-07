@@ -36,21 +36,21 @@ internal class Order: IOrder
         {
             orderD = Dal.Order.GetById(id);
         }
-        catch(DO.DalDoesNotExistException exp)
+        catch(DO.DalMissingIdException exp)
         {
-            throw new BO.Exceptions.BODoesNotExistException(exp.Message);
+            throw new BO.BlMissingEntityException("the order does not exsists",exp);
         }
+
         var items = Dal.OrderItem?.GetByOrderId(orderD.ID).Select(x => new BO.OrderItem
         {
-            ID = x?.ID ?? throw new Exception("missing id"),
-            ProductID = x?.ProductID ?? throw new Exception("missing id"),
+            ID = x?.ID ?? throw new BO.BlNullPropertyException("missing order item id"),
+            ProductID = x?.ProductID ?? throw new  BO.BlNullPropertyException("missing product id"),
             Price = x?.Price ?? 0,
-            Name = Dal.Product.GetById(x?.ProductID ?? throw new Exception("missing id")).Name,
+            Name = Dal.Product.GetById(x?.ProductID ?? 1).Name,//האיי די תמיד יהיה תקין
             Amount = x?.Amount ?? 0,
             Totalprice = x?.Price * x?.Amount ?? 0
         }).ToList();
-        try
-        {
+       
            return new BO.Order
             {
                 ID = orderD.ID,
@@ -64,11 +64,8 @@ internal class Order: IOrder
                 Items = items,
                 TotalPrice= items!.Sum(x=> x.Totalprice),
             };
-        }
-        catch( DO.DalDoesNotExistException exp)
-        {
-            throw new BO.Exceptions.BODoesNotExistException(exp.Message);
-        }
+
+     
     }
 
     public BO.OrderTracking? Tracking(int id)
@@ -105,42 +102,46 @@ internal class Order: IOrder
             };
             return ortk;
         }
-       
-    
+
+
 
     public BO.Order? Updateshipping(int id)
     {
         DO.Order order;
         if (id < 0)
-            throw new BO.BlInCorrectException ("id is negative");
+            throw new BO.BlInCorrectException("id is negative");
         try
         {
             order = Dal.Order.GetById(id);
-            if(order.ShipDate!=null)
+
+
+
+            if (order.ShipDate != null)
             {
                 Dal.Order.Update(new DO.Order
                 {
-                    ID=id,
-                    CustomerAdress=order.CustomerAdress,
-                    CustomerEmail=order.CustomerEmail,
-                    CustomerName= order.CustomerName,
-                    OrderDate=order.OrderDate,
-                    ShipDate=DateTime.Now,
-                    DeliveryrDate=order.DeliveryrDate,
+                    ID = id,
+                    CustomerAdress = order.CustomerAdress,
+                    CustomerEmail = order.CustomerEmail,
+                    CustomerName = order.CustomerName,
+                    OrderDate = order.OrderDate,
+                    ShipDate = DateTime.Now,
+                    DeliveryrDate = order.DeliveryrDate,
                 });
             }
             return this.ItemOrder(id);
         }
-        catch (DO.DalDoesNotExistException exp)
+        catch (DO.DalMissingIdException exp)
         {
-            throw new BO.Exceptions.BODoesNotExistException(exp.Message);
+            throw new BO.BlMissingEntityException("The order does not exist", exp);
         }
+
     }
     public BO.Order? Updatesupply(int id)
     {
         DO.Order order;
         if (id < 0)
-            throw new Exception("id is negative");
+            throw new BO.BlInCorrectException("id is negative");
         try
         {
             order = Dal.Order.GetById(id);
@@ -159,9 +160,9 @@ internal class Order: IOrder
             }
             return this.ItemOrder(id);
         }
-        catch (DO.DalDoesNotExistException exp)
+        catch (DO.DalMissingIdException exp)
         {
-            throw new BO.Exceptions.BODoesNotExistException(exp.Message);
+            throw new BO.BlMissingEntityException("The order does not exist", exp);
         }
     }
 }

@@ -11,18 +11,18 @@ internal class Cart:ICart
     DalApi.IDal Dal = new Dal.DalList();
     public BO.Cart? Update(BO.Cart cart, int id, int amount)
     {
-        OrderItem boOrdi = cart.Items.FirstOrDefault(x => x.ProductID == id);
+        OrderItem ?boOrdi = cart?.Items?.FirstOrDefault(x => x.ProductID == id);
         if (boOrdi == null)
-            throw new BO.Exceptions.BlInvalidInputException("prodcut  dose not exists in cart");
+            throw new BO.BlMissingEntityException("prodcut  dose not exists in cart");
 
         if( amount<0)
-            throw new Exception("invlavel amaunt");
+            throw new BO.BlInCorrectException("invlavel amount");
         if (amount == 0)
             cart?.Items?.Remove(boOrdi);
         if(amount <boOrdi .Amount )
         {
             cart?.Items?.Remove(boOrdi);
-            cart.TotalPrice-=(boOrdi.Amount-amount)*boOrdi.Price;
+            cart!.TotalPrice-=(boOrdi.Amount-amount)*boOrdi.Price;
             boOrdi.Amount = amount;
             boOrdi.Totalprice=boOrdi.Price*amount;
             cart?.Items?.Add(boOrdi); 
@@ -45,15 +45,15 @@ internal class Cart:ICart
     public BO.Cart? Add(BO.Cart cart, int id)
     {
         if (id <= 0)
-            throw new Exception("wrong id");
+            throw new BO.BlInCorrectException("wrong negative id");
         DO.Product pro;
         try
         {
             pro = Dal.Product.GetById(id);
         }
-        catch (DO.DalDoesNotExistException exp)
+        catch (DO.DalMissingIdException exp)
         {
-            throw new Exception(exp.Message);  //!!! 
+            throw new BO.BlMissingEntityException("the product does not exist",exp);   
         }
         var boOrderItem = cart?.Items?.FirstOrDefault(x => x.ProductID == id);
         if (pro.InStock > 0)
@@ -69,7 +69,7 @@ internal class Cart:ICart
                     Totalprice = pro.Price
                     //ID??
                 });
-                cart!.TotalPrice = (cart?.TotalPrice ?? 0) + pro.Price;//?
+                cart!.TotalPrice +=pro.Price;//?
             }
 
             else//האורדראייטם קיים
@@ -83,7 +83,7 @@ internal class Cart:ICart
             }
         }
         else
-            throw new Exception("not in stock");
+            throw new BO.BlMissingEntityException("Product not in stock");
        
 
             
@@ -98,22 +98,22 @@ internal class Cart:ICart
         {
             cart?.Items?.ForEach(x => Dal.Product.GetById(x.ProductID));
         }
-        catch(DO.DalDoesNotExistException exp)
+        catch(DO.DalMissingIdException exp)
         {
-            throw new Exceptions.BODoesNotExistException(exp.Message);   
+            throw new BO.BlMissingEntityException("one of the products in the cart does not exsist",exp);   
         }
         if (cart!.Items!.Exists(x => x.Amount<=0))
-            throw new Exceptions.BlInvalidInputException("negetive amount");
+            throw new BO.BlInCorrectException("negetive amount");
         if (cart.Items.Exists(x => x.Amount>Dal.Product.GetById(x.ProductID).InStock))
-            throw new Exception("therse not enogth instook");
+            throw new BO.BlInCorrectException("therse not enogth instook");
         if (cart.CustomerName==null)
-            throw new Exceptions.BlInvalidInputException("missing name");
+            throw new BO.BlNullPropertyException("missing name");
         if(cart.CustomerAdress==null)
-            throw new Exceptions.BlInvalidInputException("missing adress");
+            throw new BO.BlNullPropertyException("missing adress");
         if(cart .CustomerEmail==null)
-            throw new Exceptions.BlInvalidInputException("missing Email");
+            throw new BO.BlNullPropertyException("missing Email");
         if (!new EmailAddressAttribute().IsValid(cart.CustomerEmail))
-            throw new Exceptions.BlInvalidInputException("invlavel email");
+            throw new BO.BlInCorrectException("invlavel email");
         int days = _rnd.Next(21, 200);
         int orderId;
         DO.Order ord = new()
@@ -146,18 +146,18 @@ internal class Cart:ICart
             {
                  p= Dal.Product.GetById(dOrdi.ID);
             }
-            catch (DO.DalDoesNotExistException exp)
+            catch (DO.DalMissingIdException exp)
             {
-                throw new Exceptions.BODoesNotExistException(exp.Message);
+                throw new BO.BlMissingEntityException("The priduct does not exsist",exp);
             }
             p.InStock-=dOrdi.Amount;
             try 
             {
                 Dal.Product.Update(p);
             }
-            catch (DO.DalDoesNotExistException exp)
+            catch (DO.DalMissingIdException exp)
             {
-                throw new Exceptions.BODoesNotExistException(exp.Message);
+                throw new BO.BlMissingEntityException("the priduct does not exsist",exp);
             }
 
         }
