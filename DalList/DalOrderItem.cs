@@ -1,5 +1,7 @@
 ﻿using DalApi;
 using DO;
+using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 
 namespace Dal;
@@ -12,9 +14,13 @@ internal class DalOrderItem : IOrderItem
         return oi.ID;
     }
     public OrderItem GetById(int id)=> DataSource.OrderItemsList.Find(x => x?.ID == id)
-        ?? throw new DalMissingIdException(id,"product");
-    public IEnumerable<OrderItem?> GetAll() => new List<OrderItem?>(DataSource.OrderItemsList);
-
+        ?? throw new DalMissingIdException(id, "order item");
+    public IEnumerable<OrderItem?> GetAll()
+    {
+     IEnumerable<OrderItem?> orderitemcolleption;
+         orderitemcolleption=DataSource.OrderItemsList;
+        return orderitemcolleption;
+    }
     public void Delete(int id)
     {
         if (DataSource.OrderItemsList.RemoveAll(x => x?.ID == id)==0)
@@ -27,16 +33,22 @@ internal class DalOrderItem : IOrderItem
     }
     public OrderItem? GetByTwoId(int idProduct, int idOrder)
     {
-        foreach (var item in DataSource.OrderItemsList.Where(x => x?.OrderID == idOrder).Where(x => x?.ProductID == idProduct))
-            return item;
-      //  throw new DalDoesNotExistException()???!!!!
-        return null;
+        var ordreit =DataSource.OrderItemsList.Where(x => x?.OrderID == idOrder && x?.ProductID == idProduct);
+        ordreit.ToList();
+        if (!ordreit.Any())
+            throw new DO.DalMissingIdException(idProduct, idOrder, "Order item", "the order item which has the profuct id and the order id that you asked for does not exsist");   
+        return ordreit.First();
+       
+        
     }
     public IEnumerable<OrderItem?> GetByOrderId (int idOrder)
     {
-        List<OrderItem?> ordi = new();
-        foreach (var item in DataSource.OrderItemsList.Where(x => x?.ID == idOrder))
-            ordi.Add(item);
+
+        IEnumerable<OrderItem?> ordi;
+        ordi=DataSource.OrderItemsList.Where(x => x?.ID == idOrder);
         return ordi;
+
+     
+
     }
 }

@@ -15,7 +15,12 @@ internal class DalOrder : IOrder
     public Order GetById(int id) => DataSource.OrdersList.Find(x => x?.ID == id)
         ?? throw new DalMissingIdException(id,"order");
 
-    public IEnumerable<Order?> GetAll()=>new List<Order?>(DataSource.OrdersList); 
+    public IEnumerable<Order?> GetAll()
+    {
+        IEnumerable<Order?> ord=DataSource.OrdersList;
+        return ord;
+    }
+
 
     public void Delete(int id)
     {

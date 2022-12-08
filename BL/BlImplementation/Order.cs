@@ -71,6 +71,7 @@ internal class Order: IOrder
             Name = Dal.Product.GetById(x?.ProductID ?? 1).Name,//האיי די תמיד יהיה תקין
             Amount = x?.Amount ?? 0,
             Totalprice = x?.Price * x?.Amount ?? 0
+            
         }).ToList();
         return new BO.Order
         {
@@ -106,26 +107,25 @@ internal class Order: IOrder
         catch (DO.DalMissingIdException exp)
         {
             throw new BO.BlMissingEntityException("missing order", exp);
+        }  
+            List<Tuple<DateTime?, string?>> tracking = new();
+            if (order.OrderDate != null)
+                tracking.Add(new Tuple<DateTime?, string?>(order.OrderDate, "the order allready exist"));
+            else throw new BO.BlIncorrectDatesException("order date is miising");
+            if (order.ShipDate != null)
+                tracking.Add(new Tuple<DateTime?, string?>(order.ShipDate, " the order has been sent"));
+           // else throw new BO.BlNullPropertyException("Ship date is missing");
+            if (order.DeliveryrDate != null)
+                tracking.Add(new Tuple<DateTime?, string?>(order.ShipDate, " the order has been delivered"));
+            //else throw new BO.BlNullPropertyException("Delivery Date is missing");
+            BO.OrderTracking ortk = new()
+            {
+                ID = id,
+                Status = GetStatus(order),
+                Tracking = tracking,
+            };
+            return ortk;
         }
-        List<Tuple<DateTime?, string?>> tracking = new(); // A list of date pairs and a verbal description of a situation
-        if (order.OrderDate != null)
-            tracking.Add(new Tuple<DateTime?, string?>(order.OrderDate, "the order allready exist"));
-        else throw new BO.BlNullPropertyException("order fate is miising");
-        if (order.ShipDate != null)
-            tracking.Add(new Tuple<DateTime?, string?>(order.ShipDate, " the order has been sent"));
-        else throw new BO.BlNullPropertyException("Ship date is missing");
-        if (order.DeliveryrDate != null)
-            tracking.Add(new Tuple<DateTime?, string?>(order.ShipDate, " the order has been delivered"));
-        else throw new BO.BlNullPropertyException("Delivery Date is missing");
-        // An instance of order tracking
-        BO.OrderTracking ortk = new()
-         {
-            ID = id,
-            Status = GetStatus(order),
-            Tracking = tracking,
-        };
-        return ortk;
-    }
   
     /// <summary>
     /// Order shipping update (Admin order management screen)
