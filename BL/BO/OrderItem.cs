@@ -8,7 +8,7 @@ public class OrderItem
     /// <summary>
     /// The ID number of the orderItem
     /// </summary>
-    public int ID { get; set; } 
+    public int ID { get; set; }
     /// <summary>
     /// The ID product of the orderItem
     /// </summary>
@@ -16,15 +16,15 @@ public class OrderItem
     /// <summary>
     /// The price of the orderItem
     /// </summary>
-    public double Price { get; set; } 
+    public double Price { get; set; }
     /// <summary>
     /// The amount of the orderItem
     /// </summary>
-    public int Amount { get; set; }  
+    public int Amount { get; set; }
     /// <summary>
     ///  Total price
     /// </summary>
-    public double Totalprice { get; set; } 
+    public double Totalprice { get; set; }
     /// <summary>
     /// name of product
     /// </summary>
@@ -33,5 +33,5 @@ public class OrderItem
     /// An action that prints the orderItem
     /// </summary>
     /// <returns></returns>
-    public override string ToString()=> this.ToStringProperty();
+    public override string ToString() => this.ToStringProperty();
 }

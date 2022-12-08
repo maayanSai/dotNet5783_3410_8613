@@ -32,7 +32,7 @@ public struct Order
     /// <summary>
     /// Shipping arrival time
     /// </summary>
-    public DateTime? DeliveryrDate { get; set; } 
+    public DateTime? DeliveryrDate { get; set; }
     /// <summary>
     /// amount of product
     /// </summary>

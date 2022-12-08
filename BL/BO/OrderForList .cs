@@ -24,10 +24,10 @@ public class OrderForList
     /// <summary>
     /// amount of items
     /// </summary>
-    public int Amount { get; set; } 
+    public int Amount { get; set; }
     /// <summary>
     /// An action that prints the orderItem
     /// </summary>
     /// <returns></returns>
-    public override string ToString()=> this.ToStringProperty();
+    public override string ToString() => this.ToStringProperty();
 }

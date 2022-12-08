@@ -1,13 +1,12 @@
 ﻿namespace BlTest;
-using BO;
 using BlApi;
 using BlImplementation;
-using System.Reflection.Metadata;
+using BO;
 
 public class Program
 {
     static IBl s_bl = new Bl();
-    static Cart s_c  = new() { Items = new List<OrderItem>(), CustomerName = "Ayala", CustomerAdress = "israel 23", CustomerEmail = "ayala@gmail.com" };
+    static Cart s_c = new() { Items = new List<OrderItem>(), CustomerName = "Ayala", CustomerAdress = "israel 23", CustomerEmail = "ayala@gmail.com" };
     static void Main()
     {
         int id, amount, stock;
@@ -207,7 +206,7 @@ public class Program
                         throw new Exception("the choice has not correct");
                 }
             }
-            catch (BO.BlAlreadyExistEntityException a) 
+            catch (BO.BlAlreadyExistEntityException a)
             {
                 Console.WriteLine(a);
             }
@@ -216,11 +215,8 @@ public class Program
             catch (BO.BlMissingEntityException a) { Console.WriteLine(a); }
             catch (BO.BlNullPropertyException a) { Console.WriteLine(a); }
             catch (BO.BlWorngCategoryException a) { Console.WriteLine(a); }
-         
-            //catch (Exception str) // catches the error
-            //{
-            //    Console.WriteLine(str); // prints the error
-            //}
+
+
             Console.WriteLine("Choose an entity:");
             Console.WriteLine("0: to exit");
             Console.WriteLine("1: to order");

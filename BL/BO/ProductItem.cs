@@ -8,19 +8,19 @@ public class ProductItem
     /// <summary>
     /// The ID number of the orderItem
     /// </summary>
-    public int ID { get; set; } 
+    public int ID { get; set; }
     /// <summary>
     /// The name of the product
     /// </summary>
-    public string? Name { get; set; }  
+    public string? Name { get; set; }
     /// <summary>
     /// The price of the product
     /// </summary>
-    public double Price { get; set; } 
+    public double Price { get; set; }
     /// <summary>
     /// The kind of the product
     /// </summary>
-    public Category Category { get; set; }  
+    public Category Category { get; set; }
     /// <summary>
     /// Availability (Is it in stock)
     /// </summary>
@@ -29,5 +29,5 @@ public class ProductItem
     /// An action that prints the order
     /// </summary>
     /// <returns></returns>
-    public override string ToString()=> this.ToStringProperty();
+    public override string ToString() => this.ToStringProperty();
 }

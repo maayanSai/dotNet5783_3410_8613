@@ -8,7 +8,7 @@ using System.Linq;
 /// <summary>
 /// A logical entity-item
 /// </summary>
-internal class Product:IProduct
+internal class Product : IProduct
 {
     DalApi.IDal Dal = new Dal.DalList();
 
@@ -23,12 +23,12 @@ internal class Product:IProduct
     {
         if (p.ID <= 0) // if id is negative
             throw new BO.BlInCorrectException("product ID");
-            if(p.InStock< 0) //negative amount
-                throw new BO.BlInCorrectException("product amount");
-            if (p.Price< 0) //negative price
-                throw new BO.BlInCorrectException("product price");
-            if (p.Name == "") //empty string
-                throw new BO.BlInCorrectException("product name");
+        if (p.InStock< 0) //negative amount
+            throw new BO.BlInCorrectException("product amount");
+        if (p.Price< 0) //negative price
+            throw new BO.BlInCorrectException("product price");
+        if (p.Name == "") //empty string
+            throw new BO.BlInCorrectException("product name");
         try
         {
             DO.Product p1 = new()
@@ -58,29 +58,20 @@ internal class Product:IProduct
     {
         if (id<=0) // if id is negative
             throw new BO.BlInCorrectException("negative id");
-        bool exist = false;
-        IEnumerable<DO.Order?> orders = new List<DO.Order?>(Dal.Order.GetAll());// Create a collection of orders
-        foreach (var ord in orders)
-        { 
-            IEnumerable<DO.OrderItem?> ordi = new List<DO.OrderItem?>();
-            ordi=Dal.OrderItem.GetByOrderId(ord?.ID??throw new BO.BlNullPropertyException("order id is missing"));
-            foreach (var oi in ordi)
-                if (oi?.ID==id)
-                    exist=true;
-        }
-        if (!exist)
-        {
+
+
+        if (Dal.OrderItem.GetAll().Where(orderItem => orderItem?.ProductID==id).Any())
+            throw new BO.BlAlreadyExistEntityException("the product is exsist in order/s so that can not be deleated");
             try
             {
                 Dal.Product.Delete(id);
             }
             catch (DalMissingIdException exp)
             {
-                throw new BlMissingEntityException("The product doesnt exsist",exp);//לשנות לסוג אקספשיון הנדרש
+                throw new BlMissingEntityException("The product doesnt exsist", exp);//לשנות לסוג אקספשיון הנדרש
             }
-        }
-        else
-            throw new BO.BlAlreadyExistEntityException("the product is exsist in order/s so that can not be deleated");//לשנות לסוג אקספשיון הנדרש
+        
+    
     }
     /// <summary>
     /// Product list request (for manager screen and buyer's catalog screen)
@@ -90,14 +81,14 @@ internal class Product:IProduct
     /// <exception cref="Exception"></exception>
     public IEnumerable<ProductForList?> GetProducts()
     {
-        IEnumerable<DO.Product?> pro=Dal.Product.GetAll();
+        IEnumerable<DO.Product?> pro = Dal.Product.GetAll();
         return pro.Select(pr => new BO.ProductForList
         {
             ID = pr?.ID ?? throw new BO.BlNullPropertyException("null product id"),
             Name = pr?.Name ?? "",
             Price = pr?.Price ?? 0,
             Category = (BO.Category?)pr?.Category ?? throw new BO.BlWorngCategoryException("wrong product cayegory"),
-        }) ;
+        });
     }
     /// <summary>
     /// Product details request (for admin screen and for)
@@ -110,7 +101,7 @@ internal class Product:IProduct
     /// <exception cref="BlWorngCategoryException"></exception>
     public BO.Product ItemProduct(int id)
     {
-        if(id<=0)
+        if (id<=0)
             throw new BO.BlInCorrectException("inncorrect id");
         DO.Product? dopro;
         try
@@ -119,7 +110,7 @@ internal class Product:IProduct
         }
         catch (DO.DalMissingIdException exp)
         {
-            throw new BO.BlMissingEntityException("product des not exsist",exp); 
+            throw new BO.BlMissingEntityException("product des not exsist", exp);
         }
         BO.Product bopro = new()
         {
@@ -142,7 +133,7 @@ internal class Product:IProduct
     /// <exception cref="BO.BlNullPropertyException"></exception>
     public BO.ProductItem ItemProduct(int id, BO.Cart cart)
     {
-        if(id<=0)
+        if (id<=0)
             throw new BO.BlInCorrectException("incorrct id");
         DO.Product? p;
         try
@@ -153,7 +144,7 @@ internal class Product:IProduct
         {
             throw new BO.BlMissingEntityException(exp.Message);
         }
-        int amount=0;
+        int amount = 0;
         if (cart.Items != null)
         {
             BO.OrderItem? itemIn = cart.Items?.FirstOrDefault(item => item.ProductID == id); //if items in cart null error in runtime
@@ -165,7 +156,7 @@ internal class Product:IProduct
             ID = p?.ID?? throw new BO.BlNullPropertyException("Null product id"),
             Name = p?.Name??"",
             Price = p?.Price??0,
-            isStock = p?.InStock > 0 ,
+            isStock = p?.InStock > 0,
         };
         return proi;
     }
@@ -192,16 +183,16 @@ internal class Product:IProduct
             DO.Product dp = new()
             {
                 ID = p.ID,
-                Name = p?.Name ??"" ,
+                Name = p?.Name ??"",
                 Price = p?.Price??0,
-                InStock = p.InStock,
+                InStock = p?.InStock??0,
                 Category = (DO.Category?)p?.Category?? throw new BO.BlInCorrectException("product name"),
             };
             Dal.Product.Update(dp);
         }
         catch (DO.DalMissingIdException exp)
         {
-            throw new BlMissingEntityException("the product dosnt exsist",exp);
+            throw new BlMissingEntityException("the product dosnt exsist", exp);
         }
     }
 }

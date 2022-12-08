@@ -26,7 +26,7 @@ internal class DalOrderItem : IOrderItem
     /// <param name="id"></param>
     /// <returns></returns>
     /// <exception cref="DalMissingIdException"></exception>
-    public OrderItem GetById(int id)=> DataSource.s_orderItemsList.Find(x => x?.ID == id)
+    public OrderItem GetById(int id) => DataSource.s_orderItemsList.Find(x => x?.ID == id)
         ?? throw new DalMissingIdException(id, "order item");
     /// <summary>
     /// Returns a collection of items
@@ -34,8 +34,8 @@ internal class DalOrderItem : IOrderItem
     /// <returns></returns>
     public IEnumerable<OrderItem?> GetAll()
     {
-     IEnumerable<OrderItem?> orderitemcolleption;
-         orderitemcolleption=DataSource.s_orderItemsList;
+        IEnumerable<OrderItem?> orderitemcolleption;
+        orderitemcolleption=DataSource.s_orderItemsList;
         return orderitemcolleption;
     }
     /// <summary>
@@ -46,7 +46,7 @@ internal class DalOrderItem : IOrderItem
     public void Delete(int id)
     {
         if (DataSource.s_orderItemsList.RemoveAll(x => x?.ID == id)==0)
-            throw new DalMissingIdException(id,"order item");
+            throw new DalMissingIdException(id, "order item");
     }
     /// <summary>
     /// Item update
@@ -66,23 +66,24 @@ internal class DalOrderItem : IOrderItem
     /// <exception cref="DO.DalMissingIdException"></exception>
     public OrderItem? GetByTwoId(int idProduct, int idOrder)
     {
-        IEnumerable<OrderItem?> ordreit =DataSource.s_orderItemsList.Where(x => x?.OrderID == idOrder && x?.ProductID == idProduct);
+        IEnumerable<OrderItem?> ordreit = DataSource.s_orderItemsList.Where(x => x?.OrderID == idOrder && x?.ProductID == idProduct);
         ordreit.ToList();
         if (!ordreit.Any())
-            throw new DO.DalMissingIdException(idProduct, idOrder, "Order item", "the order item which has the profuct id and the order id that you asked for does not exsist");   
+            throw new DO.DalMissingIdException(idProduct, idOrder, "Order item", "the order item which has the profuct id and the order id that you asked for does not exsist");
         return ordreit.First();
-       
-        
+
+
     }
     /// <summary>
     /// Returns an item by order ID number
     /// </summary>
     /// <param name="idOrder"></param>
     /// <returns></returns>
-    public IEnumerable<OrderItem?> GetByOrderId (int idOrder)
+    public IEnumerable<OrderItem?> GetByOrderId(int idOrder)
     {
         IEnumerable<OrderItem?> ordi;
-        ordi=DataSource.s_orderItemsList.Where(x => x?.ID == idOrder);
+        ordi=DataSource.s_orderItemsList.Where(x => x?.OrderID == idOrder);
+
         return ordi;
     }
 }

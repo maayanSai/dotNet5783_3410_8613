@@ -12,7 +12,7 @@ public class Order
     /// <summary>
     /// The name of customer of the order
     /// </summary>
-    public string? CustomerName { get; set; } 
+    public string? CustomerName { get; set; }
     /// <summary>
     /// The email of customer of the order
     /// </summary>
