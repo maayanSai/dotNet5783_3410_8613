@@ -5,9 +5,9 @@ using System.Collections.Generic;
 /// <summary>
 /// The order-logical entity
 /// </summary>
-internal class Order: IOrder
+internal class Order : IOrder
 {
-     DalApi.IDal Dal = new Dal.DalList();
+    DalApi.IDal Dal = new Dal.DalList();
     /// <summary>
     /// order list request (admin screen)
     /// </summary>
@@ -20,9 +20,9 @@ internal class Order: IOrder
             ID = order?.ID ?? throw new BO.BlNullPropertyException("missing order id"),
             CustomerName = order?.CustomerName ?? " ",
             Status = GetStatus(order),
-            TotalPrice = Dal.OrderItem?.GetByOrderId(order?.ID??1).Sum(x => x?.Price * x?.Amount)??0,//alredy cheked id isnot null
-            Amount = Dal.OrderItem?.GetByOrderId(order?.ID ?? 1).Count()??0,
-        }) ;
+            TotalPrice = Dal.OrderItem?.GetByOrderId(order?.ID ?? 1).Sum(x => x?.Price * x?.Amount) ?? 0,//alredy cheked id isnot null
+            Amount = Dal.OrderItem?.GetByOrderId(order?.ID ?? 1).Count() ?? 0,
+        });
     }
 
     /// <summary>
@@ -58,20 +58,20 @@ internal class Order: IOrder
         {
             orderD = Dal.Order.GetById(id);
         }
-        catch(DO.DalMissingIdException exp)
+        catch (DO.DalMissingIdException exp)
         {
-            throw new BO.BlMissingEntityException("the order does not exsists",exp);
+            throw new BO.BlMissingEntityException("the order does not exsists", exp);
         }
         //  Create a collection of order items
         var items = Dal.OrderItem?.GetByOrderId(orderD.ID).Select(x => new BO.OrderItem
         {
             ID = x?.ID ?? throw new BO.BlNullPropertyException("missing order item id"),
-            ProductID = x?.ProductID ?? throw new  BO.BlNullPropertyException("missing product id"),
+            ProductID = x?.ProductID ?? throw new BO.BlNullPropertyException("missing product id"),
             Price = x?.Price ?? 0,
             Name = Dal.Product.GetById(x?.ProductID ?? 1).Name,//האיי די תמיד יהיה תקין
             Amount = x?.Amount ?? 0,
             Totalprice = x?.Price * x?.Amount ?? 0
-            
+
         }).ToList();
         return new BO.Order
         {
@@ -84,7 +84,7 @@ internal class Order: IOrder
             DeliveryrDate = orderD.DeliveryrDate,
             Status = GetStatus(orderD),
             Items = items,
-            TotalPrice= items!.Sum(x=> x.Totalprice),
+            TotalPrice = items!.Sum(x => x.Totalprice),
         };
     }
     /// <summary>
@@ -107,26 +107,26 @@ internal class Order: IOrder
         catch (DO.DalMissingIdException exp)
         {
             throw new BO.BlMissingEntityException("missing order", exp);
-        }  
-            List<Tuple<DateTime?, string?>> tracking = new();
-            if (order.OrderDate != null)
-                tracking.Add(new Tuple<DateTime?, string?>(order.OrderDate, "the order allready exist"));
-            else throw new BO.BlIncorrectDatesException("order date is miising");
-            if (order.ShipDate != null)
-                tracking.Add(new Tuple<DateTime?, string?>(order.ShipDate, " the order has been sent"));
-           // else throw new BO.BlNullPropertyException("Ship date is missing");
-            if (order.DeliveryrDate != null)
-                tracking.Add(new Tuple<DateTime?, string?>(order.ShipDate, " the order has been delivered"));
-            //else throw new BO.BlNullPropertyException("Delivery Date is missing");
-            BO.OrderTracking ortk = new()
-            {
-                ID = id,
-                Status = GetStatus(order),
-                Tracking = tracking,
-            };
-            return ortk;
         }
-  
+        List<Tuple<DateTime?, string?>> tracking = new();
+        if (order.OrderDate != null)
+            tracking.Add(new Tuple<DateTime?, string?>(order.OrderDate, "the order allready exist"));
+        else throw new BO.BlIncorrectDatesException("order date is miising");
+        if (order.ShipDate != null)
+            tracking.Add(new Tuple<DateTime?, string?>(order.ShipDate, " the order has been sent"));
+        // else throw new BO.BlNullPropertyException("Ship date is missing");
+        if (order.DeliveryrDate != null)
+            tracking.Add(new Tuple<DateTime?, string?>(order.ShipDate, " the order has been delivered"));
+        //else throw new BO.BlNullPropertyException("Delivery Date is missing");
+        BO.OrderTracking ortk = new()
+        {
+            ID = id,
+            Status = GetStatus(order),
+            Tracking = tracking,
+        };
+        return ortk;
+    }
+
     /// <summary>
     /// Order shipping update (Admin order management screen)
     /// </summary>

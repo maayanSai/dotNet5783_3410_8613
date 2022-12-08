@@ -18,29 +18,35 @@ internal class Cart:ICart
     /// <exception cref="Exception"></exception>
     public BO.Cart? Update(BO.Cart cart, int id, int amount)
     {
-        OrderItem ?boOrdi = cart?.Items?.FirstOrDefault(x => x.ProductID == id);
+        OrderItem ?boOrdi = cart.Items?.FirstOrDefault(x => x.ProductID == id);
         if (boOrdi == null)
             throw new BO.BlMissingEntityException("prodcut  dose not exists in cart");
 
         if( amount<0)
             throw new BO.BlInCorrectException("invlavel amount");
         if (amount == 0)
-            cart?.Items?.Remove(boOrdi);
-        if(amount <boOrdi .Amount )
         {
-            cart?.Items?.Remove(boOrdi);
-            cart!.TotalPrice-=(boOrdi.Amount-amount)*boOrdi.Price;
-            boOrdi.Amount = amount;
-            boOrdi.Totalprice=boOrdi.Price*amount;
-            cart?.Items?.Add(boOrdi); 
+            cart.Items?.Remove(boOrdi);
+            cart.TotalPrice -= boOrdi.Totalprice;
         }
-        if (amount >boOrdi.Amount)
+        else
         {
-            cart?.Items?.Remove(boOrdi);
-            cart!.TotalPrice+=(amount-boOrdi.Amount)*boOrdi.Price;  
-            boOrdi.Amount = amount;
-            boOrdi.Totalprice=boOrdi.Price*amount;
-            cart?.Items?.Add(boOrdi);
+            if (amount < boOrdi.Amount)
+            {
+                cart?.Items?.Remove(boOrdi);
+                cart!.TotalPrice -= (boOrdi.Amount - amount) * boOrdi.Price;
+                boOrdi.Amount = amount;
+                boOrdi.Totalprice = boOrdi.Price * amount;
+                cart?.Items?.Add(boOrdi);
+            }
+            if (amount > boOrdi.Amount)
+            {
+                cart?.Items?.Remove(boOrdi);
+                cart!.TotalPrice += (amount - boOrdi.Amount) * boOrdi.Price;
+                boOrdi.Amount = amount;
+                boOrdi.Totalprice = boOrdi.Price * amount;
+                cart?.Items?.Add(boOrdi);
+            }
         }
         return cart;
     }
@@ -51,7 +57,7 @@ internal class Cart:ICart
     /// <param name="id"></param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    public BO.Cart? Add(BO.Cart cart, int id)
+    public BO.Cart Add(BO.Cart cart, int id)
     {
         if (id <= 0)
             throw new BO.BlInCorrectException("wrong negative id");
@@ -64,12 +70,12 @@ internal class Cart:ICart
         {
             throw new BO.BlMissingEntityException("the product does not exist",exp);   
         }
-        var boOrderItem = cart?.Items?.FirstOrDefault(x => x.ProductID == id);
+        BO.OrderItem? boOrderItem = cart.Items?.FirstOrDefault(x => x.ProductID == id);
         if (pro.InStock > 0)
         {
             if (boOrderItem == null)//האורדר אייט לא קיים
             {
-                cart?.Items?.Add(new BO.OrderItem
+                cart.Items?.Add(new BO.OrderItem
                 {
                     ProductID = pro.ID,
                     Amount = 1,
@@ -81,11 +87,11 @@ internal class Cart:ICart
             }
             else//האורדראייטם קיים
             {
-                cart?.Items?.Remove(boOrderItem);
+                cart.Items?.Remove(boOrderItem);
                 boOrderItem.Amount++;
                 boOrderItem.Totalprice += pro.Price;
-                cart?.Items?.Add(boOrderItem);
-                cart!.TotalPrice += pro.Price;
+                cart.Items?.Add(boOrderItem);
+                cart.TotalPrice += pro.Price;
             }
         }
         else

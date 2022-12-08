@@ -6,8 +6,13 @@ using BlImplementation;
  public class Program
 {
     static IBl bl = new Bl();
+
+    static Cart c  = new() { Items = new List<OrderItem>(), CustomerName = "Ayala", CustomerAdress = "israel 23", CustomerEmail = "ayala@gmail.com" };
     static void Main()
     {
+        
+        
+        
         int id, amount, stock;
         double price;
         int chooseMenu, chooseEntity; // function and entity selection
@@ -88,42 +93,22 @@ using BlImplementation;
                         {
                             case 1: // Add
                                 int idProduct;
-                                Cart c = new();
+                               // Cart c = new();
                                 do { Console.WriteLine("enter id of product"); }
                                 while (!int.TryParse(Console.ReadLine(), out idProduct));
-                                Console.WriteLine("enter name of customer ");
-                                c.CustomerName = Console.ReadLine() ?? "";
-                                Console.WriteLine("enter email of customer");
-                                c.CustomerEmail = Console.ReadLine() ?? "";
-                                Console.WriteLine("enter adress of customer");
-                                c.CustomerAdress = Console.ReadLine() ?? " ";
-                                Console.WriteLine("enter price of product");
-                                while (!double.TryParse(Console.ReadLine(), out price)) ;
                                 Console.WriteLine("enter amount of product");
                                 while (!int.TryParse(Console.ReadLine(), out amount)) ;
-                                c.TotalPrice = price * amount;
-                                c.Items = new List<BO.OrderItem>();
+                                
                                 Console.WriteLine(bl.Cart.Add(c, idProduct));
                                 Console.WriteLine();
                                 break;
                             case 2: // Update
                                 int idProduct1;
-                                Cart c1 = new();
                                 do { Console.WriteLine("enter id of product"); }
                                 while (!int.TryParse(Console.ReadLine(), out idProduct1));
-                                Console.WriteLine("enter name of customer ");
-                                c1.CustomerName = Console.ReadLine() ?? "";
-                                Console.WriteLine("enter email of customer");
-                                c1.CustomerEmail = Console.ReadLine() ?? "";
-                                Console.WriteLine("enter adress of customer");
-                                c1.CustomerAdress = Console.ReadLine() ?? " ";
-                                Console.WriteLine("enter price of product");
-                                while (!double.TryParse(Console.ReadLine(), out price)) ;
                                 Console.WriteLine("enter amount of product");
                                 while (!int.TryParse(Console.ReadLine(), out amount)) ;
-                                c1.TotalPrice = price * amount;
-                                c1.Items = new List<BO.OrderItem>();
-                                Console.WriteLine(bl.Cart.Update(c1, idProduct1, amount));
+                                Console.WriteLine(bl.Cart.Update(c, idProduct1, amount));
                                 Console.WriteLine();
                                 break;
                             case 3: // Make an order

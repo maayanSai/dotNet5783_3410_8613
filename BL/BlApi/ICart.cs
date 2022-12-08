@@ -8,7 +8,7 @@ public interface ICart
     /// <param name="cart"></param>
     /// <param name="id"></param>
     /// <returns></returns>
-    Cart? Add(Cart cart, int id);
+    Cart Add(Cart cart, int id);
     /// <summary>
     /// Update as of a product in the shopping cart
     /// </summary>
