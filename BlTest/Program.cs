@@ -95,10 +95,7 @@ using BlImplementation;
                                 int idProduct;
                                // Cart c = new();
                                 do { Console.WriteLine("enter id of product"); }
-                                while (!int.TryParse(Console.ReadLine(), out idProduct));
-                                Console.WriteLine("enter amount of product");
-                                while (!int.TryParse(Console.ReadLine(), out amount)) ;
-                                
+                                while (!int.TryParse(Console.ReadLine(), out idProduct));   
                                 Console.WriteLine(bl.Cart.Add(c, idProduct));
                                 Console.WriteLine();
                                 break;
@@ -112,20 +109,7 @@ using BlImplementation;
                                 Console.WriteLine();
                                 break;
                             case 3: // Make an order
-                                Cart c2 = new();
-                                Console.WriteLine("enter name of customer ");
-                                c2.CustomerName = Console.ReadLine() ?? "";
-                                Console.WriteLine("enter email of customer");
-                                c2.CustomerEmail = Console.ReadLine() ?? "";
-                                Console.WriteLine("enter adress of customer");
-                                c2.CustomerAdress = Console.ReadLine() ?? " ";
-                                Console.WriteLine("enter price of product");
-                                while (!double.TryParse(Console.ReadLine(), out price)) ;
-                                Console.WriteLine("enter amount of product");
-                                while (!int.TryParse(Console.ReadLine(), out amount)) ;
-                                c2.TotalPrice = price * amount;
-                                c2.Items = new List<BO.OrderItem>();
-                                bl.Cart.MakeAnOrder(c2);
+                                bl.Cart.MakeAnOrder(c);
                                 Console.WriteLine();
                                 break;
                             case 4: // exit

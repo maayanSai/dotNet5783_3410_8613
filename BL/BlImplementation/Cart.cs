@@ -110,7 +110,7 @@ internal class Cart:ICart
         //כל המוצרים קיימים(לפי התעודת זהות,למרות שיכול להיות שהם קיימים עם כמות אפס
         try
         {
-            cart?.Items?.ForEach(x => Dal.Product.GetById(x.ProductID));
+            cart.Items?.Exists(x=> Dal.Product.GetById(x.ProductID).ID==x.ProductID);
         }
         catch(DO.DalMissingIdException exp)
         {
@@ -141,6 +141,7 @@ internal class Cart:ICart
             ShipDate=null,
             DeliveryrDate=null,
             Amount=cart.Items.Select(x => x.Amount).Sum(),
+            
         };
 
 
@@ -154,12 +155,13 @@ internal class Cart:ICart
                 OrderID=orderId,
                 Price=bordi.Price,
                 Amount=bordi.Amount,
+                
             };
             Dal.OrderItem.Add(dOrdi); //לא יכולה להיות חריגה
             DO.Product p;
             try
             {
-                 p= Dal.Product.GetById(dOrdi.ID);
+                 p= Dal.Product.GetById(dOrdi.ProductID);
             }
             catch (DO.DalMissingIdException exp)
             {
@@ -176,11 +178,12 @@ internal class Cart:ICart
             }
 
         }
-       
 
 
+        
 
     }
+ 
 
 
 }

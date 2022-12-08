@@ -20,7 +20,7 @@ internal class Order : IOrder
             ID = order?.ID ?? throw new BO.BlNullPropertyException("missing order id"),
             CustomerName = order?.CustomerName ?? " ",
             Status = GetStatus(order),
-            TotalPrice = Dal.OrderItem?.GetByOrderId(order?.ID ?? 1).Sum(x => x?.Price * x?.Amount) ?? 0,//alredy cheked id isnot null
+            TotalPrice = Dal.OrderItem?.GetByOrderId(order?.ID ?? 1).Sum(x => x?.Price * x?.Amount) ,//alredy cheked id isnot null
             Amount = Dal.OrderItem?.GetByOrderId(order?.ID ?? 1).Count() ?? 0,
         });
     }
