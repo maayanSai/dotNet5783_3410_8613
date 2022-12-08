@@ -8,16 +8,32 @@
         public override string ToString() => base.ToString() + $"Entity is already exist.";
     }
 
-    /// <summary>
-    /// if the entity is missing throw an exception
-    /// </summary>
-    [Serializable]
-    public class BlMissingEntityException : Exception
+/// <summary>
+/// if the entity is missing throw an exception
+/// </summary>
+[Serializable]
+public class BlMissingEntityException : Exception
+{
+    string Message;
+    int a;
+    public BlMissingEntityException(string message, DO.DalMissingIdException innerException, int b = 0) : base(message, innerException)
     {
-        public BlMissingEntityException(string message, Exception innerException) : base(message, innerException) { }
-        public BlMissingEntityException(string message) : base(message) { }
-        public override string ToString() => base.ToString + $"Missing Entity";
+        a=b;
     }
+    public BlMissingEntityException(string message, int b = 1) : base()
+    {
+        Message=message;
+        a=b;
+    }
+    public override string ToString()
+    {
+        if (a==0)
+            return InnerException.ToString() +Message +$"Missing Entity";
+        else
+            return $"{Message}";
+
+    }
+}
     /// <summary>
     /// if the Property null throw an exception
     /// </summary>
