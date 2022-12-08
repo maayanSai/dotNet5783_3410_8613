@@ -5,16 +5,29 @@
 /// </summary>
 public struct OrderItem
 {
-    public int ID { get; set; } // The ID number of the orderItem
-    public int ProductID { get; set; } // The ID product of the orderItem
-    public int OrderID { get; set; } // The ID order of the orderItem
-    public double Price { get; set; } // The price of the orderItem
-    public int Amount { get; set; } // The amounr of the orderItem
-    
-
-    // An action that prints the orderItem
-    public override string ToString()
-    {
-        return this.ToStringProperty();
-    }
+    /// <summary>
+    /// The ID number of the orderItem
+    /// </summary>
+    public int ID { get; set; } 
+    /// <summary>
+    /// The ID product of the orderItem
+    /// </summary>
+    public int ProductID { get; set; }  
+    /// <summary>
+    /// The ID order of the orderItem
+    /// </summary>
+    public int OrderID { get; set; }  
+    /// <summary>
+    /// The price of the orderItem
+    /// </summary>
+    public double Price { get; set; } 
+    /// <summary>
+    /// The amounr of the orderItem
+    /// </summary>
+    public int Amount { get; set; } 
+    /// <summary>
+    /// An action that prints the orderItem
+    /// </summary>
+    /// <returns></returns>
+    public override string ToString()=> this.ToStringProperty();
 }

@@ -1,12 +1,33 @@
 ﻿namespace BO;
 
+/// <summary>
+/// Shopping cart
+/// </summary>
 public class Cart
 {
-    public string? CustomerName { get; set; } // The name of customer of the order
-    public string? CustomerEmail { get; set; } // The email of customer of the order
-    public string? CustomerAdress { get; set; } // The adress of customer of the order
-    public  List<BO.OrderItem>?  Items { set; get; }//IEnumerable?
+    /// <summary>
+    /// The name of customer of the order
+    /// </summary>
+    public string? CustomerName { get; set; }
+    /// <summary>
+    /// The email of customer of the order
+    /// </summary>
+    public string? CustomerEmail { get; set; }
+    /// <summary>
+    /// The adress of customer of the order
+    /// </summary>
+    public string? CustomerAdress { get; set; }
+    /// <summary>
+    /// A collection of items
+    /// </summary>
+    public List<BO.OrderItem>?  Items { set; get; }
+    /// <summary>
+    /// Final price of a shopping basket
+    /// </summary>
     public double TotalPrice { set; get; }
-    // An action that prints the order
+    /// <summary>
+    /// An action that prints the order
+    /// </summary>
+    /// <returns></returns>
     public override string ToString() => this.ToStringProperty();
 }

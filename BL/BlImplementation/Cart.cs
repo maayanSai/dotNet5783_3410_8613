@@ -3,10 +3,14 @@ using BlApi;
 using BO;
 using System.ComponentModel.DataAnnotations;
 
+/// <summary>
+/// Implementation of CART
+/// </summary>
 internal class Cart:ICart
 {
     private static readonly Random _rnd = new();
     DalApi.IDal Dal = new Dal.DalList();
+
     /// <summary>
     /// Updating the quantity of a product in the shopping cart (for the shopping cart screen)
     /// </summary>
@@ -73,7 +77,7 @@ internal class Cart:ICart
         BO.OrderItem? boOrderItem = cart.Items?.FirstOrDefault(x => x.ProductID == id);
         if (pro.InStock > 0)
         {
-            if (boOrderItem == null)//האורדר אייט לא קיים
+            if (boOrderItem == null)// OrderItem does not exist
             {
                 cart.Items?.Add(new BO.OrderItem
                 {
@@ -85,7 +89,7 @@ internal class Cart:ICart
                 });
                 cart!.TotalPrice +=pro.Price;
             }
-            else//האורדראייטם קיים
+            else // OrderItem exists
             {
                 cart.Items?.Remove(boOrderItem);
                 boOrderItem.Amount++;
@@ -107,7 +111,7 @@ internal class Cart:ICart
     /// <exception cref="Exception"></exception>
     public void MakeAnOrder(BO.Cart cart)
     {
-        //כל המוצרים קיימים(לפי התעודת זהות,למרות שיכול להיות שהם קיימים עם כמות אפס
+        //All the products exist (according to the ID card, although it is possible that they exist with zero quantity
         try
         {
             cart.Items?.Exists(x=> Dal.Product.GetById(x.ProductID).ID==x.ProductID);
@@ -130,7 +134,6 @@ internal class Cart:ICart
             throw new BO.BlInCorrectException("invlavel email");
         int days = _rnd.Next(21, 200);
         int orderId;
-        //
         DO.Order ord = new()
         {
             CustomerAdress = cart.CustomerAdress,
@@ -140,24 +143,20 @@ internal class Cart:ICart
             OrderDate=DateTime.Now,
             ShipDate=null,
             DeliveryrDate=null,
-            Amount=cart.Items.Select(x => x.Amount).Sum(),
-            
+            Amount=cart.Items.Select(x => x.Amount).Sum(), 
         };
-
-
-        orderId=Dal.Order.Add(ord);//לא צריך לבדוק כי אין חריגה להוספה של אורדר
-        foreach(var bordi in cart.Items)
+        orderId=Dal.Order.Add(ord); // There is no need to check that there is no exception for adding an order
+        foreach (var bordi in cart.Items)
         {
             DO.OrderItem dOrdi = new()
             {
-                ID=bordi.ID,//זניח
-                ProductID=bordi.ProductID,
+                ID=bordi.ID, // negligible
+                ProductID =bordi.ProductID,
                 OrderID=orderId,
                 Price=bordi.Price,
                 Amount=bordi.Amount,
-                
             };
-            Dal.OrderItem.Add(dOrdi); //לא יכולה להיות חריגה
+            Dal.OrderItem.Add(dOrdi); // There can be no exception
             DO.Product p;
             try
             {
@@ -176,15 +175,7 @@ internal class Cart:ICart
             {
                 throw new BO.BlMissingEntityException("the priduct does not exsist",exp);
             }
-
         }
-
-
-        
-
     }
- 
-
-
 }
 

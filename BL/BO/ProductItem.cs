@@ -1,17 +1,33 @@
-﻿
-namespace BO;
+﻿namespace BO;
 
+/// <summary>
+/// A product item reference entity
+/// </summary>
 public class ProductItem
 {
-    public int ID { get; set; } // The ID number of the orderItem
-    public string? Name { get; set; } // The name of the product
-    public double Price { get; set; } // The price of the product
-    public int AmountCart { get; set; } // 
-    public Category Category { get; set; } // The kind of the product
+    /// <summary>
+    /// The ID number of the orderItem
+    /// </summary>
+    public int ID { get; set; } 
+    /// <summary>
+    /// The name of the product
+    /// </summary>
+    public string? Name { get; set; }  
+    /// <summary>
+    /// The price of the product
+    /// </summary>
+    public double Price { get; set; } 
+    /// <summary>
+    /// The kind of the product
+    /// </summary>
+    public Category Category { get; set; }  
+    /// <summary>
+    /// Availability (Is it in stock)
+    /// </summary>
     public bool isStock { get; set; }
-    // An action that prints the order
-    public override string ToString()
-    {
-        return this.ToStringProperty();
-    }
+    /// <summary>
+    /// An action that prints the order
+    /// </summary>
+    /// <returns></returns>
+    public override string ToString()=> this.ToStringProperty();
 }

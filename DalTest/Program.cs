@@ -1,11 +1,12 @@
 ﻿// We did the bonus - we used TryParse for the conversions
+namespace DalTest;
 using DO;
 using DalApi;
-namespace DalTest
-{
     public class Program
     {
-        //MAIN
+        /// <summary>
+        /// MAIN
+        /// </summary>
         static void Main()
         {
             IDal dal = new Dal.DalList();
@@ -38,22 +39,17 @@ namespace DalTest
                                     Product p = new(); // We will create an object
                                     int id, stock; double price;
                                     Category category;
-                                    // We will collect the ID
                                     do { Console.WriteLine("enter id of product"); }
                                     while (!int.TryParse(Console.ReadLine(), out id));
                                     p.ID = id;
-                                    // We will collect the name
                                     Console.WriteLine("enter name of product");
                                     p.Name = Console.ReadLine() ?? "";
-                                    // We will collect the price
                                     do { Console.WriteLine("enter price of product"); }
                                     while (!double.TryParse(Console.ReadLine(), out price));
                                     p.Price = price;
-                                    // We will collect the category
                                     do { Console.WriteLine("enter category of product"); }
                                     while (!Enum.TryParse(Console.ReadLine(), out category));
                                     p.Category = category;
-                                    // We will collect the stock
                                     do { Console.WriteLine("enter inStock of product"); }
                                     while (!int.TryParse(Console.ReadLine(), out stock));
                                     p.InStock = stock;
@@ -61,7 +57,6 @@ namespace DalTest
                                     break;
                                 case 2: // get product
                                     int id1;
-                                    // We will collect the ID
                                     do { Console.WriteLine("enter id of product"); }
                                     while(!int.TryParse(Console.ReadLine(), out id1));
                                     Console.WriteLine(dal.Product.GetById(id1)); // We will call get
@@ -75,22 +70,17 @@ namespace DalTest
                                     Product p1 = new(); // We will create an object
                                     int id2, stock1; double price1;
                                     Category category1;
-                                    // We will collect the ID
                                     do { Console.WriteLine("enter id of product"); }
                                     while(int.TryParse(Console.ReadLine(), out id2));
                                     p1.ID = id2;
-                                    // We will collect the name
                                     Console.WriteLine("enter name of product");
                                     p1.Name = Console.ReadLine() ?? "";
-                                    // We will collect the price
                                     do { Console.WriteLine("enter price of product"); }
                                     while(!double.TryParse(Console.ReadLine(), out price1));
                                     p1.Price = price1;
-                                    // We will collect the category
                                     do { Console.WriteLine("enter category of product"); }
                                     while(!Enum.TryParse(Console.ReadLine(), out category1));
                                     p1.Category = category1;
-                                    // We will collect the stock
                                     do { Console.WriteLine("enter inStock of product"); }
                                     while(!int.TryParse(Console.ReadLine(), out stock1));
                                     p1.InStock = stock1;
@@ -99,7 +89,6 @@ namespace DalTest
                                     break;
                                 case 5: // to delete
                                     int id3;
-                                    // We will collect the ID
                                     do { Console.WriteLine("enter id of product"); }
                                     while(!int.TryParse(Console.ReadLine(), out id3));
                                     dal.Product.Delete(id3); // We will activate the delete function
@@ -121,13 +110,10 @@ namespace DalTest
                                     Order order = new(); // We will create an object
                                     int id;
                                     order.ID = 1;
-                                    // We will collect the name
                                     Console.WriteLine("enter customer name of order");
                                     order.CustomerName = Console.ReadLine() ?? "";
-                                    // We will collect the Email
                                     Console.WriteLine("enter customer email of order");
                                     order.CustomerEmail = Console.ReadLine() ?? "";
-                                    // We will collect the adress
                                     Console.WriteLine("enter customer adress of order");
                                     order.CustomerAdress = Console.ReadLine() ?? "";
                                     order.OrderDate = DateTime.Now; // We will enter the date
@@ -135,7 +121,7 @@ namespace DalTest
                                     break;
                                 case 2: // get order
                                     do { Console.WriteLine("enter id of order"); }
-                                    while(!int.TryParse(Console.ReadLine(), out id)); // We will collect the ID
+                                    while(!int.TryParse(Console.ReadLine(), out id)); 
                                     Console.WriteLine(dal.Order.GetById(id)); // We will call get
                                     break;
                                 case 3: // get all orders
@@ -145,25 +131,20 @@ namespace DalTest
                                     break;
                                 case 4: // update
                                     Order order1 = new(); //  We will create an object
-                                    // We will collect the ID
                                     do { Console.WriteLine("enter id of order"); }
                                     while(!int.TryParse(Console.ReadLine(), out id));
                                     order1.ID = id;
-                                    // We will collect the name
                                     Console.WriteLine("enter customer name of order");
                                     order1.CustomerName = Console.ReadLine() ?? "";
-                                    // We will collect the Email
                                     Console.WriteLine("enter customer email of order");
                                     order1.CustomerEmail = Console.ReadLine() ?? "";
-                                    // We will collect the adress
                                     Console.WriteLine("enter customer adress of order");
                                     order1.CustomerAdress = Console.ReadLine() ?? "";
-                                    order1.OrderDate = DateTime.Now; // We will enter the date
+                                    order1.OrderDate = DateTime.Now; 
                                     if (order1.CustomerName?.Length > 0) // If no blank input is entered
                                         dal.Order.Update(order1); // We will activate the update function
                                     break;
                                 case 5: // delete
-                                    // We will collect the ID
                                     do { Console.WriteLine("enter id of order"); }
                                     while(!int.TryParse(Console.ReadLine(), out id));
                                     dal.Order.Delete(id); // We will activate the delete function
@@ -185,18 +166,13 @@ namespace DalTest
                                     OrderItem orderItem = new(); // We will create an object
                                     int id, idProduct, idOrder, amount;
                                     orderItem.ID = 1;
-                                    // We will collect the ID
                                     do { Console.WriteLine("enter product ID of orderItem"); }
                                     while(!int.TryParse(Console.ReadLine(), out idProduct));
-                                    // We will take the ID of the product
                                     orderItem.ProductID = idProduct;
-                                    // We will receive the ID of the order
                                     do { Console.WriteLine("enter order ID of orderItem"); }
                                     while(!int.TryParse(Console.ReadLine(), out idOrder));
                                     orderItem.OrderID = idOrder;
-                                    // We will take the price of the item
                                     orderItem.Price = dal.Product.GetById(orderItem.ProductID).Price;
-                                    // We will take the quantity of the item
                                     do { Console.WriteLine("enter amount of orderItem"); }
                                     while(!int.TryParse(Console.ReadLine(), out amount));
                                     orderItem.Amount = amount;
@@ -204,7 +180,7 @@ namespace DalTest
                                     break;
                                 case 2: // get orderItem
                                     do { Console.WriteLine("enter id of orderItem"); }
-                                    while(!int.TryParse(Console.ReadLine(), out id)); // We will collect the ID
+                                    while(!int.TryParse(Console.ReadLine(), out id)); 
                                     Console.WriteLine(dal.OrderItem.GetById(id)); // We will call get
                                     break;
                                 case 3: // get all orderItems
@@ -214,21 +190,16 @@ namespace DalTest
                                     break;
                                 case 4: // update
                                     OrderItem orderItem1 = new(); //  We will create an object
-                                    // We will collect the ID
                                     do { Console.WriteLine("enter id of orderItem"); }
                                     while(!int.TryParse(Console.ReadLine(), out id));
                                     orderItem1.ID = id;
-                                    // We will take the ID of the product
                                     do { Console.WriteLine("enter product ID of orderItem"); }
                                     while (!int.TryParse(Console.ReadLine(), out idProduct));
                                     orderItem1.ProductID = idProduct;
-                                    // We will receive the ID of the order
                                     do { Console.WriteLine("enter order ID of orderItem"); }
                                     while (!int.TryParse(Console.ReadLine(), out idOrder));
                                     orderItem1.OrderID = idOrder;
-                                    // We will take the price of the item
                                     orderItem1.Price = dal.Product.GetById(orderItem1.ProductID).Price;
-                                    // We will take the quantity of the item
                                     do { Console.WriteLine("enter amount of orderItem"); }
                                     while(! int.TryParse(Console.ReadLine(), out amount));
                                     orderItem1.Amount = amount;
@@ -237,7 +208,7 @@ namespace DalTest
                                     break;
                                 case 5: // delete
                                     do { Console.WriteLine("enter id of orderItem"); }
-                                    while(!int.TryParse(Console.ReadLine(), out id)); // We will collect the ID
+                                    while(!int.TryParse(Console.ReadLine(), out id)); 
                                     dal.OrderItem.Delete(id); //  We will activate the delete function
                                     break;
                             }
@@ -248,7 +219,7 @@ namespace DalTest
                 }
                 catch (Exception str) // catches the error
                 {
-                    Console.WriteLine(str); // prints the error
+                    Console.WriteLine(str); 
                 }
                 // Let's choose again which entity we want
                 Console.WriteLine("Choose an entity:");
@@ -261,4 +232,3 @@ namespace DalTest
             }
         }
     }
-}

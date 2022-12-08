@@ -1,8 +1,17 @@
-﻿using System.Reflection;
-namespace DO;
+﻿namespace DO;
+using System.Reflection;
 
+/// <summary>
+/// To String Property
+/// </summary>
 public static class Tools
 {
+    /// <summary>
+    /// to string property
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="t"></param>
+    /// <returns></returns>
     public static string ToStringProperty<T>(this T t)
     {
         string str = " ";

@@ -1,5 +1,9 @@
 ﻿namespace BlApi;
 using BO;
+
+/// <summary>
+/// interface ICart
+/// </summary>
 public interface ICart
 {
     /// <summary>
