@@ -15,7 +15,11 @@ internal class DalProduct : IProduct
     }
     public Product GetById(int id)=> DataSource.ProductsList.Find(x => x?.ID == id)
         ?? throw new DalMissingIdException(id,"product");
-    public IEnumerable<Product?> GetAll() => new List<Product?>(DataSource.ProductsList);
+    public IEnumerable<Product?> GetAll()
+    {
+        IEnumerable<Product?> prod = (DataSource.ProductsList);
+        return prod;
+    }
 
     public void Delete(int id)
     {

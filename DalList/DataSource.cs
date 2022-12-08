@@ -70,8 +70,8 @@ internal static class DataSource
                 CustomerEmail = _orderNameEmailAdress[x, 1],
                 CustomerAdress = _orderNameEmailAdress[x, 2],
                 OrderDate = DateTime.Now.AddDays(-days),
-                ShipDate = DateTime.MinValue,
-                DeliveryrDate = DateTime.MinValue,
+                ShipDate = null,//DateTime.MinValue,
+                DeliveryrDate = null,//DateTime.MinValue,
             };
             if (i < 0.8 * 20)
                 order.ShipDate = order.OrderDate + new TimeSpan(_rnd.Next(10, 20), 0, 0, 0);

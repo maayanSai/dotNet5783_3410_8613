@@ -31,7 +31,7 @@ internal class Product:IProduct
             {
                 ID = p.ID,
                 Name=p?.Name??throw new BO.BlNullPropertyException("Empty name"),
-                Price=p.Price,
+                Price=p?.Price??0,
                 Category=(DO.Category?)p?.Category ?? throw new BO.BlWorngCategoryException("Wrong category "),//צריך לבדוק אם הומר תקין?
                 InStock=p.InStock,
             };
@@ -179,9 +179,9 @@ internal class Product:IProduct
         {
             DO.Product dp = new()
             {
-                ID = p?.ID ?? throw new BO.BlNullPropertyException("product name"),
-                Name = p.Name ??"" ,
-                Price = p.Price,
+                ID = p.ID,
+                Name = p?.Name ??"" ,
+                Price = p?.Price??0,
                 InStock = p.InStock,
                 Category = (DO.Category?)p?.Category?? throw new BO.BlInCorrectException("product name"),
             };

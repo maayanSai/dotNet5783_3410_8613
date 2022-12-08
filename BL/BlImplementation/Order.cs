@@ -60,6 +60,7 @@ internal class Order: IOrder
             Name = Dal.Product.GetById(x?.ProductID ?? 1).Name,//האיי די תמיד יהיה תקין
             Amount = x?.Amount ?? 0,
             Totalprice = x?.Price * x?.Amount ?? 0
+            
         }).ToList();
        
            return new BO.Order
@@ -87,24 +88,21 @@ internal class Order: IOrder
         try
         {
             order = Dal.Order.GetById(id);
-         }
+        }
         catch (DO.DalMissingIdException exp)
         {
             throw new BO.BlMissingEntityException("missing order", exp);
-        }
-
-        
-        
+        }  
             List<Tuple<DateTime?, string?>> tracking = new();
             if (order.OrderDate != null)
                 tracking.Add(new Tuple<DateTime?, string?>(order.OrderDate, "the order allready exist"));
-            else throw new BO.BlNullPropertyException("order fate is miising");
+            else throw new BO.BlIncorrectDatesException("order date is miising");
             if (order.ShipDate != null)
                 tracking.Add(new Tuple<DateTime?, string?>(order.ShipDate, " the order has been sent"));
-            else throw new BO.BlNullPropertyException("Ship date is missing");
+           // else throw new BO.BlNullPropertyException("Ship date is missing");
             if (order.DeliveryrDate != null)
                 tracking.Add(new Tuple<DateTime?, string?>(order.ShipDate, " the order has been delivered"));
-            else throw new BO.BlNullPropertyException("Delivery Date is missing");
+            //else throw new BO.BlNullPropertyException("Delivery Date is missing");
             BO.OrderTracking ortk = new()
             {
                 ID = id,
