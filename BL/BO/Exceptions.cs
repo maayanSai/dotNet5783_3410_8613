@@ -55,7 +55,7 @@ public class BlInCorrectException : Exception
 {
     //string Message1;
     public BlInCorrectException(string? message) : base(message) { } // { //Message1=message; }
-    public override string ToString()=> " bl-incorrect" + base.ToString();
+    public override string ToString() => " bl-incorrect" + base.ToString();
 }
 
 
