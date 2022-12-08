@@ -18,13 +18,14 @@ using BlImplementation;
         Console.WriteLine("3: to product");
         while (!int.TryParse(Console.ReadLine(), out chooseEntity)) // absorption of an entity
             Console.Write("Please enter a number (your choice):");
+        Console.WriteLine();
         while (chooseEntity != 0) // As long as 0 is not pressed
         {
             try
             {
                 switch (chooseEntity)
                 {
-                    case 1:
+                    case 1: // order
                         Console.WriteLine("Choose one of the following:");
                         Console.WriteLine("1: to get all orders");
                         Console.WriteLine("2: to get items order");
@@ -34,51 +35,58 @@ using BlImplementation;
                         Console.WriteLine("6: to exit");
                         while (!int.TryParse(Console.ReadLine(), out chooseMenu)) // We will take a function number
                             Console.Write("Please enter a number (your choice):");
+                        Console.WriteLine();
                         switch (chooseMenu)
                         {
-                            case 1:
+                            case 1: // get all orders
                                 var list= bl.Order.GetOrders();
                                 foreach(var item in list)
                                     Console.WriteLine(item);
+                                Console.WriteLine();
                                 break;
-                            case 2:
+                            case 2: // get items order
                                 do { Console.WriteLine("enter id of order"); }
                                 while (!int.TryParse(Console.ReadLine(), out id));
                                 BO.Order o = bl.Order.ItemOrder(id);
                                 Console.WriteLine(o);
+                                Console.WriteLine();
                                 break;
-                            case 3:
+                            case 3: // Update shipping
                                 do { Console.WriteLine("enter id of order"); }
                                 while (!int.TryParse(Console.ReadLine(), out id));
                                 Console.WriteLine(bl.Order.Updateshipping(id));
+                                Console.WriteLine();
                                 break;
-                            case 4:
+                            case 4: // Update supply
                                 do { Console.WriteLine("enter id of order"); }
                                 while (!int.TryParse(Console.ReadLine(), out id));
                                 Console.WriteLine(bl.Order.Updatesupply(id));
+                                Console.WriteLine();
                                 break;
-                            case 5:
+                            case 5: // tracking
                                 do { Console.WriteLine("enter id of order"); }
                                 while (!int.TryParse(Console.ReadLine(), out id));
                                 Console.WriteLine(bl.Order.Tracking(id));
+                                Console.WriteLine();
                                 break;
-                            case 6:
+                            case 6: // exit
                                 break;
                             default:
                                 throw new Exception("the choice has not correct");
                         }
                         break;
-                    case 2:
+                    case 2: // cart
                         Console.WriteLine("Choose one of the following:");
                         Console.WriteLine("1: to Add");
                         Console.WriteLine("2: Update");
-                        Console.WriteLine("3: MakeAnOrder");
+                        Console.WriteLine("3: Make an order");
                         Console.WriteLine("4: to exit");
                         while (!int.TryParse(Console.ReadLine(), out chooseMenu)) // We will take a function number
                             Console.Write("Please enter a number (your choice):");
+                        Console.WriteLine();
                         switch (chooseMenu)
                         {
-                            case 1:
+                            case 1: // Add
                                 int idProduct;
                                 Cart c = new();
                                 do { Console.WriteLine("enter id of product"); }
@@ -96,8 +104,9 @@ using BlImplementation;
                                 c.TotalPrice = price * amount;
                                 c.Items = new List<BO.OrderItem>();
                                 Console.WriteLine(bl.Cart.Add(c, idProduct));
+                                Console.WriteLine();
                                 break;
-                            case 2:
+                            case 2: // Update
                                 int idProduct1;
                                 Cart c1 = new();
                                 do { Console.WriteLine("enter id of product"); }
@@ -115,8 +124,9 @@ using BlImplementation;
                                 c1.TotalPrice = price * amount;
                                 c1.Items = new List<BO.OrderItem>();
                                 Console.WriteLine(bl.Cart.Update(c1, idProduct1, amount));
+                                Console.WriteLine();
                                 break;
-                            case 3:
+                            case 3: // Make an order
                                 Cart c2 = new();
                                 Console.WriteLine("enter name of customer ");
                                 c2.CustomerName = Console.ReadLine() ?? "";
@@ -131,14 +141,15 @@ using BlImplementation;
                                 c2.TotalPrice = price * amount;
                                 c2.Items = new List<BO.OrderItem>();
                                 bl.Cart.MakeAnOrder(c2);
+                                Console.WriteLine();
                                 break;
-                            case 4:
+                            case 4: // exit
                                 break;
                             default:
                                 throw new Exception("the choice has not correct");
                         }
                         break;
-                    case 3:
+                    case 3: // product
                         Console.WriteLine("Choose one of the following:");
                         Console.WriteLine("1: to Get products");
                         Console.WriteLine("2: to get item product by id");
@@ -149,38 +160,30 @@ using BlImplementation;
                         Console.WriteLine("7: to exit");
                         while (!int.TryParse(Console.ReadLine(), out chooseMenu)) // We will take a function number
                             Console.Write("Please enter a number (your choice):");
+                        Console.WriteLine();
                         switch (chooseMenu)
                         {
-                            case 1:
+                            case 1: // Get products
                                 var list = bl.Product.GetProducts();
                                 foreach (var item in list)
                                     Console.WriteLine(item);
+                                Console.WriteLine();
                                 break;
-                            case 2:
+                            case 2: // get item product by id
                                 do { Console.WriteLine("enter id of product"); }
                                 while (!int.TryParse(Console.ReadLine(), out id));
                                 BO.Product p = bl.Product.ItemProduct(id);
                                 Console.WriteLine(p);
+                                Console.WriteLine();
                                 break;
-                            case 3:
+                            case 3: // get item product by id and cart
                                 Cart cart = new();
                                 do { Console.WriteLine("enter id of product"); }
                                 while (!int.TryParse(Console.ReadLine(), out id));
-                                Console.WriteLine("enter name of customer ");
-                                cart.CustomerName = Console.ReadLine() ?? "";
-                                Console.WriteLine("enter email of customer");
-                                cart.CustomerEmail = Console.ReadLine() ?? "";
-                                Console.WriteLine("enter adress of customer");
-                                cart.CustomerAdress = Console.ReadLine() ?? " ";
-                                Console.WriteLine("enter price of product");
-                                while (!double.TryParse(Console.ReadLine(), out price)) ;
-                                Console.WriteLine("enter amount of product");
-                                while (!int.TryParse(Console.ReadLine(), out amount)) ;
-                                cart.TotalPrice = price * amount;
-                                cart.Items = new List<BO.OrderItem>();
                                 Console.WriteLine(bl.Product.ItemProduct(id, cart));
+                                Console.WriteLine();
                                 break;
-                            case 4:
+                            case 4: // add
                                 BO.Category category;
                                 BO.Product p1 = new();
                                 do { Console.WriteLine("enter id of product"); }
@@ -198,13 +201,15 @@ using BlImplementation;
                                 while (!Enum.TryParse(Console.ReadLine(), out category));
                                 p1.Category = category;
                                 bl.Product.Add(p1);
+                                Console.WriteLine();
                                 break;
-                            case 5:
+                            case 5: // delete
                                 do { Console.WriteLine("enter id of product"); }
                                 while (!int.TryParse(Console.ReadLine(), out id));
                                 bl.Product.Delete(id);
+                                Console.WriteLine();
                                 break;
-                            case 6:
+                            case 6: // update
                                 BO.Category category1;
                                 BO.Product p2 = new();
                                 do { Console.WriteLine("enter id of product"); }
@@ -222,8 +227,9 @@ using BlImplementation;
                                 while (!Enum.TryParse(Console.ReadLine(), out category1));
                                 p2.Category = category1;
                                 bl.Product.Update(p2);
+                                Console.WriteLine();
                                 break;
-                            case 7:
+                            case 7: // exit
                                 break;
                             default:
                                 throw new Exception("the choice has not correct");
@@ -246,6 +252,7 @@ using BlImplementation;
             Console.WriteLine("3: to product");
             while (!int.TryParse(Console.ReadLine(), out chooseEntity)) // absorption of an entity
                 Console.Write("Please enter a number (your choice):");
+            Console.WriteLine();
         }
     }
 

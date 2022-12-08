@@ -5,9 +5,13 @@ using DO;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// A logical entity-item
+/// </summary>
 internal class Product:IProduct
 {
     DalApi.IDal Dal = new Dal.DalList();
+
     /// <summary>
     /// Adding a product (for the manager screen)
     /// </summary>
@@ -17,13 +21,13 @@ internal class Product:IProduct
     /// <exception cref="Exceptions.BOAlreadyExistsException"></exception>
     public void Add(BO.Product p)
     {
-        if (p.ID <= 0)//negative id
+        if (p.ID <= 0) // if id is negative
             throw new BO.BlInCorrectException("product ID");
-            if(p.InStock< 0)//negative amount
+            if(p.InStock< 0) //negative amount
                 throw new BO.BlInCorrectException("product amount");
-            if (p.Price< 0)//negative price
+            if (p.Price< 0) //negative price
                 throw new BO.BlInCorrectException("product price");
-            if (p.Name == "")//empty string
+            if (p.Name == "") //empty string
                 throw new BO.BlInCorrectException("product name");
         try
         {
@@ -38,28 +42,33 @@ internal class Product:IProduct
             Dal.Product.Add(p1);
         }
         catch (DO.DalAlreadyExistsException exp)
-              {
+        {
                   throw new BO.BlAlreadyExistEntityException("The pruduct is allredy exssists",exp);//לשנות לסוג אקספשיון הנדרש
-             }
-     
         }
+     
+    }
 
-     public void Delete(int id)
+    /// <summary>
+    /// Product deletion (for admin screen)
+    /// </summary>
+    /// <param name="id"></param>
+    /// <exception cref="BO.BlInCorrectException"></exception>
+    /// <exception cref="BO.BlNullPropertyException"></exception>
+    /// <exception cref="BlMissingEntityException"></exception>
+    /// <exception cref="BO.BlMissingEntityException"></exception>
+    public void Delete(int id)
     {
-        if (id<=0)
+        if (id<=0) // if id is negative
             throw new BO.BlInCorrectException("negative id");
-            bool exist = false;
-        
-        IEnumerable<DO.Order?> orders = new List<DO.Order?>(Dal.Order.GetAll());
+        bool exist = false;
+        IEnumerable<DO.Order?> orders = new List<DO.Order?>(Dal.Order.GetAll());         // Create a collection of orders
         foreach (var ord in orders)
         { 
             IEnumerable<DO.OrderItem?> ordi = new List<DO.OrderItem?>();
             ordi=Dal.OrderItem.GetByOrderId(ord?.ID??throw new BO.BlNullPropertyException("order id is missing"));
             foreach (var oi in ordi)
-            {
                 if (oi?.ID==id)
                     exist=true;
-            }
         }
         if (!exist)
         {
@@ -74,8 +83,8 @@ internal class Product:IProduct
         }
         else
             throw new BO.BlMissingEntityException("the product is exsist in order/s so that can not be deleated");//לשנות לסוג אקספשיון הנדרש
-
     }
+
     /// <summary>
     /// Product list request (for manager screen and buyer's catalog screen)
     /// </summary>
@@ -85,26 +94,28 @@ internal class Product:IProduct
     public IEnumerable<ProductForList?> GetProducts()
     {
         IEnumerable<DO.Product?> pro=Dal.Product.GetAll();
-
         return pro.Select(pr => new BO.ProductForList
         {
             ID = pr?.ID ?? throw new BO.BlNullPropertyException("null product id"),
             Name = pr?.Name ?? "",
             Price = pr?.Price ?? 0,
             Category = (BO.Category?)pr?.Category ?? throw new BO.BlWorngCategoryException("wrong product cayegory"),
-
         }) ;
-        
-       
-        
     }
 
+    /// <summary>
+    /// Product details request (for admin screen and for)
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="BO.BlInCorrectException"></exception>
+    /// <exception cref="BO.BlMissingEntityException"></exception>
+    /// <exception cref="BO.BlNullPropertyException"></exception>
+    /// <exception cref="BlWorngCategoryException"></exception>
     public BO.Product ItemProduct(int id)
     {
         if(id<=0)
-        {
             throw new BO.BlInCorrectException("inncorrect id");
-        }
         DO.Product? dopro;
         try
         {
@@ -120,18 +131,24 @@ internal class Product:IProduct
             Name = dopro?.Name ?? "",
             Price = dopro?.Price ?? 0,
             Category = (BO.Category?)dopro?.Category ??throw new BlWorngCategoryException("Wrong product category"),
-            InStock = dopro?.InStock??0,//??
+            InStock = dopro?.InStock ?? 0,
         };
         return bopro;
     }
 
+    /// <summary>
+    /// Product details request (for buyer screen - from the catalog)
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="cart"></param>
+    /// <returns></returns>
+    /// <exception cref="BO.BlInCorrectException"></exception>
+    /// <exception cref="BO.BlMissingEntityException"></exception>
+    /// <exception cref="BO.BlNullPropertyException"></exception>
     public BO.ProductItem ItemProduct(int id, BO.Cart cart)
     {
         if(id<=0)
-        {
             throw new BO.BlInCorrectException("incorrct id");
-          
-        }
         DO.Product? p;
         try
         {
@@ -141,15 +158,12 @@ internal class Product:IProduct
         {
             throw new BO.BlMissingEntityException(exp.Message);
         }
-        //לחזור
         int amount=0;
         if (cart.Items != null)
         {
-            BO.OrderItem? itemIn = cart.Items?.FirstOrDefault(item => item.ProductID == id);//if items in cart null error in runtime!!!!
-
+            BO.OrderItem? itemIn = cart.Items?.FirstOrDefault(item => item.ProductID == id); //if items in cart null error in runtime
             if (itemIn != null)
                 amount = itemIn.Amount;
-
         }
         BO.ProductItem proi = new()
         {
@@ -160,21 +174,26 @@ internal class Product:IProduct
             AmountCart = amount ,
         };
         return proi;
-        
     }
 
+    /// <summary>
+    /// Update product data (for admin screen)
+    /// </summary>
+    /// <param name="p"></param>
+    /// <exception cref="BO.BlInCorrectException"></exception>
+    /// <exception cref="BO.BlNullPropertyException"></exception>
+    /// <exception cref="BlMissingEntityException"></exception>
     public void Update(BO.Product p)
     {
         //input validation
-        if (p.ID <= 0)//negative id
+        if (p.ID <= 0) //negative id
             throw new BO.BlInCorrectException("product ID");
-        if (p.InStock < 0)//negative amount
+        if (p.InStock < 0) //negative amount
             throw new BO.BlInCorrectException("product amount");
-        if (p.Price < 0)//negative price
+        if (p.Price < 0) //negative price
             throw new BO.BlInCorrectException("product price");
-        if (p.Name == "")//empty string
+        if (p.Name == "") //empty string
             throw new BO.BlInCorrectException("product name");
-
         try
         {
             DO.Product dp = new()
@@ -187,10 +206,9 @@ internal class Product:IProduct
             };
             Dal.Product.Update(dp);
         }
-         catch (DO.DalMissingIdException exp)
+        catch (DO.DalMissingIdException exp)
         {
             throw new BlMissingEntityException("the product dosnt exsist",exp);
         }
- 
     }
 }

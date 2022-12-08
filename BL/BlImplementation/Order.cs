@@ -2,6 +2,9 @@
 using BlApi;
 using System.Collections.Generic;
 
+/// <summary>
+/// The order-logical entity
+/// </summary>
 internal class Order: IOrder
 {
      DalApi.IDal Dal = new Dal.DalList();
@@ -12,7 +15,6 @@ internal class Order: IOrder
     /// <exception cref="Exception"></exception>
     public IEnumerable<BO.OrderForList?> GetOrders()
     {
-
         return Dal.Order.GetAll().Select(order => new BO.OrderForList
         {
             ID = order?.ID ?? throw new BO.BlNullPropertyException("missing order id"),
@@ -22,6 +24,7 @@ internal class Order: IOrder
             Amount = Dal.OrderItem?.GetByOrderId(order?.ID ?? 1).Count()??0,
         }) ;
     }
+
     /// <summary>
     /// A private helper function, that returns the state of the order 
     /// </summary>
@@ -38,6 +41,14 @@ internal class Order: IOrder
         else
             return BO.OrderStatus.Ordered;
     }
+    /// <summary>
+    /// Order details request (for manager screen and buyer screen)
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    /// <exception cref="BO.BlMissingEntityException"></exception>
+    /// <exception cref="BO.BlNullPropertyException"></exception>
     public BO.Order ItemOrder(int id)
     {
         DO.Order orderD;
@@ -61,24 +72,28 @@ internal class Order: IOrder
             Amount = x?.Amount ?? 0,
             Totalprice = x?.Price * x?.Amount ?? 0
         }).ToList();
-       
-           return new BO.Order
-            {
-                ID = orderD.ID,
-                CustomerName = orderD.CustomerName,
-                CustomerAdress = orderD.CustomerAdress,
-                CustomerEmail = orderD.CustomerEmail,
-                OrderDate = orderD.OrderDate,
-                ShipDate = orderD.ShipDate,
-                DeliveryrDate = orderD.DeliveryrDate,
-                Status = GetStatus(orderD),
-                Items = items,
-                TotalPrice= items!.Sum(x=> x.Totalprice),
-            };
-
-     
+        return new BO.Order
+        {
+            ID = orderD.ID,
+            CustomerName = orderD.CustomerName,
+            CustomerAdress = orderD.CustomerAdress,
+            CustomerEmail = orderD.CustomerEmail,
+            OrderDate = orderD.OrderDate,
+            ShipDate = orderD.ShipDate,
+            DeliveryrDate = orderD.DeliveryrDate,
+            Status = GetStatus(orderD),
+            Items = items,
+            TotalPrice= items!.Sum(x=> x.Totalprice),
+        };
     }
-
+    /// <summary>
+    /// Order Tracking (Manager Order Management Screen)
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="BO.BlInCorrectException"></exception>
+    /// <exception cref="BO.BlMissingEntityException"></exception>
+    /// <exception cref="BO.BlNullPropertyException"></exception>
     public BO.OrderTracking? Tracking(int id)
     {
         DO.Order order;
@@ -87,32 +102,30 @@ internal class Order: IOrder
         try
         {
             order = Dal.Order.GetById(id);
-         }
+        }
         catch (DO.DalMissingIdException exp)
         {
             throw new BO.BlMissingEntityException("missing order", exp);
         }
-
-        
-        
-            List<Tuple<DateTime?, string?>> tracking = new();
-            if (order.OrderDate != null)
-                tracking.Add(new Tuple<DateTime?, string?>(order.OrderDate, "the order allready exist"));
-            else throw new BO.BlNullPropertyException("order fate is miising");
-            if (order.ShipDate != null)
-                tracking.Add(new Tuple<DateTime?, string?>(order.ShipDate, " the order has been sent"));
-            else throw new BO.BlNullPropertyException("Ship date is missing");
-            if (order.DeliveryrDate != null)
-                tracking.Add(new Tuple<DateTime?, string?>(order.ShipDate, " the order has been delivered"));
-            else throw new BO.BlNullPropertyException("Delivery Date is missing");
-            BO.OrderTracking ortk = new()
-            {
-                ID = id,
-                Status = GetStatus(order),
-                Tracking = tracking,
-            };
-            return ortk;
-        }
+        List<Tuple<DateTime?, string?>> tracking = new(); // A list of date pairs and a verbal description of a situation
+        if (order.OrderDate != null)
+            tracking.Add(new Tuple<DateTime?, string?>(order.OrderDate, "the order allready exist"));
+        else throw new BO.BlNullPropertyException("order fate is miising");
+        if (order.ShipDate != null)
+            tracking.Add(new Tuple<DateTime?, string?>(order.ShipDate, " the order has been sent"));
+        else throw new BO.BlNullPropertyException("Ship date is missing");
+        if (order.DeliveryrDate != null)
+            tracking.Add(new Tuple<DateTime?, string?>(order.ShipDate, " the order has been delivered"));
+        else throw new BO.BlNullPropertyException("Delivery Date is missing");
+        // An instance of order tracking
+        BO.OrderTracking ortk = new()
+         {
+            ID = id,
+            Status = GetStatus(order),
+            Tracking = tracking,
+        };
+        return ortk;
+    }
   
     /// <summary>
     /// Order shipping update (Admin order management screen)
@@ -129,10 +142,7 @@ internal class Order: IOrder
         try
         {
             order = Dal.Order.GetById(id);
-
-
-
-            if (order.ShipDate != null)
+            if (order.ShipDate != null) // Check if an order exists, and has not yet been sent
             {
                 Dal.Order.Update(new DO.Order
                 {
@@ -151,8 +161,8 @@ internal class Order: IOrder
         {
             throw new BO.BlMissingEntityException("The order does not exist", exp);
         }
-
     }
+
     /// <summary>
     /// Order Delivery Update (Admin Order Management Screen)
     /// </summary>
@@ -168,6 +178,7 @@ internal class Order: IOrder
         try
         {
             order = Dal.Order.GetById(id);
+            // Check if an order exists, already sent but not yet delivered
             if (order.ShipDate != DateTime.MinValue && order.DeliveryrDate == DateTime.MinValue)
             {
                 Dal.Order.Update(new DO.Order

@@ -2,8 +2,6 @@
 using BlApi;
 using BO;
 using System.ComponentModel.DataAnnotations;
-using System.Transactions;
-using System.Collections.Generic;
 
 internal class Cart:ICart
 {
@@ -78,9 +76,8 @@ internal class Cart:ICart
                     Name = pro.Name,
                     Price = pro.Price,
                     Totalprice = pro.Price
-                    //ID??
                 });
-                cart!.TotalPrice +=pro.Price;//?
+                cart!.TotalPrice +=pro.Price;
             }
             else//האורדראייטם קיים
             {
@@ -93,10 +90,6 @@ internal class Cart:ICart
         }
         else
             throw new BO.BlMissingEntityException("Product not in stock");
-       
-
-            
-
         return cart;
     }
     /// <summary>
@@ -131,6 +124,7 @@ internal class Cart:ICart
             throw new BO.BlInCorrectException("invlavel email");
         int days = _rnd.Next(21, 200);
         int orderId;
+        //
         DO.Order ord = new()
         {
             CustomerAdress = cart.CustomerAdress,

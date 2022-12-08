@@ -1,5 +1,4 @@
-﻿
-namespace BO;
+﻿namespace BO;
 
 public class Cart
 {
@@ -10,5 +9,4 @@ public class Cart
     public double TotalPrice { set; get; }
     // An action that prints the order
     public override string ToString() => this.ToStringProperty();
-
 }
