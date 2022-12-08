@@ -1,10 +1,20 @@
 ﻿namespace DO;
 
+/// <summary>
+/// Exception
+/// </summary>
 public class DalMissingIdException: Exception
 {
     public int Entity1Id;
     public int ?Entity2Id;
     public string EntityName;
+
+    /// <summary>
+    /// Missing Id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="name"></param>
+    public DalMissingIdException(int id, string name) : base() { }
     int num;
     string Message;
     public DalMissingIdException(int id, string name,int a=0) : base()
@@ -37,6 +47,10 @@ public class DalMissingIdException: Exception
     //}
     
 }
+
+/// <summary>
+/// Already Exists
+/// </summary>
 public class DalAlreadyExistsException: Exception
 {
     public int EntityId;

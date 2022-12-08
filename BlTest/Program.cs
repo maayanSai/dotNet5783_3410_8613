@@ -5,14 +5,10 @@ using BlImplementation;
 
  public class Program
 {
-    static IBl bl = new Bl();
-
-    static Cart c  = new() { Items = new List<OrderItem>(), CustomerName = "Ayala", CustomerAdress = "israel 23", CustomerEmail = "ayala@gmail.com" };
+    static IBl s_bl = new Bl();
+    static Cart s_c  = new() { Items = new List<OrderItem>(), CustomerName = "Ayala", CustomerAdress = "israel 23", CustomerEmail = "ayala@gmail.com" };
     static void Main()
     {
-        
-        
-        
         int id, amount, stock;
         double price;
         int chooseMenu, chooseEntity; // function and entity selection
@@ -44,7 +40,7 @@ using BlImplementation;
                         switch (chooseMenu)
                         {
                             case 1: // get all orders
-                                var list= bl.Order.GetOrders();
+                                var list= s_bl.Order.GetOrders();
                                 foreach(var item in list)
                                     Console.WriteLine(item);
                                 Console.WriteLine();
@@ -52,26 +48,26 @@ using BlImplementation;
                             case 2: // get items order
                                 do { Console.WriteLine("enter id of order"); }
                                 while (!int.TryParse(Console.ReadLine(), out id));
-                                BO.Order o = bl.Order.ItemOrder(id);
+                                BO.Order o = s_bl.Order.ItemOrder(id);
                                 Console.WriteLine(o);
                                 Console.WriteLine();
                                 break;
                             case 3: // Update shipping
                                 do { Console.WriteLine("enter id of order"); }
                                 while (!int.TryParse(Console.ReadLine(), out id));
-                                Console.WriteLine(bl.Order.Updateshipping(id));
+                                Console.WriteLine(s_bl.Order.Updateshipping(id));
                                 Console.WriteLine();
                                 break;
                             case 4: // Update supply
                                 do { Console.WriteLine("enter id of order"); }
                                 while (!int.TryParse(Console.ReadLine(), out id));
-                                Console.WriteLine(bl.Order.Updatesupply(id));
+                                Console.WriteLine(s_bl.Order.Updatesupply(id));
                                 Console.WriteLine();
                                 break;
                             case 5: // tracking
                                 do { Console.WriteLine("enter id of order"); }
                                 while (!int.TryParse(Console.ReadLine(), out id));
-                                Console.WriteLine(bl.Order.Tracking(id));
+                                Console.WriteLine(s_bl.Order.Tracking(id));
                                 Console.WriteLine();
                                 break;
                             case 6: // exit
@@ -96,7 +92,7 @@ using BlImplementation;
                                // Cart c = new();
                                 do { Console.WriteLine("enter id of product"); }
                                 while (!int.TryParse(Console.ReadLine(), out idProduct));   
-                                Console.WriteLine(bl.Cart.Add(c, idProduct));
+                                Console.WriteLine(s_bl.Cart.Add(s_c, idProduct));
                                 Console.WriteLine();
                                 break;
                             case 2: // Update
@@ -105,11 +101,11 @@ using BlImplementation;
                                 while (!int.TryParse(Console.ReadLine(), out idProduct1));
                                 Console.WriteLine("enter amount of product");
                                 while (!int.TryParse(Console.ReadLine(), out amount)) ;
-                                Console.WriteLine(bl.Cart.Update(c, idProduct1, amount));
+                                Console.WriteLine(s_bl.Cart.Update(s_c, idProduct1, amount));
                                 Console.WriteLine();
                                 break;
                             case 3: // Make an order
-                                bl.Cart.MakeAnOrder(c);
+                                s_bl.Cart.MakeAnOrder(s_c);
                                 Console.WriteLine();
                                 break;
                             case 4: // exit
@@ -121,8 +117,8 @@ using BlImplementation;
                     case 3: // product
                         Console.WriteLine("Choose one of the following:");
                         Console.WriteLine("1: to Get products");
-                        Console.WriteLine("2: to get item product by id");
-                        Console.WriteLine("3: to get item product by id and cart");
+                        Console.WriteLine("2: to get product by id");
+                        Console.WriteLine("3: to get product by id and cart");
                         Console.WriteLine("4: to add");
                         Console.WriteLine("5: to delete");
                         Console.WriteLine("6: to update");
@@ -133,7 +129,7 @@ using BlImplementation;
                         switch (chooseMenu)
                         {
                             case 1: // Get products
-                                var list = bl.Product.GetProducts();
+                                var list = s_bl.Product.GetProducts();
                                 foreach (var item in list)
                                     Console.WriteLine(item);
                                 Console.WriteLine();
@@ -141,7 +137,7 @@ using BlImplementation;
                             case 2: // get item product by id
                                 do { Console.WriteLine("enter id of product"); }
                                 while (!int.TryParse(Console.ReadLine(), out id));
-                                BO.Product p = bl.Product.ItemProduct(id);
+                                BO.Product p = s_bl.Product.ItemProduct(id);
                                 Console.WriteLine(p);
                                 Console.WriteLine();
                                 break;
@@ -149,7 +145,7 @@ using BlImplementation;
                                 Cart cart = new();
                                 do { Console.WriteLine("enter id of product"); }
                                 while (!int.TryParse(Console.ReadLine(), out id));
-                                Console.WriteLine(bl.Product.ItemProduct(id, cart));
+                                Console.WriteLine(s_bl.Product.ItemProduct(id, cart));
                                 Console.WriteLine();
                                 break;
                             case 4: // add
@@ -169,13 +165,13 @@ using BlImplementation;
                                 do { Console.WriteLine("enter category of product"); }
                                 while (!Enum.TryParse(Console.ReadLine(), out category));
                                 p1.Category = category;
-                                bl.Product.Add(p1);
+                                s_bl.Product.Add(p1);
                                 Console.WriteLine();
                                 break;
                             case 5: // delete
                                 do { Console.WriteLine("enter id of product"); }
                                 while (!int.TryParse(Console.ReadLine(), out id));
-                                bl.Product.Delete(id);
+                                s_bl.Product.Delete(id);
                                 Console.WriteLine();
                                 break;
                             case 6: // update
@@ -195,7 +191,7 @@ using BlImplementation;
                                 do { Console.WriteLine("enter category of product"); }
                                 while (!Enum.TryParse(Console.ReadLine(), out category1));
                                 p2.Category = category1;
-                                bl.Product.Update(p2);
+                                s_bl.Product.Update(p2);
                                 Console.WriteLine();
                                 break;
                             case 7: // exit

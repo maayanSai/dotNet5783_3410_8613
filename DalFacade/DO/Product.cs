@@ -5,15 +5,29 @@
 /// </summary>
 public struct Product
 {
-    public int ID { get; set; } // The ID number of the product
-    public string Name { get; set; } // The name of the product
-    public double Price { get; set; } // The price of the product
-    public Category Category { get; set; } // The kind of the product
-    public int InStock { get; set; } // The amount of the product in stock
-
-    // An action that prints the order
-    public override string ToString()
-    {
-        return this.ToStringProperty();
-    }
+    /// <summary>
+    /// The ID number of the product
+    /// </summary>
+    public int ID { get; set; } 
+    /// <summary>
+    /// The name of the product
+    /// </summary>
+    public string Name { get; set; }
+    /// <summary>
+    /// The price of the product
+    /// </summary>
+    public double Price { get; set; } 
+    /// <summary>
+    /// The kind of the product
+    /// </summary>
+    public Category Category { get; set; }  
+    /// <summary>
+    /// The amount of the product in stock
+    /// </summary>
+    public int InStock { get; set; } 
+    /// <summary>
+    /// An action that prints the order
+    /// </summary>
+    /// <returns></returns>
+    public override string ToString()=> this.ToStringProperty();
 }

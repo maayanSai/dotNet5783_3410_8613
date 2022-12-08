@@ -9,18 +9,38 @@ public struct Order
     /// The ID number of the order
     /// </summary>
     public int ID { get; set; }
-    public string CustomerName { get; set; } // The name of customer of the order
-    public string CustomerEmail { get; set; } // The email of customer of the order
-    public string CustomerAdress { get; set; } // The adress of customer of the order
-    public DateTime? OrderDate { get; set; } // Time of placing the order                                     
-    public DateTime? ShipDate { get; set; } // Delivery time
-    public DateTime? DeliveryrDate { get; set; } // Shipping arrival time
+    /// <summary>
+    /// The name of customer of the order
+    /// </summary>
+    public string CustomerName { get; set; }
+    /// <summary>
+    /// The email of customer of the order
+    /// </summary>
+    public string CustomerEmail { get; set; }
+    /// <summary>
+    /// The adress of customer of the order
+    /// </summary>
+    public string CustomerAdress { get; set; }
+    /// <summary>
+    /// Time of placing the order 
+    /// </summary>
+    public DateTime? OrderDate { get; set; }
+    /// <summary>
+    /// Delivery time
+    /// </summary>
+    public DateTime? ShipDate { get; set; }
+    /// <summary>
+    /// Shipping arrival time
+    /// </summary>
+    public DateTime? DeliveryrDate { get; set; } 
+    /// <summary>
+    /// amount of product
+    /// </summary>
     public int Amount { get; set; }
-
-    // An action that prints the order
-    public override string ToString()
-    {
-        return this.ToStringProperty();
-    }
+    /// <summary>
+    /// An action that prints the order
+    /// </summary>
+    /// <returns></returns>
+    public override string ToString() => this.ToStringProperty();
 }
 

@@ -1,5 +1,9 @@
 ﻿namespace BlApi;
 using BO;
+
+/// <summary>
+/// interface IProduct
+/// </summary>
 public interface IProduct
 {
     /// <summary>

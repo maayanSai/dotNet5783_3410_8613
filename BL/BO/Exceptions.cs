@@ -1,16 +1,11 @@
-﻿
-namespace BO;
-
-
+﻿namespace BO;
 
     public class BlAlreadyExistEntityException : Exception
     {
         public BlAlreadyExistEntityException(string message, Exception innerException) : base(message, innerException)
         {
-
         }
         public override string ToString() => base.ToString() + $"Entity is already exist.";
-
     }
 
 /// <summary>
@@ -45,10 +40,7 @@ public class BlMissingEntityException : Exception
     [Serializable]
     public class BlNullPropertyException : Exception
     {
-        public BlNullPropertyException(string message) : base(message)
-        {
-
-        }
+        public BlNullPropertyException(string message) : base(message) { }
     }
     /// <summary>
     /// if its not the category throw an exception
@@ -56,10 +48,7 @@ public class BlMissingEntityException : Exception
     [Serializable]
     public class BlWorngCategoryException : Exception
     {
-        public BlWorngCategoryException(string message) : base(message)
-        {
-
-        }
+        public BlWorngCategoryException(string message) : base(message) { }
     }
     /// <summary>
     /// if the date in correct throw an exception
@@ -67,20 +56,14 @@ public class BlMissingEntityException : Exception
     [Serializable]
     public class BlIncorrectDatesException : Exception
     {
-        public BlIncorrectDatesException(string message) : base(message)
-        {
-
-        }
+        public BlIncorrectDatesException(string message) : base(message) { }
         /// <summary>
         /// if the Property null throw an exception
         /// </summary>
         [Serializable]
         public class BlNullPropertyException : Exception
         {
-            public BlNullPropertyException(string message) : base(message)
-            {
-
-            }
+            public BlNullPropertyException(string message) : base(message) { }
         }
         /// <summary>
         /// if its not the category throw an exception
@@ -88,10 +71,7 @@ public class BlMissingEntityException : Exception
         [Serializable]
         public class BlWorngCategoryException : Exception
         {
-            public BlWorngCategoryException(string message) : base(message)
-            {
-
-            }
+           public BlWorngCategoryException(string message) : base(message) { }
         }
        
 
@@ -114,10 +94,7 @@ public class BlMissingEntityException : Exception
     [Serializable]
     public class BlInCorrectException : Exception
     {
-        public BlInCorrectException(string? message) : base(message)
-        {
-
-        }
+        public BlInCorrectException(string? message) : base(message) { }
     }
 
 

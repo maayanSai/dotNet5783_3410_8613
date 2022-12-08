@@ -36,18 +36,16 @@ internal class Product:IProduct
                 ID = p.ID,
                 Name=p?.Name??throw new BO.BlNullPropertyException("Empty name"),
                 Price=p?.Price??0,
-                Category=(DO.Category?)p?.Category ?? throw new BO.BlWorngCategoryException("Wrong category "),//צריך לבדוק אם הומר תקין?
+                Category=(DO.Category?)p?.Category ?? throw new BO.BlWorngCategoryException("Wrong category "),
                 InStock=p.InStock,
             };
             Dal.Product.Add(p1);
         }
         catch (DO.DalAlreadyExistsException exp)
         {
-                  throw new BO.BlAlreadyExistEntityException("The pruduct is allredy exssists",exp);//לשנות לסוג אקספשיון הנדרש
+            throw new BO.BlAlreadyExistEntityException("The pruduct is allredy exssists", exp);
         }
-     
     }
-
     /// <summary>
     /// Product deletion (for admin screen)
     /// </summary>
@@ -61,7 +59,7 @@ internal class Product:IProduct
         if (id<=0) // if id is negative
             throw new BO.BlInCorrectException("negative id");
         bool exist = false;
-        IEnumerable<DO.Order?> orders = new List<DO.Order?>(Dal.Order.GetAll());         // Create a collection of orders
+        IEnumerable<DO.Order?> orders = new List<DO.Order?>(Dal.Order.GetAll());// Create a collection of orders
         foreach (var ord in orders)
         { 
             IEnumerable<DO.OrderItem?> ordi = new List<DO.OrderItem?>();
@@ -84,7 +82,6 @@ internal class Product:IProduct
         else
             throw new BO.BlMissingEntityException("the product is exsist in order/s so that can not be deleated");//לשנות לסוג אקספשיון הנדרש
     }
-
     /// <summary>
     /// Product list request (for manager screen and buyer's catalog screen)
     /// </summary>
@@ -102,7 +99,6 @@ internal class Product:IProduct
             Category = (BO.Category?)pr?.Category ?? throw new BO.BlWorngCategoryException("wrong product cayegory"),
         }) ;
     }
-
     /// <summary>
     /// Product details request (for admin screen and for)
     /// </summary>
@@ -123,7 +119,7 @@ internal class Product:IProduct
         }
         catch (DO.DalMissingIdException exp)
         {
-            throw new BO.BlMissingEntityException("product des not exsist",exp); //לשנות לסוג אקספשיון הנדרש
+            throw new BO.BlMissingEntityException("product des not exsist",exp); 
         }
         BO.Product bopro = new()
         {
@@ -135,7 +131,6 @@ internal class Product:IProduct
         };
         return bopro;
     }
-
     /// <summary>
     /// Product details request (for buyer screen - from the catalog)
     /// </summary>
@@ -171,11 +166,9 @@ internal class Product:IProduct
             Name = p?.Name??"",
             Price = p?.Price??0,
             isStock = p?.InStock > 0 ,
-            AmountCart = amount ,
         };
         return proi;
     }
-
     /// <summary>
     /// Update product data (for admin screen)
     /// </summary>

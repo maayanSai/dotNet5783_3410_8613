@@ -1,5 +1,9 @@
 ﻿namespace BlApi;
 using BO;
+
+/// <summary>
+/// interface IOrder
+/// </summary>
 public interface IOrder
 {
     /// <summary>

@@ -20,11 +20,10 @@ internal class Order : IOrder
             ID = order?.ID ?? throw new BO.BlNullPropertyException("missing order id"),
             CustomerName = order?.CustomerName ?? " ",
             Status = GetStatus(order),
-            TotalPrice = Dal.OrderItem?.GetByOrderId(order?.ID ?? 1).Sum(x => x?.Price * x?.Amount) ,//alredy cheked id isnot null
+            TotalPrice = Dal.OrderItem?.GetByOrderId(order?.ID ?? 1).Sum(x => x?.Price * x?.Amount),//alredy cheked id isnot null
             Amount = Dal.OrderItem?.GetByOrderId(order?.ID ?? 1).Count() ?? 0,
         });
     }
-
     /// <summary>
     /// A private helper function, that returns the state of the order 
     /// </summary>
@@ -88,6 +87,77 @@ internal class Order : IOrder
         };
     }
     /// <summary>
+    /// Order shipping update (Admin order management screen)
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    /// <exception cref="BO.Exceptions.BODoesNotExistException"></exception>
+    public BO.Order? Updateshipping(int id)
+    {
+        DO.Order order;
+        if (id < 0)
+            throw new BO.BlInCorrectException("id is negative");
+        try
+        {
+            order = Dal.Order.GetById(id);
+            if (order.ShipDate != null) // Check if an order exists, and has not yet been sent
+            {
+                Dal.Order.Update(new DO.Order
+                {
+                    ID = id,
+                    CustomerAdress = order.CustomerAdress,
+                    CustomerEmail = order.CustomerEmail,
+                    CustomerName = order.CustomerName,
+                    OrderDate = order.OrderDate,
+                    ShipDate = DateTime.Now,
+                    DeliveryrDate = order.DeliveryrDate,
+                });
+            }
+            return this.ItemOrder(id);
+        }
+        catch (DO.DalMissingIdException exp)
+        {
+            throw new BO.BlMissingEntityException("The order does not exist", exp);
+        }
+    }
+    /// <summary>
+    /// Order Delivery Update (Admin Order Management Screen)
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    /// <exception cref="BO.Exceptions.BODoesNotExistException"></exception>
+    public BO.Order? Updatesupply(int id)
+    {
+        DO.Order order;
+        if (id < 0)
+            throw new BO.BlInCorrectException("id is negative");
+        try
+        {
+            order = Dal.Order.GetById(id);
+            // Check if an order exists, already sent but not yet delivered
+            if (order.ShipDate != DateTime.MinValue && order.DeliveryrDate == DateTime.MinValue)
+            {
+                Dal.Order.Update(new DO.Order
+                {
+                    ID = id,
+                    CustomerAdress = order.CustomerAdress,
+                    CustomerEmail = order.CustomerEmail,
+                    CustomerName = order.CustomerName,
+                    OrderDate = order.OrderDate,
+                    ShipDate = order.ShipDate,
+                    DeliveryrDate = DateTime.Now,
+                });
+            }
+            return this.ItemOrder(id);
+        }
+        catch (DO.DalMissingIdException exp)
+        {
+            throw new BO.BlMissingEntityException("The order does not exist", exp);
+        }
+    }
+    /// <summary>
     /// Order Tracking (Manager Order Management Screen)
     /// </summary>
     /// <param name="id"></param>
@@ -125,78 +195,5 @@ internal class Order : IOrder
             Tracking = tracking,
         };
         return ortk;
-    }
-
-    /// <summary>
-    /// Order shipping update (Admin order management screen)
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    /// <exception cref="Exception"></exception>
-    /// <exception cref="BO.Exceptions.BODoesNotExistException"></exception>
-    public BO.Order? Updateshipping(int id)
-    {
-        DO.Order order;
-        if (id < 0)
-            throw new BO.BlInCorrectException("id is negative");
-        try
-        {
-            order = Dal.Order.GetById(id);
-            if (order.ShipDate != null) // Check if an order exists, and has not yet been sent
-            {
-                Dal.Order.Update(new DO.Order
-                {
-                    ID = id,
-                    CustomerAdress = order.CustomerAdress,
-                    CustomerEmail = order.CustomerEmail,
-                    CustomerName = order.CustomerName,
-                    OrderDate = order.OrderDate,
-                    ShipDate = DateTime.Now,
-                    DeliveryrDate = order.DeliveryrDate,
-                });
-            }
-            return this.ItemOrder(id);
-        }
-        catch (DO.DalMissingIdException exp)
-        {
-            throw new BO.BlMissingEntityException("The order does not exist", exp);
-        }
-    }
-
-    /// <summary>
-    /// Order Delivery Update (Admin Order Management Screen)
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    /// <exception cref="Exception"></exception>
-    /// <exception cref="BO.Exceptions.BODoesNotExistException"></exception>
-    public BO.Order? Updatesupply(int id)
-    {
-        DO.Order order;
-        if (id < 0)
-            throw new BO.BlInCorrectException("id is negative");
-        try
-        {
-            order = Dal.Order.GetById(id);
-            // Check if an order exists, already sent but not yet delivered
-            if (order.ShipDate != DateTime.MinValue && order.DeliveryrDate == DateTime.MinValue)
-            {
-                Dal.Order.Update(new DO.Order
-                {
-                    ID = id,
-                    CustomerAdress = order.CustomerAdress,
-                    CustomerEmail = order.CustomerEmail,
-                    CustomerName = order.CustomerName,
-                    OrderDate = order.OrderDate,
-                    ShipDate = order.ShipDate,
-                    DeliveryrDate = DateTime.Now,
-                });
-            }
-            return this.ItemOrder(id);
-        }
-        catch (DO.DalMissingIdException exp)
-        {
-            throw new BO.BlMissingEntityException("The order does not exist", exp);
-        }
     }
 }

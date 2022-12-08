@@ -1,5 +1,9 @@
 ﻿namespace BlImplementation;
 using BlApi;
+
+/// <summary>
+/// Realization of BL
+/// </summary>
 sealed public class Bl: IBl
 {
     DalApi.IDal Dal = new Dal.DalList();
