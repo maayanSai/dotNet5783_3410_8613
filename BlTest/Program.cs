@@ -208,13 +208,13 @@ public class Program
             }
             catch (BO.BlAlreadyExistEntityException a)
             {
-                Console.WriteLine(a);
+                Console.WriteLine(a.Message+" "+a.InnerException.ToString());
             }
-            catch (BO.BlIncorrectDatesException a) { Console.WriteLine(a); }
-            catch (BO.BlInCorrectException a) { Console.WriteLine(a); }
-            catch (BO.BlMissingEntityException a) { Console.WriteLine(a); }
-            catch (BO.BlNullPropertyException a) { Console.WriteLine(a); }
-            catch (BO.BlWorngCategoryException a) { Console.WriteLine(a); }
+            catch (BO.BlIncorrectDatesException a) { Console.WriteLine(a.Message); }
+            catch (BO.BlInCorrectException a) { Console.WriteLine(a.Message); }
+            catch (BO.BlMissingEntityException a) { Console.WriteLine(a.Message+""+a.InnerException.ToString()); }
+            catch (BO.BlNullPropertyException a) { Console.WriteLine(a.Message); }
+            catch (BO.BlWorngCategoryException a) { Console.WriteLine(a.Message); }
 
 
             Console.WriteLine("Choose an entity:");

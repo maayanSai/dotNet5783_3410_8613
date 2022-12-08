@@ -18,7 +18,7 @@ public class BlAlreadyExistEntityException : Exception
 public class BlMissingEntityException : Exception
 {
 
-    public BlMissingEntityException(string message, DO.DalMissingIdException innerException) : base(message, innerException)
+    public BlMissingEntityException(string message, Exception innerException) : base(message, innerException)
     {
 
     }
@@ -38,12 +38,7 @@ public class BlMissingEntityException : Exception
 public class BlNullPropertyException : Exception
 {
     public BlNullPropertyException(string message) : base(message) { }
-    public override string ToString()
-    {
-
-        return "null property" + base.ToString();
-
-    }
+    
 }
 
 
@@ -54,12 +49,7 @@ public class BlNullPropertyException : Exception
 public class BlWorngCategoryException : Exception
 {
     public BlWorngCategoryException(string message) : base(message) { }
-    public override string ToString()
-    {
-
-        return "Wrong catefory" + base.ToString();
-
-    }
+  
 }
 
 /// <summary>
@@ -69,12 +59,7 @@ public class BlWorngCategoryException : Exception
 public class BlIncorrectDatesException : Exception
 {
     public BlIncorrectDatesException(string message) : base(message) { }
-    public override string ToString()
-    {
 
-        return "date exeption" + base.ToString();//$"{Message}";
-
-    }
 }
 
 

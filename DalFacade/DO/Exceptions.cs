@@ -59,7 +59,7 @@ public class DalAlreadyExistsException : Exception
 
     public override string ToString()
     {
-        return EntityName+"whith the id: "+EntityId+" is allredy exist";
+        return EntityName +"whith the id: " +EntityId+" is allredy exist";
 
     }
 }
