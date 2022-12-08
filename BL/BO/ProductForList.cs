@@ -12,7 +12,7 @@ public class ProductForList
     /// <summary>
     /// product name
     /// </summary>
-    public string ?Name { set; get; }
+    public string? Name { set; get; }
     /// <summary>
     /// product price
     /// </summary>
@@ -20,7 +20,7 @@ public class ProductForList
     /// <summary>
     /// The kind of the product
     /// </summary>
-    public Category Category { get; set; } 
+    public Category Category { get; set; }
     /// <summary>
     /// An action that prints the orderItem
     /// </summary>

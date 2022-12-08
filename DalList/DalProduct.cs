@@ -16,7 +16,7 @@ internal class DalProduct : IProduct
     public int Add(Product p)
     {
         if ((DataSource.s_productsList.Exists(x => x?.ID == p.ID)))
-            throw new DalAlreadyExistsException(p.ID,"product");
+            throw new DalAlreadyExistsException(p.ID, "product");
         else
         {
             DataSource.s_productsList.Add(p);
@@ -29,8 +29,8 @@ internal class DalProduct : IProduct
     /// <param name="id"></param>
     /// <returns></returns>
     /// <exception cref="DalMissingIdException"></exception>
-    public Product GetById(int id)=> DataSource.s_productsList.Find(x => x?.ID == id)
-        ?? throw new DalMissingIdException(id,"product");
+    public Product GetById(int id) => DataSource.s_productsList.Find(x => x?.ID == id)
+        ?? throw new DalMissingIdException(id, "product");
     /// <summary>
     /// Returns a collection of products
     /// </summary>
@@ -48,7 +48,7 @@ internal class DalProduct : IProduct
     public void Delete(int id)
     {
         if (DataSource.s_productsList.RemoveAll(x => x?.ID == id)==0)
-            throw new DalMissingIdException(id,"product");
+            throw new DalMissingIdException(id, "product");
     }
     /// <summary>
     /// Product update

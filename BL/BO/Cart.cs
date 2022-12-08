@@ -20,7 +20,7 @@ public class Cart
     /// <summary>
     /// A collection of items
     /// </summary>
-    public List<BO.OrderItem>?  Items { set; get; }
+    public List<BO.OrderItem>? Items { set; get; }
     /// <summary>
     /// Final price of a shopping basket
     /// </summary>

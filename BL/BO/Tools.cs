@@ -20,7 +20,7 @@ public static class Tools
             str += "\n" + item.Name + ": ";
             if (item.GetValue(t, null) is IEnumerable<object>)
             {
-                IEnumerable<object> list = (IEnumerable<object>)item.GetValue(obj:t,null);
+                IEnumerable<object> list = (IEnumerable<object>)item.GetValue(obj: t, null);
                 string s = String.Join(" ", list);
                 str+=s;
             }

@@ -26,14 +26,14 @@ internal class DalOrder : IOrder
     /// <returns></returns>
     /// <exception cref="DalMissingIdException"></exception>
     public Order GetById(int id) => DataSource.s_ordersList.Find(x => x?.ID == id)
-        ?? throw new DalMissingIdException(id,"order");
+        ?? throw new DalMissingIdException(id, "order");
     /// <summary>
     /// Returns a collection of orders
     /// </summary>
     /// <returns></returns>
     public IEnumerable<Order?> GetAll()
     {
-        IEnumerable<Order?> ord=DataSource.s_ordersList;
+        IEnumerable<Order?> ord = DataSource.s_ordersList;
         return ord;
     }
     /// <summary>
@@ -44,7 +44,7 @@ internal class DalOrder : IOrder
     public void Delete(int id)
     {
         if (DataSource.s_ordersList.RemoveAll(x => x?.ID == id) == 0)
-            throw new DalMissingIdException(id,"order");
+            throw new DalMissingIdException(id, "order");
     }
     /// <summary>
     /// Update Invitation

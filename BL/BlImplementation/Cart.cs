@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 /// <summary>
 /// Implementation of CART
 /// </summary>
-internal class Cart:ICart
+internal class Cart : ICart
 {
     private static readonly Random _rnd = new();
     DalApi.IDal Dal = new Dal.DalList();
@@ -22,11 +22,11 @@ internal class Cart:ICart
     /// <exception cref="Exception"></exception>
     public BO.Cart? Update(BO.Cart cart, int id, int amount)
     {
-        OrderItem ?boOrdi = cart.Items?.FirstOrDefault(x => x.ProductID == id);
+        OrderItem? boOrdi = cart.Items?.FirstOrDefault(x => x.ProductID == id);
         if (boOrdi == null)
             throw new BO.BlMissingEntityException("prodcut  dose not exists in cart");
 
-        if( amount<0)
+        if (amount<0)
             throw new BO.BlInCorrectException("invlavel amount");
         if (amount == 0)
         {
@@ -67,12 +67,12 @@ internal class Cart:ICart
             throw new BO.BlInCorrectException("wrong negative id");
         DO.Product pro;
         try
-        { 
+        {
             pro = Dal.Product.GetById(id);
         }
         catch (DO.DalMissingIdException exp)
         {
-            throw new BO.BlMissingEntityException("the product does not exist",exp);   
+            throw new BO.BlMissingEntityException("the product does not exist", exp);
         }
         BO.OrderItem? boOrderItem = cart.Items?.FirstOrDefault(x => x.ProductID == id);
         if (pro.InStock > 0)
@@ -114,11 +114,11 @@ internal class Cart:ICart
         //All the products exist (according to the ID card, although it is possible that they exist with zero quantity
         try
         {
-            cart.Items?.Exists(x=> Dal.Product.GetById(x.ProductID).ID==x.ProductID);
+            cart.Items?.Exists(x => Dal.Product.GetById(x.ProductID).ID==x.ProductID);
         }
-        catch(DO.DalMissingIdException exp)
+        catch (DO.DalMissingIdException exp)
         {
-            throw new BO.BlMissingEntityException("one of the products in the cart does not exsist",exp);   
+            throw new BO.BlMissingEntityException("one of the products in the cart does not exsist", exp);
         }
         if (cart!.Items!.Exists(x => x.Amount<=0))
             throw new BO.BlInCorrectException("negetive amount");
@@ -126,9 +126,9 @@ internal class Cart:ICart
             throw new BO.BlInCorrectException("therse not enogth instook");
         if (cart.CustomerName==null)
             throw new BO.BlNullPropertyException("missing name");
-        if(cart.CustomerAdress==null)
+        if (cart.CustomerAdress==null)
             throw new BO.BlNullPropertyException("missing adress");
-        if(cart .CustomerEmail==null)
+        if (cart.CustomerEmail==null)
             throw new BO.BlNullPropertyException("missing Email");
         if (!new EmailAddressAttribute().IsValid(cart.CustomerEmail))
             throw new BO.BlInCorrectException("invlavel email");
@@ -143,7 +143,7 @@ internal class Cart:ICart
             OrderDate=DateTime.Now,
             ShipDate=null,
             DeliveryrDate=null,
-            Amount=cart.Items.Select(x => x.Amount).Sum(), 
+            Amount=cart.Items.Select(x => x.Amount).Sum(),
         };
         orderId=Dal.Order.Add(ord); // There is no need to check that there is no exception for adding an order
         foreach (var bordi in cart.Items)
@@ -160,20 +160,20 @@ internal class Cart:ICart
             DO.Product p;
             try
             {
-                 p= Dal.Product.GetById(dOrdi.ProductID);
+                p= Dal.Product.GetById(dOrdi.ProductID);
             }
             catch (DO.DalMissingIdException exp)
             {
-                throw new BO.BlMissingEntityException("The priduct does not exsist",exp);
+                throw new BO.BlMissingEntityException("The priduct does not exsist", exp);
             }
             p.InStock-=dOrdi.Amount;
-            try 
+            try
             {
                 Dal.Product.Update(p);
             }
             catch (DO.DalMissingIdException exp)
             {
-                throw new BO.BlMissingEntityException("the priduct does not exsist",exp);
+                throw new BO.BlMissingEntityException("the priduct does not exsist", exp);
             }
         }
     }

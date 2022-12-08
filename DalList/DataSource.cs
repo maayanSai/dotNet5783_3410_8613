@@ -10,7 +10,7 @@ internal static class DataSource
     /// <summary>
     /// A constructive operation, which initializes the entity arrays
     /// </summary>
-    static DataSource() { s_Initialize(); } 
+    static DataSource() { s_Initialize(); }
     private static readonly Random _rnd = new(); // lottery variable
 
     internal static List<Product?> s_productsList = new(); // An array of orders
@@ -43,7 +43,7 @@ internal static class DataSource
         {"Ayala Coen","aya@gmail.com","Hpalmach 15 Tel-Aviv" },
         {"Maayan Levi","maayan@gmail.com","Hashikma 12 Or-Yehuda" }
     };
-    
+
     /// <summary>
     /// A function that creates and inserts a new product
     /// </summary>
@@ -99,16 +99,22 @@ internal static class DataSource
         for (int i = 0; i < 20; i++)
         {
             x = _rnd.Next(1, 5);
-            OrderItem oi = new ();
+            OrderItem oi = new();
             for (int j = 0; j < x; j++)
             {
                 oi.ID = s_NextOrderItemNumber;
                 oi.Amount = _rnd.Next(1, 4);
-                oi.ProductID = 100000 + _rnd.Next(0, 20);
-                oi.OrderID = 100000 + i;
+                oi.OrderID = 1000 + i;
+                do
+                {
+                    oi.ProductID = 100000 + _rnd.Next(0, 20);
+                } while (s_orderItemsList.Exists(p => p?.ProductID== oi.ProductID && p?.OrderID ==oi.OrderID));
+                
+                
                 oi.Price = _rnd.Next(500, 5000);
+                s_orderItemsList.Add(oi);
             }
-            s_orderItemsList.Add(oi);
+          
         }
     }
 

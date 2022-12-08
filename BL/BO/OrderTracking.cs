@@ -16,7 +16,7 @@ public class OrderTracking
     /// <summary>
     /// List of pairs (date, package progress description)
     /// </summary>
-    public List<Tuple<DateTime?,string?> >? Tracking { set; get; }
+    public List<Tuple<DateTime?, string?>>? Tracking { set; get; }
     /// <summary>
     /// An action that prints the orderItem
     /// </summary>
