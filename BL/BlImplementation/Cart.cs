@@ -180,8 +180,8 @@ internal class Cart:ICart
         }
 
 
-        //cart.Items.Clear();
-        //cart.TotalPrice=0;
+        cart.Items.Clear();
+        cart.TotalPrice=0;
 
     }
  
