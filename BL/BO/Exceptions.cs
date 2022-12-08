@@ -1,13 +1,12 @@
 ﻿namespace BO;
 
+/// <summary>
+/// the Entity is Already Exist
+/// </summary>
 public class BlAlreadyExistEntityException : Exception
 {
-    public BlAlreadyExistEntityException(string message) : base(message)
-    {
-    }
-    public BlAlreadyExistEntityException(string message, Exception innerException) : base(message, innerException)
-    {
-    }
+    public BlAlreadyExistEntityException(string message) : base(message) { }
+    public BlAlreadyExistEntityException(string message, Exception innerException) : base(message, innerException) { }
     public override string ToString() => $"Entity is already exist." + base.ToString();
 }
 
@@ -17,18 +16,9 @@ public class BlAlreadyExistEntityException : Exception
 [Serializable]
 public class BlMissingEntityException : Exception
 {
-
-    public BlMissingEntityException(string message, Exception innerException) : base(message, innerException)
-    {
-
-    }
+    public BlMissingEntityException(string message, Exception innerException) : base(message, innerException) { }
     public BlMissingEntityException(string message) : base(message) { }
-
-    public override string ToString()
-    {
-        return base.ToString() + "missing entitiy";
-
-    }
+    public override string ToString()=> base.ToString() + "missing entitiy";
 }
 
 /// <summary>
@@ -38,7 +28,6 @@ public class BlMissingEntityException : Exception
 public class BlNullPropertyException : Exception
 {
     public BlNullPropertyException(string message) : base(message) { }
-    
 }
 
 /// <summary>
@@ -48,7 +37,6 @@ public class BlNullPropertyException : Exception
 public class BlWorngCategoryException : Exception
 {
     public BlWorngCategoryException(string message) : base(message) { }
-  
 }
 
 /// <summary>
@@ -58,7 +46,6 @@ public class BlWorngCategoryException : Exception
 public class BlIncorrectDatesException : Exception
 {
     public BlIncorrectDatesException(string message) : base(message) { }
-
 }
 
 /// <summary>

@@ -1,6 +1,7 @@
 ﻿namespace BlTest;
 using BlApi;
 using BlImplementation;
+using BO;
 
 public class Program
 {
@@ -211,10 +212,9 @@ public class Program
             }
             catch (BO.BlIncorrectDatesException a) { Console.WriteLine(a.Message); }
             catch (BO.BlInCorrectException a) { Console.WriteLine(a.Message); }
-            catch (BO.BlMissingEntityException a) { Console.WriteLine(a.Message+""+a.InnerException.ToString()); }
+            catch (BO.BlMissingEntityException a) { Console.WriteLine(a.Message+" "+a.InnerException.ToString()); }
             catch (BO.BlNullPropertyException a) { Console.WriteLine(a.Message); }
             catch (BO.BlWorngCategoryException a) { Console.WriteLine(a.Message); }
-
 
             Console.WriteLine("Choose an entity:");
             Console.WriteLine("1: to product");
