@@ -2,7 +2,6 @@
 using BO;
 using BlApi;
 using BlImplementation;
-using System.Reflection.Metadata;
 
 public class Program
 {
@@ -14,10 +13,10 @@ public class Program
         double price;
         int chooseMenu, chooseEntity; // function and entity selection
         Console.WriteLine("Choose an entity:");
+        Console.WriteLine("1: to product");
+        Console.WriteLine("2: to order");
+        Console.WriteLine("3: to cart");
         Console.WriteLine("0: to exit");
-        Console.WriteLine("1: to order");
-        Console.WriteLine("2: to cart");
-        Console.WriteLine("3: to product");
         while (!int.TryParse(Console.ReadLine(), out chooseEntity)) // absorption of an entity
             Console.Write("Please enter a number (your choice):");
         Console.WriteLine();
@@ -27,95 +26,7 @@ public class Program
             {
                 switch (chooseEntity)
                 {
-                    case 1: // order
-                        Console.WriteLine("Choose one of the following:");
-                        Console.WriteLine("1: to get all orders");
-                        Console.WriteLine("2: to get items order");
-                        Console.WriteLine("3: to Update shipping");
-                        Console.WriteLine("4: to Update supply");
-                        Console.WriteLine("5: to tracking");
-                        Console.WriteLine("6: to exit");
-                        while (!int.TryParse(Console.ReadLine(), out chooseMenu)) // We will take a function number
-                            Console.Write("Please enter a number (your choice):");
-                        Console.WriteLine();
-                        switch (chooseMenu)
-                        {
-                            case 1: // get all orders
-                                var list = s_bl.Order.GetOrders();
-                                foreach (var item in list)
-                                    Console.WriteLine(item);
-                                Console.WriteLine();
-                                break;
-                            case 2: // get items order
-                                do { Console.WriteLine("enter id of order"); }
-                                while (!int.TryParse(Console.ReadLine(), out id));
-                                BO.Order o = s_bl.Order.ItemOrder(id);
-                                Console.WriteLine(o);
-                                Console.WriteLine();
-                                break;
-                            case 3: // Update shipping
-                                do { Console.WriteLine("enter id of order"); }
-                                while (!int.TryParse(Console.ReadLine(), out id));
-                                Console.WriteLine(s_bl.Order.Updateshipping(id));
-                                Console.WriteLine();
-                                break;
-                            case 4: // Update supply
-                                do { Console.WriteLine("enter id of order"); }
-                                while (!int.TryParse(Console.ReadLine(), out id));
-                                Console.WriteLine(s_bl.Order.Updatesupply(id));
-                                Console.WriteLine();
-                                break;
-                            case 5: // tracking
-                                do { Console.WriteLine("enter id of order"); }
-                                while (!int.TryParse(Console.ReadLine(), out id));
-                                Console.WriteLine(s_bl.Order.Tracking(id));
-                                Console.WriteLine();
-                                break;
-                            case 6: // exit
-                                break;
-                            default:
-                                throw new Exception("the choice has not correct");
-                        }
-                        break;
-                    case 2: // cart
-                        Console.WriteLine("Choose one of the following:");
-                        Console.WriteLine("1: to Add");
-                        Console.WriteLine("2: Update");
-                        Console.WriteLine("3: Make an order");
-                        Console.WriteLine("4: to exit");
-                        while (!int.TryParse(Console.ReadLine(), out chooseMenu)) // We will take a function number
-                            Console.Write("Please enter a number (your choice):");
-                        Console.WriteLine();
-                        switch (chooseMenu)
-                        {
-                            case 1: // Add
-                                int idProduct;
-                                // Cart c = new();
-                                do { Console.WriteLine("enter id of product"); }
-                                while (!int.TryParse(Console.ReadLine(), out idProduct));
-                                Console.WriteLine(s_bl.Cart.Add(s_c, idProduct));
-                                Console.WriteLine();
-                                break;
-                            case 2: // Update
-                                int idProduct1;
-                                do { Console.WriteLine("enter id of product"); }
-                                while (!int.TryParse(Console.ReadLine(), out idProduct1));
-                                Console.WriteLine("enter amount of product");
-                                while (!int.TryParse(Console.ReadLine(), out amount)) ;
-                                Console.WriteLine(s_bl.Cart.Update(s_c, idProduct1, amount));
-                                Console.WriteLine();
-                                break;
-                            case 3: // Make an order
-                                s_bl.Cart.MakeAnOrder(s_c);
-                                Console.WriteLine();
-                                break;
-                            case 4: // exit
-                                break;
-                            default:
-                                throw new Exception("the choice has not correct");
-                        }
-                        break;
-                    case 3: // product
+                    case 1: // product
                         Console.WriteLine("Choose one of the following:");
                         Console.WriteLine("1: to Get products");
                         Console.WriteLine("2: to get product by id");
@@ -201,16 +112,101 @@ public class Program
                                 throw new Exception("the choice has not correct");
                         }
                         break;
+                    case 2: // order
+                        Console.WriteLine("Choose one of the following:");
+                        Console.WriteLine("1: to get all orders");
+                        Console.WriteLine("2: to get items order");
+                        Console.WriteLine("3: to Update shipping");
+                        Console.WriteLine("4: to Update supply");
+                        Console.WriteLine("5: to tracking");
+                        Console.WriteLine("6: to exit");
+                        while (!int.TryParse(Console.ReadLine(), out chooseMenu)) // We will take a function number
+                            Console.Write("Please enter a number (your choice):");
+                        Console.WriteLine();
+                        switch (chooseMenu)
+                        {
+                            case 1: // get all orders
+                                var list = s_bl.Order.GetOrders();
+                                foreach (var item in list)
+                                    Console.WriteLine(item);
+                                Console.WriteLine();
+                                break;
+                            case 2: // get items order
+                                do { Console.WriteLine("enter id of order"); }
+                                while (!int.TryParse(Console.ReadLine(), out id));
+                                BO.Order o = s_bl.Order.ItemOrder(id);
+                                Console.WriteLine(o);
+                                Console.WriteLine();
+                                break;
+                            case 3: // Update shipping
+                                do { Console.WriteLine("enter id of order"); }
+                                while (!int.TryParse(Console.ReadLine(), out id));
+                                Console.WriteLine(s_bl.Order.Updateshipping(id));
+                                Console.WriteLine();
+                                break;
+                            case 4: // Update supply
+                                do { Console.WriteLine("enter id of order"); }
+                                while (!int.TryParse(Console.ReadLine(), out id));
+                                Console.WriteLine(s_bl.Order.Updatesupply(id));
+                                Console.WriteLine();
+                                break;
+                            case 5: // tracking
+                                do { Console.WriteLine("enter id of order"); }
+                                while (!int.TryParse(Console.ReadLine(), out id));
+                                Console.WriteLine(s_bl.Order.Tracking(id));
+                                Console.WriteLine();
+                                break;
+                            case 6: // exit
+                                break;
+                            default:
+                                throw new Exception("the choice has not correct");
+                        }
+                        break;
+                    case 3: // cart
+                        Console.WriteLine("Choose one of the following:");
+                        Console.WriteLine("1: to Add");
+                        Console.WriteLine("2: Update");
+                        Console.WriteLine("3: Make an order");
+                        Console.WriteLine("4: to exit");
+                        while (!int.TryParse(Console.ReadLine(), out chooseMenu)) // We will take a function number
+                            Console.Write("Please enter a number (your choice):");
+                        Console.WriteLine();
+                        switch (chooseMenu)
+                        {
+                            case 1: // Add
+                                int idProduct;
+                                // Cart c = new();
+                                do { Console.WriteLine("enter id of product"); }
+                                while (!int.TryParse(Console.ReadLine(), out idProduct));
+                                Console.WriteLine(s_bl.Cart.Add(s_c, idProduct));
+                                Console.WriteLine();
+                                break;
+                            case 2: // Update
+                                int idProduct1;
+                                do { Console.WriteLine("enter id of product"); }
+                                while (!int.TryParse(Console.ReadLine(), out idProduct1));
+                                Console.WriteLine("enter amount of product");
+                                while (!int.TryParse(Console.ReadLine(), out amount)) ;
+                                Console.WriteLine(s_bl.Cart.Update(s_c, idProduct1, amount));
+                                Console.WriteLine();
+                                break;
+                            case 3: // Make an order
+                                s_bl.Cart.MakeAnOrder(s_c);
+                                Console.WriteLine();
+                                break;
+                            case 4: // exit
+                                break;
+                            default:
+                                throw new Exception("the choice has not correct");
+                        }
+                        break;
                     case 0:
                         break;
                     default:
                         throw new Exception("the choice has not correct");
                 }
             }
-            catch (BO.BlAlreadyExistEntityException a) 
-            {
-                Console.WriteLine(a);
-            }
+            catch (BO.BlAlreadyExistEntityException a) { Console.WriteLine(a); }
             catch (BO.BlIncorrectDatesException a) { Console.WriteLine(a); }
             catch (BO.BlInCorrectException a) { Console.WriteLine(a); }
             catch (BO.BlMissingEntityException a) { Console.WriteLine(a); }
@@ -218,14 +214,13 @@ public class Program
             catch (BO.BlWorngCategoryException a) { Console.WriteLine(a); }
 
             Console.WriteLine("Choose an entity:");
+            Console.WriteLine("1: to product");
+            Console.WriteLine("2: to order");
+            Console.WriteLine("3: to cart");
             Console.WriteLine("0: to exit");
-            Console.WriteLine("1: to order");
-            Console.WriteLine("2: to cart");
-            Console.WriteLine("3: to product");
             while (!int.TryParse(Console.ReadLine(), out chooseEntity)) // absorption of an entity
                 Console.Write("Please enter a number (your choice):");
             Console.WriteLine();
         }
     }
-
 }

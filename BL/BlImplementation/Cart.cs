@@ -176,11 +176,6 @@ internal class Cart:ICart
                 throw new BO.BlMissingEntityException("the priduct does not exsist",exp);
             }
         }
-
-
-        cart.Items.Clear();
-        cart.TotalPrice=0;
-
     }
 }
 
