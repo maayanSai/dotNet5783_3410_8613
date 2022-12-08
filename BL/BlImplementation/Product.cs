@@ -80,7 +80,7 @@ internal class Product:IProduct
             }
         }
         else
-            throw new BO.BlMissingEntityException("the product is exsist in order/s so that can not be deleated");//לשנות לסוג אקספשיון הנדרש
+            throw new BO.BlAlreadyExistEntityException("the product is exsist in order/s so that can not be deleated");//לשנות לסוג אקספשיון הנדרש
     }
     /// <summary>
     /// Product list request (for manager screen and buyer's catalog screen)

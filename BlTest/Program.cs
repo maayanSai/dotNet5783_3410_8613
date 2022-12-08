@@ -2,8 +2,9 @@
 using BO;
 using BlApi;
 using BlImplementation;
+using System.Reflection.Metadata;
 
- public class Program
+public class Program
 {
     static IBl s_bl = new Bl();
     static Cart s_c  = new() { Items = new List<OrderItem>(), CustomerName = "Ayala", CustomerAdress = "israel 23", CustomerEmail = "ayala@gmail.com" };
@@ -40,8 +41,8 @@ using BlImplementation;
                         switch (chooseMenu)
                         {
                             case 1: // get all orders
-                                var list= s_bl.Order.GetOrders();
-                                foreach(var item in list)
+                                var list = s_bl.Order.GetOrders();
+                                foreach (var item in list)
                                     Console.WriteLine(item);
                                 Console.WriteLine();
                                 break;
@@ -89,9 +90,9 @@ using BlImplementation;
                         {
                             case 1: // Add
                                 int idProduct;
-                               // Cart c = new();
+                                // Cart c = new();
                                 do { Console.WriteLine("enter id of product"); }
-                                while (!int.TryParse(Console.ReadLine(), out idProduct));   
+                                while (!int.TryParse(Console.ReadLine(), out idProduct));
                                 Console.WriteLine(s_bl.Cart.Add(s_c, idProduct));
                                 Console.WriteLine();
                                 break;
@@ -206,10 +207,20 @@ using BlImplementation;
                         throw new Exception("the choice has not correct");
                 }
             }
-            catch (Exception str) // catches the error
+            catch (BO.BlAlreadyExistEntityException a) 
             {
-                Console.WriteLine(str); // prints the error
+                Console.WriteLine(a);
             }
+            catch (BO.BlIncorrectDatesException a) { Console.WriteLine(a); }
+            catch (BO.BlInCorrectException a) { Console.WriteLine(a); }
+            catch (BO.BlMissingEntityException a) { Console.WriteLine(a); }
+            catch (BO.BlNullPropertyException a) { Console.WriteLine(a); }
+            catch (BO.BlWorngCategoryException a) { Console.WriteLine(a); }
+         
+            //catch (Exception str) // catches the error
+            //{
+            //    Console.WriteLine(str); // prints the error
+            //}
             Console.WriteLine("Choose an entity:");
             Console.WriteLine("0: to exit");
             Console.WriteLine("1: to order");

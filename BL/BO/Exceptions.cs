@@ -1,15 +1,15 @@
 ﻿namespace BO;
 
-public class BlAlreadyExistEntityException : Exception
-{
+    public class BlAlreadyExistEntityException : Exception
+    {
     public BlAlreadyExistEntityException(string message) : base(message)
     {
     }
     public BlAlreadyExistEntityException(string message, Exception innerException) : base(message, innerException)
-    {
-    }
+        {
+        }
     public override string ToString() => $"Entity is already exist." + base.ToString();
-}
+    }
 
 /// <summary>
 /// if the entity is missing throw an exception
@@ -17,16 +17,16 @@ public class BlAlreadyExistEntityException : Exception
 [Serializable]
 public class BlMissingEntityException : Exception
 {
-
+   
     public BlMissingEntityException(string message, DO.DalMissingIdException innerException) : base(message, innerException)
     {
-
+       
     }
     public BlMissingEntityException(string message) : base(message) { }
-
+  
     public override string ToString()
     {
-        return base.ToString() + "missing entitiy";
+       return base.ToString() + "missing entitiy";
 
     }
 }
@@ -35,9 +35,9 @@ public class BlMissingEntityException : Exception
 /// if the Property null throw an exception
 /// </summary>
 [Serializable]
-public class BlNullPropertyException : Exception
-{
-    public BlNullPropertyException(string message) : base(message) { }
+    public class BlNullPropertyException : Exception
+    {
+        public BlNullPropertyException(string message) : base(message) { }
     public override string ToString()
     {
 
@@ -91,6 +91,9 @@ public class BlInCorrectException : Exception
 
     }
 }
+
+
+
 
 
 
