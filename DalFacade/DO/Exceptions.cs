@@ -14,7 +14,7 @@ public class DalMissingIdException: Exception
     /// </summary>
     /// <param name="id"></param>
     /// <param name="name"></param>
-    public DalMissingIdException(int id, string name) : base()
+    public DalMissingIdException(int id, string name) : base() { }
     int num;
     string Message;
     public DalMissingIdException(int id, string name,int a=0) : base()

@@ -1,4 +1,8 @@
 ﻿namespace BlApi;
+
+/// <summary>
+/// interface IBl
+/// </summary>
 public interface IBl
 {
     /// <summary>

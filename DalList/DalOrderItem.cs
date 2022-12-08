@@ -66,7 +66,7 @@ internal class DalOrderItem : IOrderItem
     /// <exception cref="DO.DalMissingIdException"></exception>
     public OrderItem? GetByTwoId(int idProduct, int idOrder)
     {
-        IEnumerable<OrderItem?> ordreit =DataSource.OrderItemsList.Where(x => x?.OrderID == idOrder && x?.ProductID == idProduct);
+        IEnumerable<OrderItem?> ordreit =DataSource.s_orderItemsList.Where(x => x?.OrderID == idOrder && x?.ProductID == idProduct);
         ordreit.ToList();
         if (!ordreit.Any())
             throw new DO.DalMissingIdException(idProduct, idOrder, "Order item", "the order item which has the profuct id and the order id that you asked for does not exsist");   
