@@ -216,11 +216,7 @@ public class Program
             catch (BO.BlMissingEntityException a) { Console.WriteLine(a); }
             catch (BO.BlNullPropertyException a) { Console.WriteLine(a); }
             catch (BO.BlWorngCategoryException a) { Console.WriteLine(a); }
-         
-            //catch (Exception str) // catches the error
-            //{
-            //    Console.WriteLine(str); // prints the error
-            //}
+
             Console.WriteLine("Choose an entity:");
             Console.WriteLine("0: to exit");
             Console.WriteLine("1: to order");
