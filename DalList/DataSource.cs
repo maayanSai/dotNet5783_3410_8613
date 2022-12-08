@@ -75,7 +75,7 @@ internal static class DataSource
             int x = _rnd.Next(3);
             order = new()
             {
-                ID = s_nextOrderNumber,
+                ID = s_NextOrderNumber,
                 CustomerName = s_orderNameEmailAdress[x, 0],
                 CustomerEmail = s_orderNameEmailAdress[x, 1],
                 CustomerAdress = s_orderNameEmailAdress[x, 2],
