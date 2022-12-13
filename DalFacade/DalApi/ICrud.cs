@@ -36,7 +36,8 @@ public interface ICrud<T> where T : struct
     /// A request to return all instances of an entity
     /// </summary>
     /// <returns></returns>
-    IEnumerable<T?> GetAll(Func<T?, bool>? f=null);
+    IEnumerable<T?> GetAll(Func<T?, bool>? filter=null);
+    T GetTermsOf(Func<T?, bool>? filter);
 }
 
 

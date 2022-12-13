@@ -65,4 +65,10 @@ internal class DalProduct : IProduct
         Delete(p.ID); // if not found - exception is thrown from this method
         DataSource.s_productsList.Add(p);
     }
+
+    public Product GetTermsOf(Func<Product?, bool>? filter)
+    {
+        return DataSource.s_productsList.First(x => filter(x)?? throw new DO.)
+       ?? throw new DalMissingIdException(id, "order item");
+    }
 }

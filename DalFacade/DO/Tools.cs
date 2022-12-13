@@ -15,18 +15,18 @@ public static class Tools
     public static string ToStringProperty<T>(this T t)
     {
         string str = " ";
-        foreach (PropertyInfo item in t.GetType().GetProperties())
+        foreach (PropertyInfo item in t?.GetType().GetProperties())
         {
             str += "\n" + item.Name + ": ";
             if (item.GetValue(t, null) is IEnumerable<object>)
             {
                 IEnumerable<object> list = (IEnumerable<object>)item.GetValue(obj: t, null);
                 string s = String.Join(" ", list);
-                str+=s;
+                str += s;
             }
             else
-                str+=item.GetValue(t, null);
+                str += item.GetValue(t, null);
         }
-        return str+"\n";
+        return str + "\n";
     }
 }

@@ -1,7 +1,6 @@
 ﻿namespace Dal;
 using DalApi;
 using DO;
-using System.Linq.Expressions;
 
 /// <summary>
 /// Fulfillment of an order
@@ -63,6 +62,11 @@ internal class DalOrder : IOrder
     {
         Delete(ord.ID); // if not found - exception is thrown from this method
         DataSource.s_ordersList.Add(ord);
+    }
+    public Order GetTermsOf(Func<Order?, bool>? filter)
+    {
+      return DataSource.s_ordersList.First(x => filter(x)==true )
+    ?? throw new DalMissingIdException(id, "order");
     }
 }
 

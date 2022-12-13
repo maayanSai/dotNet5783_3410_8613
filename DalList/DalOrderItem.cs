@@ -92,4 +92,9 @@ internal class DalOrderItem : IOrderItem
 
         return ordi;
     }
+    public OrderItem GetTermsOf(Func<OrderItem?, bool>? filter)
+    {
+         return DataSource.s_orderItemsList.First(x => filter(x) ?? )
+        ?? throw new DalMissingIdException(id, "order item");
+    }
 }
