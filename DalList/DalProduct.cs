@@ -35,9 +35,15 @@ internal class DalProduct : IProduct
     /// Returns a collection of products
     /// </summary>
     /// <returns></returns>
-    public IEnumerable<Product?> GetAll()
+    public IEnumerable<Product?> GetAll(Func<Product?, bool>? f)
     {
         IEnumerable<Product?> prod = (DataSource.s_productsList);
+        if (f != null)
+        {
+            var pr = from Product? item in prod
+            where f(item)
+            select item;
+        }
         return prod;
     }
     /// <summary>

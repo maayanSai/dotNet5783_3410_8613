@@ -16,11 +16,11 @@ public class OrderForList
     /// <summary>
     /// Order status
     /// </summary>
-    public OrderStatus Status { set; get; }
+    public OrderStatus? Status { set; get; }
     /// <summary>
     /// total price
     /// </summary>
-    public double? TotalPrice { set; get; }
+    public double TotalPrice { set; get; }
     /// <summary>
     /// amount of items
     /// </summary>

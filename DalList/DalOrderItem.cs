@@ -4,6 +4,7 @@ using DO;
 using System.Collections.Generic;
 using System.Data;
 
+
 /// <summary>
 /// Implementing the functions of order details
 /// </summary>
@@ -32,10 +33,15 @@ internal class DalOrderItem : IOrderItem
     /// Returns a collection of items
     /// </summary>
     /// <returns></returns>
-    public IEnumerable<OrderItem?> GetAll()
-    {
-        IEnumerable<OrderItem?> orderitemcolleption;
-        orderitemcolleption=DataSource.s_orderItemsList;
+    public IEnumerable<OrderItem?> GetAll(Func<OrderItem?, bool>? f)
+    { 
+        IEnumerable<OrderItem?> orderitemcolleption = DataSource.s_orderItemsList;
+        if (f != null)
+        {
+            var oi=from OrderItem? item in orderitemcolleption
+            where f(item)
+            select item;
+        }  
         return orderitemcolleption;
     }
     /// <summary>

@@ -13,25 +13,21 @@ internal class Order : IOrder
     /// </summary>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    public IEnumerable<BO.OrderForList?> GetOrders()
+    public IEnumerable<BO.OrderForList> GetOrders()
     {
         return Dal.Order.GetAll().Select(order =>
         {
-            var items = Dal.OrderItem?.GetByOrderId(order?.ID??1);
+            var items = Dal.OrderItem.GetByOrderId(order?.ID ?? throw new BO.BlNullPropertyException("missing order id"));
             return new BO.OrderForList
             {
-                ID = order?.ID ?? throw new BO.BlNullPropertyException("missing order id"),
+                ID = order?.ID?? throw new BO.BlNullPropertyException("missing order id"),
                 CustomerName = order?.CustomerName ?? " ",
                 Status = GetStatus(order),
-                TotalPrice = items.Sum(x => x?.Price * x?.Amount),//alredy cheked id isnot null
-                Amount =   items.Count(),//!!
+                TotalPrice = items.Sum(x => x?.Price * x?.Amount ?? 0),//alredy cheked id isnot null
+                Amount =items.Count(),
             };
         });
-
     }
-
-
-
 
 /// <summary>
 /// A private helper function, that returns the state of the order 
@@ -92,7 +88,7 @@ public BO.Order ItemOrder(int id)
         DeliveryrDate = orderD.DeliveryrDate,
         Status = GetStatus(orderD),
         Items = items,
-        TotalPrice = items!.Sum(x => x.Totalprice),
+        TotalPrice = items.Sum(x => x.Totalprice),
     };
 }
 /// <summary>

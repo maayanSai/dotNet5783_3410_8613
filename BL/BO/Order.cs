@@ -24,7 +24,7 @@ public class Order
     /// <summary>
     /// Order status
     /// </summary>
-    public OrderStatus Status { set; get; }
+    public OrderStatus? Status { set; get; }
     /// <summary>
     /// Time of placing the order   
     /// </summary>
@@ -44,7 +44,7 @@ public class Order
     /// <summary>
     /// A collection of items
     /// </summary>
-    public List<OrderItem>? Items { set; get; }
+    public List<OrderItem> Items { set; get; }
     /// <summary>
     /// To String Property
     /// </summary>

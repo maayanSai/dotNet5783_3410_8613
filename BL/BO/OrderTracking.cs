@@ -12,7 +12,7 @@ public class OrderTracking
     /// <summary>
     /// Order status
     /// </summary>
-    public OrderStatus Status { set; get; }
+    public OrderStatus? Status { set; get; }
     /// <summary>
     /// List of pairs (date, package progress description)
     /// </summary>

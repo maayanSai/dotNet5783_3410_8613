@@ -2,11 +2,10 @@
 using BlApi;
 using BlImplementation;
 using BO;
-
 public class Program
 {
     static IBl s_bl = new Bl();
-    static Cart s_c = new() { Items = new List<OrderItem>(), CustomerName = "Ayala", CustomerAdress = "israel 23", CustomerEmail = "ayala@gmail.com" };
+    static Cart s_c = new() { Items = new List<OrderItem?>(), CustomerName = "Ayala", CustomerAdress = "israel 23", CustomerEmail = "ayala@gmail.com" };
     static void Main()
     {
         int id, amount, stock;
@@ -208,11 +207,11 @@ public class Program
             }
             catch (BO.BlAlreadyExistEntityException a)
             {
-                Console.WriteLine(a.Message+" "+a.InnerException.ToString());
+                Console.WriteLine(a.Message+" "+a.InnerException?.ToString());
             }
             catch (BO.BlIncorrectDatesException a) { Console.WriteLine(a.Message); }
             catch (BO.BlInCorrectException a) { Console.WriteLine(a.Message); }
-            catch (BO.BlMissingEntityException a) { Console.WriteLine(a.Message+" "+a.InnerException.ToString()); }
+            catch (BO.BlMissingEntityException a) { Console.WriteLine(a.Message+" "+a.InnerException?.ToString()); }
             catch (BO.BlNullPropertyException a) { Console.WriteLine(a.Message); }
             catch (BO.BlWorngCategoryException a) { Console.WriteLine(a.Message); }
 

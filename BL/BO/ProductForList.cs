@@ -20,7 +20,7 @@ public class ProductForList
     /// <summary>
     /// The kind of the product
     /// </summary>
-    public Category Category { get; set; }
+    public Category? Category { get; set; }
     /// <summary>
     /// An action that prints the orderItem
     /// </summary>

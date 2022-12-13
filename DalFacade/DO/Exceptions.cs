@@ -9,7 +9,7 @@ public class DalMissingIdException : Exception
     public int? Entity2Id;
     public string EntityName;
     int num;
-    string Message1;
+    string? Message1;
     /// <summary>
     /// Missing Id
     /// </summary>

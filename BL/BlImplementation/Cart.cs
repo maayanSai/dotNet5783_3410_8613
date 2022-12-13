@@ -1,6 +1,5 @@
 ﻿namespace BlImplementation;
 using BlApi;
-using BO;
 using System.ComponentModel.DataAnnotations;
 
 /// <summary>
@@ -20,12 +19,11 @@ internal class Cart : ICart
     /// <returns></returns>
     /// <exception cref="BO.Exceptions.BlInvalidInputException"></exception>
     /// <exception cref="Exception"></exception>
-    public BO.Cart? Update(BO.Cart cart, int id, int amount)
+    public BO.Cart Update(BO.Cart cart, int id, int amount)
     {
-        OrderItem? boOrdi = cart.Items?.FirstOrDefault(x => x.ProductID == id);
+        BO.OrderItem? boOrdi = cart.Items?.FirstOrDefault(x => x?.ProductID == id);
         if (boOrdi == null)
             throw new BO.BlMissingEntityException("prodcut  dose not exists in cart");
-
         if (amount<0)
             throw new BO.BlInCorrectException("invlavel amount");
         if (amount == 0)
@@ -37,19 +35,19 @@ internal class Cart : ICart
         {
             if (amount < boOrdi.Amount)
             {
-                cart?.Items?.Remove(boOrdi);
-                cart!.TotalPrice -= (boOrdi.Amount - amount) * boOrdi.Price;
+                cart.Items?.Remove(boOrdi);
+                cart.TotalPrice -= (boOrdi.Amount - amount) * boOrdi.Price;
                 boOrdi.Amount = amount;
                 boOrdi.Totalprice = boOrdi.Price * amount;
-                cart?.Items?.Add(boOrdi);
+                cart.Items?.Add(boOrdi);
             }
             if (amount > boOrdi.Amount)
             {
-                cart?.Items?.Remove(boOrdi);
-                cart!.TotalPrice += (amount - boOrdi.Amount) * boOrdi.Price;
+                cart.Items?.Remove(boOrdi);
+                cart.TotalPrice += (amount - boOrdi.Amount) * boOrdi.Price;
                 boOrdi.Amount = amount;
                 boOrdi.Totalprice = boOrdi.Price * amount;
-                cart?.Items?.Add(boOrdi);
+                cart.Items?.Add(boOrdi);
             }
         }
         return cart;
@@ -74,7 +72,7 @@ internal class Cart : ICart
         {
             throw new BO.BlMissingEntityException("the product does not exist", exp);
         }
-        BO.OrderItem? boOrderItem = cart.Items?.FirstOrDefault(x => x.ProductID == id);
+        BO.OrderItem? boOrderItem = cart.Items?.FirstOrDefault(x => x?.ProductID == id);
         if (pro.InStock > 0)
         {
             if (boOrderItem == null)// OrderItem does not exist
@@ -114,15 +112,15 @@ internal class Cart : ICart
         //All the products exist (according to the ID card, although it is possible that they exist with zero quantity
         try
         {
-            cart.Items?.Exists(x => Dal.Product.GetById(x.ProductID).ID==x.ProductID);
+            cart.Items?.Exists(x => Dal.Product.GetById(x?.ProductID ?? throw new BO.BlNullPropertyException("OrderItems does not exist")).ID==x?.ProductID) ;
         }
         catch (DO.DalMissingIdException exp)
         {
             throw new BO.BlMissingEntityException("one of the products in the cart does not exsist", exp);
         }
-        if (cart!.Items!.Exists(x => x.Amount<=0))
+        if (cart.Items?.Exists(x => x?.Amount<=0)?? throw new BO.BlNullPropertyException("Items does not exist"))
             throw new BO.BlInCorrectException("negetive amount");
-        if (cart.Items.Exists(x => x.Amount>Dal.Product.GetById(x.ProductID).InStock))
+        if (cart.Items.Exists(x => x?.Amount>Dal.Product.GetById(x?.ProductID ?? throw new BO.BlNullPropertyException("OrderItems does not exist")).InStock))
             throw new BO.BlInCorrectException("therse not enogth instook");
         if (cart.CustomerName==null)
             throw new BO.BlNullPropertyException("missing name");
@@ -143,14 +141,14 @@ internal class Cart : ICart
             OrderDate=DateTime.Now,
             ShipDate=null,
             DeliveryrDate=null,
-            Amount=cart.Items.Select(x => x.Amount).Sum(),
+            Amount=cart.Items.Select(x => x?.Amount ?? throw new BO.BlNullPropertyException("OrderItem does not exist")).Sum(),
         };
         orderId=Dal.Order.Add(ord); // There is no need to check that there is no exception for adding an order
         foreach (var bordi in cart.Items)
         {
             DO.OrderItem dOrdi = new()
             {
-                ID=bordi.ID, // negligible
+                ID=bordi?.ID ?? throw new BO.BlNullPropertyException("OrderItem does not exist"), // negligible
                 ProductID =bordi.ProductID,
                 OrderID=orderId,
                 Price=bordi.Price,
@@ -176,6 +174,8 @@ internal class Cart : ICart
                 throw new BO.BlMissingEntityException("the priduct does not exsist", exp);
             }
         }
+        cart.Items.Clear();
+        cart.TotalPrice = 0;
     }
 }
 

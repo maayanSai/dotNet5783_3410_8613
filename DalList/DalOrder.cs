@@ -1,6 +1,7 @@
 ﻿namespace Dal;
 using DalApi;
 using DO;
+using System.Linq.Expressions;
 
 /// <summary>
 /// Fulfillment of an order
@@ -31,11 +32,19 @@ internal class DalOrder : IOrder
     /// Returns a collection of orders
     /// </summary>
     /// <returns></returns>
-    public IEnumerable<Order?> GetAll()
+    public IEnumerable<Order?> GetAll(Func<Order?, bool>? f)
     {
-        IEnumerable<Order?> ord = DataSource.s_ordersList;
+        IEnumerable<Order?> ord;
+        ord = DataSource.s_ordersList;
+        if (f != null)
+        {
+            var o= from Order? item in ord
+                   where f(item)
+                   select item;
+        }
         return ord;
     }
+
     /// <summary>
     /// Deleting an order
     /// </summary>

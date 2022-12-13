@@ -20,7 +20,7 @@ public class ProductItem
     /// <summary>
     /// The kind of the product
     /// </summary>
-    public Category Category { get; set; }
+    public Category? Category { get; set; }
     /// <summary>
     /// Availability (Is it in stock)
     /// </summary>

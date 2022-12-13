@@ -23,7 +23,7 @@ public interface IProduct
     /// <param name="id"></param>
     /// <param name="cart"></param>
     /// <returns></returns>
-    BO.ProductItem ItemProduct(int id, Cart cart);
+    ProductItem ItemProduct(int id, Cart cart);
     /// <summary>
     /// Adding a product
     /// </summary>
