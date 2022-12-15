@@ -23,28 +23,21 @@ internal class DalProduct : IProduct
             return p.ID;
         }
     }
-    /// <summary>
-    /// Returns a product by ID number
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    /// <exception cref="DalMissingIdException"></exception>
-    public Product GetById(int id) => DataSource.s_productsList.Find(x => x?.ID == id)
-        ?? throw new DalMissingIdException(id, "product");
+
+    public Product? GetById(int id)
+    {
+        return DataSource.s_productsList.FirstOrDefault(x => x?.ID == id);
+    }
+
     /// <summary>
     /// Returns a collection of products
     /// </summary>
     /// <returns></returns>
-    public IEnumerable<Product?> GetAll(Func<Product?, bool>? f)
+    public IEnumerable<Product?> GetAll(Func<Product?, bool>? filter)
     {
-        IEnumerable<Product?> prod = (DataSource.s_productsList);
-        if (f != null)
-        {
-            var pr = from Product? item in prod
-            where f(item)
-            select item;
-        }
-        return prod;
+        if (DataSource.s_productsList.Count == 0)
+            throw new Exception("the list is empty"); // לשנות שגיאה
+        return filter is null ? DataSource.s_productsList.Select(order => order) : DataSource.s_productsList.Where(filter);
     }
     /// <summary>
     /// Product deletion
@@ -66,9 +59,15 @@ internal class DalProduct : IProduct
         DataSource.s_productsList.Add(p);
     }
 
-    public Product GetTermsOf(Func<Product?, bool>? filter)
+    /// <summary>
+    /// Returns a product by terms of
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="DalMissingIdException"></exception>
+    public Product? GetById(Func<Product?, bool>? filter)
     {
-        return DataSource.s_productsList.First(x => filter(x)?? throw new DO.)
-       ?? throw new DalMissingIdException(id, "order item");
+        // לשנות שגיאה
+        return filter is null ? throw new Exception("there is no func"): DataSource.s_productsList.First(x => filter(x));
     }
 }

@@ -80,8 +80,8 @@ internal static class DataSource
                 CustomerEmail = s_orderNameEmailAdress[x, 1],
                 CustomerAdress = s_orderNameEmailAdress[x, 2],
                 OrderDate = DateTime.Now.AddDays(-days),
-                ShipDate = null,//DateTime.MinValue,
-                DeliveryrDate = null,//DateTime.MinValue,
+                ShipDate = null,
+                DeliveryrDate = null,
             };
             if (i < 0.8 * 20)
                 order.ShipDate = order.OrderDate + new TimeSpan(_rnd.Next(10, 20), 0, 0, 0);
@@ -108,9 +108,7 @@ internal static class DataSource
                 do
                 {
                     oi.ProductID = 100000 + _rnd.Next(0, 20);
-                } while (s_orderItemsList.Exists(p => p?.ProductID== oi.ProductID && p?.OrderID ==oi.OrderID));
-                
-                
+                } while (s_orderItemsList.Exists(p => p?.ProductID == oi.ProductID && p?.OrderID == oi.OrderID));
                 oi.Price = _rnd.Next(500, 5000);
                 s_orderItemsList.Add(oi);
             }

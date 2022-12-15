@@ -172,7 +172,7 @@ public class Program
                                 do { Console.WriteLine("enter order ID of orderItem"); }
                                 while (!int.TryParse(Console.ReadLine(), out idOrder));
                                 orderItem.OrderID = idOrder;
-                                orderItem.Price = dal.Product.GetById(orderItem.ProductID).Price;
+                                orderItem.Price = dal.Product.GetById(orderItem.ProductID)?.Price ?? 0;
                                 do { Console.WriteLine("enter amount of orderItem"); }
                                 while (!int.TryParse(Console.ReadLine(), out amount));
                                 orderItem.Amount = amount;
@@ -199,7 +199,7 @@ public class Program
                                 do { Console.WriteLine("enter order ID of orderItem"); }
                                 while (!int.TryParse(Console.ReadLine(), out idOrder));
                                 orderItem1.OrderID = idOrder;
-                                orderItem1.Price = dal.Product.GetById(orderItem1.ProductID).Price;
+                                orderItem1.Price = dal.Product.GetById(orderItem1.ProductID)?.Price ?? 0;
                                 do { Console.WriteLine("enter amount of orderItem"); }
                                 while (!int.TryParse(Console.ReadLine(), out amount));
                                 orderItem1.Amount = amount;

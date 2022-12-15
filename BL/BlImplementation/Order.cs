@@ -1,6 +1,7 @@
 ﻿namespace BlImplementation;
 using BlApi;
 using System.Collections.Generic;
+using System.Reflection.Metadata.Ecma335;
 
 /// <summary>
 /// The order-logical entity
@@ -45,6 +46,7 @@ private static BO.OrderStatus GetStatus(DO.Order? order)
     else
         return BO.OrderStatus.Ordered;
 }
+
 /// <summary>
 /// Order details request (for manager screen and buyer screen)
 /// </summary>
@@ -55,42 +57,44 @@ private static BO.OrderStatus GetStatus(DO.Order? order)
 /// <exception cref="BO.BlNullPropertyException"></exception>
 public BO.Order ItemOrder(int id)
 {
-    DO.Order orderD;
+    DO.Order? orderD;
     if (id < 0)
         throw new Exception("id is negative");
     try
     {
-        orderD = Dal.Order.GetById(id);
+        orderD = Dal.Order.GetById(delegate (DO.Order? x) { return x?.ID == id; });
     }
     catch (DO.DalMissingIdException exp)
     {
         throw new BO.BlMissingEntityException("the order does not exsists", exp);
     }
     //  Create a collection of order items
-    var items = Dal.OrderItem?.GetByOrderId(orderD.ID).Select(x => new BO.OrderItem
+    var items = Dal.OrderItem?.GetByOrderId(orderD?.ID ?? throw new BO.BlNullPropertyException("missing order id")).Select(x => new BO.OrderItem
     {
         ID = x?.ID ?? throw new BO.BlNullPropertyException("missing order item id"),
         ProductID = x?.ProductID ?? throw new BO.BlNullPropertyException("missing product id"),
         Price = x?.Price ?? 0,
-        Name = Dal.Product.GetById(x?.ProductID ?? 1).Name,//האיי די תמיד יהיה תקין
+        Name = Dal.Product.GetById(x?.ID ?? throw new BO.BlNullPropertyException("missing order id"))?.Name,//האיי די תמיד יהיה תקין
         Amount = x?.Amount ?? 0,
         Totalprice = x?.Price * x?.Amount ?? 0
 
     }).ToList();
+
     return new BO.Order
     {
-        ID = orderD.ID,
-        CustomerName = orderD.CustomerName,
-        CustomerAdress = orderD.CustomerAdress,
-        CustomerEmail = orderD.CustomerEmail,
-        OrderDate = orderD.OrderDate,
-        ShipDate = orderD.ShipDate,
-        DeliveryrDate = orderD.DeliveryrDate,
+        ID = orderD?.ID ?? throw new BO.BlNullPropertyException("missing order id"),
+        CustomerName = orderD?.CustomerName,
+        CustomerAdress = orderD?.CustomerAdress,
+        CustomerEmail = orderD?.CustomerEmail,
+        OrderDate = orderD?.OrderDate,
+        ShipDate = orderD?.ShipDate,
+        DeliveryrDate = orderD?.DeliveryrDate,
         Status = GetStatus(orderD),
-        Items = items,
-        TotalPrice = items.Sum(x => x.Totalprice),
+        Items = items!,
+        TotalPrice = items!.Sum(x => x.Totalprice),
     };
 }
+
 /// <summary>
 /// Order shipping update (Admin order management screen)
 /// </summary>
@@ -105,7 +109,7 @@ public BO.Order? Updateshipping(int id)
         throw new BO.BlInCorrectException("id is negative");
     try
     {
-        order = Dal.Order.GetById(id);
+        order = Dal.Order.GetById(id) ?? throw new BO.BlNullPropertyException("missing product id");
         if (order.ShipDate != null) // Check if an order exists, and has not yet been sent
         {
             Dal.Order.Update(new DO.Order
@@ -140,7 +144,7 @@ public BO.Order? Updatesupply(int id)
         throw new BO.BlInCorrectException("id is negative");
     try
     {
-        order = Dal.Order.GetById(id);
+        order = Dal.Order.GetById(id) ?? throw new BO.BlNullPropertyException("missing product id");
         // Check if an order exists, already sent but not yet delivered
         if (order.ShipDate != DateTime.MinValue && order.DeliveryrDate == DateTime.MinValue)
         {
@@ -177,7 +181,7 @@ public BO.OrderTracking? Tracking(int id)
         throw new BO.BlInCorrectException("id is negative");
     try
     {
-        order = Dal.Order.GetById(id);
+        order = Dal.Order.GetById(id) ?? throw new BO.BlNullPropertyException("missing product id");
     }
     catch (DO.DalMissingIdException exp)
     {

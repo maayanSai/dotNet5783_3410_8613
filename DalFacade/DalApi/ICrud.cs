@@ -31,13 +31,15 @@ public interface ICrud<T> where T : struct
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    T GetById(int id);
+    T? GetById(Func<T?, bool>? filter);
+
+    T? GetById(int id);
+
     /// <summary>
     /// A request to return all instances of an entity
     /// </summary>
     /// <returns></returns>
     IEnumerable<T?> GetAll(Func<T?, bool>? filter=null);
-    T GetTermsOf(Func<T?, bool>? filter);
 }
 
 

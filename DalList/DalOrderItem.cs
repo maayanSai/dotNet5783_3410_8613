@@ -21,29 +21,19 @@ internal class DalOrderItem : IOrderItem
         DataSource.s_orderItemsList.Add(oi); // We will insert the order into the last empty place in the array
         return oi.ID;
     }
-    /// <summary>
-    /// Item return by ID number
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    /// <exception cref="DalMissingIdException"></exception>
-    public OrderItem GetById(int id) => DataSource.s_orderItemsList.Find(x => x?.ID == id)
-        ?? throw new DalMissingIdException(id, "order item");
+
+
     /// <summary>
     /// Returns a collection of items
     /// </summary>
     /// <returns></returns>
-    public IEnumerable<OrderItem?> GetAll(Func<OrderItem?, bool>? f)
-    { 
-        IEnumerable<OrderItem?> orderitemcolleption = DataSource.s_orderItemsList;
-        if (f != null)
-        {
-            var oi=from OrderItem? item in orderitemcolleption
-            where f(item)
-            select item;
-        }  
-        return orderitemcolleption;
+    public IEnumerable<OrderItem?> GetAll(Func<OrderItem?, bool>? filter)
+    {
+        if (DataSource.s_orderItemsList.Count == 0)
+            throw new Exception("the list is empty"); // לשנות את השגיאה
+        return filter is null ? DataSource.s_orderItemsList.Select(orderItem => orderItem) : DataSource.s_orderItemsList.Where(filter);
     }
+
     /// <summary>
     /// Deleting an item
     /// </summary>
@@ -63,6 +53,10 @@ internal class DalOrderItem : IOrderItem
         Delete(oi.ID); // if not found - exception is thrown from this method
         DataSource.s_orderItemsList.Add(oi);
     }
+    public OrderItem? GetById(int id)
+    {
+        return DataSource.s_orderItemsList.FirstOrDefault(x => x?.ID == id);
+    }
     /// <summary>
     /// Returns an item by 2 ID numbers
     /// </summary>
@@ -81,20 +75,26 @@ internal class DalOrderItem : IOrderItem
 
     }
     /// <summary>
+    /// Item return by terms of
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="DalMissingIdException"></exception>
+    public OrderItem? GetById(Func<OrderItem?, bool>? filter)
+    {
+        // לשנות את השגיאה
+        return filter is null ? throw new Exception("there is no func") : DataSource.s_orderItemsList.First(x => filter(x));
+    }
+
+    /// <summary>
     /// Returns an item by order ID number
     /// </summary>
     /// <param name="idOrder"></param>
     /// <returns></returns>
     public IEnumerable<OrderItem?> GetByOrderId(int idOrder)
     {
-        IEnumerable<OrderItem?> ordi;
-        ordi=DataSource.s_orderItemsList.Where(x => x?.OrderID == idOrder);
+        return GetAll(delegate (OrderItem? x) { return x?.OrderID == idOrder; });
+    }
 
-        return ordi;
-    }
-    public OrderItem GetTermsOf(Func<OrderItem?, bool>? filter)
-    {
-         return DataSource.s_orderItemsList.First(x => filter(x) ?? )
-        ?? throw new DalMissingIdException(id, "order item");
-    }
+
 }

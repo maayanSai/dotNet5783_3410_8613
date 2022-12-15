@@ -1,4 +1,8 @@
 ﻿namespace DO;
+public class UnFoundException : Exception
+{
+
+}
 
 /// <summary>
 /// Exception
@@ -40,14 +44,6 @@ public class DalMissingIdException : Exception
             return EntityName+"not exsist for the id's of product:"+Entity1Id+ "and order: "+Entity2Id  +$"{Message1}";
 
     }
-}
-public class DalMissingException:Exception
-{
-    public DalMissingException(int idPro, int idOrder, string name, string message, int a = 1) : base(message)
-    {
-
-    }
-
 }
 
 /// <summary>
