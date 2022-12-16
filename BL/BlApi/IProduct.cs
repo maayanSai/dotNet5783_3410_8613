@@ -10,7 +10,7 @@ public interface IProduct
     /// Product list request 
     /// </summary>
     /// <returns></returns>
-    IEnumerable<ProductForList?> GetProducts();
+    IEnumerable<ProductForList?> GetProducts(Func<ProductForList?, bool>? func = null);
     /// <summary>
     /// Product details request- Gets a product ID
     /// </summary>

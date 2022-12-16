@@ -5,8 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="ProductWindow" Height="450" Width="800">
+        Title="ProductWindow" Height="450" Width="800" Background="White">
     <Grid>
-        
+        <Label Name="ID" Content="Id:" HorizontalAlignment="Left" Height="29" Margin="209,78,0,0" VerticalAlignment="Top" Width="123"/>
+        <TextBox Name="Id" HorizontalAlignment="Left" Height="29" Margin="300,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123"/>
+        <Label Content="Category:" HorizontalAlignment="Left" Height="29" Margin="209,125,0,0" VerticalAlignment="Top" Width="123"/>
+        <ComboBox Name="CategoryForNewProduct" HorizontalAlignment="Left" Height="29" Margin="300,125,0,0" VerticalAlignment="Top" Width="123"/>
+        <Label Content="Name:" HorizontalAlignment="Left" Height="29" Margin="209,178,0,0" VerticalAlignment="Top" Width="123"/>
+        <Label Content="Price:" HorizontalAlignment="Left" Height="29" Margin="209,222,0,0" VerticalAlignment="Top" Width="123"/>
+        <Label Content="InStock:" HorizontalAlignment="Left" Height="29" Margin="209,267,0,0" VerticalAlignment="Top" Width="123"/>
+        <TextBox x:Name="Name" HorizontalAlignment="Left" Height="29" Margin="300,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123" RenderTransformOrigin="0.473,0.77" />
+        <TextBox Name="Price" HorizontalAlignment="Left" Height="29" Margin="300,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123"/>
+        <TextBox x:Name="InStock" HorizontalAlignment="Left" Height="29" Margin="300,267,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123" />
+        <Button Name="BtnAddOrUpdetProduct" Content="Add" HorizontalAlignment="Left" Height="29" Margin="500,318,0,0" VerticalAlignment="Top" Width="80" Click="ButtonAddProduct_Click"/>
+
     </Grid>
 </Window>

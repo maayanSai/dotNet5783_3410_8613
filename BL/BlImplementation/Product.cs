@@ -3,7 +3,9 @@ using BlApi;
 using BO;
 using DO;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Xml.Linq;
 
 /// <summary>
 /// A logical entity-item
@@ -23,9 +25,9 @@ internal class Product : IProduct
     {
         if (p.ID <= 0) // if id is negative
             throw new BO.BlInCorrectException("product ID");
-        if (p.InStock< 0) //negative amount
+        if (p.InStock < 0) //negative amount
             throw new BO.BlInCorrectException("product amount");
-        if (p.Price< 0) //negative price
+        if (p.Price < 0) //negative price
             throw new BO.BlInCorrectException("product price");
         if (p.Name == "") //empty string
             throw new BO.BlInCorrectException("product name");
@@ -34,10 +36,10 @@ internal class Product : IProduct
             DO.Product p1 = new()
             {
                 ID = p.ID,
-                Name=p?.Name??throw new BO.BlNullPropertyException("Empty name"),
-                Price=p?.Price??0,
-                Category=(DO.Category?)p?.Category ?? throw new BO.BlWorngCategoryException("Wrong category "),
-                InStock=p.InStock,
+                Name = p?.Name ?? throw new BO.BlNullPropertyException("Empty name"),
+                Price = p?.Price ?? 0,
+                Category = (DO.Category?)p?.Category ?? throw new BO.BlWorngCategoryException("Wrong category "),
+                InStock = p.InStock,
             };
             Dal.Product.Add(p1);
         }
@@ -56,22 +58,22 @@ internal class Product : IProduct
     /// <exception cref="BO.BlMissingEntityException"></exception>
     public void Delete(int id)
     {
-        if (id<=0) // if id is negative
+        if (id <= 0) // if id is negative
             throw new BO.BlInCorrectException("negative id");
 
 
-        if (Dal.OrderItem.GetAll().Where(orderItem => orderItem?.ProductID==id).Any())
+        if (Dal.OrderItem.GetAll().Where(orderItem => orderItem?.ProductID == id).Any())
             throw new BO.BlAlreadyExistEntityException("the product is exsist in order/s so that can not be deleated");
-            try
-            {
-                Dal.Product.Delete(id);
-            }
-            catch (DalMissingIdException exp)
-            {
-                throw new BlMissingEntityException("The product doesnt exsist", exp);//לשנות לסוג אקספשיון הנדרש
-            }
-        
-    
+        try
+        {
+            Dal.Product.Delete(id);
+        }
+        catch (DalMissingIdException exp)
+        {
+            throw new BlMissingEntityException("The product doesnt exsist", exp);//לשנות לסוג אקספשיון הנדרש
+        }
+
+
     }
     /// <summary>
     /// Product list request (for manager screen and buyer's catalog screen)
@@ -79,16 +81,17 @@ internal class Product : IProduct
     /// <returns></returns>
     /// <exception cref="Exceptions.BlNullPropertyException"></exception>
     /// <exception cref="Exception"></exception>
-    public IEnumerable<ProductForList?> GetProducts()
+    public IEnumerable<ProductForList?> GetProducts(Func<ProductForList?, bool>? func = null)
     {
-        IEnumerable<DO.Product?> pro = Dal.Product.GetAll();
-        return pro.Select(pr => new BO.ProductForList
-        {
-            ID = pr?.ID ?? throw new BO.BlNullPropertyException("null product id"),
-            Name = pr?.Name ?? "",
-            Price = pr?.Price ?? 0,
-            Category = (BO.Category?)pr?.Category ?? throw new BO.BlWorngCategoryException("wrong product cayegory"),
-        });
+        IEnumerable<BO.ProductForList?> pro = from DO.Product item in Dal.Product.GetAll()
+                                              select new ProductForList()
+                                              {
+                                                  ID = item.ID ,
+                                                  Name = item.Name,
+                                                  Price = item.Price ,
+                                                  Category = (BO.Category?)item.Category,
+                                              };
+        return func is null ? pro : pro.Where(func);
     }
     /// <summary>
     /// Product details request (for admin screen and for)
@@ -101,7 +104,7 @@ internal class Product : IProduct
     /// <exception cref="BlWorngCategoryException"></exception>
     public BO.Product ItemProduct(int id)
     {
-        if (id<=0)
+        if (id <= 0)
             throw new BO.BlInCorrectException("inncorrect id");
         DO.Product? dopro;
         try
@@ -117,7 +120,7 @@ internal class Product : IProduct
             ID = dopro?.ID ?? throw new BO.BlNullPropertyException("Null priduct id"),
             Name = dopro?.Name ?? "",
             Price = dopro?.Price ?? 0,
-            Category = (BO.Category?)dopro?.Category ??throw new BlWorngCategoryException("Wrong product category"),
+            Category = (BO.Category?)dopro?.Category ?? throw new BlWorngCategoryException("Wrong product category"),
             InStock = dopro?.InStock ?? 0,
         };
         return bopro;
@@ -133,7 +136,7 @@ internal class Product : IProduct
     /// <exception cref="BO.BlNullPropertyException"></exception>
     public BO.ProductItem ItemProduct(int id, BO.Cart cart)
     {
-        if (id<=0)
+        if (id <= 0)
             throw new BO.BlInCorrectException("incorrct id");
         DO.Product? p;
         try
@@ -153,9 +156,9 @@ internal class Product : IProduct
         }
         BO.ProductItem proi = new()
         {
-            ID = p?.ID?? throw new BO.BlNullPropertyException("Null product id"),
-            Name = p?.Name??"",
-            Price = p?.Price??0,
+            ID = p?.ID ?? throw new BO.BlNullPropertyException("Null product id"),
+            Name = p?.Name ?? "",
+            Price = p?.Price ?? 0,
             isStock = p?.InStock > 0,
         };
         return proi;
@@ -183,10 +186,10 @@ internal class Product : IProduct
             DO.Product dp = new()
             {
                 ID = p.ID,
-                Name = p?.Name ??"",
-                Price = p?.Price??0,
-                InStock = p?.InStock??0,
-                Category = (DO.Category?)p?.Category?? throw new BO.BlInCorrectException("product name"),
+                Name = p?.Name ?? "",
+                Price = p?.Price ?? 0,
+                InStock = p?.InStock ?? 0,
+                Category = (DO.Category?)p?.Category ?? throw new BO.BlInCorrectException("product name"),
             };
             Dal.Product.Update(dp);
         }

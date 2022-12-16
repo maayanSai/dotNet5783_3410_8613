@@ -4,7 +4,7 @@ using BlImplementation;
 using BO;
 public class Program
 {
-    static IBl s_bl = new Bl();
+    static IBl s_bl = new BL();
     static Cart s_c = new() { Items = new List<OrderItem?>(), CustomerName = "Ayala", CustomerAdress = "israel 23", CustomerEmail = "ayala@gmail.com" };
     static void Main()
     {

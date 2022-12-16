@@ -4,7 +4,7 @@ using BlApi;
 /// <summary>
 /// Realization of BL
 /// </summary>
-sealed public class Bl : IBl
+sealed public class BL : IBl
 {
     DalApi.IDal Dal = new Dal.DalList();
     /// <summary>
