@@ -32,9 +32,7 @@ public interface ICrud<T> where T : struct
     /// <param name="id"></param>
     /// <returns></returns>
     T? GetById(Func<T?, bool>? filter);
-
     T? GetById(int id);
-
     /// <summary>
     /// A request to return all instances of an entity
     /// </summary>

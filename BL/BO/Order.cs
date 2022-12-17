@@ -44,7 +44,7 @@ public class Order
     /// <summary>
     /// A collection of items
     /// </summary>
-    public List<OrderItem> Items { set; get; }
+    public List<OrderItem>? Items { set; get; }
     /// <summary>
     /// To String Property
     /// </summary>

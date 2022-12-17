@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="ProductForListWindow" Height="640" Width="800">
-    <Grid Name="MainGrid" Background="White">
+    <Grid Name="MainGrid" Background="Black">
         <Grid.RowDefinitions>
             <RowDefinition Height="41"/>
             <RowDefinition Height="514*"/>
@@ -21,17 +21,17 @@
                 <ColumnDefinition Width="81"/>
                 <ColumnDefinition Width="32"/>
             </Grid.ColumnDefinitions >
-            <ComboBox Name="AttributeSelector" SelectionChanged="SelectionChanged" Grid.Column="1" Height="20" Grid.ColumnSpan="4" Margin="112,11,16,10"/>
-            <Label Grid.Column="0"  Content="Category:" Margin="10,3,267,-2" Grid.ColumnSpan="2"/>
+            <ComboBox Name="AttributeSelector" FontFamily="Segoe Print" SelectionChanged="SelectionChanged" Foreground="Black" Height="20" Grid.ColumnSpan="2" Margin="374,10,25,11"/>
+            <Label Grid.Column="0" FontFamily="Segoe Print" Foreground="#FFEFCF81" FontSize="20" Content="Category:" Margin="10,-4,267,-5" Grid.ColumnSpan="2"/>
         </Grid>
-        <ListView x:Name="ProductListview" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,30,0,3" Grid.Row="1" MouseDoubleClick="Update">
+        <ListView x:Name="ProductListview" FontFamily="Segoe Print" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="-5,0,5,45" Grid.Row="1" MouseDoubleClick="Update" Background="Black" Foreground="#FFFFFBFD" FontSize="15" Grid.RowSpan="2" SelectionChanged="ProductListview_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="click to all product" HorizontalAlignment="Left" Height="20" Margin="670,5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="102" Click="Button_Click"/>
-        <Button Content="Add new Product" Name="addNewProduct" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="NewProductButton_Click"/>
+        <Button Content="click to all product" HorizontalAlignment="Left" Height="25" Margin="655,0,0,0" VerticalAlignment="Center" Width="125" Click="ButtonAfterFiltering_Click" Foreground="#FFEFCF81" FontSize="12" FontFamily="Segoe Print"  Background="Black"/>
+        <Button Content="Add new Product" Name="addNewProduct" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="NewProductButton_Click" Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black"/>
     </Grid>
 </Window>

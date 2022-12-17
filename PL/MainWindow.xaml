@@ -5,8 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" FontSize="16">
     <Grid>
-        <Button Content="Admin" HorizontalAlignment="Center" Height="26" VerticalAlignment="Center" Width="152" Click="ShowProductsButton_Click"/>
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="/צילום מסך 2022-12-17 212806.png"/>
+        </Grid.Background>
+        <Button Content="Admin" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Width="93" Click="ShowProductsButton_Click" Foreground="#FFEFCF81" FontSize="20" Margin="671,359,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold"/>
+
+
     </Grid>
 </Window>

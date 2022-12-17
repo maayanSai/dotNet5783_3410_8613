@@ -23,12 +23,7 @@ internal class DalProduct : IProduct
             return p.ID;
         }
     }
-
-    public Product? GetById(int id)
-    {
-        return DataSource.s_productsList.FirstOrDefault(x => x?.ID == id);
-    }
-
+    public Product? GetById(int id)=> DataSource.s_productsList.FirstOrDefault(x => x?.ID == id);
     /// <summary>
     /// Returns a collection of products
     /// </summary>
@@ -36,7 +31,7 @@ internal class DalProduct : IProduct
     public IEnumerable<Product?> GetAll(Func<Product?, bool>? filter)
     {
         if (DataSource.s_productsList.Count == 0)
-            throw new Exception("the list is empty"); // לשנות שגיאה
+            throw new UnFoundException("the list is empty"); 
         return filter is null ? DataSource.s_productsList.Select(order => order) : DataSource.s_productsList.Where(filter);
     }
     /// <summary>
@@ -47,7 +42,7 @@ internal class DalProduct : IProduct
     public void Delete(int id)
     {
         if (DataSource.s_productsList.RemoveAll(x => x?.ID == id)==0)
-            throw new DalMissingIdException(id, "product");
+            throw new UnFoundException( "the product for the id: "+id+" does not exsist");
     }
     /// <summary>
     /// Product update
@@ -58,16 +53,11 @@ internal class DalProduct : IProduct
         Delete(p.ID); // if not found - exception is thrown from this method
         DataSource.s_productsList.Add(p);
     }
-
     /// <summary>
     /// Returns a product by terms of
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
     /// <exception cref="DalMissingIdException"></exception>
-    public Product? GetById(Func<Product?, bool>? filter)
-    {
-        // לשנות שגיאה
-        return filter is null ? throw new Exception("there is no func"): DataSource.s_productsList.First(x => filter(x));
-    }
+    public Product? GetById(Func<Product?, bool>? filter)=> filter is null ? throw new UnFoundException("there is no func") : DataSource.s_productsList.First(x => filter(x));
 }

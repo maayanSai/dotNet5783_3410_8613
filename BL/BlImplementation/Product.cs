@@ -1,11 +1,8 @@
 ﻿namespace BlImplementation;
 using BlApi;
-using BO;
-using DO;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Xml.Linq;
+
 
 /// <summary>
 /// A logical entity-item
@@ -68,9 +65,9 @@ internal class Product : IProduct
         {
             Dal.Product.Delete(id);
         }
-        catch (DalMissingIdException exp)
+        catch (DO.UnFoundException exp)
         {
-            throw new BlMissingEntityException("The product doesnt exsist", exp);//לשנות לסוג אקספשיון הנדרש
+            throw new BO.BlMissingEntityException("The product doesnt exsist", exp);//לשנות לסוג אקספשיון הנדרש
         }
 
 
@@ -81,10 +78,10 @@ internal class Product : IProduct
     /// <returns></returns>
     /// <exception cref="Exceptions.BlNullPropertyException"></exception>
     /// <exception cref="Exception"></exception>
-    public IEnumerable<ProductForList?> GetProducts(Func<ProductForList?, bool>? func = null)
+    public IEnumerable<BO.ProductForList?> GetProducts(Func<BO.ProductForList?, bool>? func = null)
     {
         IEnumerable<BO.ProductForList?> pro = from DO.Product item in Dal.Product.GetAll()
-                                              select new ProductForList()
+                                              select new BO.ProductForList()
                                               {
                                                   ID = item.ID ,
                                                   Name = item.Name,
@@ -111,7 +108,7 @@ internal class Product : IProduct
         {
             dopro = Dal.Product.GetById(id);
         }
-        catch (DO.DalMissingIdException exp)
+        catch (DO.UnFoundException exp)
         {
             throw new BO.BlMissingEntityException("product des not exsist", exp);
         }
@@ -120,7 +117,7 @@ internal class Product : IProduct
             ID = dopro?.ID ?? throw new BO.BlNullPropertyException("Null priduct id"),
             Name = dopro?.Name ?? "",
             Price = dopro?.Price ?? 0,
-            Category = (BO.Category?)dopro?.Category ?? throw new BlWorngCategoryException("Wrong product category"),
+            Category = (BO.Category?)dopro?.Category ?? throw new BO.BlWorngCategoryException("Wrong product category"),
             InStock = dopro?.InStock ?? 0,
         };
         return bopro;
@@ -143,7 +140,7 @@ internal class Product : IProduct
         {
             p = Dal.Product.GetById(id);
         }
-        catch (DO.DalMissingIdException exp)
+        catch (DO.UnFoundException exp)
         {
             throw new BO.BlMissingEntityException(exp.Message);
         }
@@ -193,9 +190,9 @@ internal class Product : IProduct
             };
             Dal.Product.Update(dp);
         }
-        catch (DO.DalMissingIdException exp)
+        catch (DO.UnFoundException exp)
         {
-            throw new BlMissingEntityException("the product dosnt exsist", exp);
+            throw new BO.BlMissingEntityException("the product dosnt exsist", exp);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿namespace BlImplementation;
 using BlApi;
 using System.Collections.Generic;
-using System.Reflection.Metadata.Ecma335;
 
 /// <summary>
 /// The order-logical entity
@@ -18,7 +17,7 @@ internal class Order : IOrder
     {
         return Dal.Order.GetAll().Select(order =>
         {
-            var items = Dal.OrderItem.GetByOrderId(order?.ID ?? throw new BO.BlNullPropertyException("missing order id"));
+            var items = Dal.OrderItem.GetAll(delegate (DO.OrderItem? x) { return x?.OrderID == order?.ID; });
             return new BO.OrderForList
             {
                 ID = order?.ID?? throw new BO.BlNullPropertyException("missing order id"),
@@ -64,12 +63,12 @@ public BO.Order ItemOrder(int id)
     {
         orderD = Dal.Order.GetById(delegate (DO.Order? x) { return x?.ID == id; });
     }
-    catch (DO.DalMissingIdException exp)
+    catch (DO.UnFoundException exp)
     {
         throw new BO.BlMissingEntityException("the order does not exsists", exp);
     }
     //  Create a collection of order items
-    var items = Dal.OrderItem?.GetByOrderId(orderD?.ID ?? throw new BO.BlNullPropertyException("missing order id")).Select(x => new BO.OrderItem
+    var items = Dal.OrderItem?.GetAll((delegate (DO.OrderItem? x) { return x?.OrderID == orderD?.ID; })).Select(x => new BO.OrderItem
     {
         ID = x?.ID ?? throw new BO.BlNullPropertyException("missing order item id"),
         ProductID = x?.ProductID ?? throw new BO.BlNullPropertyException("missing product id"),
@@ -125,7 +124,7 @@ public BO.Order? Updateshipping(int id)
         }
         return this.ItemOrder(id);
     }
-    catch (DO.DalMissingIdException exp)
+    catch (DO.UnFoundException exp)
     {
         throw new BO.BlMissingEntityException("The order does not exist", exp);
     }
@@ -161,7 +160,7 @@ public BO.Order? Updatesupply(int id)
         }
         return this.ItemOrder(id);
     }
-    catch (DO.DalMissingIdException exp)
+    catch (DO.UnFoundException exp)
     {
         throw new BO.BlMissingEntityException("The order does not exist", exp);
     }
@@ -183,7 +182,7 @@ public BO.OrderTracking? Tracking(int id)
     {
         order = Dal.Order.GetById(id) ?? throw new BO.BlNullPropertyException("missing product id");
     }
-    catch (DO.DalMissingIdException exp)
+    catch (DO.UnFoundException exp)
     {
         throw new BO.BlMissingEntityException("missing order", exp);
     }

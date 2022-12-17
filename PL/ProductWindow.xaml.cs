@@ -1,80 +1,82 @@
-﻿using BlImplementation;
+﻿namespace PL;
+using BlImplementation;
 using System;
 using System.Windows;
-using BO;
 using BlApi;
-using System.Windows.Controls;
 
-namespace PL
+/// <summary>
+/// Interaction logic for ProductWindow.xaml
+/// </summary>
+public partial class ProductWindow : Window
 {
+    private IBl bl = new BL()
+
     /// <summary>
-    /// Interaction logic for ProductWindow.xaml
+    /// Constructive action to add products
     /// </summary>
-    public partial class ProductWindow : Window
+; public ProductWindow()
     {
-        private IBl bl = new BL()
-        
-;       public ProductWindow()
+        InitializeComponent();
+        CategoryForNewProduct.ItemsSource = Enum.GetValues(typeof(BO.Category));
+        BtnAddOrUpdetProduct.Content = "Add";
+    }
+    /// <summary>
+    /// Constructive action to update products
+    /// </summary>
+    /// <param name="id"></param>
+    public ProductWindow(int id)
+    {
+        InitializeComponent();
+        CategoryForNewProduct.ItemsSource = Enum.GetValues(typeof(BO.Category));// for the comboBox
+        BO.Product product = bl.Product.ItemProduct(id);//getting the details from bl about the 
+        BtnAddOrUpdetProduct.Content = "Updet";
+        Id.Text = product.ID.ToString();
+        Name.Text = product.Name;
+        CategoryForNewProduct.Text = product.Category.ToString();
+        InStock.Text = product.InStock.ToString();
+        Price.Text = product.Price.ToString();
+    }
+    /// <summary>
+    /// A button that adds or updates products
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void ButtonAddOrApdet_Click(object sender, RoutedEventArgs e)
+    {
+        try
         {
-            InitializeComponent();
-            CategoryForNewProduct.ItemsSource = Enum.GetValues(typeof(BO.Category));
-            BtnAddOrUpdetProduct.Content = "Add";
-        }
-        public ProductWindow(int id)
-        {
-            InitializeComponent();
-            CategoryForNewProduct.ItemsSource = Enum.GetValues(typeof(BO.Category));// for the comboBox
-            Product product = bl.Product.ItemProduct(id);//getting the details from bl about the 
-            BtnAddOrUpdetProduct.Content = "Updet";
-            Id.Text = product.ID.ToString();
-            Name.Text = product.Name;
-            CategoryForNewProduct.Text = product.Category.ToString();
-            InStock.Text = product.InStock.ToString();
-            Price.Text = product.Price.ToString();
-        }
-
-        private void ButtonAddProduct_Click(object sender, RoutedEventArgs e)
-        {
-            try
+            string s = BtnAddOrUpdetProduct.Content.ToString()!;
+            if (s == "Add")
             {
-                if (Id.Text.Length == 0 || Price.Text.Length == 0 || InStock.Text.Length == 0 || Name.Text.Length == 0 || CategoryForNewProduct.Text.Length == 0 || CategoryForNewProduct.SelectedIndex == 4 || CategoryForNewProduct.SelectedItem == null)
+                BO.Product product = new BO.Product()
                 {
-                    MessageBox.Show("Fill in the missing fields", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                string s = BtnAddOrUpdetProduct.Content.ToString()!;
-                if (s == "Add")
-                {
-                    BO.Product product = new BO.Product()
-                    {
-                        ID = int.Parse(Id.Text),
-                        Name = Name.Text,
-                        InStock = int.Parse(InStock.Text),
-                        Price = double.Parse(Price.Text),
-                        Category = (BO.Category)CategoryForNewProduct.SelectedItem!,
-                    };
-                    bl.Product.Add(product);
-                    MessageBox.Show("Product Add succefully", "succefully", MessageBoxButton.OK, MessageBoxImage.Information);
-                    this.Close();
-                }
-                else
-                {
-                    bl!.Product.Update(new Product()
-                    {
-                        ID = int.Parse(Id.Text),
-                        Name = Name.Text,
-                        InStock = int.Parse(InStock.Text),
-                        Price = int.Parse(Price.Text),
-                        Category = (BO.Category)CategoryForNewProduct.SelectedItem!,
-                    });
-                    MessageBox.Show("Product Updet succefully", "succefully", MessageBoxButton.OK, MessageBoxImage.Information);
-                    this.Close();
-                }
+                    ID = int.Parse(Id.Text),
+                    Name = Name.Text,
+                    InStock = int.Parse(InStock.Text),
+                    Price = double.Parse(Price.Text),
+                    Category = (BO.Category)CategoryForNewProduct.SelectedItem!,
+                };
+                bl.Product.Add(product);
+                MessageBox.Show("Product Add succefully", "succefully", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.Close();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message);
+                bl!.Product.Update(new BO.Product()
+                {
+                    ID = int.Parse(Id.Text),
+                    Name = Name.Text,
+                    InStock = int.Parse(InStock.Text),
+                    Price = int.Parse(Price.Text),
+                    Category = (BO.Category)CategoryForNewProduct.SelectedItem!,
+                });
+                MessageBox.Show("Product Updet succefully", "succefully", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.Close();
             }
-
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
         }
     }
 }

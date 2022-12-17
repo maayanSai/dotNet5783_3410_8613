@@ -1,5 +1,5 @@
-﻿using DalApi;
-namespace Dal;
+﻿namespace Dal;
+using DalApi;
 
 /// <summary>
 /// Dal List

@@ -4,7 +4,6 @@ using DO;
 using System.Collections.Generic;
 using System.Data;
 
-
 /// <summary>
 /// Implementing the functions of order details
 /// </summary>
@@ -21,8 +20,6 @@ internal class DalOrderItem : IOrderItem
         DataSource.s_orderItemsList.Add(oi); // We will insert the order into the last empty place in the array
         return oi.ID;
     }
-
-
     /// <summary>
     /// Returns a collection of items
     /// </summary>
@@ -30,10 +27,9 @@ internal class DalOrderItem : IOrderItem
     public IEnumerable<OrderItem?> GetAll(Func<OrderItem?, bool>? filter)
     {
         if (DataSource.s_orderItemsList.Count == 0)
-            throw new Exception("the list is empty"); // לשנות את השגיאה
+            throw new UnFoundException("the list is empty"); 
         return filter is null ? DataSource.s_orderItemsList.Select(orderItem => orderItem) : DataSource.s_orderItemsList.Where(filter);
     }
-
     /// <summary>
     /// Deleting an item
     /// </summary>
@@ -42,7 +38,7 @@ internal class DalOrderItem : IOrderItem
     public void Delete(int id)
     {
         if (DataSource.s_orderItemsList.RemoveAll(x => x?.ID == id)==0)
-            throw new DalMissingIdException(id, "order item");
+            throw new UnFoundException( "the order item for the id: "+id+" does not exsist -do that cant be erased");
     }
     /// <summary>
     /// Item update
@@ -53,48 +49,12 @@ internal class DalOrderItem : IOrderItem
         Delete(oi.ID); // if not found - exception is thrown from this method
         DataSource.s_orderItemsList.Add(oi);
     }
-    public OrderItem? GetById(int id)
-    {
-        return DataSource.s_orderItemsList.FirstOrDefault(x => x?.ID == id);
-    }
-    /// <summary>
-    /// Returns an item by 2 ID numbers
-    /// </summary>
-    /// <param name="idProduct"></param>
-    /// <param name="idOrder"></param>
-    /// <returns></returns>
-    /// <exception cref="DO.DalMissingIdException"></exception>
-    public OrderItem? GetByTwoId(int idProduct, int idOrder)
-    {
-        IEnumerable<OrderItem?> ordreit = DataSource.s_orderItemsList.Where(x => x?.OrderID == idOrder && x?.ProductID == idProduct);
-        ordreit.ToList();
-        if (!ordreit.Any())
-            throw new DO.DalMissingIdException(idProduct, idOrder, "Order item", "the order item which has the profuct id and the order id that you asked for does not exsist");
-        return ordreit.First();
-
-
-    }
+    public OrderItem? GetById(int id)=> DataSource.s_orderItemsList.FirstOrDefault(x => x?.ID == id);
     /// <summary>
     /// Item return by terms of
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
     /// <exception cref="DalMissingIdException"></exception>
-    public OrderItem? GetById(Func<OrderItem?, bool>? filter)
-    {
-        // לשנות את השגיאה
-        return filter is null ? throw new Exception("there is no func") : DataSource.s_orderItemsList.First(x => filter(x));
-    }
-
-    /// <summary>
-    /// Returns an item by order ID number
-    /// </summary>
-    /// <param name="idOrder"></param>
-    /// <returns></returns>
-    public IEnumerable<OrderItem?> GetByOrderId(int idOrder)
-    {
-        return GetAll(delegate (OrderItem? x) { return x?.OrderID == idOrder; });
-    }
-
-
+    public OrderItem? GetById(Func<OrderItem?, bool>? filter)=> filter is null ? throw new UnFoundException("there is no func") : DataSource.s_orderItemsList.First(x => filter(x));
 }

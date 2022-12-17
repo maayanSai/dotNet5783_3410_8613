@@ -1,7 +1,7 @@
-﻿using BlApi;
+﻿namespace PL;
+using BlApi;
 using BlImplementation;
 using System.Windows;
-namespace PL;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
@@ -9,11 +9,17 @@ namespace PL;
 public partial class MainWindow : Window
 {
     private IBl bl = new BL();
+    /// <summary>
+    /// constructive action
+    /// </summary>
     public MainWindow()
     {
         InitializeComponent();
     }
-
+    /// <summary>
+    /// Entering the product menu
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void ShowProductsButton_Click(object sender, RoutedEventArgs e) => new ProductListWindow().Show();
-
 }

@@ -1,7 +1,6 @@
 ﻿namespace Dal;
 using DalApi;
 using DO;
-using static DataSource;
 
 /// <summary>
 /// Fulfillment of an order
@@ -20,8 +19,6 @@ internal class DalOrder : IOrder
         DataSource.s_ordersList.Add(ord); // We will insert the order into the last empty place in the array
         return ord.ID;
     }
-
-
     /// <summary>
     /// Returns a collection of orders
     /// </summary>
@@ -29,10 +26,9 @@ internal class DalOrder : IOrder
     public IEnumerable<Order?> GetAll(Func<Order?, bool>? filter)
     {
         if (DataSource.s_ordersList.Count == 0)
-            throw new Exception("the list is empty"); // לשנות את השגיאה
+            throw new UnFoundException("the list is empty"); // לשנות את השגיאה
         return filter is null ? DataSource.s_ordersList.Select(order => order) : DataSource.s_ordersList.Where(filter);
     }
-
     /// <summary>
     /// Deleting an order
     /// </summary>
@@ -41,7 +37,7 @@ internal class DalOrder : IOrder
     public void Delete(int id)
     {
         if (DataSource.s_ordersList.RemoveAll(x => x?.ID == id) == 0)
-            throw new DalMissingIdException(id, "order");
+            throw new UnFoundException("the order for the id: "+id+" does not exsist");
     }
     /// <summary>
     /// Update Invitation
@@ -58,11 +54,10 @@ internal class DalOrder : IOrder
     /// <param name="id"></param>
     /// <returns></returns>
     /// <exception cref="DalMissingIdException"></exception>
-    public Order? GetById(Func<Order?, bool>? filter) // לשנות את השגיאה
+    public Order? GetById(Func<Order?, bool>? filter) 
     {
-      return filter is null ? throw new Exception("there is no func") : DataSource.s_ordersList.FirstOrDefault(x => filter(x));
+      return filter is null ? throw new UnFoundException("there is no func") : DataSource.s_ordersList.FirstOrDefault(x => filter(x));
     }
-
     public Order? GetById(int id)
     {
         return DataSource.s_ordersList.FirstOrDefault(x => x?.ID == id);

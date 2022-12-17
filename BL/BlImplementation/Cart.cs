@@ -1,7 +1,6 @@
 ﻿namespace BlImplementation;
 using BlApi;
 using System.ComponentModel.DataAnnotations;
-using System.Reflection.Metadata.Ecma335;
 
 /// <summary>
 /// Implementation of CART
@@ -69,7 +68,7 @@ internal class Cart : ICart
         {
             pro = Dal.Product.GetById(delegate (DO.Product? x) { return x?.ID == id; });
         }
-        catch (DO.DalMissingIdException exp)
+        catch (DO.UnFoundException exp)
         {
             throw new BO.BlMissingEntityException("the product does not exist", exp);
         }
@@ -80,13 +79,13 @@ internal class Cart : ICart
             {
                 cart.Items?.Add(new BO.OrderItem
                 {
-                    ProductID = pro?.ID ?? throw new Exception("id is missing"),
+                    ProductID = pro?.ID ?? throw new BO.BlNullPropertyException("id is missing"),
                     Amount = 1,
                     Name = pro?.Name,
                     Price = pro?.Price ?? 0,
                     Totalprice = pro?.Price ?? 0
                 });
-                cart.TotalPrice += pro?.Price ?? throw new Exception("product does not exist");
+                cart.TotalPrice += pro?.Price ?? throw new BO.BlNullPropertyException("product does not exist");
             }
             else // OrderItem exists
             {
@@ -115,7 +114,7 @@ internal class Cart : ICart
         {
             cart.Items?.ForEach(x => Dal.Product.GetById(x!.ProductID));
         }
-        catch (DO.DalMissingIdException exp)
+        catch (DO.UnFoundException exp)
         {
             throw new BO.BlMissingEntityException("one of the products in the cart does not exsist", exp);
         }
@@ -161,7 +160,7 @@ internal class Cart : ICart
             {
                 p = Dal.Product.GetById(dOrdi.ProductID);
             }
-            catch (DO.DalMissingIdException exp)
+            catch (DO.UnFoundException exp)
             {
                 throw new BO.BlMissingEntityException("The priduct does not exsist", exp);
             }
@@ -173,7 +172,7 @@ internal class Cart : ICart
                 {
                     Dal.Product.Update(product);
                 }
-                catch (DO.DalMissingIdException exp)
+                catch (DO.UnFoundException exp)
                 {
                     throw new BO.BlMissingEntityException("the priduct does not exsist", exp);
                 }

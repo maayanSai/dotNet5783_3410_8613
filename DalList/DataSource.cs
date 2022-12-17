@@ -43,7 +43,6 @@ internal static class DataSource
         {"Ayala Coen","aya@gmail.com","Hpalmach 15 Tel-Aviv" },
         {"Maayan Levi","maayan@gmail.com","Hashikma 12 Or-Yehuda" }
     };
-
     /// <summary>
     /// A function that creates and inserts a new product
     /// </summary>
@@ -62,7 +61,6 @@ internal static class DataSource
             });
         }
     }
-
     /// <summary>
     /// A function that creates and adds the orders
     /// </summary>
@@ -111,11 +109,9 @@ internal static class DataSource
                 } while (s_orderItemsList.Exists(p => p?.ProductID == oi.ProductID && p?.OrderID == oi.OrderID));
                 oi.Price = _rnd.Next(500, 5000);
                 s_orderItemsList.Add(oi);
-            }
-          
+            }   
         }
     }
-
     /// <summary>
     /// A static function that creates the order, product, and items
     /// </summary>
