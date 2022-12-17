@@ -24,7 +24,7 @@
             <ComboBox Name="AttributeSelector" SelectionChanged="SelectionChanged" Grid.Column="1" Height="20" Grid.ColumnSpan="4" Margin="112,11,16,10"/>
             <Label Grid.Column="0"  Content="Category:" Margin="10,3,267,-2" Grid.ColumnSpan="2"/>
         </Grid>
-        <ListView x:Name="ProductListview" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,30,0,3" SelectionChanged="SelectionChanged" Grid.Row="1" MouseDoubleClick="Update">
+        <ListView x:Name="ProductListview" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,30,0,3" Grid.Row="1" MouseDoubleClick="Update">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

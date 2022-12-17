@@ -35,7 +35,6 @@ public partial class ProductListWindow : Window
             MessageBox.Show(ex.Message);
         }
     }
-
     private void Button_Click(object sender, RoutedEventArgs e)
     {
         try
@@ -56,7 +55,8 @@ public partial class ProductListWindow : Window
     {
         int id = ((ProductForList)ProductListview.SelectedItem).ID;
         if (ProductListview.SelectedItem is ProductForList productForList)
-            new ProductWindow(id).Show();
+            new ProductWindow(id).ShowDialog();
         ProductListview.ItemsSource = bl?.Product.GetProducts();
+
     }
 }

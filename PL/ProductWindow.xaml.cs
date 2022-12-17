@@ -26,6 +26,11 @@ namespace PL
             CategoryForNewProduct.ItemsSource = Enum.GetValues(typeof(BO.Category));// for the comboBox
             Product product = bl.Product.ItemProduct(id);//getting the details from bl about the 
             BtnAddOrUpdetProduct.Content = "Updet";
+            Id.Text = product.ID.ToString();
+            Name.Text = product.Name;
+            CategoryForNewProduct.Text = product.Category.ToString();
+            InStock.Text = product.InStock.ToString();
+            Price.Text = product.Price.ToString();
         }
 
         private void ButtonAddProduct_Click(object sender, RoutedEventArgs e)
@@ -36,7 +41,8 @@ namespace PL
                 {
                     MessageBox.Show("Fill in the missing fields", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                if (BtnAddOrUpdetProduct.Content == "Add")
+                string s = BtnAddOrUpdetProduct.Content.ToString()!;
+                if (s == "Add")
                 {
                     BO.Product product = new BO.Product()
                     {
@@ -44,10 +50,11 @@ namespace PL
                         Name = Name.Text,
                         InStock = int.Parse(InStock.Text),
                         Price = double.Parse(Price.Text),
-                        Category = (BO.Category)CategoryForNewProduct.SelectedItem,
+                        Category = (BO.Category)CategoryForNewProduct.SelectedItem!,
                     };
                     bl.Product.Add(product);
                     MessageBox.Show("Product Add succefully", "succefully", MessageBoxButton.OK, MessageBoxImage.Information);
+                    this.Close();
                 }
                 else
                 {
@@ -57,9 +64,10 @@ namespace PL
                         Name = Name.Text,
                         InStock = int.Parse(InStock.Text),
                         Price = int.Parse(Price.Text),
-                        Category = (BO.Category)CategoryForNewProduct.SelectedItem,
+                        Category = (BO.Category)CategoryForNewProduct.SelectedItem!,
                     });
                     MessageBox.Show("Product Updet succefully", "succefully", MessageBoxButton.OK, MessageBoxImage.Information);
+                    this.Close();
                 }
             }
             catch (Exception ex)
