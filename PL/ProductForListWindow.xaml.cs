@@ -1,6 +1,4 @@
 ﻿namespace PL;
-using BlApi;
-using BlImplementation;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,14 +9,14 @@ using System.Windows.Input;
 /// </summary>
 public partial class ProductListWindow : Window
 {
-    private IBl bl = new BL();
+    BlApi.IBl? bl = BlApi.Factory.Get();
     /// <summary>
     /// constructive action
     /// </summary>
     public ProductListWindow()
     {
         InitializeComponent();
-        ProductListview.ItemsSource = bl.Product.GetProducts();
+        ProductListview.ItemsSource = bl?.Product.GetProducts();
         AttributeSelector.ItemsSource = Enum.GetValues(typeof(BO.Category));
     }
     /// <summary>
@@ -31,7 +29,7 @@ public partial class ProductListWindow : Window
         BO.Category c = (BO.Category)AttributeSelector.SelectedItem;
         try
         {
-            ProductListview.ItemsSource = bl.Product.GetProducts(x => x!.Category == c);
+            ProductListview.ItemsSource = bl?.Product.GetListedProductByCategory(c);
         }
         catch (Exception ex)
         {
@@ -75,7 +73,7 @@ public partial class ProductListWindow : Window
     {
         try
         {
-            ProductListview.ItemsSource = bl.Product.GetProducts();
+            ProductListview.ItemsSource = bl?.Product.GetProducts();
         }
         catch (Exception ex)
         {

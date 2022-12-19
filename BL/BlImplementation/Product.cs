@@ -9,7 +9,7 @@ using System.Linq;
 /// </summary>
 internal class Product : IProduct
 {
-    DalApi.IDal Dal = new Dal.DalList();
+    DalApi.IDal? dal = DalApi.Factory.Get();
 
     /// <summary>
     /// Adding a product (for the manager screen)
@@ -38,7 +38,7 @@ internal class Product : IProduct
                 Category = (DO.Category?)p?.Category ?? throw new BO.BlWorngCategoryException("Wrong category "),
                 InStock = p.InStock,
             };
-            Dal.Product.Add(p1);
+            dal?.Product.Add(p1);
         }
         catch (DO.DalAlreadyExistsException exp)
         {
@@ -59,18 +59,16 @@ internal class Product : IProduct
             throw new BO.BlInCorrectException("negative id");
 
 
-        if (Dal.OrderItem.GetAll().Where(orderItem => orderItem?.ProductID == id).Any())
+        if (dal!.OrderItem.GetAll().Where(orderItem => orderItem?.ProductID == id).Any())
             throw new BO.BlAlreadyExistEntityException("the product is exsist in order/s so that can not be deleated");
         try
         {
-            Dal.Product.Delete(id);
+            dal?.Product.Delete(id);
         }
         catch (DO.UnFoundException exp)
         {
             throw new BO.BlMissingEntityException("The product doesnt exsist", exp);//לשנות לסוג אקספשיון הנדרש
         }
-
-
     }
     /// <summary>
     /// Product list request (for manager screen and buyer's catalog screen)
@@ -80,7 +78,7 @@ internal class Product : IProduct
     /// <exception cref="Exception"></exception>
     public IEnumerable<BO.ProductForList?> GetProducts(Func<BO.ProductForList?, bool>? func = null)
     {
-        IEnumerable<BO.ProductForList?> pro = from DO.Product item in Dal.Product.GetAll()
+        IEnumerable<BO.ProductForList?> pro = from DO.Product item in dal!.Product.GetAll()
                                               select new BO.ProductForList()
                                               {
                                                   ID = item.ID ,
@@ -106,7 +104,7 @@ internal class Product : IProduct
         DO.Product? dopro;
         try
         {
-            dopro = Dal.Product.GetById(id);
+            dopro = dal?.Product.GetById(id);
         }
         catch (DO.UnFoundException exp)
         {
@@ -138,7 +136,7 @@ internal class Product : IProduct
         DO.Product? p;
         try
         {
-            p = Dal.Product.GetById(id);
+            p = dal?.Product.GetById(id);
         }
         catch (DO.UnFoundException exp)
         {
@@ -188,11 +186,15 @@ internal class Product : IProduct
                 InStock = p?.InStock ?? 0,
                 Category = (DO.Category?)p?.Category ?? throw new BO.BlInCorrectException("product name"),
             };
-            Dal.Product.Update(dp);
+            dal?.Product.Update(dp);
         }
         catch (DO.UnFoundException exp)
         {
             throw new BO.BlMissingEntityException("the product dosnt exsist", exp);
         }
+    }
+    public IEnumerable<BO.ProductForList?> GetListedProductByCategory(BO.Category c)
+    {
+        return GetProducts().Where(x => x?.Category == c);
     }
 }

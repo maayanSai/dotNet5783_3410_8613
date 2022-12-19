@@ -4,9 +4,9 @@ using BlApi;
 /// <summary>
 /// Realization of BL
 /// </summary>
-sealed public class BL : IBl
+sealed internal class BL : IBl
 {
-    DalApi.IDal Dal = new Dal.DalList();
+    DalApi.IDal? dal = DalApi.Factory.Get();
     /// <summary>
     /// Main logical entity - order
     /// </summary>

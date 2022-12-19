@@ -9,7 +9,7 @@ public class Program
     /// </summary>
     static void Main()
     {
-        IDal dal = new Dal.DalList();
+        IDal? dal = Factory.Get();
         int chooseMenu, chooseEntity; // function and entity selection
         Console.WriteLine("Choose an entity:");
         Console.WriteLine("0: to exit");
@@ -53,16 +53,16 @@ public class Program
                                 do { Console.WriteLine("enter inStock of product"); }
                                 while (!int.TryParse(Console.ReadLine(), out stock));
                                 p.InStock = stock;
-                                dal.Product.Add(p); // We will call the add function
+                                dal?.Product.Add(p); // We will call the add function
                                 break;
                             case 2: // get product
                                 int id1;
                                 do { Console.WriteLine("enter id of product"); }
                                 while (!int.TryParse(Console.ReadLine(), out id1));
-                                Console.WriteLine(dal.Product.GetById(id1)); // We will call get
+                                Console.WriteLine(dal?.Product.GetById(id1)); // We will call get
                                 break;
                             case 3: // get all products
-                                IEnumerable<Product?> list = dal.Product.GetAll();
+                                IEnumerable<Product?> list = dal!.Product.GetAll();
                                 foreach (var pro in list) // We will go through all the products and copy to the new system
                                     Console.WriteLine(pro);
                                 break;
@@ -85,13 +85,13 @@ public class Program
                                 while (!int.TryParse(Console.ReadLine(), out stock1));
                                 p1.InStock = stock1;
                                 if (p1.Name?.Length > 0) // If no blank input is entered
-                                    dal.Product.Update(p1); // We will activate the update function
+                                    dal?.Product.Update(p1); // We will activate the update function
                                 break;
                             case 5: // to delete
                                 int id3;
                                 do { Console.WriteLine("enter id of product"); }
                                 while (!int.TryParse(Console.ReadLine(), out id3));
-                                dal.Product.Delete(id3); // We will activate the delete function
+                                dal?.Product.Delete(id3); // We will activate the delete function
                                 break;
                         }
                         break;
@@ -117,15 +117,15 @@ public class Program
                                 Console.WriteLine("enter customer adress of order");
                                 order.CustomerAdress = Console.ReadLine() ?? "";
                                 order.OrderDate = DateTime.Now; // We will enter the date
-                                dal.Order.Add(order); // we call to add function
+                                dal?.Order.Add(order); // we call to add function
                                 break;
                             case 2: // get order
                                 do { Console.WriteLine("enter id of order"); }
                                 while (!int.TryParse(Console.ReadLine(), out id));
-                                Console.WriteLine(dal.Order.GetById(id)); // We will call get
+                                Console.WriteLine(dal?.Order.GetById(id)); // We will call get
                                 break;
                             case 3: // get all orders
-                                IEnumerable<Order?> list = dal.Order.GetAll(); // We will create a new array
+                                IEnumerable<Order?> list = dal!.Order.GetAll(); // We will create a new array
                                 foreach (var o in list) // We will copy the entire array of orders
                                     Console.WriteLine(o);
                                 break;
@@ -142,12 +142,12 @@ public class Program
                                 order1.CustomerAdress = Console.ReadLine() ?? "";
                                 order1.OrderDate = DateTime.Now;
                                 if (order1.CustomerName?.Length > 0) // If no blank input is entered
-                                    dal.Order.Update(order1); // We will activate the update function
+                                    dal?.Order.Update(order1); // We will activate the update function
                                 break;
                             case 5: // delete
                                 do { Console.WriteLine("enter id of order"); }
                                 while (!int.TryParse(Console.ReadLine(), out id));
-                                dal.Order.Delete(id); // We will activate the delete function
+                                dal?.Order.Delete(id); // We will activate the delete function
                                 break;
                         }
                         break;
@@ -172,19 +172,19 @@ public class Program
                                 do { Console.WriteLine("enter order ID of orderItem"); }
                                 while (!int.TryParse(Console.ReadLine(), out idOrder));
                                 orderItem.OrderID = idOrder;
-                                orderItem.Price = dal.Product.GetById(orderItem.ProductID)?.Price ?? 0;
+                                orderItem.Price = dal?.Product.GetById(orderItem.ProductID)?.Price ?? 0;
                                 do { Console.WriteLine("enter amount of orderItem"); }
                                 while (!int.TryParse(Console.ReadLine(), out amount));
                                 orderItem.Amount = amount;
-                                dal.OrderItem.Add(orderItem); // We will call the add function
+                                dal?.OrderItem.Add(orderItem); // We will call the add function
                                 break;
                             case 2: // get orderItem
                                 do { Console.WriteLine("enter id of orderItem"); }
                                 while (!int.TryParse(Console.ReadLine(), out id));
-                                Console.WriteLine(dal.OrderItem.GetById(id)); // We will call get
+                                Console.WriteLine(dal?.OrderItem.GetById(id)); // We will call get
                                 break;
                             case 3: // get all orderItems
-                                IEnumerable<OrderItem?> list = dal.OrderItem.GetAll(); // We will create a new array
+                                IEnumerable<OrderItem?> list = dal!.OrderItem.GetAll(); // We will create a new array
                                 foreach (var o in list) // We will copy all the items
                                     Console.WriteLine(o);
                                 break;
@@ -199,17 +199,17 @@ public class Program
                                 do { Console.WriteLine("enter order ID of orderItem"); }
                                 while (!int.TryParse(Console.ReadLine(), out idOrder));
                                 orderItem1.OrderID = idOrder;
-                                orderItem1.Price = dal.Product.GetById(orderItem1.ProductID)?.Price ?? 0;
+                                orderItem1.Price = dal?.Product.GetById(orderItem1.ProductID)?.Price ?? 0;
                                 do { Console.WriteLine("enter amount of orderItem"); }
                                 while (!int.TryParse(Console.ReadLine(), out amount));
                                 orderItem1.Amount = amount;
                                 if (orderItem1.ProductID > 0) // If no blank input is entered
-                                    dal.OrderItem.Update(orderItem1); // We will activate the update function
+                                    dal?.OrderItem.Update(orderItem1); // We will activate the update function
                                 break;
                             case 5: // delete
                                 do { Console.WriteLine("enter id of orderItem"); }
                                 while (!int.TryParse(Console.ReadLine(), out id));
-                                dal.OrderItem.Delete(id); //  We will activate the delete function
+                                dal?.OrderItem.Delete(id); //  We will activate the delete function
                                 break;
                         }
                         break;

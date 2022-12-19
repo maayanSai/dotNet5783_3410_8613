@@ -1,20 +1,20 @@
 ﻿namespace PL;
-using BlImplementation;
+
 using System;
 using System.Windows;
-using BlApi;
+
 
 /// <summary>
 /// Interaction logic for ProductWindow.xaml
 /// </summary>
 public partial class ProductWindow : Window
 {
-    private IBl bl = new BL()
+    BlApi.IBl? bl = BlApi.Factory.Get();
 
     /// <summary>
     /// Constructive action to add products
     /// </summary>
-; public ProductWindow()
+    public ProductWindow()
     {
         InitializeComponent();
         CategoryForNewProduct.ItemsSource = Enum.GetValues(typeof(BO.Category));
@@ -28,7 +28,7 @@ public partial class ProductWindow : Window
     {
         InitializeComponent();
         CategoryForNewProduct.ItemsSource = Enum.GetValues(typeof(BO.Category));// for the comboBox
-        BO.Product product = bl.Product.ItemProduct(id);//getting the details from bl about the 
+        BO.Product product = bl!.Product.ItemProduct(id);//getting the details from bl about the 
         BtnAddOrUpdetProduct.Content = "Updet";
         Id.Text = product.ID.ToString();
         Name.Text = product.Name;
@@ -56,7 +56,7 @@ public partial class ProductWindow : Window
                     Price = double.Parse(Price.Text),
                     Category = (BO.Category)CategoryForNewProduct.SelectedItem!,
                 };
-                bl.Product.Add(product);
+                bl?.Product.Add(product);
                 MessageBox.Show("Product Add succefully", "succefully", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }

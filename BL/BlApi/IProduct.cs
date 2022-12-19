@@ -39,4 +39,5 @@ public interface IProduct
     /// </summary>
     /// <param name="p"></param>
     void Update(Product p);
+    IEnumerable<ProductForList?> GetListedProductByCategory(BO.Category c);
 }

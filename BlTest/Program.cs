@@ -1,11 +1,8 @@
 ﻿namespace BlTest;
-using BlApi;
-using BlImplementation;
-using BO;
 public class Program
 {
-    static IBl s_bl = new BL();
-    static Cart s_c = new() { Items = new List<OrderItem?>(), CustomerName = "Ayala", CustomerAdress = "israel 23", CustomerEmail = "ayala@gmail.com" };
+    static BlApi.IBl? bl = BlApi.Factory.Get();
+    static BO.Cart s_c = new() { Items = new List<BO.OrderItem?>(), CustomerName = "Ayala", CustomerAdress = "israel 23", CustomerEmail = "ayala@gmail.com" };
     static void Main()
     {
         int id, amount, stock;
@@ -40,7 +37,7 @@ public class Program
                         switch (chooseMenu)
                         {
                             case 1: // Get products
-                                var list = s_bl.Product.GetProducts();
+                                var list = bl?.Product.GetProducts(); 
                                 foreach (var item in list)
                                     Console.WriteLine(item);
                                 Console.WriteLine();
@@ -48,15 +45,15 @@ public class Program
                             case 2: // get item product by id
                                 do { Console.WriteLine("enter id of product"); }
                                 while (!int.TryParse(Console.ReadLine(), out id));
-                                BO.Product p = s_bl.Product.ItemProduct(id);
+                                BO.Product p = bl!.Product.ItemProduct(id);
                                 Console.WriteLine(p);
                                 Console.WriteLine();
                                 break;
                             case 3: // get item product by id and cart
-                                Cart cart = new();
+                                BO.Cart cart = new();
                                 do { Console.WriteLine("enter id of product"); }
                                 while (!int.TryParse(Console.ReadLine(), out id));
-                                Console.WriteLine(s_bl.Product.ItemProduct(id, cart));
+                                Console.WriteLine(bl?.Product.ItemProduct(id, cart));
                                 Console.WriteLine();
                                 break;
                             case 4: // add
@@ -76,13 +73,13 @@ public class Program
                                 do { Console.WriteLine("enter category of product"); }
                                 while (!Enum.TryParse(Console.ReadLine(), out category));
                                 p1.Category = category;
-                                s_bl.Product.Add(p1);
+                                bl?.Product.Add(p1);
                                 Console.WriteLine();
                                 break;
                             case 5: // delete
                                 do { Console.WriteLine("enter id of product"); }
                                 while (!int.TryParse(Console.ReadLine(), out id));
-                                s_bl.Product.Delete(id);
+                                bl?.Product.Delete(id);
                                 Console.WriteLine();
                                 break;
                             case 6: // update
@@ -102,7 +99,7 @@ public class Program
                                 do { Console.WriteLine("enter category of product"); }
                                 while (!Enum.TryParse(Console.ReadLine(), out category1));
                                 p2.Category = category1;
-                                s_bl.Product.Update(p2);
+                                bl?.Product.Update(p2);
                                 Console.WriteLine();
                                 break;
                             case 7: // exit
@@ -125,7 +122,7 @@ public class Program
                         switch (chooseMenu)
                         {
                             case 1: // get all orders
-                                var list = s_bl.Order.GetOrders();
+                                var list = bl?.Order.GetOrders();
                                 foreach (var item in list)
                                     Console.WriteLine(item);
                                 Console.WriteLine();
@@ -133,26 +130,26 @@ public class Program
                             case 2: // get items order
                                 do { Console.WriteLine("enter id of order"); }
                                 while (!int.TryParse(Console.ReadLine(), out id));
-                                BO.Order o = s_bl.Order.ItemOrder(id);
+                                BO.Order o = bl!.Order.ItemOrder(id);
                                 Console.WriteLine(o);
                                 Console.WriteLine();
                                 break;
                             case 3: // Update shipping
                                 do { Console.WriteLine("enter id of order"); }
                                 while (!int.TryParse(Console.ReadLine(), out id));
-                                Console.WriteLine(s_bl.Order.Updateshipping(id));
+                                Console.WriteLine(bl?.Order.Updateshipping(id));
                                 Console.WriteLine();
                                 break;
                             case 4: // Update supply
                                 do { Console.WriteLine("enter id of order"); }
                                 while (!int.TryParse(Console.ReadLine(), out id));
-                                Console.WriteLine(s_bl.Order.Updatesupply(id));
+                                Console.WriteLine(bl?.Order.Updatesupply(id));
                                 Console.WriteLine();
                                 break;
                             case 5: // tracking
                                 do { Console.WriteLine("enter id of order"); }
                                 while (!int.TryParse(Console.ReadLine(), out id));
-                                Console.WriteLine(s_bl.Order.Tracking(id));
+                                Console.WriteLine(bl?.Order.Tracking(id));
                                 Console.WriteLine();
                                 break;
                             case 6: // exit
@@ -177,7 +174,7 @@ public class Program
                                 // Cart c = new();
                                 do { Console.WriteLine("enter id of product"); }
                                 while (!int.TryParse(Console.ReadLine(), out idProduct));
-                                Console.WriteLine(s_bl.Cart.Add(s_c, idProduct));
+                                Console.WriteLine(bl?.Cart.Add(s_c, idProduct));
                                 Console.WriteLine();
                                 break;
                             case 2: // Update
@@ -186,11 +183,11 @@ public class Program
                                 while (!int.TryParse(Console.ReadLine(), out idProduct1));
                                 Console.WriteLine("enter amount of product");
                                 while (!int.TryParse(Console.ReadLine(), out amount)) ;
-                                Console.WriteLine(s_bl.Cart.Update(s_c, idProduct1, amount));
+                                Console.WriteLine(bl?.Cart.Update(s_c, idProduct1, amount));
                                 Console.WriteLine();
                                 break;
                             case 3: // Make an order
-                                s_bl.Cart.MakeAnOrder(s_c);
+                                bl?.Cart.MakeAnOrder(s_c);
                                 Console.WriteLine();
                                 break;
                             case 4: // exit

@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 internal class Cart : ICart
 {
     private static readonly Random _rnd = new();
-    DalApi.IDal Dal = new Dal.DalList();
+    DalApi.IDal? dal = DalApi.Factory.Get();
 
     /// <summary>
     /// Updating the quantity of a product in the shopping cart (for the shopping cart screen)
@@ -66,7 +66,7 @@ internal class Cart : ICart
         DO.Product? pro;
         try
         {
-            pro = Dal.Product.GetById(delegate (DO.Product? x) { return x?.ID == id; });
+            pro = dal?.Product.GetById(delegate (DO.Product? x) { return x?.ID == id; });
         }
         catch (DO.UnFoundException exp)
         {
@@ -112,7 +112,7 @@ internal class Cart : ICart
         //All the products exist (according to the ID card, although it is possible that they exist with zero quantity
         try
         {
-            cart.Items?.ForEach(x => Dal.Product.GetById(x!.ProductID));
+            cart.Items?.ForEach(x => dal?.Product.GetById(x!.ProductID));
         }
         catch (DO.UnFoundException exp)
         {
@@ -120,7 +120,7 @@ internal class Cart : ICart
         }
         if (cart.Items?.Exists(x => x?.Amount <= 0) ?? throw new BO.BlNullPropertyException("Items does not exist"))
             throw new BO.BlInCorrectException("negetive amount");
-        if (cart.Items.Exists(x => x?.Amount > Dal.Product.GetById(x?.ProductID ?? throw new BO.BlNullPropertyException("OrderItems does not exist"))?.InStock))
+        if (cart.Items.Exists(x => x?.Amount > dal?.Product.GetById(x?.ProductID ?? throw new BO.BlNullPropertyException("OrderItems does not exist"))?.InStock))
             throw new BO.BlInCorrectException("therse not enogth instook");
         if (cart.CustomerName == null)
             throw new BO.BlNullPropertyException("missing name");
@@ -143,7 +143,7 @@ internal class Cart : ICart
             DeliveryrDate = null,
             Amount = cart.Items.Select(x => x?.Amount ?? throw new BO.BlNullPropertyException("OrderItem does not exist")).Sum(),
         };
-        orderId = Dal.Order.Add(ord); // There is no need to check that there is no exception for adding an order
+        orderId = dal!.Order.Add(ord); // There is no need to check that there is no exception for adding an order
         foreach (var bordi in cart.Items)
         {
             DO.OrderItem dOrdi = new()
@@ -154,11 +154,11 @@ internal class Cart : ICart
                 Price = bordi.Price,
                 Amount = bordi.Amount,
             };
-            Dal.OrderItem.Add(dOrdi); // There can be no exception
+            dal?.OrderItem.Add(dOrdi); // There can be no exception
             DO.Product? p;
             try
             {
-                p = Dal.Product.GetById(dOrdi.ProductID);
+                p = dal?.Product.GetById(dOrdi.ProductID);
             }
             catch (DO.UnFoundException exp)
             {
@@ -170,7 +170,7 @@ internal class Cart : ICart
                 product.InStock -= dOrdi.Amount;
                 try
                 {
-                    Dal.Product.Update(product);
+                    dal?.Product.Update(product);
                 }
                 catch (DO.UnFoundException exp)
                 {

@@ -1,14 +1,13 @@
 ﻿namespace PL;
-using BlApi;
-using BlImplementation;
 using System.Windows;
+
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
 public partial class MainWindow : Window
 {
-    private IBl bl = new BL();
+    BlApi.IBl? bl = BlApi.Factory.Get();
     /// <summary>
     /// constructive action
     /// </summary>
