@@ -166,43 +166,43 @@ public BO.Order? Updatesupply(int id)
         throw new BO.BlMissingEntityException("The order does not exist", exp);
     }
 }
-/// <summary>
-/// Order Tracking (Manager Order Management Screen)
-/// </summary>
-/// <param name="id"></param>
-/// <returns></returns>
-/// <exception cref="BO.BlInCorrectException"></exception>
-/// <exception cref="BO.BlMissingEntityException"></exception>
-/// <exception cref="BO.BlNullPropertyException"></exception>
-public BO.OrderTracking? Tracking(int id)
-{
-    DO.Order order;
-    if (id < 0)
-        throw new BO.BlInCorrectException("id is negative");
-    try
+    /// <summary>
+    /// Order Tracking (Manager Order Management Screen)
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="BO.BlInCorrectException"></exception>
+    /// <exception cref="BO.BlMissingEntityException"></exception>
+    /// <exception cref="BO.BlNullPropertyException"></exception>
+    public BO.OrderTracking? Tracking(int id)
     {
-        order = dal?.Order.GetById(id) ?? throw new BO.BlNullPropertyException("missing product id");
+        DO.Order order;
+        if (id < 0)
+            throw new BO.BlInCorrectException("id is negative");
+        try
+        {
+            order = dal?.Order.GetById(id) ?? throw new BO.BlNullPropertyException("missing product id");
+        }
+        catch (DO.UnFoundException exp)
+        {
+            throw new BO.BlMissingEntityException("missing order", exp);
+        }
+        List<Tuple<DateTime?, string?>> tracking = new();
+        if (order.OrderDate != null)
+            tracking.Add(new Tuple<DateTime?, string?>(order.OrderDate, "the order allready exist"));
+        else throw new BO.BlIncorrectDatesException("order date is miising");
+        if (order.ShipDate != null)
+            tracking.Add(new Tuple<DateTime?, string?>(order.ShipDate, " the order has been sent"));
+        // else throw new BO.BlNullPropertyException("Ship date is missing");
+        if (order.DeliveryrDate != null)
+            tracking.Add(new Tuple<DateTime?, string?>(order.ShipDate, " the order has been delivered"));
+        //else throw new BO.BlNullPropertyException("Delivery Date is missing");
+        BO.OrderTracking ortk = new()
+        {
+            ID = id,
+            Status = GetStatus(order),
+            Tracking = tracking,
+        };
+        return ortk;
     }
-    catch (DO.UnFoundException exp)
-    {
-        throw new BO.BlMissingEntityException("missing order", exp);
-    }
-    List<Tuple<DateTime?, string?>> tracking = new();
-    if (order.OrderDate != null)
-        tracking.Add(new Tuple<DateTime?, string?>(order.OrderDate, "the order allready exist"));
-    else throw new BO.BlIncorrectDatesException("order date is miising");
-    if (order.ShipDate != null)
-        tracking.Add(new Tuple<DateTime?, string?>(order.ShipDate, " the order has been sent"));
-    // else throw new BO.BlNullPropertyException("Ship date is missing");
-    if (order.DeliveryrDate != null)
-        tracking.Add(new Tuple<DateTime?, string?>(order.ShipDate, " the order has been delivered"));
-    //else throw new BO.BlNullPropertyException("Delivery Date is missing");
-    BO.OrderTracking ortk = new()
-    {
-        ID = id,
-        Status = GetStatus(order),
-        Tracking = tracking,
-    };
-    return ortk;
-}
 }

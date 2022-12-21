@@ -15,7 +15,7 @@
         <Label Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black" Content="Price:" HorizontalAlignment="Left" Height="40" Margin="209,222,0,0" VerticalAlignment="Top" Width="76"/>
         <Label Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black" Content="InStock:" HorizontalAlignment="Left" Height="39" Margin="209,267,0,0" VerticalAlignment="Top" Width="86"/>
         <TextBox Foreground="Black" x:Name="Name" HorizontalAlignment="Left" Height="29" Margin="300,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123" RenderTransformOrigin="0.473,0.77" />
-        <TextBox x:Name="Price" Foreground="Black" HorizontalAlignment="Left" Height="29" Margin="300,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123"/>
+        <TextBox Foreground="Black" x:Name="Price" HorizontalAlignment="Left" Height="29" Margin="300,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123"/>
         <TextBox Foreground="Black" x:Name="InStock" HorizontalAlignment="Left" Height="29" Margin="300,267,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123" />
         <Button  Name="BtnAddOrUpdetProduct" Content="Add" HorizontalAlignment="Left" Height="29" Margin="514,319,0,0" VerticalAlignment="Top" Width="80" Click="ButtonAddOrApdet_Click" Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black"/>
 
