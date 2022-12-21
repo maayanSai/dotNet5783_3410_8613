@@ -6,7 +6,7 @@ using BlApi;
 /// </summary>
 sealed internal class BL : IBl
 {
-    DalApi.IDal? dal = DalApi.Factory.Get();
+    private static readonly DalApi.IDal  dal = DalApi.Factory.Get()!;
     /// <summary>
     /// Main logical entity - order
     /// </summary>

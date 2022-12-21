@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 internal class Cart : ICart
 {
     private static readonly Random _rnd = new();
-    DalApi.IDal? dal = DalApi.Factory.Get();
+    private static readonly DalApi.IDal dal = DalApi.Factory.Get()!;
 
     /// <summary>
     /// Updating the quantity of a product in the shopping cart (for the shopping cart screen)

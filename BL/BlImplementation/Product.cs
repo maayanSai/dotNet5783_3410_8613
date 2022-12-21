@@ -9,7 +9,7 @@ using System.Linq;
 /// </summary>
 internal class Product : IProduct
 {
-    DalApi.IDal? dal = DalApi.Factory.Get();
+    private static readonly DalApi.IDal dal = DalApi.Factory.Get()!;
 
     /// <summary>
     /// Adding a product (for the manager screen)

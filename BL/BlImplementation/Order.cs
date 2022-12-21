@@ -7,7 +7,8 @@ using System.Collections.Generic;
 /// </summary>
 internal class Order : IOrder
 {
-    DalApi.IDal? dal = DalApi.Factory.Get();
+    private static readonly DalApi.IDal dal = DalApi.Factory.Get()!;
+
     /// <summary>
     /// order list request (admin screen)
     /// </summary>
