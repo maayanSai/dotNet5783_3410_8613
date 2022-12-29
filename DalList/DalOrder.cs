@@ -58,9 +58,6 @@ internal class DalOrder : IOrder
     {
       return filter is null ? throw new UnFoundException("there is no func") : DataSource.s_ordersList.FirstOrDefault(x => filter(x));
     }
-    public Order? GetById(int id)
-    {
-        return DataSource.s_ordersList.FirstOrDefault(x => x?.ID == id);
-    }
+    public Order? GetById(int id)=> DataSource.s_ordersList.FirstOrDefault(x => x?.ID == id);
 }
 

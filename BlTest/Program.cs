@@ -37,8 +37,9 @@ public class Program
                         switch (chooseMenu)
                         {
                             case 1: // Get products
-                                var list = bl?.Product.GetProducts(); 
-                                foreach (var item in list)
+                                var list = bl?.Product.GetProducts();
+                                
+                                foreach (var item in list!)
                                     Console.WriteLine(item);
                                 Console.WriteLine();
                                 break;
@@ -123,7 +124,7 @@ public class Program
                         {
                             case 1: // get all orders
                                 var list = bl?.Order.GetOrders();
-                                foreach (var item in list)
+                                foreach (var item in list!)
                                     Console.WriteLine(item);
                                 Console.WriteLine();
                                 break;

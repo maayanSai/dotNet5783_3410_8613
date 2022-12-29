@@ -52,6 +52,9 @@ internal class DalProduct : IProduct
     {
         Delete(p.ID); // if not found - exception is thrown from this method
         DataSource.s_productsList.Add(p);
+        var v = from item in DataSource.s_productsList
+                orderby item?.ID
+                select item;
     }
     /// <summary>
     /// Returns a product by terms of

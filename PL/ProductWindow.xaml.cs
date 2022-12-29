@@ -1,8 +1,6 @@
 ﻿namespace PL;
-
 using System;
 using System.Windows;
-
 
 /// <summary>
 /// Interaction logic for ProductWindow.xaml

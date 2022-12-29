@@ -1,7 +1,9 @@
 ﻿namespace PL;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 
 /// <summary>
@@ -59,11 +61,6 @@ public partial class ProductListWindow : Window
         ProductListview.ItemsSource = bl?.Product.GetProducts();
     }
 
-    private void ProductListview_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-
-    }
-
     /// <summary>
     /// A button that returns all products after filtering
     /// </summary>
@@ -79,5 +76,10 @@ public partial class ProductListWindow : Window
         {
             MessageBox.Show(ex.Message);
         }
+    }
+
+    private void ProductListview_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+
     }
 }

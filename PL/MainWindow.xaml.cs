@@ -1,7 +1,6 @@
 ﻿namespace PL;
 using System.Windows;
 
-
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
@@ -20,5 +19,5 @@ public partial class MainWindow : Window
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    private void ShowProductsButton_Click(object sender, RoutedEventArgs e) => new ProductListWindow().Show();
+    private void ShowProductsButton_Click(object sender, RoutedEventArgs e) => new OrdersAndProducts().Show();
 }

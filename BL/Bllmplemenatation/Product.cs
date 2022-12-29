@@ -57,8 +57,6 @@ internal class Product : IProduct
     {
         if (id <= 0) // if id is negative
             throw new BO.BlInCorrectException("negative id");
-
-
         if (dal!.OrderItem.GetAll().Where(orderItem => orderItem?.ProductID == id).Any())
             throw new BO.BlAlreadyExistEntityException("the product is exsist in order/s so that can not be deleated");
         try
