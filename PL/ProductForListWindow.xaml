@@ -24,7 +24,7 @@
             <ComboBox Name="AttributeSelector" FontFamily="Segoe Print" SelectionChanged="SelectionChanged" Foreground="Black" Grid.ColumnSpan="2" Margin="372,3,27,7"/>
             <Label Grid.Column="0" FontFamily="Segoe Print" Foreground="#FFEFCF81" FontSize="20" Content="Category:" Margin="10,-4,267,-5" Grid.ColumnSpan="2"/>
         </Grid>
-        <ListView x:Name="ProductListview" FontFamily="Segoe Print" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="-5,0,5,45" Grid.Row="1" MouseDoubleClick="Update" Background="Black" Foreground="#FFFFFBFD" FontSize="12" Grid.RowSpan="2" SelectionChanged="ProductListview_SelectionChanged">
+        <ListView x:Name="ProductListview" FontFamily="Segoe Print" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,0,0,44" MouseDoubleClick="Update" Background="Black" Foreground="#FFFFFBFD" FontSize="12" Grid.RowSpan="2" SelectionChanged="ProductListview_SelectionChanged" Grid.Row="1">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

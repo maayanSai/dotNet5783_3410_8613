@@ -27,5 +27,12 @@ namespace PL
             OrderForList.ItemsSource = bl?.Order.GetOrders();
         }
 
+        private void OrderItem(object sender, MouseButtonEventArgs e)
+        {
+            int id = ((Order)OrderForList.SelectedItem).ID;
+            if (OrderForList.SelectedItem is Order order)
+                new OrderForListWindow().ShowDialog();
+            OrderForList.ItemsSource = bl?.Order.GetOrders();
+        }
     }
 }
