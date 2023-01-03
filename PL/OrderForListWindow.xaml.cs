@@ -29,9 +29,7 @@ namespace PL
 
         private void OrderItem(object sender, MouseButtonEventArgs e)
         {
-            int id = ((Order)OrderForList.SelectedItem).ID;
-            if (OrderForList.SelectedItem is Order order)
-                new OrderForListWindow().ShowDialog();
+            new OrderItemWindow().Show();
             OrderForList.ItemsSource = bl?.Order.GetOrders();
         }
     }
