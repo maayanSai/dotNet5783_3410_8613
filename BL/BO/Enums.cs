@@ -9,7 +9,8 @@ public enum Category
     Necklace,
     Bracelet,
     FootBracelet,
-    Earings
+    Earings,
+    None,
 }
 /// <summary>
 /// order status enum

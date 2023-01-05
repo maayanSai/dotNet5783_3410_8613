@@ -1,6 +1,9 @@
 ﻿namespace PL;
+
+using BO;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -15,10 +18,27 @@ public partial class ProductListWindow : Window
     /// <summary>
     /// constructive action
     /// </summary>
+    /// 
+    //DependencyProperty ProductDep = DependencyProperty.Register(nameof(ProductList), typeof(IEnumerable<ProductForList>), typeof(ProductListWindow));
+    //IEnumerable<ProductForList> ProductList { get => (IEnumerable<ProductForList>)GetValue(ProductDep); set => SetValue(ProductDep, value); }
+
+
+    public ObservableCollection<BO.ProductForList?> ProductList
+    {
+        get { return (ObservableCollection<BO.ProductForList?>)GetValue(ProductListProperty); }
+        set { SetValue(ProductListProperty, value); }
+    }
+    public Category Category { get; set; } = Category.None;
+    // Using a DependencyProperty as the backing store for ProductList.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty ProductListProperty =
+        DependencyProperty.Register("ProductList", typeof(ObservableCollection<BO.ProductForList?>), typeof(Window));
+
+
     public ProductListWindow()
     {
         InitializeComponent();
-        ProductListview.ItemsSource = bl?.Product.GetProducts();
+        ProductList = new(bl?.Product.GetProducts()!);
+       // productForListDataGrid.ItemsSource = bl?.Product.GetProducts();
         AttributeSelector.ItemsSource = Enum.GetValues(typeof(BO.Category));
     }
     /// <summary>
@@ -31,7 +51,7 @@ public partial class ProductListWindow : Window
         BO.Category c = (BO.Category)AttributeSelector.SelectedItem;
         try
         {
-            ProductListview.ItemsSource = bl?.Product.GetListedProductByCategory(c);
+            ProductList = new(bl?.Product.GetListedProductByCategory(c)!);
         }
         catch (Exception ex)
         {
@@ -46,20 +66,14 @@ public partial class ProductListWindow : Window
     private void NewProductButton_Click(object sender, RoutedEventArgs e)
     {
         new ProductWindow().Show();
-        ProductListview.ItemsSource = bl?.Product.GetProducts();
+        ProductList = new(bl?.Product.GetProducts()!);
     }
     /// <summary>
     /// A button that allows updating products
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    private void Update(object sender, MouseButtonEventArgs e)
-    {
-        int id = ((BO.ProductForList)ProductListview.SelectedItem).ID;
-        if (ProductListview.SelectedItem is BO.ProductForList productForList)
-            new ProductWindow(id).ShowDialog();
-        ProductListview.ItemsSource = bl?.Product.GetProducts();
-    }
+    
 
     /// <summary>
     /// A button that returns all products after filtering
@@ -70,12 +84,22 @@ public partial class ProductListWindow : Window
     {
         try
         {
-            ProductListview.ItemsSource = bl?.Product.GetProducts();
+            ProductList = new(bl?.Product.GetProducts()!);
         }
         catch (Exception ex)
         {
             MessageBox.Show(ex.Message);
         }
+    }
+
+    private void productForListDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+    {
+        e.Handled= true;
+        BO.ProductForList? p = (ProductForList)((DataGrid)sender).SelectedItem;
+
+        ProductWindow windoProduct = new ProductWindow(p.ID);
+        windoProduct.ShowDialog();
+
     }
 
     private void ProductListview_SelectionChanged(object sender, SelectionChangedEventArgs e)

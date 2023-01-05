@@ -1,5 +1,8 @@
 ﻿namespace PL;
+
+using BO;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 
 /// <summary>
@@ -12,9 +15,22 @@ public partial class ProductWindow : Window
     /// <summary>
     /// Constructive action to add products
     /// </summary>
+    static readonly DependencyProperty categoriesdp = DependencyProperty.Register("enum category", typeof(List<string>), typeof(ProductWindow));
+   // List<string> Categories { get=>
+    static readonly DependencyProperty ProductDep = DependencyProperty.Register(nameof(Product), typeof(Product), typeof(ProductWindow));
+    Product Product {  get=> (Product)GetValue(ProductDep); set => SetValue(ProductDep, value); }
+
+    static readonly DependencyProperty ModeDep = DependencyProperty.Register(nameof(Mode), typeof(bool), typeof(ProductWindow));
+    bool Mode { get => (bool)GetValue(ModeDep); set => SetValue(ModeDep, value); }
+
+    static readonly DependencyProperty CategoryEmunDep= DependencyProperty.Register(nameof(BO.Category), typeof(BO.Category), typeof(ProductWindow));
+
+    BO.Category category { get => (BO.Category)GetValue(CategoryEmunDep); set => SetValue(CategoryEmunDep, value); }
     public ProductWindow()
     {
         InitializeComponent();
+        Product = new Product();  
+        Mode= false;
         CategoryForNewProduct.ItemsSource = Enum.GetValues(typeof(BO.Category));
         BtnAddOrUpdetProduct.Content = "Add";
     }
@@ -25,14 +41,10 @@ public partial class ProductWindow : Window
     public ProductWindow(int id)
     {
         InitializeComponent();
+        Mode=true;
         CategoryForNewProduct.ItemsSource = Enum.GetValues(typeof(BO.Category));// for the comboBox
-        BO.Product product = bl!.Product.ItemProduct(id);//getting the details from bl about the 
+        Product = bl!.Product.ItemProduct(id);//getting the details from bl about the 
         BtnAddOrUpdetProduct.Content = "Updet";
-        Id.Text = product.ID.ToString();
-        Name.Text = product.Name;
-        CategoryForNewProduct.Text = product.Category.ToString();
-        InStock.Text = product.InStock.ToString();
-        Price.Text = product.Price.ToString();
     }
     /// <summary>
     /// A button that adds or updates products
@@ -46,28 +58,13 @@ public partial class ProductWindow : Window
             string s = BtnAddOrUpdetProduct.Content.ToString()!;
             if (s == "Add")
             {
-                BO.Product product = new BO.Product()
-                {
-                    ID = int.Parse(Id.Text),
-                    Name = Name.Text,
-                    InStock = int.Parse(InStock.Text),
-                    Price = double.Parse(Price.Text),
-                    Category = (BO.Category)CategoryForNewProduct.SelectedItem!,
-                };
-                bl?.Product.Add(product);
+                bl?.Product.Add(Product);
                 MessageBox.Show("Product Add succefully", "succefully", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
             else
             {
-                bl!.Product.Update(new BO.Product()
-                {
-                    ID = int.Parse(Id.Text),
-                    Name = Name.Text,
-                    InStock = int.Parse(InStock.Text),
-                    Price = int.Parse(Price.Text),
-                    Category = (BO.Category)CategoryForNewProduct.SelectedItem!,
-                });
+                bl!.Product.Update(Product);
                 MessageBox.Show("Product Updet succefully", "succefully", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
