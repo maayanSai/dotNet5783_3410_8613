@@ -10,9 +10,14 @@
         <Grid.Background>
             <ImageBrush Stretch="Fill" ImageSource="/צילום מסך 2022-12-17 212806.png"/>
         </Grid.Background>
-        <Button Content="Admin" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Width="93" Click="ShowProductsButton_Click" Foreground="#FFEFCF81" FontSize="20" Margin="671,359,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold"/>
-        <Button Content="New order" HorizontalAlignment="Left" Height="59" Margin="638,268,0,0" VerticalAlignment="Top" Width="152"/>
-        <Button Content="Order tracking" HorizontalAlignment="Left" Height="98" Margin="644,161,0,0" VerticalAlignment="Top" Width="140"/>
+        <Button Content="Admin" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Width="92" Click="ShowProductsButton_Click" Foreground="#FFEFCF81" FontSize="20" Margin="659,280,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold"/>
+        <Button Content="New order" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Width="152" Foreground="#FFEFCF81" FontSize="20" Margin="629,333,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold"/>
+        <Grid HorizontalAlignment="Left" Height="98" Margin="43,180,0,0" VerticalAlignment="Top" Width="102">
+            <Grid.Background>
+                <ImageBrush/>
+            </Grid.Background>
+        </Grid>
+        <Button Content="Order Tracking" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Width="170" Foreground="#FFEFCF81" FontSize="20" Margin="620,390,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold"/>
 
 
     </Grid>

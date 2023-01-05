@@ -5,10 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="OrdersAndProducts" Height="450" Width="800">
+        Title="OrdersAndProducts" Height="450" Width="800" Background="Black">
     <Grid>
-        <Button Content="Products" HorizontalAlignment="Left" Height="96" Margin="106,165,0,0" VerticalAlignment="Top" Width="160" Click="Product_Click"/>
-        <Button Content="Orders" HorizontalAlignment="Left" Height="96" Margin="335,165,0,0" VerticalAlignment="Top" Width="201" Click="Order_Click"/>
+        <Grid.Background>
+            <ImageBrush/>
+        </Grid.Background>
+        <Button Content="Products" HorizontalAlignment="Left" Height="107" VerticalAlignment="Top" Width="208" Foreground="#FFEFCF81" FontSize="30" Margin="424,152,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold" RenderTransformOrigin="0.176,1.215"/>
+        <Button Content="Orders" HorizontalAlignment="Left" Height="107" VerticalAlignment="Top" Width="208" Foreground="#FFEFCF81" FontSize="30" Margin="164,152,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold"/>
+        <Grid HorizontalAlignment="Left" Height="73" Margin="0,351,0,0" VerticalAlignment="Top" Width="113">
+            <Grid.Background>
+                <ImageBrush ImageSource="/צילום מסך 2023-01-05 161035.png"/>
+            </Grid.Background>
+        </Grid>
 
     </Grid>
 </Window>
