@@ -90,6 +90,7 @@ public partial class ProductListWindow : Window
         {
             MessageBox.Show(ex.Message);
         }
+
     }
 
     private void productForListDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -99,7 +100,6 @@ public partial class ProductListWindow : Window
 
         ProductWindow windoProduct = new ProductWindow(p.ID);
         windoProduct.ShowDialog();
-
     }
 
     private void ProductListview_SelectionChanged(object sender, SelectionChangedEventArgs e)
