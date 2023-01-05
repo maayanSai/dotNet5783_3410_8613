@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        DataContext="{Binding Path=ProductList, RelativeSource={RelativeSource self}}"
+        DataContext="{Binding Path=ProductList,Mode=TwoWay,RelativeSource={RelativeSource self}}"
         Title="ProductForListWindow" Height="640" Width="800">
     <Grid Name="MainGrid" Background="Black">
         <Grid.RowDefinitions>
@@ -31,11 +31,11 @@
         <Button Content="Add new Product" Name="addNewProduct" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="NewProductButton_Click" Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black"/>
         <DataGrid x:Name="productForListDataGrid" ItemsSource="{Binding}" SelectionChanged="ProductListview_SelectionChanged" AutoGenerateColumns="False" EnableRowVirtualization="True" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="320,72,320,267" Grid.Row="1" MouseDoubleClick="productForListDataGrid_MouseDoubleClick">
             <DataGrid.Columns>
-                
-                <DataGridTextColumn x:Name="categoryColumn" Binding="{Binding Category}" Header="Category" Width="SizeToHeader"/>
+             
+                <DataGridTextColumn x:Name="categoryColumn" Binding="{Binding Category ,Mode=TwoWay}" Header="Category" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="iDColumn" Binding="{Binding ID}" Header="ID" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="priceColumn" Binding="{Binding Price}" Header="Price" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name,Mode=TwoWay}" Header="Name" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="priceColumn" Binding="{Binding Price, Mode=TwoWay}" Header="Price" Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

@@ -19,8 +19,8 @@ public partial class ProductListWindow : Window
     /// constructive action
     /// </summary>
     /// 
-    //DependencyProperty ProductDep = DependencyProperty.Register(nameof(ProductList), typeof(IEnumerable<ProductForList>), typeof(ProductListWindow));
-    //IEnumerable<ProductForList> ProductList { get => (IEnumerable<ProductForList>)GetValue(ProductDep); set => SetValue(ProductDep, value); }
+  //  DependencyProperty ProductDep = DependencyProperty.Register(nameof(ProductList), typeof(IEnumerable<ProductForList>), typeof(ProductListWindow));
+   // IEnumerable<ProductForList> ProductList { get => (IEnumerable<ProductForList>)GetValue(ProductDep); set => SetValue(ProductDep, value); }
 
 
     public ObservableCollection<BO.ProductForList?> ProductList

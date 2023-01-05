@@ -15,17 +15,16 @@ public partial class ProductWindow : Window
     /// <summary>
     /// Constructive action to add products
     /// </summary>
-    static readonly DependencyProperty categoriesdp = DependencyProperty.Register("enum category", typeof(List<string>), typeof(ProductWindow));
-   // List<string> Categories { get=>
+
+    public static readonly DependencyProperty CategorysDep = DependencyProperty.Register(nameof(CategorysDep), typeof(BO.Category[]), typeof(ProductWindow));
+   BO.Category[] Category {    get => (Category[])GetValue(CategorysDep);set=> SetValue(CategorysDep, value); }
     static readonly DependencyProperty ProductDep = DependencyProperty.Register(nameof(Product), typeof(Product), typeof(ProductWindow));
     Product Product {  get=> (Product)GetValue(ProductDep); set => SetValue(ProductDep, value); }
 
     static readonly DependencyProperty ModeDep = DependencyProperty.Register(nameof(Mode), typeof(bool), typeof(ProductWindow));
     bool Mode { get => (bool)GetValue(ModeDep); set => SetValue(ModeDep, value); }
 
-    static readonly DependencyProperty CategoryEmunDep= DependencyProperty.Register(nameof(BO.Category), typeof(BO.Category), typeof(ProductWindow));
-
-    BO.Category category { get => (BO.Category)GetValue(CategoryEmunDep); set => SetValue(CategoryEmunDep, value); }
+    
     public ProductWindow()
     {
         InitializeComponent();
