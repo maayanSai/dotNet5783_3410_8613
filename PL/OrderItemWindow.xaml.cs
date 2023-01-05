@@ -25,7 +25,6 @@ namespace PL
         public OrderItemWindow()
         {
             InitializeComponent();
-            status.ItemsSource = Enum.GetValues(typeof(BO.OrderStatus));
         }
 
 
