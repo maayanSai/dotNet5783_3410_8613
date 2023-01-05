@@ -23,7 +23,7 @@ public partial class ProductListWindow : Window
     //IEnumerable<ProductForList> ProductList { get => (IEnumerable<ProductForList>)GetValue(ProductDep); set => SetValue(ProductDep, value); }
 
 
-    public ObservableCollection<BO.ProductForList?> ProductList
+    public  ObservableCollection<BO.ProductForList?> ProductList
     {
         get { return (ObservableCollection<BO.ProductForList?>)GetValue(ProductListProperty); }
         set { SetValue(ProductListProperty, value); }

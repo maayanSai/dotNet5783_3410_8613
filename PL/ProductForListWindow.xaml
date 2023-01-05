@@ -23,19 +23,27 @@
                 <ColumnDefinition Width="32"/>
             </Grid.ColumnDefinitions >
             <ComboBox Name="AttributeSelector" FontFamily="Segoe Print" SelectionChanged="SelectionChanged" DataContext="{Binding Path=cate}" Foreground="Black" Grid.ColumnSpan="2" Margin="372,3,27,7"/>
-            <Label Grid.Column="0" FontFamily="Segoe Print" Foreground="#FFEFCF81" FontSize="20" Content="Category:" Margin="10,-4,267,-5" Grid.ColumnSpan="2"/>
+            <Label Grid.Column="0" FontFamily="Segoe Print" Foreground="#FFEFCF81" FontSize="20" Content=" Select Category:" Margin="10,-4,267,-5" Grid.ColumnSpan="2"/>
+
         </Grid>
         <!--<ListView FontFamily="Segoe Print" ItemsSource="{Binding ProductList}" Margin="0,0,0,44" MouseDoubleClick="Update" Background="Black" Foreground="#FFFFFBFD" FontSize="12" Grid.RowSpan="2" SelectionChanged="ProductListview_SelectionChanged" Grid.Row="1"/>-->
 
+        <Button Content="Add new Product" Name="addNewProduct" Grid.Row="1" HorizontalAlignment="Right" Margin="0,498,10,35" Padding="5" Click="NewProductButton_Click" Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black"/>
         <Button Content="click to all product" HorizontalAlignment="Left" Height="25" Margin="655,0,0,0" VerticalAlignment="Center" Width="125" Click="ButtonAfterFiltering_Click" Foreground="#FFEFCF81" FontSize="12" FontFamily="Segoe Print"  Background="Black"/>
-        <Button Content="Add new Product" Name="addNewProduct" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="NewProductButton_Click" Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black"/>
-        <DataGrid x:Name="productForListDataGrid" ItemsSource="{Binding}" SelectionChanged="ProductListview_SelectionChanged" AutoGenerateColumns="False" EnableRowVirtualization="True" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="320,72,320,267" Grid.Row="1" MouseDoubleClick="productForListDataGrid_MouseDoubleClick">
+        <DataGrid x:Name="productForListDataGrid" ItemsSource="{Binding}" SelectionChanged="ProductListview_SelectionChanged" AutoGenerateColumns="False" EnableRowVirtualization="True" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="20,18,16,103" Grid.Row="1" MouseDoubleClick="productForListDataGrid_MouseDoubleClick" RenderTransformOrigin="0.5,0.5">
+            <DataGrid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="0.336"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="1.194"/>
+                </TransformGroup>
+            </DataGrid.RenderTransform>
             <DataGrid.Columns>
-                
-                <DataGridTextColumn x:Name="categoryColumn" Binding="{Binding Category}" Header="Category" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="iDColumn" Binding="{Binding ID}" Header="ID" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="priceColumn" Binding="{Binding Price}" Header="Price" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="categoryColumn" Binding="{Binding Category}" Header="Category       " Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="iDColumn" Binding="{Binding ID}" Header="ID            " Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name                       " Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="priceColumn" Binding="{Binding Price}" Header="Price      " Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
