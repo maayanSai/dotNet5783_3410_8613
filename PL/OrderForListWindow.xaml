@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
+        DataContext="{Binding RelativeSource={RelativeSource self}}"
         Title="OrderForListWindow" Height="450" Width="800">
     <Grid>
         <Grid HorizontalAlignment="Center" Height="435" VerticalAlignment="Center" Width="790"/>
-        <ListView x:Name="OrderForList" d:ItemsSource="{d:SampleData ItemCount=5}" MouseDoubleClick="OrderItem"  >
+        <ListView ItemsSource="{Binding OrderList}" MouseDoubleClick="OrderItem"  >
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

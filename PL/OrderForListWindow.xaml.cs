@@ -1,6 +1,7 @@
 ﻿using BO;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,16 +22,21 @@ namespace PL
     public partial class OrderForListWindow : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
-        public OrderForListWindow()
+
+        //public  ObservableCollection<OrderForList> OrderList;
+        //IEnumerable<OrderForList> List;
+
+        DependencyProperty OrdersDep = DependencyProperty.Register(nameof(OrderList), typeof(IEnumerable<OrderForList>), typeof(OrderForListWindow));
+        IEnumerable<OrderForList> OrderList { get => (IEnumerable<OrderForList>)GetValue(OrdersDep); set => SetValue(OrdersDep, value); }
+            public OrderForListWindow()
         {
             InitializeComponent();
-            OrderForList.ItemsSource = bl?.Order.GetOrders();
+            OrderList = bl?.Order.GetOrders()!;
         }
 
         private void OrderItem(object sender, MouseButtonEventArgs e)
         {
             new OrderItemWindow().Show();
-            OrderForList.ItemsSource = bl?.Order.GetOrders();
         }
     }
 }
