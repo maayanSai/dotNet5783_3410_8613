@@ -16,8 +16,8 @@ public partial class ProductWindow : Window
     /// Constructive action to add products
     /// </summary>
 
-    public static readonly DependencyProperty CategorysDep = DependencyProperty.Register(nameof(CategorysDep), typeof(BO.Category[]), typeof(ProductWindow));
-   BO.Category[] Category {    get => (Category[])GetValue(CategorysDep);set=> SetValue(CategorysDep, value); }
+   // public static readonly DependencyProperty CategorysDep = DependencyProperty.Register(nameof(CategorysDep), typeof(BO.Category[]), typeof(ProductWindow));
+   //BO.Category[] Category {    get => (Category[])GetValue(CategorysDep);set=> SetValue(CategorysDep, value); }
     static readonly DependencyProperty ProductDep = DependencyProperty.Register(nameof(Product), typeof(Product), typeof(ProductWindow));
     Product Product {  get=> (Product)GetValue(ProductDep); set => SetValue(ProductDep, value); }
 
@@ -29,8 +29,9 @@ public partial class ProductWindow : Window
     {
         InitializeComponent();
         Product = new Product();  
-        Mode= false;
+        Mode= false;//מה זה?
         CategoryForNewProduct.ItemsSource = Enum.GetValues(typeof(BO.Category));
+        //Product.Category= (BO.Category)CategoryForNewProduct.SelectedItem;
         BtnAddOrUpdetProduct.Content = "Add";
     }
     /// <summary>
@@ -40,7 +41,7 @@ public partial class ProductWindow : Window
     public ProductWindow(int id)
     {
         InitializeComponent();
-        Mode=true;
+        Mode=true;//מה זה?
         CategoryForNewProduct.ItemsSource = Enum.GetValues(typeof(BO.Category));// for the comboBox
         Product = bl!.Product.ItemProduct(id);//getting the details from bl about the 
         BtnAddOrUpdetProduct.Content = "Updet";
@@ -65,6 +66,7 @@ public partial class ProductWindow : Window
             {
                 bl!.Product.Update(Product);
                 MessageBox.Show("Product Updet succefully", "succefully", MessageBoxButton.OK, MessageBoxImage.Information);
+                
                 this.Close();
             }
         }

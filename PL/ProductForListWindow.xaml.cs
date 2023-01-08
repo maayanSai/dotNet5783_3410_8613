@@ -4,8 +4,10 @@ using BO;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 
@@ -18,19 +20,18 @@ public partial class ProductListWindow : Window
     /// <summary>
     /// constructive action
     /// </summary>
-    /// 
-  //  DependencyProperty ProductDep = DependencyProperty.Register(nameof(ProductList), typeof(IEnumerable<ProductForList>), typeof(ProductListWindow));
-   // IEnumerable<ProductForList> ProductList { get => (IEnumerable<ProductForList>)GetValue(ProductDep); set => SetValue(ProductDep, value); }
-
-
     public  ObservableCollection<BO.ProductForList?> ProductList
     {
         get { return (ObservableCollection<BO.ProductForList?>)GetValue(ProductListProperty); }
         set { SetValue(ProductListProperty, value); }
     }
-    public Category Category { get; set; } = Category.None;
-    // Using a DependencyProperty as the backing store for ProductList.  This enables animation, styling, binding, etc...
-    public static readonly DependencyProperty ProductListProperty =
+    //public   Category Category { get; set; } = Category.None;
+    //public static readonly DependencyProperty CategoryDp =
+    //    DependencyProperty.Register("Category", typeof(Category), typeof(Window));
+
+ // Using a DependencyProperty as the backing store for ProductList.  This enables animation, styling, binding, etc...
+
+ public static readonly DependencyProperty ProductListProperty =
         DependencyProperty.Register("ProductList", typeof(ObservableCollection<BO.ProductForList?>), typeof(Window));
 
 
@@ -38,7 +39,7 @@ public partial class ProductListWindow : Window
     {
         InitializeComponent();
         ProductList = new(bl?.Product.GetProducts()!);
-       // productForListDataGrid.ItemsSource = bl?.Product.GetProducts();
+        // productForListDataGrid.ItemsSource = bl?.Product.GetProducts();
         AttributeSelector.ItemsSource = Enum.GetValues(typeof(BO.Category));
     }
     /// <summary>
@@ -46,12 +47,19 @@ public partial class ProductListWindow : Window
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
+    /// 
+
     private void SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         BO.Category c = (BO.Category)AttributeSelector.SelectedItem;
         try
         {
-            ProductList = new(bl?.Product.GetListedProductByCategory(c)!);
+            if (c==Category.None)
+            {
+                ProductList=new(bl?.Product.GetProducts()!);
+            }
+            else
+           ProductList = new(bl?.Product.GetListedProductByCategory(c)!);
         }
         catch (Exception ex)
         {
@@ -65,15 +73,13 @@ public partial class ProductListWindow : Window
     /// <param name="e"></param>
     private void NewProductButton_Click(object sender, RoutedEventArgs e)
     {
-        new ProductWindow().Show();
+        new ProductWindow().ShowDialog();
+       // BO.Product p = (BO.Product)((Datasender);
+       // ProductList.Add(new BO.ProductForList { ID=p.ID, Category=p.Category, Price=p.Price, Name=p.Name });
         ProductList = new(bl?.Product.GetProducts()!);
+        
     }
-    /// <summary>
-    /// A button that allows updating products
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    
+   
 
     /// <summary>
     /// A button that returns all products after filtering
@@ -93,13 +99,28 @@ public partial class ProductListWindow : Window
 
     }
 
+    /// <summary>
+    /// A button that allows updating products
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+
     private void productForListDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
         e.Handled= true;
         BO.ProductForList? p = (ProductForList)((DataGrid)sender).SelectedItem;
-
+        
         ProductWindow windoProduct = new ProductWindow(p.ID);
         windoProduct.ShowDialog();
+        BO.ProductForList element = ProductList.First(x => x?.ID == p.ID)!;
+        int index = ProductList.IndexOf(element);
+        ProductList.RemoveAt(index);
+        ProductList.Add(bl?.Product.GetProducts(x => x?.ID ==p.ID).First());
+            //[index] = (bl?.Product.GetProducts(x=> x?.ID ==p.ID)).First();
+            // RaisePropertyChanged(nameof( ProductList));
+            //CollectionViewSource.GetDefaultView(ProductList).Refresh();
+
+        // ProductListWindow.s
     }
 
     private void ProductListview_SelectionChanged(object sender, SelectionChangedEventArgs e)
