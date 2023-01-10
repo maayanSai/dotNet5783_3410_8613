@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,17 @@ namespace PL
     /// </summary>
     public partial class ProductItem : Window
     {
+        public Category Category { get; set; } = Category.None;
+        public static readonly DependencyProperty CategoryDp =
+            DependencyProperty.Register("Category", typeof(Category), typeof(Window));
         public ProductItem()
         {
             InitializeComponent();
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

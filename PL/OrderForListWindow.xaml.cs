@@ -19,24 +19,35 @@ namespace PL
     /// <summary>
     /// Interaction logic for OrderForListWindow.xaml
     /// </summary>
+    /// 
     public partial class OrderForListWindow : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
 
-        //public  ObservableCollection<OrderForList> OrderList;
-        //IEnumerable<OrderForList> List;
 
-        DependencyProperty OrdersDep = DependencyProperty.Register(nameof(OrderList), typeof(IEnumerable<OrderForList>), typeof(OrderForListWindow));
-        IEnumerable<OrderForList> OrderList { get => (IEnumerable<OrderForList>)GetValue(OrdersDep); set => SetValue(OrdersDep, value); }
+        
+        public ObservableCollection<OrderForList> OrderList
+        {
+            get { return (ObservableCollection<OrderForList>)GetValue(OrdersDep); }
+            set  { SetValue(OrdersDep, value); }
+        }
+        public static readonly DependencyProperty OrdersDep = DependencyProperty.Register("OrderList", typeof(IEnumerable<OrderForList>), typeof(OrderForListWindow));
+       
             public OrderForListWindow()
         {
             InitializeComponent();
-            OrderList = bl?.Order.GetOrders()!;
+            OrderList = new (bl?.Order.GetOrders()!);
         }
 
-        private void OrderItem(object sender, MouseButtonEventArgs e)
+       
+       private void OrderForListDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            new OrderItemWindow().Show();
+            e.Handled= true;
+            BO.OrderForList? O = (OrderForList)((DataGrid)sender).SelectedItem;
+            OrderItemWindow? orderWindow = new OrderItemWindow(O.ID);
+            orderWindow.ShowDialog(); 
+
+
         }
     }
 }

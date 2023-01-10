@@ -20,7 +20,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Cart" HorizontalAlignment="Left" Height="42" VerticalAlignment="Top" Width="101" Foreground="#FFEFCF81" FontSize="20" Margin="91,372,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold" Grid.Column="1"/>
-        <ComboBox HorizontalAlignment="Left" Height="20" Margin="310,13,0,0" VerticalAlignment="Top" Width="139"/>
-        <Label Content="Category" HorizontalAlignment="Left" Height="21" Margin="454,12,0,0" VerticalAlignment="Top" Width="45" Foreground="#FFEFCF81" FontSize="7" FontFamily="Segoe Print" Background="Black" FontWeight="Bold"/>
+        <ComboBox HorizontalAlignment="Left"  Height="20" Margin="310,13,0,0" VerticalAlignment="Top" Width="139" SelectionChanged="ComboBox_SelectionChanged" SelectedIndex="5"/>
+        <Label Content="Category"   HorizontalAlignment="Left" Height="21" Margin="454,12,0,0" VerticalAlignment="Top" Width="45" Foreground="#FFEFCF81" FontSize="7" FontFamily="Segoe Print" Background="Black" FontWeight="Bold"/>
     </Grid>
 </Window>

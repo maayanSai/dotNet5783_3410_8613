@@ -20,12 +20,27 @@ namespace PL
     /// </summary>
     public partial class OrderItemWindow : Window
     {
+        public delegate void UpdateOrder(int proId);
         BlApi.IBl? bl = BlApi.Factory.Get();
-
-        public OrderItemWindow()
+        static readonly DependencyProperty OrderctDep = DependencyProperty.Register(nameof(Order), typeof(BO.Order), typeof(OrderItemWindow));
+       BO.Order Order { get => (BO.Order)GetValue(OrderctDep); set => SetValue(OrderctDep, value); }
+        static readonly DependencyProperty IsBossDep = DependencyProperty.Register(nameof(IsBoss), typeof(bool), typeof(OrderItemWindow));
+        bool IsBoss { get => (bool)GetValue(IsBossDep); set => SetValue(IsBossDep, value); }
+        public OrderItemWindow(int id, UpdateOrder updateOrder)
         {
+            Order=bl?.Order.ItemOrder(id)!;
             InitializeComponent();
+            IsBoss=true;
+
            // status.ItemsSource = Enum.GetValues(typeof(BO.OrderStatus));
+        }
+        public OrderItemWindow(int id)
+        {
+            Order=bl?.Order.ItemOrder(id)!;
+            InitializeComponent();
+            IsBoss=false;
+
+            // status.ItemsSource = Enum.GetValues(typeof(BO.OrderStatus));
         }
 
 
