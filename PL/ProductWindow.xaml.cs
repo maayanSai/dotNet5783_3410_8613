@@ -64,8 +64,8 @@ public partial class ProductWindow : Window
     {
         try
         {
-            string s = BtnAddOrUpdetProduct.Content.ToString()!;
-            if (s == "Add")
+          
+            if (BtnAddOrUpdetProductContent == "Add")
             {
                 bl!.Product.Add(Product);
                 //add();

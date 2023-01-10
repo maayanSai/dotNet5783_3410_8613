@@ -49,7 +49,7 @@ public partial class ProductListWindow : Window
     /// <param name="sender"></param>
     /// <param name="e"></param>
     /// 
-    public delegate void adding(int proId);
+    
     public void AddToOb(int proId)
     {
 

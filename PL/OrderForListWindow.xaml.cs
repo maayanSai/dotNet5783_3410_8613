@@ -19,12 +19,13 @@ namespace PL
     /// <summary>
     /// Interaction logic for OrderForListWindow.xaml
     /// </summary>
+    /// 
     public partial class OrderForListWindow : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
 
-        //public  ObservableCollection<OrderForList> OrderList;
-        //IEnumerable<OrderForList> List;
+
+        
         public ObservableCollection<OrderForList> OrderList
         {
             get { return (ObservableCollection<OrderForList>)GetValue(OrdersDep); }
