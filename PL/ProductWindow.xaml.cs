@@ -4,12 +4,14 @@ using BO;
 using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 
 /// <summary>
 /// Interaction logic for ProductWindow.xaml
 /// </summary>
 public partial class ProductWindow : Window
 {
+    public delegate void AddingOrUpdate(int proId);
     BlApi.IBl? bl = BlApi.Factory.Get();
 
     /// <summary>
@@ -24,15 +26,21 @@ public partial class ProductWindow : Window
     static readonly DependencyProperty ModeDep = DependencyProperty.Register(nameof(Mode), typeof(bool), typeof(ProductWindow));
     bool Mode { get => (bool)GetValue(ModeDep); set => SetValue(ModeDep, value); }
 
-    
-    public ProductWindow()
+    string BtnAddOrUpdetProductContent { get => (string)GetValue(BtnAddOrUpdetProductContentDp); set => SetValue(BtnAddOrUpdetProductContentDp, value); }
+
+
+    static readonly DependencyProperty BtnAddOrUpdetProductContentDp = DependencyProperty.Register(nameof(BtnAddOrUpdetProductContent), typeof(string), typeof(ProductWindow));
+
+    public ProductWindow(AddingOrUpdate ad)
     {
         InitializeComponent();
         Product = new Product();  
-        Mode= false;//מה זה?
+        Mode= false;
         CategoryForNewProduct.ItemsSource = Enum.GetValues(typeof(BO.Category));
-        //Product.Category= (BO.Category)CategoryForNewProduct.SelectedItem;
-        BtnAddOrUpdetProduct.Content = "Add";
+
+        BtnAddOrUpdetProductContent = "Add";
+        AddingOrUpdate add = ad;
+        
     }
     /// <summary>
     /// Constructive action to update products
@@ -41,10 +49,11 @@ public partial class ProductWindow : Window
     public ProductWindow(int id)
     {
         InitializeComponent();
-        Mode=true;//מה זה?
+        Mode=true;
         CategoryForNewProduct.ItemsSource = Enum.GetValues(typeof(BO.Category));// for the comboBox
         Product = bl!.Product.ItemProduct(id);//getting the details from bl about the 
-        BtnAddOrUpdetProduct.Content = "Updet";
+        BtnAddOrUpdetProductContent = "Updet";
+
     }
     /// <summary>
     /// A button that adds or updates products
@@ -58,8 +67,11 @@ public partial class ProductWindow : Window
             string s = BtnAddOrUpdetProduct.Content.ToString()!;
             if (s == "Add")
             {
-                bl?.Product.Add(Product);
+                bl!.Product.Add(Product);
+                //add();
+
                 MessageBox.Show("Product Add succefully", "succefully", MessageBoxButton.OK, MessageBoxImage.Information);
+               
                 this.Close();
             }
             else

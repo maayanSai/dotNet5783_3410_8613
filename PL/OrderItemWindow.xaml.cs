@@ -20,11 +20,15 @@ namespace PL
     /// </summary>
     public partial class OrderItemWindow : Window
     {
+        
         BlApi.IBl? bl = BlApi.Factory.Get();
-
-        public OrderItemWindow()
+        static readonly DependencyProperty OrderctDep = DependencyProperty.Register(nameof(Order), typeof(BO.Order), typeof(OrderItemWindow));
+       BO.Order Order { get => (BO.Order)GetValue(OrderctDep); set => SetValue(OrderctDep, value); }
+        public OrderItemWindow(int id)
         {
+            Order=bl?.Order.ItemOrder(id)!;
             InitializeComponent();
+            
            // status.ItemsSource = Enum.GetValues(typeof(BO.OrderStatus));
         }
 
