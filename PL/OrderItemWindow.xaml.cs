@@ -21,6 +21,8 @@ namespace PL
     public partial class OrderItemWindow : Window
     {
         public delegate void UpdateOrder(int proId);
+
+        UpdateOrder? update;
         BlApi.IBl? bl = BlApi.Factory.Get();
         static readonly DependencyProperty OrderctDep = DependencyProperty.Register(nameof(Order), typeof(BO.Order), typeof(OrderItemWindow));
        BO.Order Order { get => (BO.Order)GetValue(OrderctDep); set => SetValue(OrderctDep, value); }
@@ -28,13 +30,15 @@ namespace PL
         bool IsBoss { get => (bool)GetValue(IsBossDep); set => SetValue(IsBossDep, value); }
         public OrderItemWindow(int id, UpdateOrder updateOrder)
         {
-           
-            Order =bl?.Order.ItemOrder(id)!;
             InitializeComponent();
-            IsBoss=true;
-            
-
+            update=updateOrder;
+            Order =bl?.Order.ItemOrder(id)!;
+            var a = Order.Items;
            
+            
+            IsBoss=true;
+
+
         }
         public OrderItemWindow(int id)
         {
@@ -44,6 +48,20 @@ namespace PL
 
         }
 
+     
 
+        private void Label_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled=true;
+            try
+            {
+                bl.Order.Updateshipping(Order.ID);
+                update(Order.ID);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
