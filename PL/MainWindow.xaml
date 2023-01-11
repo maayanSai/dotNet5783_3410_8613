@@ -11,7 +11,7 @@
             <ImageBrush Stretch="Fill" ImageSource="/צילום מסך 2022-12-17 212806.png"/>
         </Grid.Background>
         <Button Content="Admin" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Width="92" Click="ShowProductsButton_Click" Foreground="#FFEFCF81" FontSize="20" Margin="650,294,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold"/>
-        <Button Content="New order" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Width="152" Foreground="#FFEFCF81" FontSize="20" Margin="620,333,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold"/>
+        <Button Content="New order" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Width="152" Foreground="#FFEFCF81" FontSize="20" Margin="620,333,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold" Click="Button_Click"/>
         <Grid HorizontalAlignment="Left" Height="98" Margin="43,180,0,0" VerticalAlignment="Top" Width="102">
             <Grid.Background>
                 <ImageBrush/>

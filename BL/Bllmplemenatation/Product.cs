@@ -74,7 +74,7 @@ internal class Product : IProduct
     /// <returns></returns>
     /// <exception cref="Exceptions.BlNullPropertyException"></exception>
     /// <exception cref="Exception"></exception>
-    public IEnumerable<BO.ProductForList?> GetProducts(Func<BO.ProductForList?, bool>? func = null)
+    public IEnumerable<BO.ProductForList?> GetProducts(Func<BO.ProductForList?, bool>? func =null)
     {
         IEnumerable<BO.ProductForList?> pro = from DO.Product item in dal!.Product.GetAll()
                                               select new BO.ProductForList()

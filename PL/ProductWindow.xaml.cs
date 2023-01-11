@@ -53,14 +53,8 @@ public partial class ProductWindow : Window
         Mode=true;
             
         BtnAddOrUpdetProductContent = "Updete";
-        
-           
-        
-           
-
         CategoryForNewProduct.ItemsSource = Enum.GetValues(typeof(BO.Category));// for the comboBox
-        Product = bl!.Product.ItemProduct(id);//getting the details from bl about the 
-        
+        Product = bl!.Product.ItemProduct(id);//getting the details from bl about the  
 
     }
     /// <summary>

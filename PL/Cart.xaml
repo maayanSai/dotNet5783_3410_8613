@@ -7,7 +7,11 @@
         mc:Ignorable="d"
         Title="Cart" Height="450" Width="800">
     <Grid Background="Black">
-        <DataGrid x:Name="cartDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,10,390,10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="51*"/>
+            <ColumnDefinition Width="29*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid x:Name="cartDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,10,100,10">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="customerNameColumn" Binding="{Binding CustomerName}" Header="Customer Name" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="customerAdressColumn" Binding="{Binding CustomerAdress}" Header="Customer Adress" Width="SizeToHeader"/>
@@ -15,7 +19,7 @@
                 <DataGridTextColumn x:Name="totalPriceColumn" Binding="{Binding TotalPrice}" Header="Total Price" Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Complete an order"  HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="231" Foreground="#FFEFCF81" FontSize="20" Margin="558,377,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold">
+        <Button Content="Complete an order"  HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="231" Foreground="#FFEFCF81" FontSize="20" Margin="48,377,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold" Grid.Column="1">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

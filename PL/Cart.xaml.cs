@@ -19,7 +19,7 @@ namespace PL
     /// </summary>
     public partial class Cart : Window
     {
-        public Cart()
+        public Cart(BO.Cart c)
         {
             InitializeComponent();
         }
