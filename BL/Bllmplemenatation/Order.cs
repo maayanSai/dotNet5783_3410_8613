@@ -126,7 +126,7 @@ public BO.Order? Updateshipping(int id)
     try
     {
         order = dal?.Order.GetById(id) ?? throw new BO.BlNullPropertyException("missing product id");
-        if (order.DeliveryrDate !=null && order.ShipDate == null) // Check if an order exists, and has not yet been sent
+        if (order.OrderDate !=null && order.ShipDate == null) // Check if an order exists, and has not yet been sent
         {
             dal?.Order.Update(new DO.Order
             {
