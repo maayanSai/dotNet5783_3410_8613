@@ -101,11 +101,12 @@ public BO.Order ItemOrder(int id)
         ID = x?.ID ?? throw new BO.BlNullPropertyException("missing order item id"),
         ProductID = x?.ProductID ?? throw new BO.BlNullPropertyException("missing product id"),
         Price = x?.Price ?? 0,
-        Name = dal?.Product.GetById(x?.ID ?? throw new BO.BlNullPropertyException("missing order id"))?.Name,//האיי די תמיד יהיה תקין
+        Name = dal?.Product.GetById(x?.ProductID ?? throw new BO.BlNullPropertyException("missing product id"))?.Name,//האיי די תמיד יהיה תקין
         Amount = x?.Amount ?? 0,
         Totalprice = x?.Price * x?.Amount ?? 0
 
     }).ToList();
+
 
     return new BO.Order
     {

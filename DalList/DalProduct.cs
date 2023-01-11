@@ -23,7 +23,12 @@ internal class DalProduct : IProduct
             return p.ID;
         }
     }
-    public Product? GetById(int id)=> DataSource.s_productsList.FirstOrDefault(x => x?.ID == id);
+    public Product? GetById(int id)
+    {
+        Product? P = DataSource.s_productsList.FirstOrDefault(x => x?.ID == id);
+
+        return P;
+    }
     /// <summary>
     /// Returns a collection of products
     /// </summary>
