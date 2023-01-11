@@ -56,9 +56,8 @@ namespace PL
             e.Handled=true;
             try
             {
-              Order=  bl.Order.Updateshipping(Order.ID);
+                bl.Order.Updateshipping(Order.ID);
                 update(Order.ID);
-                
             }
             catch (Exception ex)
             {
