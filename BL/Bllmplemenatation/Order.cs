@@ -29,6 +29,19 @@ internal class Order : IOrder
             };
         });
     }
+    public BO.OrderForList GetOrderForList(int id)
+    {
+        DO.Order? order= dal.Order.GetById(id);
+        var items = dal.OrderItem.GetAll(delegate (DO.OrderItem? x) { return x?.OrderID == order?.ID; });
+        return new BO.OrderForList
+        {
+            ID = order?.ID ?? throw new BO.BlNullPropertyException("missing order id"),
+            CustomerName = order?.CustomerName ?? " ",
+            Status = GetStatus(order),
+            TotalPrice = items.Sum(x => x?.Price * x?.Amount ?? 0),//alredy cheked id isnot null
+            Amount = items.Count(),
+        };
+    }
 
     public BO.OrderForList GetOrderForList(int id)
     {

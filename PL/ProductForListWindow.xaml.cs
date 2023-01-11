@@ -1,6 +1,5 @@
 ﻿namespace PL;
 
-using BO;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -61,7 +60,7 @@ public partial class ProductListWindow : Window
         BO.Category c = (BO.Category)AttributeSelector.SelectedItem;
         try
         {
-            if (c==Category.None)
+            if (c==BO.Category.None)
             {
                 ProductList=new(bl?.Product.GetProducts()!);
             }
@@ -79,8 +78,7 @@ public partial class ProductListWindow : Window
     /// <param name="sender"></param>
     /// <param name="e"></param>
     private void NewProductButton_Click(object sender, RoutedEventArgs e)
-    {
-        
+    {    
         new ProductWindow(AddToOb).ShowDialog();
 
         
@@ -103,7 +101,6 @@ public partial class ProductListWindow : Window
         {
             MessageBox.Show(ex.Message);
         }
-
     }
 
     /// <summary>
@@ -115,7 +112,7 @@ public partial class ProductListWindow : Window
     private void productForListDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
         e.Handled= true;
-        BO.ProductForList? p = (ProductForList)((DataGrid)sender).SelectedItem;
+        BO.ProductForList? p = (BO.ProductForList)((DataGrid)sender).SelectedItem;
         
         ProductWindow windoProduct = new ProductWindow(p.ID);
         windoProduct.ShowDialog();
