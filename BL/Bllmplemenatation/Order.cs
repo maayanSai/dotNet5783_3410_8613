@@ -45,7 +45,7 @@ internal class Order : IOrder
 
     public BO.OrderForList GetOrderForList(int id)
     {
-        DO.Order? order == dal.Order.GetById(id);
+        DO.Order? order = dal.Order.GetById(id);
         var items = dal.OrderItem.GetAll(delegate (DO.OrderItem? x) { return x?.OrderID == order?.ID; });
         return new BO.OrderForList
         {
