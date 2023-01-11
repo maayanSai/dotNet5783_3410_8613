@@ -51,12 +51,29 @@ namespace PL
 
      
 
-        private void Label_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void ShippingUpdate_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             e.Handled=true;
             try
             {
-                bl.Order.Updateshipping(Order.ID);
+                var a = bl.Order.Updateshipping(Order.ID);
+                Order=a;
+             
+                update(Order.ID);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void DeliveryUpdate_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled=true;
+            try
+            {
+                var a = bl.Order.Updatesupply(Order.ID);
+                Order=a;
+
                 update(Order.ID);
             }
             catch (Exception ex)
