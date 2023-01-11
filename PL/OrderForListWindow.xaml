@@ -9,11 +9,11 @@
         Title="OrderForListWindow" Height="450" Width="800">
     <Grid>
 
-        <DataGrid x:Name="orderForListDataGrid" AutoGenerateColumns="False" MouseDoubleClick="OrderForListDataGrid_MouseDoubleClick" EnableRowVirtualization="True" ItemsSource="{Binding }" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,10,355,10">
+        <DataGrid x:Name="orderForListDataGrid" AutoGenerateColumns="False" MouseDoubleClick="OrderForListDataGrid_MouseDoubleClick" EnableRowVirtualization="True" ItemsSource="{Binding }" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,10,389,10">
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="iDColumn" Binding="{Binding ID}" Header="ID" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="iDColumn" Binding="{Binding ID}" Header="ID      " Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="customerNameColumn" Binding="{Binding CustomerName}" Header="Customer Name" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="statusColumn" Binding="{Binding Status}" Header="Status" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="statusColumn" Binding="{Binding Status}" Header="Status     " Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="amountColumn" Binding="{Binding Amount}" Header="Amount" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="totalPriceColumn" Binding="{Binding TotalPrice}" Header="Total Price" Width="SizeToHeader"/>
             </DataGrid.Columns>

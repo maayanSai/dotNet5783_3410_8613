@@ -1,6 +1,5 @@
 ﻿namespace PL;
 
-using BO;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -53,14 +52,14 @@ public partial class ProductListWindow : Window
     public void AddToOb(int proId)
     {
 
-        ProductList.Add(bl.Product.GetProducts(x => x.ID==proId).First());
+        ProductList.Add(bl?.Product.GetProducts(x => x?.ID==proId).First());
     }
     private void SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         BO.Category c = (BO.Category)AttributeSelector.SelectedItem;
         try
         {
-            if (c==Category.None)
+            if (c==BO.Category.None)
             {
                 ProductList=new(bl?.Product.GetProducts()!);
             }
@@ -78,13 +77,9 @@ public partial class ProductListWindow : Window
     /// <param name="sender"></param>
     /// <param name="e"></param>
     private void NewProductButton_Click(object sender, RoutedEventArgs e)
-    {
-        
+    {    
         new ProductWindow(AddToOb).ShowDialog();
 
-        // BO.Product p = (BO.Product)((Dataender);
-        //.Product p = (BO.Product)sender;
-        // ProductList.Add(new BO.ProductForList { ID=p.ID, Category=p.Category, Price=p.Price, Name=p.Name });
 
         ProductList = new(bl?.Product.GetProducts()!);
         
@@ -117,7 +112,7 @@ public partial class ProductListWindow : Window
     private void productForListDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
         e.Handled= true;
-        BO.ProductForList? p = (ProductForList)((DataGrid)sender).SelectedItem;
+        BO.ProductForList? p = (BO.ProductForList)((DataGrid)sender).SelectedItem;
         
         ProductWindow windoProduct = new ProductWindow(p.ID);
         windoProduct.ShowDialog();
@@ -125,12 +120,5 @@ public partial class ProductListWindow : Window
         int index = ProductList.IndexOf(element);
         ProductList.RemoveAt(index);
         ProductList.Add(bl?.Product.GetProducts(x => x?.ID ==p.ID).First());
-            //[index] = (bl?.Product.GetProducts(x=> x?.ID ==p.ID)).First();
-            // RaisePropertyChanged(nameof( ProductList));
-            //CollectionViewSource.GetDefaultView(ProductList).Refresh();
-
-        // ProductListWindow.s
-    }
-
-    
+    }  
 }
