@@ -1,6 +1,6 @@
-﻿using BO;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,19 +18,41 @@ namespace PL
     /// <summary>
     /// Interaction logic for ProductItem.xaml
     /// </summary>
-    public partial class ProductItem : Window
+    public partial class Catalog : Window
     {
-        public Category Category { get; set; } = Category.None;
-        public static readonly DependencyProperty CategoryDp =
-            DependencyProperty.Register("Category", typeof(Category), typeof(Window));
-        public ProductItem()
+        BlApi.IBl? bl = BlApi.Factory.Get();
+        public ObservableCollection<BO.ProductItem?> ProductItem
         {
-            InitializeComponent();
+            get { return (ObservableCollection<BO.ProductItem?>)GetValue(ProductListProperty); }
+            set { SetValue(ProductListProperty, value); }
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public static readonly DependencyProperty ProductListProperty =
+               DependencyProperty.Register("ProductItem", typeof(ObservableCollection<BO.ProductItem?>), typeof(Window));
+        public Catalog()
         {
+            InitializeComponent();
+            ProductItem = bl?.Cart.Item
 
+            SelectedCategory.ItemsSource = Enum.GetValues(typeof(BO.Category));
+        }
+
+        private void SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            BO.Category c = (BO.Category)SelectedCategory.SelectedItem;
+            try
+            {
+                if (c == BO.Category.None)
+                {
+                    ProductItem = new(bl?.Product.GetProducts()!);
+                }
+                else
+                    ProductItem = new(bl?.Product.GetListedProductByCategory(c)!);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

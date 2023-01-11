@@ -25,16 +25,10 @@ public partial class ProductListWindow : Window
         get { return (ObservableCollection<BO.ProductForList?>) GetValue(ProductListProperty);}
         set { SetValue(ProductListProperty, value); }
     }
-    //public   Category Category { get; set; } = Category.None;
-    //public static readonly DependencyProperty CategoryDp =
-    //    DependencyProperty.Register("Category", typeof(Category), typeof(Window));
-
-    // Using a DependencyProperty as the backing store for ProductList.  This enables animation, styling, binding, etc...
 
     public static readonly DependencyProperty ProductListProperty =
            DependencyProperty.Register("ProductList", typeof(ObservableCollection<BO.ProductForList?>), typeof(Window));
-   
-
+  
     public ProductListWindow()
     {
         InitializeComponent();

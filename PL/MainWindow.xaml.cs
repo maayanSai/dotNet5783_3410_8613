@@ -1,4 +1,6 @@
 ﻿namespace PL;
+
+using System.Data.Common;
 using System.Windows;
 
 /// <summary>
@@ -20,4 +22,6 @@ public partial class MainWindow : Window
     /// <param name="sender"></param>
     /// <param name="e"></param>
     private void ShowProductsButton_Click(object sender, RoutedEventArgs e) => new OrdersAndProducts().Show();
+
+    private void newOrder_Click(object sender, RoutedEventArgs e)=> new Catalog().Show();
 }
