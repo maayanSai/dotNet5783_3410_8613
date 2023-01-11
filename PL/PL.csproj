@@ -25,8 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="image.jpg" />
-    <Resource Include="images.jpg" />
     <Resource Include="צילום מסך 2022-12-17 212806.png" />
     <Resource Include="צילום מסך 2023-01-05 161035.png" />
   </ItemGroup>
