@@ -28,11 +28,13 @@ namespace PL
         bool IsBoss { get => (bool)GetValue(IsBossDep); set => SetValue(IsBossDep, value); }
         public OrderItemWindow(int id, UpdateOrder updateOrder)
         {
-            Order=bl?.Order.ItemOrder(id)!;
+           
+            Order =bl?.Order.ItemOrder(id)!;
             InitializeComponent();
             IsBoss=true;
+            
 
-           // status.ItemsSource = Enum.GetValues(typeof(BO.OrderStatus));
+           
         }
         public OrderItemWindow(int id)
         {
@@ -40,7 +42,6 @@ namespace PL
             InitializeComponent();
             IsBoss=false;
 
-            // status.ItemsSource = Enum.GetValues(typeof(BO.OrderStatus));
         }
 
 

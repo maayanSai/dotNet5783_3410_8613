@@ -54,6 +54,7 @@ public partial class ProductListWindow : Window
     {
 
         ProductList.Add(bl.Product.GetProducts(x => x.ID==proId).First());
+        
     }
     private void SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
@@ -82,11 +83,7 @@ public partial class ProductListWindow : Window
         
         new ProductWindow(AddToOb).ShowDialog();
 
-        // BO.Product p = (BO.Product)((Dataender);
-        //.Product p = (BO.Product)sender;
-        // ProductList.Add(new BO.ProductForList { ID=p.ID, Category=p.Category, Price=p.Price, Name=p.Name });
-
-        ProductList = new(bl?.Product.GetProducts()!);
+        
         
     }
    
@@ -126,11 +123,7 @@ public partial class ProductListWindow : Window
         int index = ProductList.IndexOf(element);
         ProductList.RemoveAt(index);
         ProductList.Add(bl?.Product.GetProducts(x => x?.ID ==p.ID).First());
-            //[index] = (bl?.Product.GetProducts(x=> x?.ID ==p.ID)).First();
-            // RaisePropertyChanged(nameof( ProductList));
-            //CollectionViewSource.GetDefaultView(ProductList).Refresh();
-
-        // ProductListWindow.s
+      
     }
 
     
