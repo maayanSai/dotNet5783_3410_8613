@@ -12,22 +12,23 @@ using System.Windows.Controls;
 public partial class ProductWindow : Window
 {
     public delegate void AddingOrUpdate(int proId);
+    AddingOrUpdate? add;
     BlApi.IBl? bl = BlApi.Factory.Get();
 
     /// <summary>
     /// Constructive action to add products
     /// </summary>
 
-   // public static readonly DependencyProperty CategorysDep = DependencyProperty.Register(nameof(CategorysDep), typeof(BO.Category[]), typeof(ProductWindow));
-   //BO.Category[] Category {    get => (Category[])GetValue(CategorysDep);set=> SetValue(CategorysDep, value); }
+  
     static readonly DependencyProperty ProductDep = DependencyProperty.Register(nameof(Product), typeof(Product), typeof(ProductWindow));
     Product Product {  get=> (Product)GetValue(ProductDep); set => SetValue(ProductDep, value); }
 
     static readonly DependencyProperty ModeDep = DependencyProperty.Register(nameof(Mode), typeof(bool), typeof(ProductWindow));
     bool Mode { get => (bool)GetValue(ModeDep); set => SetValue(ModeDep, value); }
 
-    string BtnAddOrUpdetProductContent { get => (string)GetValue(BtnAddOrUpdetProductContentDp); set => SetValue(BtnAddOrUpdetProductContentDp, value); }
 
+  
+    string BtnAddOrUpdetProductContent { get => (string)GetValue(BtnAddOrUpdetProductContentDp); set => SetValue(BtnAddOrUpdetProductContentDp, value); }
 
     static readonly DependencyProperty BtnAddOrUpdetProductContentDp = DependencyProperty.Register(nameof(BtnAddOrUpdetProductContent), typeof(string), typeof(ProductWindow));
 
@@ -39,7 +40,7 @@ public partial class ProductWindow : Window
         CategoryForNewProduct.ItemsSource = Enum.GetValues(typeof(BO.Category));
 
         BtnAddOrUpdetProductContent = "Add";
-        AddingOrUpdate add = ad;
+       add = ad;
         
     }
     /// <summary>
@@ -50,9 +51,16 @@ public partial class ProductWindow : Window
     {
         InitializeComponent();
         Mode=true;
+            
+        BtnAddOrUpdetProductContent = "Updete";
+        
+           
+        
+           
+
         CategoryForNewProduct.ItemsSource = Enum.GetValues(typeof(BO.Category));// for the comboBox
         Product = bl!.Product.ItemProduct(id);//getting the details from bl about the 
-        BtnAddOrUpdetProductContent = "Updet";
+        
 
     }
     /// <summary>
@@ -68,7 +76,7 @@ public partial class ProductWindow : Window
             if (BtnAddOrUpdetProductContent == "Add")
             {
                 bl!.Product.Add(Product);
-                //add();
+              add(Product.ID);
 
                 MessageBox.Show("Product Add succefully", "succefully", MessageBoxButton.OK, MessageBoxImage.Information);
                
@@ -76,8 +84,11 @@ public partial class ProductWindow : Window
             }
             else
             {
-                bl!.Product.Update(Product);
-                MessageBox.Show("Product Updet succefully", "succefully", MessageBoxButton.OK, MessageBoxImage.Information);
+               
+                    bl!.Product.Update(Product);
+                    MessageBox.Show("Product Updet succefully", "succefully", MessageBoxButton.OK, MessageBoxImage.Information);
+                
+            
                 
                 this.Close();
             }

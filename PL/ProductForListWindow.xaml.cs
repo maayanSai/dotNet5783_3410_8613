@@ -52,7 +52,8 @@ public partial class ProductListWindow : Window
     public void AddToOb(int proId)
     {
 
-        ProductList.Add(bl?.Product.GetProducts(x => x?.ID==proId).First());
+        ProductList.Add(bl.Product.GetProducts(x => x.ID==proId).First());
+        
     }
     private void SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
@@ -80,8 +81,7 @@ public partial class ProductListWindow : Window
     {    
         new ProductWindow(AddToOb).ShowDialog();
 
-
-        ProductList = new(bl?.Product.GetProducts()!);
+        
         
     }
    
@@ -120,5 +120,8 @@ public partial class ProductListWindow : Window
         int index = ProductList.IndexOf(element);
         ProductList.RemoveAt(index);
         ProductList.Add(bl?.Product.GetProducts(x => x?.ID ==p.ID).First());
-    }  
+      
+    }
+
+    
 }

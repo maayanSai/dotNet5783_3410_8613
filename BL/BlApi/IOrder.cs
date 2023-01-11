@@ -36,4 +36,6 @@ public interface IOrder
     /// <returns></returns>
     OrderTracking? Tracking(int id);
 
+    OrderForList GetOrderForList (int id);
+
 }
