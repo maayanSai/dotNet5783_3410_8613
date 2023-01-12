@@ -62,15 +62,16 @@ namespace PL
 
         private void productItemDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            e.Handled = true;
-            BO.ProductForList? p = (BO.ProductForList)((DataGrid)sender).SelectedItem;
+            e.Handled=true;
+            BO.ProductForList? pfl = (BO.ProductForList)((DataGrid)sender).SelectedItem;
+            int pflId = pfl.ID;
+            BO.Product p = bl.Product.ItemProduct(pflId);
+            BO.ProductItem pb = new BO.ProductItem { ID=p.ID, Category=p.Category, isStock=p.InStock>0 ? true : false, Name=p.Name, Price=p.Price };
+            ProductItem windoProductItem = new ProductItem(pb,Cb);
+            windoProductItem.ShowDialog();
+            
 
-            ProductWindow windoProduct = new ProductWindow(p.ID);
-            windoProduct.ShowDialog();
-            BO.ProductForList element = ProductList.First(x => x?.ID == p.ID)!;
-            int index = ProductList.IndexOf(element);
-            ProductList.RemoveAt(index);
-            ProductList.Add(bl?.Product.GetProducts(x => x?.ID == p.ID).First());
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -78,5 +79,7 @@ namespace PL
             Cart cartWindow = new Cart(Cb);
             cartWindow.ShowDialog();
         }
+
+     
     }
 }

@@ -22,5 +22,6 @@
         </DataGrid>
         <Button Content="Cart" HorizontalAlignment="Left" Height="42" VerticalAlignment="Top" Width="101" Foreground="#FFEFCF81" FontSize="20" Margin="91,372,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold" Grid.Column="1" Click="Button_Click"/>
         <ComboBox HorizontalAlignment="Left" Name="SelectedCategory" Height="20" Margin="339,12,0,0" VerticalAlignment="Top" Width="160" SelectionChanged="CategorySelectionChanged" SelectedIndex="5"/>
+        
     </Grid>
 </Window>
