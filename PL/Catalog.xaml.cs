@@ -21,65 +21,38 @@ namespace PL
     public partial class Catalog : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
-        public BO.Cart Cb;
-        public ObservableCollection<BO.ProductForList?> ProductList
+        public ObservableCollection<BO.ProductItem?> ProductItem
         {
-            get { return (ObservableCollection<BO.ProductForList?>)GetValue(ProductListProperty); }
+            get { return (ObservableCollection<BO.ProductItem?>)GetValue(ProductListProperty); }
             set { SetValue(ProductListProperty, value); }
         }
 
         public static readonly DependencyProperty ProductListProperty =
-               DependencyProperty.Register("ProductList", typeof(ObservableCollection<BO.ProductForList?>), typeof(Window));
-        public Catalog(BO.Cart cb)
+               DependencyProperty.Register("ProductItem", typeof(ObservableCollection<BO.ProductItem?>), typeof(Window));
+        public Catalog()
         {
-            Cb=cb;
             InitializeComponent();
-
-            ProductList= new(bl.Product.GetProducts()); 
+            ProductItem = bl?.Cart.Item;
 
             SelectedCategory.ItemsSource = Enum.GetValues(typeof(BO.Category));
         }
 
-        private void CategorySelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            e.Handled=true;
             BO.Category c = (BO.Category)SelectedCategory.SelectedItem;
             try
             {
-                
                 if (c == BO.Category.None)
                 {
-                         ProductList = new(bl?.Product.GetProducts()!);
+                    ProductItem = new(bl?.Product.GetProducts()!);
                 }
                 else
-                    ProductList = new(bl?.Product.GetListedProductByCategory(c)!);
+                    ProductItem = new(bl?.Product.GetListedProductByCategory(c)!);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
-
-        private void productItemDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            e.Handled=true;
-            BO.ProductForList? p = (BO.ProductForList)((DataGrid)sender).SelectedItem;
-
-            ProductWindow windoProduct = new ProductWindow(p.ID);
-            windoProduct.ShowDialog();
-            BO.ProductForList element = ProductList.First(x => x?.ID == p.ID)!;
-            int index = ProductList.IndexOf(element);
-            ProductList.RemoveAt(index);
-            ProductList.Add(bl?.Product.GetProducts(x => x?.ID ==p.ID).First());
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-            Cart cartWindow = new Cart(Cb);
-            cartWindow.ShowDialog();
-        }
     }
 }
-
