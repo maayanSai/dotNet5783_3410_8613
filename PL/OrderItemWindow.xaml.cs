@@ -51,26 +51,14 @@ namespace PL
 
      
 
-        //private void Label_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        //{
-        //    e.Handled=true;
-        //    try
-        //    {
-        //        bl.Order.Updateshipping(Order.ID);
-        //        update(Order.ID);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //}
-
-        private void UpdateShip(object sender, RoutedEventArgs e)
+        private void ShippingUpdate_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            e.Handled = true;
+            e.Handled=true;
             try
             {
-                Order.ShipDate = bl?.Order.Updateshipping(Order.ID).ShipDate;
+                var a = bl.Order.Updateshipping(Order.ID);
+                Order=a;
+             
                 update(Order.ID);
             }
             catch (Exception ex)
@@ -78,13 +66,14 @@ namespace PL
                 MessageBox.Show(ex.Message);
             }
         }
-
-        private void UpdateDelivery(object sender, RoutedEventArgs e)
+        private void DeliveryUpdate_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             e.Handled = true;
             try
             {
-                Order.DeliveryrDate = bl?.Order.Updatesupply(Order.ID).DeliveryrDate;
+                var a = bl.Order.Updatesupply(Order.ID);
+                Order=a;
+
                 update(Order.ID);
             }
             catch (Exception ex)

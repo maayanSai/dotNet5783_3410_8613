@@ -29,22 +29,21 @@
             <Label Grid.Column="0" Content="Customer Email:" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
             <TextBox x:Name="customerEmailTextBox" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3,0,0,0" Grid.Row="1" Text="{Binding Order.CustomerEmail, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="136"/>
             <Label Grid.Column="0" Content="Customer Name:" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
-            <TextBox x:Name="customerNameTextBox" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3,0,0,0" Grid.Row="2" Text="{Binding Order.CustomerName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="136"/>
-            <Label Grid.Column="0" Content="Delivery Date:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
-            <TextBox x:Name="deliveryrDateDatePicker" IsReadOnly="True"  Grid.Column="1"  Margin="3,4,0,7" Grid.Row="3" Text="{Binding Order.DeliveryrDate, Mode=TwoWay}" HorizontalAlignment="Left" Width="136"/>
+            <TextBox x:Name="customerNameTextBox" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="2" Text="{Binding Order.CustomerName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Grid.Column="0" Content="Deliveryr Date:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+            <TextBox x:Name="deliveryrDateDatePicker" IsReadOnly="True" Text="{Binding Order.DeliveryrDate, Mode=OneWay}" Grid.Column="1"  Margin="3,4,0,4" Grid.Row="3"  HorizontalAlignment="Left" Width="101"/>
             <Label Grid.Column="0" Content="ID:" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
-            <TextBox x:Name="iDTextBox" Grid.Column="1" IsReadOnly="{Binding IsBoss}" HorizontalAlignment="Left" Height="NaN" Margin="3,0,0,0" Grid.Row="4" Text="{Binding Order.ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="136"/>
+            <TextBox x:Name="iDTextBox" Grid.Column="1" IsReadOnly="True" HorizontalAlignment="Left" Height="NaN" Margin="3,0,0,0" Grid.Row="4" Text="{Binding Order.ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="136"/>
             <Label Grid.Column="0" Content="Order Date:" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
             <DatePicker x:Name="orderDateDatePicker" IsEnabled="False " Grid.Column="1" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="5" SelectedDate="{Binding Order.OrderDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="136"/>
             <Label Grid.Column="0" Content="Ship Date:" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>
-            <TextBox Grid.Column="1" IsReadOnly="True" Text="{Binding Order.ShipDate, Mode=OneWay}" HorizontalAlignment="Left" Margin="3,4,0,0" Grid.Row="6" VerticalAlignment="Top" Width="136" />
+            <TextBox Grid.Column="1"  IsReadOnly="true"  Text="{Binding Order.ShipDate, Mode=OneWay}" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="6" VerticalAlignment="Center"  Width="94" />
             <Label Grid.Column="0" Content="Status:"  HorizontalAlignment="Left" Margin="3" Grid.Row="7" VerticalAlignment="Center"/>
             <TextBox x:Name="statusTextBox"  IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3,0,0,0" Grid.Row="7" Text="{Binding Order.Status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="136"/>
             <Label Grid.Column="0" Content="Total Price:" HorizontalAlignment="Left" Margin="3" Grid.Row="8" VerticalAlignment="Center"/>
-            <TextBox x:Name="totalPriceTextBox" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3,0,0,0" Grid.Row="8" Text="{Binding Order.TotalPrice, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="136"/>
-            <Button Grid.Column="1" Content="Update" HorizontalAlignment="Left" Height="25" Margin="144,0,0,0" Grid.Row="6" VerticalAlignment="Top" Width="46" Click="UpdateShip" RenderTransformOrigin="0.971,-0.17"/>
-            <Button Grid.Column="1" Content="Update" HorizontalAlignment="Left" Height="25" Margin="144,0,0,0" Grid.Row="3" VerticalAlignment="Top" Width="46" Click="UpdateDelivery" RenderTransformOrigin="0.971,-0.17"/>
-
+            <TextBox x:Name="totalPriceTextBox" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="8" Text="{Binding Order.TotalPrice, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Button Grid.Column="1" Content="update" MouseDoubleClick="DeliveryUpdate_MouseDoubleClick" HorizontalAlignment="Left" Margin="116,0,0,0" Grid.Row="3" VerticalAlignment="Center" />
+            <Button Grid.Column="1" Content="update" MouseDoubleClick="ShippingUpdate_MouseDoubleClick" HorizontalAlignment="Left" Margin="116,0,0,0" Grid.Row="6" VerticalAlignment="Center"/>
         </Grid>
 
 

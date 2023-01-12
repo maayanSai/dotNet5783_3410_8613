@@ -30,19 +30,7 @@ internal class Order : IOrder
         });
     }
 
-    public BO.OrderForList GetOrderForList(int id)
-    {
-        DO.Order? order = dal.Order.GetById(id);
-        var items = dal.OrderItem.GetAll(delegate (DO.OrderItem? x) { return x?.OrderID == order?.ID; });
-        return new BO.OrderForList
-        {
-            ID = order?.ID ?? throw new BO.BlNullPropertyException("missing order id"),
-            CustomerName = order?.CustomerName ?? " ",
-            Status = GetStatus(order),
-            TotalPrice = items.Sum(x => x?.Price * x?.Amount ?? 0),//alredy cheked id isnot null
-            Amount = items.Count(),
-        };
-    }
+
 
     /// <summary>
     /// A private helper function, that returns the state of the order 
@@ -125,7 +113,7 @@ public BO.Order? Updateshipping(int id)
     try
     {
         order = dal?.Order.GetById(id) ?? throw new BO.BlNullPropertyException("missing product id");
-        if (order.ShipDate != null) // Check if an order exists, and has not yet been sent
+        if (order.OrderDate !=null && order.ShipDate == null) // Check if an order exists, and has not yet been sent
         {
             dal?.Order.Update(new DO.Order
             {
@@ -161,7 +149,7 @@ public BO.Order? Updatesupply(int id)
     {
         order = dal?.Order.GetById(id) ?? throw new BO.BlNullPropertyException("missing product id");
         // Check if an order exists, already sent but not yet delivered
-        if (order.ShipDate != DateTime.MinValue && order.DeliveryrDate == DateTime.MinValue)
+        if (order.ShipDate != null && order.DeliveryrDate == null)
         {
             dal?.Order.Update(new DO.Order
             {

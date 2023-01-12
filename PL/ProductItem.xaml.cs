@@ -15,13 +15,18 @@ using System.Windows.Shapes;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for Cart.xaml
+    /// Interaction logic for ProductItem.xaml
     /// </summary>
-    public partial class Cart : Window
+    public partial class ProductItem : Window
     {
-        public Cart(BO.Cart c)
+        public ProductItem()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
