@@ -9,6 +9,7 @@ using System.Windows;
 public partial class MainWindow : Window
 {
     public BO.Cart c;
+    public BO.OrderTracking Ot;
     BlApi.IBl? bl = BlApi.Factory.Get();
     /// <summary>
     /// constructive action
@@ -25,6 +26,12 @@ public partial class MainWindow : Window
             TotalPrice=0,
             Items=new()
         };
+        Ot = new BO.OrderTracking
+        {
+            ID = 0,
+            Status =BO.OrderStatus.Delivered,
+            Tracking = new()
+        };
     }
     /// <summary>
     /// Entering the product menu
@@ -33,6 +40,8 @@ public partial class MainWindow : Window
     /// <param name="e"></param>
     private void ShowProductsButton_Click(object sender, RoutedEventArgs e) => new OrdersAndProducts().Show();
 
-    private void Button_Click(object sender, RoutedEventArgs e)=>new Catalog(c).ShowDialog();    
-   
+    private void Button_Click(object sender, RoutedEventArgs e)=>new Catalog(c).ShowDialog();
+
+    private void tracking_Click(object sender, RoutedEventArgs e) =>new OrderTracking().ShowDialog();
+
 }

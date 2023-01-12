@@ -1,6 +1,4 @@
-﻿namespace PL;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -10,6 +8,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Xml;
+namespace PL;
 
 /// <summary>
 /// Interaction logic for ProductListWindow.xaml

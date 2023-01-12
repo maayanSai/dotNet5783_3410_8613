@@ -81,5 +81,10 @@ namespace PL
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void orderItemDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

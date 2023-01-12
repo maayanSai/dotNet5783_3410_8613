@@ -5,14 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="OrderTracking" Height="450" Width="800">
+        DataContext="{Binding  RelativeSource={RelativeSource self}}"
+        Title="OrderTracking" Height="652" Width="1203">
     <Grid Background="Black">
-        <DataGrid x:Name="orderTrackingDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,10,390,10">
-            <DataGrid.Columns>
-                <DataGridTextColumn x:Name="iDColumn" Binding="{Binding ID}" Header="ID" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="statusColumn" Binding="{Binding Status}" Header="Status" Width="SizeToHeader"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button Content="Order"  HorizontalAlignment="Left" Height="51" VerticalAlignment="Top" Width="129" Foreground="#FFEFCF81" FontSize="20" Margin="649,373,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold"/>
+        <ListView x:Name="orderTrackingDataGrid" ItemsSource="{Binding Ot.Tracking}" Margin="344,206,344,318" MouseDoubleClick="Order_DoubleClick"/>
+
+        <TextBox HorizontalAlignment="Left" Height="41" Margin="72,43,0,0" TextWrapping="Wrap" Text="{Binding s, Mode=TwoWay}" VerticalAlignment="Top" Width="174"/>
+        <Button Content="enter" HorizontalAlignment="Left" Height="42" Margin="270,43,0,0" VerticalAlignment="Top" Width="89" Click="enter_Click"/>
     </Grid>
 </Window>

@@ -47,7 +47,7 @@
         </Grid>
 
 
-        <DataGrid x:Name="orderItemDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Order.Items}" IsEnabled="False" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="341,34,41,200" >
+        <DataGrid x:Name="orderItemDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Order.Items}" IsEnabled="False" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="341,34,41,200" SelectionChanged="orderItemDataGrid_SelectionChanged" >
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="iDColumn" Binding="{Binding ID}" Header="ID    " Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name            " Width="SizeToHeader"/>
