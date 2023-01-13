@@ -7,13 +7,13 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" FontSize="16" Background="Black">
 
-    <Grid HorizontalAlignment="Center" Height="440" VerticalAlignment="Top" Width="800">
+    <Grid HorizontalAlignment="Center" Height="450" VerticalAlignment="Top" Width="800">
         <Grid.Background>
             <ImageBrush ImageSource="/צילום מסך 2022-12-17 212806.png"/>
         </Grid.Background>
-        <Button Content="Admin" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Width="92" Click="ShowProductsButton_Click" Foreground="#FFEFCF81" FontSize="20" Margin="650,284,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold"/>
-        <Button Content="New order" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Width="152" Foreground="#FFEFCF81" FontSize="20" Margin="620,323,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold" Click="Button_Click"/>
-        <Button Content="Order Tracking" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top" Width="170" Foreground="#FFEFCF81" FontSize="20" Margin="611,362,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold" Click="tracking_Click"/>
+        <Button Content="Admin" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Width="92" Click="ShowProductsButton_Click" Foreground="#FFEFCF81" FontSize="20" Margin="689,294,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold" RenderTransformOrigin="0.513,-0.267"/>
+        <Button Content="New order" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Width="152" Foreground="#FFEFCF81" FontSize="20" Margin="629,333,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold" Click="Button_Click"/>
+        <Button Content="Order Tracking" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top" Width="170" Foreground="#FFEFCF81" FontSize="20" Margin="611,372,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold" Click="tracking_Click"/>
     </Grid>
 
 
