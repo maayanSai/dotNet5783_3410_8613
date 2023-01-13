@@ -5,15 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="795" FontSize="16" Background="Black">
+        Title="MainWindow" Height="450" Width="800" FontSize="16" Background="Black">
 
     <Grid HorizontalAlignment="Center" Height="440" VerticalAlignment="Top" Width="800">
-        <Button Content="Admin" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Width="92" Click="ShowProductsButton_Click" Foreground="#FFEFCF81" FontSize="20" Margin="650,303,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold"/>
-        <Button Content="New order" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Width="152" Foreground="#FFEFCF81" FontSize="20" Margin="620,342,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold" Click="Button_Click"/>
-        <Button Content="Order Tracking" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top" Width="170" Foreground="#FFEFCF81" FontSize="20" Margin="611,381,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold" Click="tracking_Click"/>
         <Grid.Background>
             <ImageBrush ImageSource="/צילום מסך 2022-12-17 212806.png"/>
         </Grid.Background>
+        <Button Content="Admin" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Width="92" Click="ShowProductsButton_Click" Foreground="#FFEFCF81" FontSize="20" Margin="650,284,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold"/>
+        <Button Content="New order" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Width="152" Foreground="#FFEFCF81" FontSize="20" Margin="620,323,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold" Click="Button_Click"/>
+        <Button Content="Order Tracking" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top" Width="170" Foreground="#FFEFCF81" FontSize="20" Margin="611,362,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold" Click="tracking_Click"/>
     </Grid>
 
 

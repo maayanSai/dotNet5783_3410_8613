@@ -52,13 +52,12 @@ namespace PL
             Ot = o;
         }
 
-        private void Order_DoubleClick(object sender, MouseButtonEventArgs e)
+        private void Order_click(object sender, RoutedEventArgs e)
         {
             e.Handled = true;
-            Order? O = (BO.Order)((DataGrid)sender).SelectedItem;
-            Order? order = bl?.Order.ItemOrder(O.ID);
-            OrderWindow OR = new OrderWindow(O.ID);
-            OR.ShowDialog();
+            Order? O = bl?.Order.ItemOrder(Ot.ID);
+            OrderItemWindow? orderWindow = new OrderItemWindow(O.ID);
+            orderWindow.ShowDialog();
         }
     }
 }
