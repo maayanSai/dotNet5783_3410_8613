@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,8 +20,20 @@ namespace PL
     /// </summary>
     public partial class Cart : Window
     {
+        private static readonly DalApi.IDal dal = DalApi.Factory.Get()!;
+       
+             public ObservableCollection<BO.OrderItem?> OrderItemtList
+        {
+            get { return (ObservableCollection<BO.OrderItem?>)GetValue(OrderItemtListProperty); }
+            set { SetValue(OrderItemtListProperty, value); }
+        }
+
+        public static readonly DependencyProperty OrderItemtListProperty =
+               DependencyProperty.Register("OrderItemtList", typeof(ObservableCollection<BO.OrderItem?>), typeof(Window));
         public Cart(BO.Cart c)
         {
+    
+                
             InitializeComponent();
         }
     }

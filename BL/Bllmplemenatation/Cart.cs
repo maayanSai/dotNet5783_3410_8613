@@ -33,22 +33,40 @@ internal class Cart : ICart
         }
         else
         {
-            if (amount < boOrdi.Amount)
+            DO.Product? p;
+            try
             {
-                cart.Items?.Remove(boOrdi);
-                cart.TotalPrice -= (boOrdi.Amount - amount) * boOrdi.Price;
-                boOrdi.Amount = amount;
-                boOrdi.Totalprice = boOrdi.Price * amount;
-                cart.Items?.Add(boOrdi);
+               p =dal.Product.GetById(id);
             }
-            if (amount > boOrdi.Amount)
+              catch (DO.UnFoundException exp)
             {
-                cart.Items?.Remove(boOrdi);
-                cart.TotalPrice += (amount - boOrdi.Amount) * boOrdi.Price;
-                boOrdi.Amount = amount;
-                boOrdi.Totalprice = boOrdi.Price * amount;
-                cart.Items?.Add(boOrdi);
+                throw new BO.BlMissingEntityException("the product does not exist", exp);
             }
+            if(p?.InStock>amount)
+            {
+                if (amount < boOrdi.Amount)
+                {
+                    cart.Items?.Remove(boOrdi);
+                    cart.TotalPrice -= (boOrdi.Amount - amount) * boOrdi.Price;
+                    boOrdi.Amount = amount;
+                    boOrdi.Totalprice = boOrdi.Price * amount;
+                    cart.Items?.Add(boOrdi);
+                }
+                if (amount > boOrdi.Amount)
+                {
+                    cart.Items?.Remove(boOrdi);
+                    cart.TotalPrice += (amount - boOrdi.Amount) * boOrdi.Price;
+                    boOrdi.Amount = amount;
+                    boOrdi.Totalprice = boOrdi.Price * amount;
+                    cart.Items?.Add(boOrdi);
+                }
+
+            }
+            else
+            {
+                throw new BO.BlMissingEntityException("therse is not enough from the product in stock");
+            }
+          
         }
         return cart;
     }
@@ -83,18 +101,27 @@ internal class Cart : ICart
                     Amount = 1,
                     Name = pro?.Name,
                     Price = pro?.Price ?? 0,
-                    Totalprice = pro?.Price ?? 0
+                    Totalprice = pro?.Price ?? 0,
+                   
                 });
                 cart.TotalPrice += pro?.Price ?? throw new BO.BlNullPropertyException("product does not exist");
             }
             else // OrderItem exists
             {
-                cart.Items?.Remove(boOrderItem);
-                boOrderItem.Amount++;
-                boOrderItem.Totalprice += pro?.Price ?? 0;
-                cart.Items?.Add(boOrderItem);
-                cart.TotalPrice += pro?.Price ?? 0;
+                  if (pro?.InStock -boOrderItem.Amount-1>= 0)
+                {
+                    cart.Items?.Remove(boOrderItem);
+                    boOrderItem.Amount++;
+                    boOrderItem.Totalprice += pro?.Price ?? 0;
+                    cart.Items?.Add(boOrderItem);
+                    cart.TotalPrice += pro?.Price ?? 0;
+                }
+                  else
+                    throw new BO.BlMissingEntityException("Product not in stock for that amaunt-cant add no more");
+
             }
+            
+            
         }
         else
             throw new BO.BlMissingEntityException("Product not in stock");
@@ -176,6 +203,7 @@ internal class Cart : ICart
                 {
                     throw new BO.BlMissingEntityException("the priduct does not exsist", exp);
                 }
+               
             }
         }
         cart.Items.Clear();

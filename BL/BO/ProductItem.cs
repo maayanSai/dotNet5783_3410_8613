@@ -24,10 +24,11 @@ public class ProductItem
     /// <summary>
     /// Availability (Is it in stock)
     /// </summary>
-    public bool isStock { get; set; }
+    public int Amount { get; set; }
     /// <summary>
     /// An action that prints the order
     /// </summary>
     /// <returns></returns>
+      public bool isStock { get; set; }
     public override string ToString() => this.ToStringProperty();
 }

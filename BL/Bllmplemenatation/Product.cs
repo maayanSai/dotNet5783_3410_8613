@@ -74,14 +74,14 @@ internal class Product : IProduct
     /// <returns></returns>
     /// <exception cref="Exceptions.BlNullPropertyException"></exception>
     /// <exception cref="Exception"></exception>
-    public IEnumerable<BO.ProductForList?> GetProducts(Func<BO.ProductForList?, bool>? func =null)
+    public IEnumerable<BO.ProductForList?> GetProducts(Func<BO.ProductForList?, bool>? func = null)
     {
         IEnumerable<BO.ProductForList?> pro = from DO.Product item in dal!.Product.GetAll()
                                               select new BO.ProductForList()
                                               {
-                                                  ID = item.ID ,
+                                                  ID = item.ID,
                                                   Name = item.Name,
-                                                  Price = item.Price ,
+                                                  Price = item.Price,
                                                   Category = (BO.Category?)item.Category,
                                               };
         return func is null ? pro : pro.Where(func);
@@ -152,7 +152,9 @@ internal class Product : IProduct
             ID = p?.ID ?? throw new BO.BlNullPropertyException("Null product id"),
             Name = p?.Name ?? "",
             Price = p?.Price ?? 0,
-            isStock = p?.InStock > 0,
+            Amount = amount,
+            isStock=p?.InStock>0,
+            Category=(BO.Category?)p?.Category!,
         };
         return proi;
     }
@@ -194,5 +196,22 @@ internal class Product : IProduct
     public IEnumerable<BO.ProductForList?> GetListedProductByCategory(BO.Category c)
     {
         return GetProducts().Where(x => x?.Category == c);
+    }
+    public IEnumerable<BO.ProductItem?> GetProductItem(BO.Cart cart,Func<BO.ProductItem,bool>?fanc=null)
+    {
+        IEnumerable<BO.ProductItem?> pro = from DO.Product item in dal!.Product.GetAll()
+                                           select new BO.ProductItem()
+                                           {
+                                               ID = item.ID,
+                                               Name = item.Name,
+                                               Price = item.Price,
+                                               Category = (BO.Category?)item.Category,
+                                               Amount=cart?.Items?.FirstOrDefault(x => x?.ProductID==item.ID)?.Amount??0,
+                                               isStock=item.InStock>0,
+                                           };
+
+
+        return pro;
+
     }
 }
