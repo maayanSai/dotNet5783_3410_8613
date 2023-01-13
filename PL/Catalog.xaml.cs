@@ -22,21 +22,44 @@ namespace PL
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
         public BO.Cart Cb;
-        public ObservableCollection<BO.ProductForList?> ProductList
+        public BO.Cart AddToCart(BO.Cart c, BO.ProductItem? pro)
         {
-            get { return (ObservableCollection<BO.ProductForList?>)GetValue(ProductListProperty); }
-            set { SetValue(ProductListProperty, value); }
+            
+            BO.OrderItem b = new BO.OrderItem { Name=pro.Name, ProductID=pro.ID, Amount=1, Price=pro.Price, Totalprice=pro.Price };
+            try
+            {
+                bl.Cart.Add(c, pro.ID);
+                
+                pro.Amount=  c.Items.Find(x => x.ProductID==b.ProductID).Amount;
+            
+                 ProducitemtList.Remove(ProducitemtList.FirstOrDefault(x=>x.ID==pro.ID));
+                ProducitemtList.Add(pro);
+           
+            }
+           catch (BO.BlMissingEntityException boexp)
+            {
+                MessageBox.Show(boexp.Message, "cant add", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+           
+            return c;
         }
 
-        public static readonly DependencyProperty ProductListProperty =
-               DependencyProperty.Register("ProductList", typeof(ObservableCollection<BO.ProductForList?>), typeof(Window));
+       
+        public ObservableCollection<BO.ProductItem?> ProducitemtList
+        {
+            get { return (ObservableCollection<BO.ProductItem?>)GetValue(ProductItemProperty); }
+            set { SetValue(ProductItemProperty, value); }
+        }
+
+        public static readonly DependencyProperty ProductItemProperty =
+               DependencyProperty.Register("ProducitemtList", typeof(ObservableCollection<BO.ProductItem?>), typeof(Window));
         public Catalog(BO.Cart cb)
         {
             Cb=cb;
             InitializeComponent();
 
-            ProductList= new(bl.Product.GetProducts()); 
-
+            ProducitemtList= new(bl.Product.GetProductItem(Cb)); 
+        
             SelectedCategory.ItemsSource = Enum.GetValues(typeof(BO.Category));
         }
 
@@ -46,14 +69,15 @@ namespace PL
             BO.Category c = (BO.Category)SelectedCategory.SelectedItem;
             try
             {
-                
+
                 if (c == BO.Category.None)
                 {
-                         ProductList = new(bl?.Product.GetProducts()!);
+                    ProducitemtList = new(bl?.Product.GetProductItem(Cb)!) ;
                 }
                 else
-                    ProductList = new(bl?.Product.GetListedProductByCategory(c)!);
+                    ProducitemtList = new(bl?.Product.GetProductItem(Cb, x => x.Category==c)!);
             }
+                        
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -63,11 +87,8 @@ namespace PL
         private void productItemDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             e.Handled=true;
-            BO.ProductForList? pfl = (BO.ProductForList)((DataGrid)sender).SelectedItem;
-            int pflId = pfl.ID;
-            BO.Product p = bl.Product.ItemProduct(pflId);
-            BO.ProductItem pb = new BO.ProductItem { ID=p.ID, Category=p.Category, isStock=p.InStock>0 ? true : false, Name=p.Name, Price=p.Price };
-            ProductItem windoProductItem = new ProductItem(pb,Cb);
+            BO.ProductItem? pil = (BO.ProductItem?)((DataGrid)sender).SelectedItem;
+            ProductItem windoProductItem = new ProductItem(pil,Cb, AddToCart);
             windoProductItem.ShowDialog();
             
 

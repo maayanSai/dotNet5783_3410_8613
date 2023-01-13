@@ -40,4 +40,5 @@ public interface IProduct
     /// <param name="p"></param>
     void Update(Product p);
     IEnumerable<ProductForList?> GetListedProductByCategory(Category c);
+    public IEnumerable<BO.ProductItem?> GetProductItem(BO.Cart cart, Func<BO.ProductItem, bool>? fanc = null);
 }
