@@ -209,9 +209,6 @@ internal class Product : IProduct
                                                Amount=cart?.Items?.FirstOrDefault(x => x?.ProductID==item.ID)?.Amount??0,
                                                isStock=item.InStock>0,
                                            };
-
-
         return pro;
-
     }
 }

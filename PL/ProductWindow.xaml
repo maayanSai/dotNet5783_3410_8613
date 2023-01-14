@@ -7,23 +7,38 @@
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource self}}"
         Title="ProductWindow" Height="450" Width="800" Background="Black">
+    <Window.Resources>        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontFamily" Value="Segoe Print" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Background" Value="Black" />
+            <Setter Property="Foreground" Value="#FFEFCF81" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Height" Value="42" />
+            <Setter Property="Width" Value="91" />
+        </Style>        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="Black" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Height" Value="29" />
+            <Setter Property="Width" Value="123" />        </Style>    </Window.Resources>
     <Grid>
-        <Label  Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black" Name="ID" Content="Id:" HorizontalAlignment="Left" Height="42" Margin="209,78,0,0" VerticalAlignment="Top" Width="48"/>
-        <TextBox Foreground="Black" Text="{Binding Product.ID}" IsReadOnly="{Binding Mode}" Name="Id" HorizontalAlignment="Left" Height="29" Margin="300,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123"/>
-        <Label Foreground="#FFEFCF81"  FontSize="16" FontFamily="Segoe Print"  Background="Black" Content="Category:" HorizontalAlignment="Left" Height="39" Margin="209,125,0,0" VerticalAlignment="Top" Width="91"/>
+        <Label Name="ID" Content="Id:" Margin="209,78,0,0"/>
+        <Label Content="Name:" Margin="209,173,0,0"/>
+        <Label Content="Price:" Margin="209,222,0,0"/>
+        <Label Content="InStock:" Margin="209,267,0,0"/>
+        <Label Content="Category:" Margin="209,125,0,0"/>
         <ComboBox Foreground="Black" FontFamily="Segoe Print" Name="CategoryForNewProduct" SelectedItem="{Binding Product.Category,Mode=TwoWay}" HorizontalAlignment="Left" Background="Black" Height="29" Margin="300,125,0,0" VerticalAlignment="Top" Width="123"/>
-        <Label Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black" Content="Name:" HorizontalAlignment="Left" Height="39" Margin="209,173,0,0" VerticalAlignment="Top" Width="76"/>
-        <Label Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black" Content="Price:" HorizontalAlignment="Left" Height="40" Margin="209,222,0,0" VerticalAlignment="Top" Width="76"/>
-        <Label Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black" Content="InStock:" HorizontalAlignment="Left" Height="39" Margin="209,267,0,0" VerticalAlignment="Top" Width="86"/>
-        <TextBox Foreground="Black" Text="{Binding Product.Name, Mode=TwoWay}" x:Name="Name" HorizontalAlignment="Left" Height="29" Margin="300,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123" RenderTransformOrigin="0.473,0.77" />
-        <TextBox Foreground="Black"  Text="{Binding Product.Price, Mode=TwoWay}" x:Name="Price" HorizontalAlignment="Left" Height="29" Margin="300,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123"/>
-        <TextBox Foreground="Black" Text="{Binding Product.InStock, Mode=TwoWay}" x:Name="InStock" HorizontalAlignment="Left" Height="29" Margin="300,267,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123" />
-        <Button  Name="BtnAddOrUpdetProduct"  Content="{Binding BtnAddOrUpdetProductContent, Mode=TwoWay}" HorizontalAlignment="Left" Height="29" Margin="514,319,0,0" VerticalAlignment="Top" Width="80" Click="ButtonAddOrApdet_Click" Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black"/>
+        <TextBox Text="{Binding Product.ID}" IsReadOnly="{Binding Mode}" Name="Id" Margin="300,78,0,0"/>
+        <TextBox Text="{Binding Product.Name, Mode=TwoWay}" x:Name="Name" Margin="300,178,0,0"/>
+        <TextBox Text="{Binding Product.Price, Mode=TwoWay}" x:Name="Price" Margin="300,222,0,0"/>
+        <TextBox Text="{Binding Product.InStock, Mode=TwoWay}" x:Name="InStock" Margin="300,267,0,0"/>
+        <Button Name="BtnAddOrUpdetProduct"  Content="{Binding BtnAddOrUpdetProductContent, Mode=TwoWay}" HorizontalAlignment="Left" Height="29" Margin="514,319,0,0" VerticalAlignment="Top" Width="80" Click="ButtonAddOrApdet_Click" Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black"/>
         <Grid HorizontalAlignment="Left" Height="62" Margin="0,347,0,0" VerticalAlignment="Top" Width="101">
             <Grid.Background>
                 <ImageBrush ImageSource="/צילום מסך 2023-01-05 161035.png"/>
             </Grid.Background>
         </Grid>
-
     </Grid>
 </Window>

@@ -55,8 +55,8 @@ namespace PL
         private void Order_click(object sender, RoutedEventArgs e)
         {
             e.Handled = true;
-            Order? O = bl?.Order.ItemOrder(Ot.ID);
-            OrderItemWindow? orderWindow = new OrderItemWindow(O.ID);
+            Order? O = bl?.Order.ItemOrder(Ot!.ID);
+            OrderItemWindow? orderWindow = new OrderItemWindow(O!.ID);
             orderWindow.ShowDialog();
         }
     }

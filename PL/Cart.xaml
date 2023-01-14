@@ -11,15 +11,18 @@
             <ColumnDefinition Width="51*"/>
             <ColumnDefinition Width="29*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="cartDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,10,100,10">
+        <DataGrid x:Name="cartDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,10,83,10">
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="customerNameColumn" Binding="{Binding CustomerName}" Header="Customer Name" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="customerAdressColumn" Binding="{Binding CustomerAdress}" Header="Customer Adress" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="customerEmailColumn" Binding="{Binding CustomerEmail}" Header="Customer Email" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="totalPriceColumn" Binding="{Binding TotalPrice}" Header="Total Price" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="customerNameColumn" Binding="{Binding CustomerName}" Header="Customer Name  " Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="customerAdressColumn" Binding="{Binding CustomerAdress}" Header="Customer Adress  " Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="customerEmailColumn" Binding="{Binding CustomerEmail}" Header="Customer Email  " Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="totalPriceColumn" Binding="{Binding TotalPrice}" Header="Total Price  " Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Complete an order"  HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="231" Foreground="#FFEFCF81" FontSize="20" Margin="48,377,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold" Grid.Column="1">
+        <Button Content=""  HorizontalAlignment="Left" Height="85" VerticalAlignment="Top" Width="105" Foreground="#FFEFCF81" FontSize="20" Margin="173,318,0,0" FontFamily="Segoe Print" FontWeight="Bold" Grid.Column="1">
+            <Button.Background>
+                <ImageBrush ImageSource="/צילום מסך 2023-01-13 110221.png"/>
+            </Button.Background>
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

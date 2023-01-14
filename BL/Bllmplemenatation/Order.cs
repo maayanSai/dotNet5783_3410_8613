@@ -203,12 +203,12 @@ internal class Order : IOrder
         List<Tuple<DateTime?, string?>> tracking = new();
         if (order.OrderDate != null)
             tracking.Add(new Tuple<DateTime?, string?>(order.OrderDate, "the order allready exist"));
-        else throw new BO.BlIncorrectDatesException("order date is miising");
+        else throw new BO.BlIncorrectDatesException("order date is missing");
         if (order.ShipDate != null)
             tracking.Add(new Tuple<DateTime?, string?>(order.ShipDate, " the order has been sent"));
         // else throw new BO.BlNullPropertyException("Ship date is missing");
         if (order.DeliveryrDate != null)
-            tracking.Add(new Tuple<DateTime?, string?>(order.ShipDate, " the order has been delivered"));
+            tracking.Add(new Tuple<DateTime?, string?>(order.DeliveryrDate, " the order has been delivered"));
         //else throw new BO.BlNullPropertyException("Delivery Date is missing");
         BO.OrderTracking ortk = new()
         {

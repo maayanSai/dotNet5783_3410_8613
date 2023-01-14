@@ -7,6 +7,20 @@
         mc:Ignorable="d"
         DataContext="{Binding  RelativeSource={RelativeSource self}}"
         Title="OrderTracking" Height="450" Width="800">
+    <Window.Resources>        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontFamily" Value="Segoe Print" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Background" Value="Black" />
+            <Setter Property="Foreground" Value="#FFEFCF81" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Height" Value="34" />
+            <Setter Property="Width" Value="92" />
+        </Style>        <Style TargetType="TextBox">            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Height" Value="41" />
+            <Setter Property="Width" Value="174" />        </Style>    </Window.Resources>
     <Grid Background="Black">
         <ListView x:Name="orderTrackingDataGrid" ItemsSource="{Binding Ot.Tracking}" Margin="253,204,203,116" RenderTransformOrigin="0.5,0.5">
             <ListView.RenderTransform>
@@ -19,11 +33,14 @@
             </ListView.RenderTransform>
         </ListView>
 
-        <TextBox HorizontalAlignment="Left" Height="41" Margin="72,43,0,0" TextWrapping="Wrap" Text="{Binding s, Mode=TwoWay}" VerticalAlignment="Top" Width="174"/>
-        <Button Content="enter" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Width="92" Foreground="#FFEFCF81" FontSize="20" Margin="253,46,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold" Click="enter_Click"/>
-        <TextBox HorizontalAlignment="Left" Margin="72,108,0,0" TextWrapping="Wrap" Text="{Binding Ot.Status, Mode=OneWay}" VerticalAlignment="Top" Width="174" Height="40"/>
-        <Button Content="Order" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Width="92" Foreground="#FFEFCF81" FontSize="20" Margin="659,333,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold" Click="Order_click"/>
+        <Button Content="enter"  Margin="253,46,0,0" Click="enter_Click"/>
+        <Button Content="Order" Margin="659,333,0,0" Click="Order_click"/>
+
+        <TextBox  Margin="72,43,0,0" Text="{Binding s, Mode=TwoWay}" />
+        <TextBox  Margin="72,108,0,0" Text="{Binding Ot.Status, Mode=OneWay}"/>
+        
         <Label Content="ID:" HorizontalAlignment="Left" Height="43" VerticalAlignment="Top" Width="40" Foreground="#FFEFCF81" FontSize="20"  FontFamily="Segoe Print" Background="Black" FontWeight="Bold" Margin="27,37,0,0" />
+        
         <Grid HorizontalAlignment="Left" Height="58" Margin="10,350,0,0" VerticalAlignment="Top" Width="91">
             <Grid.Background>
                 <ImageBrush ImageSource="/צילום מסך 2023-01-05 161035.png"/>

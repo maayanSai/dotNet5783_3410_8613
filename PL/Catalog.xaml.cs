@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace PL
         public BO.Cart AddToCart(BO.Cart c, BO.ProductItem? pro)
         {
             
-            BO.OrderItem b = new BO.OrderItem { Name=pro.Name, ProductID=pro.ID, Amount=1, Price=pro.Price, Totalprice=pro.Price };
+            BO.OrderItem b = new BO.OrderItem { Name=pro?.Name, ProductID=pro.ID, Amount=1, Price=pro.Price, Totalprice=pro.Price };
             try
             {
                 bl.Cart.Add(c, pro.ID);
@@ -69,7 +70,6 @@ namespace PL
             BO.Category c = (BO.Category)SelectedCategory.SelectedItem;
             try
             {
-
                 if (c == BO.Category.None)
                 {
                     ProducitemtList = new(bl?.Product.GetProductItem(Cb)!) ;
@@ -88,11 +88,8 @@ namespace PL
         {
             e.Handled=true;
             BO.ProductItem? pil = (BO.ProductItem?)((DataGrid)sender).SelectedItem;
-            ProductItem windoProductItem = new ProductItem(pil,Cb, AddToCart);
+            ProductItem windoProductItem = new ProductItem(pil!,Cb, AddToCart);
             windoProductItem.ShowDialog();
-            
-
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -101,6 +98,11 @@ namespace PL
             cartWindow.ShowDialog();
         }
 
-     
+        private void Group_Click(object sender, RoutedEventArgs e)
+        {
+            var p = bl?.Product.GetProductItem(Cb);
+        }
+
     }
 }
+
