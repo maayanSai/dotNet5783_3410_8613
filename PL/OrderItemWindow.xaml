@@ -5,13 +5,55 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-          DataContext="{Binding  RelativeSource={RelativeSource self}}"
+        DataContext="{Binding  RelativeSource={RelativeSource self}}"
         Title="OrderItemWindow" Height="450" Width="800">
-    <Grid>
-        <Grid x:Name="grid1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,45,0,0" Height="329" Width="275">
+    <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="FontFamily" Value="Segoe Print" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Background" Value="Black" />
+            <Setter Property="Foreground" Value="#FFEFCF81" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Width" Value="97" />
+            <Setter Property="VerticalAlignment" Value="center" />
+            <Setter Property="Margin" Value="3" />
+            <Setter Property="Grid.Column" Value="0" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="Black" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Height" Value="NaN" />
+            <Setter Property="Width" Value="136" />
+            <Setter Property="IsReadOnly" Value="True" />
+            <Setter Property="Margin" Value="10,0,0,0" />
+            <Setter Property="Grid.Column" Value="1" />
+            <Setter Property="VerticalAlignment" Value="center" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Black" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Height" Value="NaN" />
+            <Setter Property="Width" Value="68" />
+            <Setter Property="Margin" Value="149,0,0,0" />
+            <Setter Property="Grid.Column" Value="1" />
+            <Setter Property="VerticalAlignment" Value="center" />
+            <Setter Property="VerticalAlignment" Value="center" />
+            <Setter Property="Content" Value="Update" />
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="FontFamily" Value="Segoe Print" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="#FFEFCF81" />
+        </Style>
+    </Window.Resources>
+    <Grid Background="Black">
+        <Grid x:Name="grid1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,19,0,0" Height="365" Width="349">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" MinWidth="97"/>
+                <ColumnDefinition Width="Auto" MinWidth="285"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -47,15 +89,20 @@
         </Grid>
 
 
-        <DataGrid x:Name="orderItemDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Order.Items}" IsEnabled="False" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="400,64,117,170" >
+        <DataGrid x:Name="orderItemDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Order.Items}" IsEnabled="False" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="372,19,10,215" SelectionChanged="orderItemDataGrid_SelectionChanged" >
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="amountColumn" Binding="{Binding Amount}" Header="Amount" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="iDColumn" Binding="{Binding ID}" Header="ID" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="priceColumn" Binding="{Binding Price}" Header="Price" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="iDColumn" Binding="{Binding ID}" Header="ID    " Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name             " Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="productIDColumn" Binding="{Binding ProductID}" Header="Product ID" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="totalpriceColumn" Binding="{Binding Totalprice}" Header="Totalprice" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="amountColumn" Binding="{Binding Amount}" Header="Amount" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="priceColumn" Binding="{Binding Price}" Header="Price     " Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="totalpriceColumn" Binding="{Binding Totalprice}" Header="Totalprice  " Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Grid HorizontalAlignment="Left" Height="37" Margin="0,378,0,0" VerticalAlignment="Top" Width="59">
+            <Grid.Background>
+                <ImageBrush ImageSource="/צילום מסך 2023-01-05 161035.png"/>
+            </Grid.Background>
+        </Grid>
     </Grid>
 </Window>
