@@ -33,7 +33,7 @@
         </Grid>
         <DataGrid x:Name="orderItemDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Cb.Items}" IsEnabled="False" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="475,25,42,64" >
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="amountColumn" Binding="{Binding Amount}" Header="Amount" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="amountColumn"  Binding="{Binding Amount}" Header="Amount" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="priceColumn" Binding="{Binding Price}" Header="Price" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="productIDColumn" Binding="{Binding ProductID}" Header="Product ID" Width="SizeToHeader"/>

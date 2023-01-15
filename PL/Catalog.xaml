@@ -26,7 +26,7 @@
                 <ImageBrush ImageSource="/צילום מסך 2023-01-13 104936.png"/>
             </Button.Background>
         </Button>
-        <ComboBox HorizontalAlignment="Left" Name="SelectedCategory" Height="20" Margin="400,12,0,0" VerticalAlignment="Top" Width="99" SelectionChanged="CategorySelectionChanged" SelectedIndex="5"/>
+        <ComboBox HorizontalAlignment="Left" Name="SelectedCategory" Margin="400,0,0,402" Width="99" SelectionChanged="CategorySelectionChanged" SelectedIndex="5" Height="20" VerticalAlignment="Bottom"/>
         <Button Content="Group by Category" HorizontalAlignment="Left" Height="33" Margin="29,22,0,0" VerticalAlignment="Top" Width="146" Click="Group_Click" Grid.Column="1"/>
         <ListView Grid.ColumnSpan="2"  x:Name="groupListView" HorizontalAlignment="Left" Height="284" Margin="553,60,0,0" VerticalAlignment="Top" Width="213" d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListView.View>

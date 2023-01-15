@@ -31,6 +31,8 @@
             <Setter Property="Margin" Value="10,0,0,0" />
             <Setter Property="Grid.Column" Value="1" />
             <Setter Property="VerticalAlignment" Value="center" />
+            <Setter Property="Foreground" Value="#FFEFCF81" />
+            
         </Style>
         <Style TargetType="Button">
             <Setter Property="Background" Value="Black" />
@@ -84,8 +86,8 @@
             <TextBox x:Name="statusTextBox"  IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3,0,0,0" Grid.Row="7" Text="{Binding Order.Status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="136"/>
             <Label Grid.Column="0" Content="Total Price:" HorizontalAlignment="Left" Margin="3" Grid.Row="8" VerticalAlignment="Center"/>
             <TextBox x:Name="totalPriceTextBox" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="8" Text="{Binding Order.TotalPrice, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Button Grid.Column="1" Content="update" Visibility="{Binding IsBoss}" MouseDoubleClick="DeliveryUpdate_MouseDoubleClick" HorizontalAlignment="Left" Margin="116,0,0,0" Grid.Row="3" VerticalAlignment="Center" />
-            <Button Grid.Column="1" Content="update" Visibility="{Binding IsBoss}" MouseDoubleClick="ShippingUpdate_MouseDoubleClick" HorizontalAlignment="Left" Margin="116,0,0,0" Grid.Row="6" VerticalAlignment="Center"/>
+            <Button Grid.Column="1" Content="update"  MouseDoubleClick="DeliveryUpdate_MouseDoubleClick" HorizontalAlignment="Left" Margin="116,0,0,0" Grid.Row="3" VerticalAlignment="Center" />
+            <Button Grid.Column="1" Content="update"  MouseDoubleClick="ShippingUpdate_MouseDoubleClick" HorizontalAlignment="Left" Margin="116,0,0,0" Grid.Row="6" VerticalAlignment="Center"/>
         </Grid>
 
 
