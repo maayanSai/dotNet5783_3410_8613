@@ -8,6 +8,7 @@ using System.Windows;
 
 namespace PL
 {
+
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>

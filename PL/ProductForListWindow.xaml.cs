@@ -1,6 +1,4 @@
-﻿namespace PL;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -10,6 +8,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Xml;
+namespace PL;
 
 /// <summary>
 /// Interaction logic for ProductListWindow.xaml
@@ -25,16 +24,10 @@ public partial class ProductListWindow : Window
         get { return (ObservableCollection<BO.ProductForList?>) GetValue(ProductListProperty);}
         set { SetValue(ProductListProperty, value); }
     }
-    //public   Category Category { get; set; } = Category.None;
-    //public static readonly DependencyProperty CategoryDp =
-    //    DependencyProperty.Register("Category", typeof(Category), typeof(Window));
-
-    // Using a DependencyProperty as the backing store for ProductList.  This enables animation, styling, binding, etc...
 
     public static readonly DependencyProperty ProductListProperty =
            DependencyProperty.Register("ProductList", typeof(ObservableCollection<BO.ProductForList?>), typeof(Window));
-   
-
+  
     public ProductListWindow()
     {
         InitializeComponent();
@@ -52,7 +45,7 @@ public partial class ProductListWindow : Window
     public void AddToOb(int proId)
     {
 
-        ProductList.Add(bl.Product.GetProducts(x => x.ID==proId).First());
+        ProductList.Add(bl.Product.GetProducts(x => x?.ID==proId).First());
         
     }
     private void SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -78,11 +71,8 @@ public partial class ProductListWindow : Window
     /// <param name="sender"></param>
     /// <param name="e"></param>
     private void NewProductButton_Click(object sender, RoutedEventArgs e)
-    {    
+    {
         new ProductWindow(AddToOb).ShowDialog();
-
-        
-        
     }
    
 

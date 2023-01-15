@@ -24,5 +24,5 @@ public interface ICart
     /// Basket confirmation for the order
     /// </summary>
     /// <param name="cart"></param>
-    void MakeAnOrder(Cart cart);
+    int MakeAnOrder(Cart cart);
 }

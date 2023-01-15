@@ -68,18 +68,23 @@ namespace PL
         }
         private void DeliveryUpdate_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            e.Handled=true;
+            e.Handled = true;
             try
             {
-                var a = bl.Order.Updatesupply(Order.ID);
-                Order=a;
+                var a = bl?.Order.Updatesupply(Order.ID);
+                Order=a!;
 
-                update(Order.ID);
+                update!(Order.ID);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void orderItemDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

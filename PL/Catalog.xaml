@@ -8,20 +8,20 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid Background="Black">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="73*"/>
-            <ColumnDefinition Width="27*"/>
+            <ColumnDefinition Width="287*"/>
+            <ColumnDefinition Width="113*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="productItemDataGrid" MouseDoubleClick="productItemDataGrid_MouseDoubleClick" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,10,71,10">
+        <DataGrid x:Name="productItemDataGrid" MouseDoubleClick="productItemDataGrid_MouseDoubleClick" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,10,70,10">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="categoryColumn" Binding="{Binding Category}" Header="Category    " IsReadOnly="True" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="iDColumn" Binding="{Binding ID}" Header="ID    " IsReadOnly="True" Width="SizeToHeader"/>
                 <DataGridCheckBoxColumn x:Name="isStockColumn" Binding="{Binding isStock}" IsReadOnly="True" Header="is Stock" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name     " IsReadOnly="True" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="priceColumn" Binding="{Binding Price}" Header="Price" IsReadOnly="True" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="Amaunt" Binding="{Binding Amount}" Header="Amount     "   Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="Amaunt" Binding="{Binding Amount}" Header="Amount     "   Width="SizeToHeader" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Cart" HorizontalAlignment="Left" Height="42" VerticalAlignment="Top" Width="101" Foreground="#FFEFCF81" FontSize="20" Margin="91,372,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold" Grid.Column="1" Click="ChangeAmaunt"/>
+        <Button Content="Cart" HorizontalAlignment="Left" Height="42" VerticalAlignment="Top" Width="101" Foreground="#FFEFCF81" FontSize="20" Margin="91,372,0,0" FontFamily="Segoe Print" Background="Black" FontWeight="Bold" Grid.Column="1" Click="Button_Click"/>
         <ComboBox HorizontalAlignment="Left" Name="SelectedCategory" Height="20" Margin="339,12,0,0" VerticalAlignment="Top" Width="160" SelectionChanged="CategorySelectionChanged" SelectedIndex="5"/>
         
     </Grid>

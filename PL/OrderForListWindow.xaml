@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         DataContext="{Binding Path=OrderList,RelativeSource={RelativeSource self}}"
         Title="OrderForListWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Background="Black">
 
         <DataGrid x:Name="orderForListDataGrid" AutoGenerateColumns="False" MouseDoubleClick="OrderForListDataGrid_MouseDoubleClick" EnableRowVirtualization="True" ItemsSource="{Binding }" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,10,389,10">
             <DataGrid.Columns>

@@ -13,10 +13,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="image.jpg" />
-    <None Remove="images.jpg" />
     <None Remove="צילום מסך 2022-12-17 212806.png" />
     <None Remove="צילום מסך 2023-01-05 161035.png" />
+    <None Remove="צילום מסך 2023-01-13 102450.png" />
+    <None Remove="צילום מסך 2023-01-13 103152.png" />
+    <None Remove="צילום מסך 2023-01-13 103224.png" />
+    <None Remove="צילום מסך 2023-01-13 104936.png" />
+    <None Remove="צילום מסך 2023-01-13 105941.png" />
+    <None Remove="צילום מסך 2023-01-13 110221.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +31,12 @@
   <ItemGroup>
     <Resource Include="צילום מסך 2022-12-17 212806.png" />
     <Resource Include="צילום מסך 2023-01-05 161035.png" />
+    <Resource Include="צילום מסך 2023-01-13 102450.png" />
+    <Resource Include="צילום מסך 2023-01-13 103152.png" />
+    <Resource Include="צילום מסך 2023-01-13 103224.png" />
+    <Resource Include="צילום מסך 2023-01-13 104936.png" />
+    <Resource Include="צילום מסך 2023-01-13 105941.png" />
+    <Resource Include="צילום מסך 2023-01-13 110221.png" />
   </ItemGroup>
 
 </Project>
