@@ -94,8 +94,31 @@ namespace PL
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ChangeAmaunt(object sender, RoutedEventArgs e)
         {
+            e.Handled=true;
+            BO.ProductItem? pil = (BO.ProductItem?)((DataGrid)sender).SelectedItem;
+           BO.OrderItem b= Cb.Items.FirstOrDefault(x => x.ProductID==pil.ID);
+            if (b!=null)
+            {
+                try
+                {
+                    bl.Cart.Update(Cb, pil.ID, pil.Amount);
+                }
+                catch (BO.BlMissingEntityException boexp)
+                {
+                    MessageBox.Show(boexp.Message, "cant change for that amaunt", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+             
+
+            }
+            else
+            {
+                ProductItem windoProductItem = new ProductItem(pil, Cb, AddToCart);
+                windoProductItem.ShowDialog();
+
+            }
+
 
             Cart cartWindow = new Cart(Cb);
             cartWindow.ShowDialog();

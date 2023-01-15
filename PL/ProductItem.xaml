@@ -20,8 +20,7 @@
         <TextBox Foreground="Black"  x:Name="InStock" Text="{Binding PB.isStock}"  HorizontalAlignment="Left" Height="29" Margin="300,267,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123" />
         <Button  Name="BtnAddOrUpdetProduct"  Content="add to cart" HorizontalAlignment="Left" Height="29" Margin="514,319,0,0" VerticalAlignment="Top" Width="80" Click="Button_Click" Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black"/>
         <Button Content="view cart" HorizontalAlignment="Left" Margin="514,272,0,0" VerticalAlignment="Top" Height="24" Width="60" Click="Button_Click_1" />
-        <Button Content="" HorizontalAlignment="Left" Margin="514,0,0,0" VerticalAlignment="Center" Height="39" Width="80"/>
-        <Label Foreground="#FFEFCF81" Content="Amaunt" HorizontalAlignment="Left" Margin="233,334,0,0" VerticalAlignment="Top" Height="35" Width="66"/>
+        <Label Foreground="#FFEFCF81" Clip="void Button_Click_1" MouseEnter="void Button_Click_1"  Content="Amaunt" HorizontalAlignment="Left" Margin="233,334,0,0" VerticalAlignment="Top" Height="35" Width="66"/>
         <TextBox HorizontalAlignment="Left" Text="{Binding PB.Amount ,Mode=TwoWay}" Margin="299,319,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="29"/>
 
     </Grid>
