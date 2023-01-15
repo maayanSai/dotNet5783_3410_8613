@@ -25,22 +25,52 @@ namespace PL
         public BO.Cart Cb;
         public BO.Cart AddToCart(BO.Cart c, BO.ProductItem? pro)
         {
+            BO.ProductItem? keep = pro;
             
-            BO.OrderItem b = new BO.OrderItem { Name=pro?.Name, ProductID=pro.ID, Amount=1, Price=pro.Price, Totalprice=pro.Price };
-            try
-            {
-                bl.Cart.Add(c, pro.ID);
-                
-                pro.Amount=  c.Items.Find(x => x.ProductID==b.ProductID).Amount;
-            
-                 ProducitemtList.Remove(ProducitemtList.FirstOrDefault(x=>x.ID==pro.ID));
-                ProducitemtList.Add(pro);
-           
+
+                if (c.Items.Find(x => x.ProductID==pro.ID)==null)
+                {
+                try
+                {
+                    bl.Cart.Add(c, pro.ID);
+                    try
+                    {
+                        bl.Cart.Update(c, pro.ID, pro.Amount);
+                    }
+
+                    catch (BO.BlMissingEntityException add1)
+                    {
+                        bl.Cart.Update(c, pro.ID, keep.Amount);
+                        pro=keep;
+                        MessageBox.Show(add1.Message, "cant add", MessageBoxButton.OK, MessageBoxImage.Information);
+                        
+                    }
+                }
+                catch (BO.BlMissingEntityException add)
+                {
+                    MessageBox.Show(add.Message, "cant add", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                }
+                  
+                }
+                else
+                {
+                    try
+                    {
+                        c=bl.Cart.Update(c, pro.ID, pro.Amount);
+                        pro.Amount=c.Items.Find(x => x.ProductID==pro.ID).Amount;
+                        ProducitemtList.Remove(ProducitemtList.FirstOrDefault(x => x.ID==pro.ID));
+                        ProducitemtList.Add(pro);
+                    }
+
+                    catch (BO.BlMissingEntityException update)
+                    {
+                        MessageBox.Show(update.Message, "cant add", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+
+                 
             }
-           catch (BO.BlMissingEntityException boexp)
-            {
-                MessageBox.Show(boexp.Message, "cant add", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+            Cb=c;
            
             return c;
         }
@@ -91,12 +121,13 @@ namespace PL
             ProductItem windoProductItem = new ProductItem(pil!,Cb, AddToCart);
             windoProductItem.ShowDialog();
         }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Cart cartWindow = new Cart(Cb);
             cartWindow.ShowDialog();
         }
+
+ 
 
         private void Group_Click(object sender, RoutedEventArgs e)
         {

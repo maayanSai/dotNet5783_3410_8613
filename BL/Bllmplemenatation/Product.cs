@@ -199,16 +199,37 @@ internal class Product : IProduct
     }
     public IEnumerable<BO.ProductItem?> GetProductItem(BO.Cart cart,Func<BO.ProductItem,bool>?fanc=null)
     {
-        IEnumerable<BO.ProductItem?> pro = from DO.Product item in dal!.Product.GetAll()
-                                           select new BO.ProductItem()
-                                           {
-                                               ID = item.ID,
-                                               Name = item.Name,
-                                               Price = item.Price,
-                                               Category = (BO.Category?)item.Category,
-                                               Amount=cart?.Items?.FirstOrDefault(x => x?.ProductID==item.ID)?.Amount??0,
-                                               isStock=item.InStock>0,
-                                           };
+        IEnumerable<BO.ProductItem?> pro;
+        if (fanc==null)
+        {
+           pro = from DO.Product item in dal!.Product.GetAll()
+                                               select new BO.ProductItem()
+                                               {
+                                                   ID = item.ID,
+                                                   Name = item.Name,
+                                                   Price = item.Price,
+                                                   Category = (BO.Category?)item.Category,
+                                                   Amount=cart?.Items?.FirstOrDefault(x => x?.ProductID==item.ID)?.Amount??0,
+                                                   isStock=item.InStock>0,
+                                               };
+        }
+        else
+        {
+            pro = from DO.Product item in dal!.Product.GetAll()
+                  select new BO.ProductItem()
+                  {
+                      ID = item.ID,
+                      Name = item.Name,
+                      Price = item.Price,
+                      Category = (BO.Category?)item.Category,
+                      Amount=cart?.Items?.FirstOrDefault(x => x?.ProductID==item.ID)?.Amount??0,
+                      isStock=item.InStock>0,
+                  };
+            pro=pro.Where(fanc);
+        }
+    
+
+      
         return pro;
     }
 }

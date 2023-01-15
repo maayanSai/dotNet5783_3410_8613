@@ -1,4 +1,4 @@
-﻿<Window x:Class="PL.ProductItem"
+<Window x:Class="PL.ProductItem"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -24,43 +24,20 @@
             <Setter Property="Height" Value="29" />
             <Setter Property="Width" Value="123" />            <Setter Property="IsReadOnly" Value="True" />        </Style>    </Window.Resources>
     <Grid>
-        <Label Name="ID" Content="Id:"  Margin="209,78,0,0"/>
-        <Label Content="Name:" Margin="209,173,0,0"/>
-        <Label Content="Price:" Margin="209,222,0,0"/>
-        <Label Content="InStock:" Margin="209,267,0,0"/>
-        <Label Content="Category:"  Margin="209,125,0,0"/>
-        <Label Content="Amount:" Margin="206,313,0,0"/>
-        <Label Content="View Cart" Margin="691,92,0,0"/>
-
-        <TextBox Text="{Binding PB.ID}" Name="Id" Margin="300,78,0,0"/>
-        <TextBox Text="{Binding PB.Category,Mode=TwoWay}" Name="CategoryForNewProduct" Margin="300,125,0,0"/>
-        <TextBox Text="{Binding PB.Name}" x:Name="Name" Margin="300,173,0,0" TextWrapping="Wrap"/>
-        <TextBox Text="{Binding PB.Price, Mode=TwoWay}" x:Name="Price" Margin="300,222,0,0" />
-        <TextBox Text="{Binding PB.isStock}" x:Name="InStock" Margin="300,267,0,0" />
-        <TextBox Text="{Binding PB.Amount ,Mode=TwoWay}" Margin="299,319,0,0"/>
-
-        <Button Name="BtnAddOrUpdetProduct" Content="" HorizontalAlignment="Left" Height="87" Margin="480,293,0,0" VerticalAlignment="Top" Width="67" Click="Button_Click">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="0.674"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Button.RenderTransform>
-            <Button.Background>
-                <ImageBrush ImageSource="/צילום מסך 2023-01-13 105941.png"/>
-            </Button.Background>
-        </Button>
-        <Button Margin="690,10,16,0" VerticalAlignment="Top" Height="89" Width="94" Click="Button_Click_1">
-            <Button.Background>
-                <ImageBrush ImageSource="/צילום מסך 2023-01-13 103224.png"/>
-            </Button.Background>
-        </Button>
-        <Grid HorizontalAlignment="Left" Height="47" Margin="0,359,0,0" VerticalAlignment="Top" Width="87">
-            <Grid.Background>
-                <ImageBrush ImageSource="/צילום מסך 2023-01-05 161035.png"/>
-            </Grid.Background>
-        </Grid>
+        <Label  Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black" Name="ID" Content="Id:" HorizontalAlignment="Left" Height="42" Margin="209,78,0,0" VerticalAlignment="Top" Width="48"/>
+        <TextBox Foreground="#FFEFCF81" Text="{Binding PB.ID}" IsReadOnly="true" Name="Id" HorizontalAlignment="Left" Height="29" Margin="300,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123"/>
+        <Label Foreground="#FFEFCF81"  FontSize="16" FontFamily="Segoe Print"  Background="Black" Content="Category:" HorizontalAlignment="Left" Height="39" Margin="209,125,0,0" VerticalAlignment="Top" Width="91"/>
+        <TextBox Foreground="#FFEFCF81" FontFamily="Segoe Print" Name="CategoryForNewProduct" Text="{Binding PB.Category,Mode=TwoWay}" HorizontalAlignment="Left" Height="29" Margin="300,125,0,0" VerticalAlignment="Top" Width="123"/>
+        <Label Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black" Content="Name:" HorizontalAlignment="Left" Height="39" Margin="209,173,0,0" VerticalAlignment="Top" Width="76"/>
+        <Label Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black" Content="Price:" HorizontalAlignment="Left" Height="40" Margin="209,222,0,0" VerticalAlignment="Top" Width="76"/>
+        <Label Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black" Content="InStock:" HorizontalAlignment="Left" Height="39" Margin="209,267,0,0" VerticalAlignment="Top" Width="86"/>
+        <TextBox Foreground="#FFEFCF81" Text="{Binding PB.Name}" x:Name="Name" HorizontalAlignment="Left" Height="29" Margin="300,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123" RenderTransformOrigin="0.473,0.77" />
+        <TextBox Foreground="#FFEFCF81" Text="{Binding PB.Price, Mode=TwoWay}" x:Name="Price" HorizontalAlignment="Left" Height="29" Margin="300,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123"/>
+        <TextBox Foreground="#FFEFCF81"  x:Name="InStock" Text="{Binding PB.isStock}"  HorizontalAlignment="Left" Height="29" Margin="300,267,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123" />
+        <Button  Name="BtnAddOrUpdetProduct"  Content="add to cart" HorizontalAlignment="Left" Height="29" Margin="514,319,0,0" VerticalAlignment="Top" Width="80" Click="Button_Click" Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black"/>
+        <Button Content="view cart" HorizontalAlignment="Left" Margin="514,272,0,0" VerticalAlignment="Top" Height="24" Width="60" Click="Button_Click_1" />
+        <Label Foreground="#FFEFCF81"    Content="Amaunt" HorizontalAlignment="Left" Margin="233,334,0,0" VerticalAlignment="Top" Height="35" Width="66"/>
+        <TextBox HorizontalAlignment="Left"  IsReadOnly="False"  Foreground="#FFEFCF81"  Text="{Binding PB.Amount ,Mode=TwoWay}" Margin="299,319,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="29" />
     </Grid>
 </Window>
+

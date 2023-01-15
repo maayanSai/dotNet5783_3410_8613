@@ -42,7 +42,7 @@ internal class Cart : ICart
             {
                 throw new BO.BlMissingEntityException("the product does not exist", exp);
             }
-            if(p?.InStock>amount)
+            if(p?.InStock>=amount)
             {
                 if (amount < boOrdi.Amount)
                 {
@@ -134,7 +134,7 @@ internal class Cart : ICart
     /// <exception cref="Exceptions.BODoesNotExistException"></exception>
     /// <exception cref="Exceptions.BlInvalidInputException"></exception>
     /// <exception cref="Exception"></exception>
-    public void MakeAnOrder(BO.Cart cart)
+    public int MakeAnOrder(BO.Cart cart)
     {
         //All the products exist (according to the ID card, although it is possible that they exist with zero quantity
         try
@@ -208,6 +208,7 @@ internal class Cart : ICart
         }
         cart.Items.Clear();
         cart.TotalPrice = 0;
+        return orderId;
     }
 }
 
