@@ -9,7 +9,7 @@
         Title="OrderForListWindow" Height="450" Width="800">
     <Grid Background="Black">
 
-        <DataGrid x:Name="orderForListDataGrid" AutoGenerateColumns="False" MouseDoubleClick="OrderForListDataGrid_MouseDoubleClick" EnableRowVirtualization="True" ItemsSource="{Binding }" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,10,389,10">
+        <DataGrid x:Name="orderForListDataGrid" AutoGenerateColumns="False" MouseDoubleClick="OrderForListDataGrid_MouseDoubleClick" EnableRowVirtualization="True" ItemsSource="{Binding }" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="206,46,206,25">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="iDColumn" Binding="{Binding ID}" Header="ID      " Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="customerNameColumn" Binding="{Binding CustomerName}" Header="Customer Name" Width="SizeToHeader"/>
