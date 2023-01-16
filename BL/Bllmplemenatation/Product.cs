@@ -83,6 +83,7 @@ internal class Product : IProduct
                                                   Name = item.Name,
                                                   Price = item.Price,
                                                   Category = (BO.Category?)item.Category,
+                                                  ImageRelativeName=item.ImageRelativeName
                                               };
         return func is null ? pro : pro.Where(func);
     }
@@ -115,6 +116,7 @@ internal class Product : IProduct
             Price = dopro?.Price ?? 0,
             Category = (BO.Category?)dopro?.Category ?? throw new BO.BlWorngCategoryException("Wrong product category"),
             InStock = dopro?.InStock ?? 0,
+            ImageRelativeName=dopro?.ImageRelativeName,
         };
         return bopro;
     }

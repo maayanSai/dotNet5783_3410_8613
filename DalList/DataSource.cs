@@ -1,6 +1,7 @@
 ﻿namespace Dal;
 using DO;
 using System;
+using System.Xml.Linq;
 
 /// <summary>
 /// DataSource
@@ -29,10 +30,10 @@ internal static class DataSource
     /// Matrix of product names
     /// </summary>
     private static readonly string[,] s_productNames = new string[5, 5]
-        {{"diamond ring", "wedding ring", "pearl ring","double ring","climbing ring" }, // rings
-        {"pearl necklace", "long necklace", "tight necklace","diamond necklace","diamond necklace" }, // necklaces
+        {{"diamond ring", "wedding ring", "pearl ring","double ring","knot ring" }, // rings
+        {"pearl necklace", "long necklace", "tight necklace","diamond necklace","family necklace" }, // necklaces
         {"Pearl bracelet","Diamond bracelet","double bracelet","Hard bracelet","Link bracelet"}, // bracelets
-        {"Pearl anklet", "Diamond anklet","Double ankle","Stiff ankle","Snake ankle"}, // foot bracelets
+        {"Pearl anklet", "Diamond anklet","Double ankle","Hard ankle","ankle bracelet loops"}, // foot bracelets
         {"falling earings", "hoop earings", "tight earings", "climbing earings", "clip earings" }}; // earings
     /// <summary>
     /// matrix of order Names,Email and Adress
@@ -51,14 +52,20 @@ internal static class DataSource
         for (int i = 0; i < 20; i++) // We will initialize 20 products
         {
             int r1 = _rnd.Next(5);
-            s_productsList.Add(new()
+            Product v=new Product
             {
                 ID = i + 100000,
                 Category = (Category)r1,
                 Name = s_productNames[r1, _rnd.Next(5)],
                 Price = _rnd.Next(500, 5000),
                 InStock = i == 1 ? 0 : _rnd.Next(4),
-            });
+                
+                
+            } ;
+
+    
+            v .ImageRelativeName = @"\pictures\" +v.Name +".png";
+            s_productsList.Add(v);
         }
     }
     /// <summary>

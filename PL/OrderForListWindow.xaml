@@ -9,19 +9,24 @@
         Title="OrderForListWindow" Height="450" Width="800">
     <Grid Background="Black">
 
-        <DataGrid x:Name="orderForListDataGrid" AutoGenerateColumns="False" MouseDoubleClick="OrderForListDataGrid_MouseDoubleClick" EnableRowVirtualization="True" ItemsSource="{Binding }" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="206,46,206,25">
+        <DataGrid x:Name="orderForListDataGrid" AutoGenerateColumns="False" MouseDoubleClick="OrderForListDataGrid_MouseDoubleClick" EnableRowVirtualization="True" ItemsSource="{Binding }" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="176,23,176,23">
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="iDColumn" Binding="{Binding ID}" Header="ID      " Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="customerNameColumn" Binding="{Binding CustomerName}" Header="Customer Name" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="statusColumn" Binding="{Binding Status}" Header="Status     " Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="amountColumn" Binding="{Binding Amount}" Header="Amount" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="totalPriceColumn" Binding="{Binding TotalPrice}" Header="Total Price" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="iDColumn" Binding="{Binding ID}" Header="ID        " Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="customerNameColumn" Binding="{Binding CustomerName}" Header="Customer Name " Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="statusColumn" Binding="{Binding Status}" Header="Status      " Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="amountColumn" Binding="{Binding Amount}" Header="Amount " Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="totalPriceColumn" Binding="{Binding TotalPrice}" Header="Total Price " Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Grid HorizontalAlignment="Left" Height="51" Margin="10,349,0,0" VerticalAlignment="Top" Width="77">
+            <Grid.Background>
+                <ImageBrush ImageSource="/צילום מסך 2023-01-05 161035.png"/>
+            </Grid.Background>
+        </Grid>
 
-      
+
     </Grid>
 
-   
-    
+
+
 </Window>

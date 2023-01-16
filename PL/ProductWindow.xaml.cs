@@ -70,20 +70,14 @@ public partial class ProductWindow : Window
             if (BtnAddOrUpdetProductContent == "Add")
             {
                 bl!.Product.Add(Product);
-              add(Product.ID);
-
+                add(Product.ID);
                 MessageBox.Show("Product Add succefully", "succefully", MessageBoxButton.OK, MessageBoxImage.Information);
-               
                 this.Close();
             }
             else
             {
-               
                     bl!.Product.Update(Product);
                     MessageBox.Show("Product Updet succefully", "succefully", MessageBoxButton.OK, MessageBoxImage.Information);
-                
-            
-                
                 this.Close();
             }
         }
@@ -91,5 +85,12 @@ public partial class ProductWindow : Window
         {
             MessageBox.Show(ex.Message);
         }
+    }
+
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+        if (BtnAddOrUpdetProductContent == "Add")
+
+
     }
 }

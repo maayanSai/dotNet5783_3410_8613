@@ -1,0 +1,52 @@
+﻿<Window x:Class="PL.PicturesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="PicturesWindow" Height="450" Width="1100">
+    <Grid>
+        <Grid HorizontalAlignment="Center" Height="414" VerticalAlignment="Center" Width="1080">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="21*"/>
+                <RowDefinition Height="25*"/>
+            </Grid.RowDefinitions>
+            <Button Content="Button" HorizontalAlignment="Left" Height="110" Margin="598,152,0,0" VerticalAlignment="Top" Width="89" Grid.RowSpan="2"/>
+            <Button Content="Button1" HorizontalAlignment="Left" Height="110" Margin="363,10,0,0" VerticalAlignment="Top" Width="89"/>
+            <Button Content="Button2" HorizontalAlignment="Left" Height="110" Margin="244,10,0,0" VerticalAlignment="Top" Width="89"/>
+            <Button Content="Button3" HorizontalAlignment="Left" Height="110" Margin="123,10,0,0" VerticalAlignment="Top" Width="89"/>
+            <Button Content="Button" HorizontalAlignment="Left" Height="110" Margin="598,10,0,0" VerticalAlignment="Top" Width="89"/>
+            <Button Content="Button" HorizontalAlignment="Left" Height="110" Margin="718,90,0,0" VerticalAlignment="Top" Width="89" Grid.Row="1"/>
+            <Button Content="Button" HorizontalAlignment="Left" Height="110" Margin="718,152,0,0" VerticalAlignment="Top" Width="89" Grid.RowSpan="2"/>
+            <Button Content="Button" HorizontalAlignment="Left" Height="110" Margin="838,10,0,0" VerticalAlignment="Top" Width="89"/>
+            <Button Content="Button" HorizontalAlignment="Left" Height="110" Margin="718,10,0,0" VerticalAlignment="Top" Width="89"/>
+            <Button Content="Button" HorizontalAlignment="Left" Height="110" Margin="838,152,0,0" VerticalAlignment="Top" Width="89" Grid.RowSpan="2"/>
+            <Button Content="Button" HorizontalAlignment="Left" Height="110" Margin="838,90,0,0" VerticalAlignment="Top" Width="89" Grid.Row="1"/>
+            <Button Content="Button" HorizontalAlignment="Left" Height="110" Margin="958,10,0,0" VerticalAlignment="Top" Width="89"/>
+
+            <Button Content="Button" HorizontalAlignment="Left" Height="110" Margin="483,90,0,0" VerticalAlignment="Top" Width="89" Grid.Row="1"/>
+            <Button Content="Button" HorizontalAlignment="Left" Height="110" Margin="598,90,0,0" VerticalAlignment="Top" Width="89" RenderTransformOrigin="0.411,1.564" Grid.Row="1"/>
+
+            <Button Content="Button" HorizontalAlignment="Left" Height="110" Margin="363,90,0,0" VerticalAlignment="Top" Width="89" Grid.Row="1"/>
+            <Button Content="Button" HorizontalAlignment="Left" Height="110" Margin="10,10,0,0" VerticalAlignment="Top" Width="89">
+                <Button.Background>
+                    <ImageBrush ImageSource="/ankle bracelet loops.png"/>
+                </Button.Background>
+            </Button>
+
+            <Button Content="Button" HorizontalAlignment="Left" Height="110" Margin="244,90,0,0" VerticalAlignment="Top" Width="89" Grid.Row="1"/>
+            <Button Content="Button" HorizontalAlignment="Left" Height="110" Margin="123,90,0,0" VerticalAlignment="Top" Width="89" Grid.Row="1"/>
+            <Button Content="Button" HorizontalAlignment="Left" Height="110" Margin="10,90,0,0" VerticalAlignment="Top" Width="89" Grid.Row="1"/>
+            <Button Content="Button" HorizontalAlignment="Left" Height="110" Margin="483,152,0,0" VerticalAlignment="Top" Width="89" Grid.RowSpan="2"/>
+            <Button Content="Button" HorizontalAlignment="Left" Height="110" Margin="483,10,0,0" VerticalAlignment="Top" Width="89"/>
+            <Button Content="Button" HorizontalAlignment="Left" Height="110" Margin="363,152,0,0" VerticalAlignment="Top" Width="89" Grid.RowSpan="2"/>
+            <Button Content="Button" HorizontalAlignment="Left" Height="110" Margin="244,152,0,0" VerticalAlignment="Top" Width="89" Grid.RowSpan="2"/>
+            <Button Content="Button" HorizontalAlignment="Left" Height="110" Margin="123,152,0,0" VerticalAlignment="Top" Width="89" Grid.RowSpan="2"/>
+            <Button Content="Button" HorizontalAlignment="Left" Height="110" Margin="10,147,0,0" VerticalAlignment="Top" Width="89" Grid.RowSpan="2"/>
+
+
+        </Grid>
+
+    </Grid>
+</Window>

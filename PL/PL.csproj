@@ -13,6 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ankle bracelet loops.png" />
     <None Remove="צילום מסך 2022-12-17 212806.png" />
     <None Remove="צילום מסך 2023-01-05 161035.png" />
     <None Remove="צילום מסך 2023-01-13 102450.png" />
@@ -21,6 +22,11 @@
     <None Remove="צילום מסך 2023-01-13 104936.png" />
     <None Remove="צילום מסך 2023-01-13 105941.png" />
     <None Remove="צילום מסך 2023-01-13 110221.png" />
+    <None Remove="צילום מסך 2023-01-15 202810.png" />
+    <None Remove="צילום מסך 2023-01-15 203147.png" />
+    <None Remove="צילום מסך 2023-01-15 214016.png" />
+    <None Remove="צילום מסך 2023-01-15 214134.png" />
+    <None Remove="צילום מסך 2023-01-15 214721.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="ankle bracelet loops.png" />
     <Resource Include="צילום מסך 2022-12-17 212806.png" />
     <Resource Include="צילום מסך 2023-01-05 161035.png" />
     <Resource Include="צילום מסך 2023-01-13 102450.png" />
@@ -37,6 +44,11 @@
     <Resource Include="צילום מסך 2023-01-13 104936.png" />
     <Resource Include="צילום מסך 2023-01-13 105941.png" />
     <Resource Include="צילום מסך 2023-01-13 110221.png" />
+    <Resource Include="צילום מסך 2023-01-15 202810.png" />
+    <Resource Include="צילום מסך 2023-01-15 203147.png" />
+    <Resource Include="צילום מסך 2023-01-15 214016.png" />
+    <Resource Include="צילום מסך 2023-01-15 214134.png" />
+    <Resource Include="צילום מסך 2023-01-15 214721.png" />
   </ItemGroup>
 
 </Project>
