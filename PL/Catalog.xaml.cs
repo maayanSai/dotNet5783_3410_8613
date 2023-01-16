@@ -111,7 +111,7 @@ namespace PL
 
             ProducitemtList= new ObservableCollection<BO.ProductItem?>(bl.Product.GetProductItem(Cb)); 
         
-            SelectedCategory.ItemsSource = Enum.GetValues(typeof(BO.Category));
+            SelectedCategory.ItemsSource = Enum.GetValues(typeof(PL.Category));
         }
 
         private void CategorySelectionChanged(object sender, SelectionChangedEventArgs e)
