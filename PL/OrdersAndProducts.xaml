@@ -6,13 +6,12 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="OrdersAndProducts" Height="450" Width="800" Background="Black">
-      
     <Grid>
         <Grid.Background>
             <ImageBrush/>
         </Grid.Background>
-        <Button Content="Products" Click="Product_Click" Margin="410,152,173,170"/>
-        <Button Content="Orders" Click="Order_Click" Margin="164,152,425,170"/>
+        <Button Content="Products" Click="Product_Click" Margin="429,153,0,168" FontSize="20" Width="180"/>
+        <Button Content="Orders" Click="Order_Click" Margin="177,153,0,169" FontSize="20" Width="180"/>
         <Grid HorizontalAlignment="Left" Height="54" Margin="10,339,0,0" VerticalAlignment="Top" Width="91">
             <Grid.Background>
                 <ImageBrush ImageSource="/צילום מסך 2023-01-05 161035.png"/>

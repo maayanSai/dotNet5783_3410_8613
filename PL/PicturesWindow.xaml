@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="PicturesWindow" Height="450" Width="1100">
+        Title="PicturesWindow" Height="450" Width="978">
     <Grid>
-        <Grid HorizontalAlignment="Left" Height="414" VerticalAlignment="Center" Width="1080" Margin="20,0,0,0">
+        <Grid HorizontalAlignment="Left" Height="414" VerticalAlignment="Center" Width="958" Margin="20,0,0,0">
             <Grid.Background>
                 <ImageBrush/>
             </Grid.Background>
@@ -15,7 +15,7 @@
                 <RowDefinition Height="21*"/>
                 <RowDefinition Height="25*"/>
             </Grid.RowDefinitions>
-            <Button HorizontalAlignment="Left" Height="110" Margin="598,152,0,0" VerticalAlignment="Top" Width="89" Grid.RowSpan="2">
+            <Button HorizontalAlignment="Left" Tag="{Binding ImageBrush}" Height="110" Margin="598,152,0,0" VerticalAlignment="Top" Width="89" Grid.RowSpan="2">
                 <Button.Background>
                     <ImageBrush ImageSource="/hoop earings.png"/>
                 </Button.Background>
@@ -135,12 +135,9 @@
                 <Button.Background>
                     <ImageBrush ImageSource="/wedding ring.png" />
                 </Button.Background>
-                
-            
+
+
             </Button>
-            <Image Height="100" Width="100" />
-
-
         </Grid>
 
     </Grid>

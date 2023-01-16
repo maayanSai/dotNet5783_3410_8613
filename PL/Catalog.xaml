@@ -5,34 +5,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         DataContext="{Binding Path=ProducitemtList, RelativeSource={RelativeSource self}}"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid Background="Black">
+        Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="287*"/>
-            <ColumnDefinition Width="113*"/>
+            <ColumnDefinition Width="170"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ListView x:Name="Products"  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                  ScrollViewer.CanContentScroll="True"
-                  FontFamily="image" Foreground="Black"
-                  MouseDoubleClick="productItemDataGrid_MouseDoubleClick" Grid.ColumnSpan="2" Background="White">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <Button Content="Button" Height="65" Width="76"/>
-        </ListView>
-        <ComboBox HorizontalAlignment="Left" Name="SelectedCategory" Margin="44,0,0,404" Width="155" SelectionChanged="CategorySelectionChanged" SelectedIndex="5" Height="20" VerticalAlignment="Bottom" Grid.Column="1"/>
-        <Grid Margin="46,83,463,273">
-            <Grid.Background>
-                <ImageBrush ImageSource="/צילום מסך 2023-01-15 214016.png"/>
-            </Grid.Background>
+        <Grid Grid.ColumnSpan="2">
+            <TextBlock Text="jewelry store" HorizontalAlignment="Center" Margin="10" FontSize="28"/>
         </Grid>
-        <Grid RenderTransformOrigin="0.63,1.6" Margin="144,84,366,273">
-            <Grid.Background>
-                <ImageBrush ImageSource="/צילום מסך 2023-01-15 214134.png"/>
-            </Grid.Background>
-        </Grid>
-        <Label Content="12,000" Margin="46,181,454,217"/>
+        <ScrollViewer Grid.Column="1" Grid.Row="1" Background="White">
+            <StackPanel>
+                <TextBlock Text="Items" Margin="10" FontSize="22" FontWeight="Medium"/>
+                <StackPanel Margin="20 0">
+                    <ItemsControl x:Name="ProductItemList" ItemsSource="{Binding}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Margin="10" Height="160" Width="110">
+                                    <StackPanel>
+                                        <Border Width="100" Height="100" CornerRadius="5,5,5,5" Margin="5">
+                                            <Border.Effect>
+                                                <DropShadowEffect/>
+                                            </Border.Effect>
+                                            <Border.Background>
+                                                <ImageBrush ImageSource="{Binding Path=ImageRelativeName, Converter={StaticResource ImagePathToBitmap}}"/>
+                                            </Border.Background>
+                                        </Border>
+                                        <TextBlock Margin="5" Text="{Binding Name}" FontSize="14" FontFamily="Segoe Print" FontWeight="Bold"  Foreground="Black" />
+                                        <TextBlock Margin="5 0 " Text="{Binding Price ,StringFormat={} {0:C}}" FontSize="14" FontFamily="Segoe Print" FontWeight="Bold" Foreground="Black" />
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+        <ComboBox Name="SelectedCategory" HorizontalAlignment="Left" SelectionChanged="CategorySelectionChanged" Margin="485,18,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
     </Grid>
 </Window>
+
+

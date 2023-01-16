@@ -113,5 +113,8 @@ public partial class ProductListWindow : Window
       
     }
 
+    private void productForListDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
 
+    }
 }

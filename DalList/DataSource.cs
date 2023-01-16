@@ -58,12 +58,8 @@ internal static class DataSource
                 Category = (Category)r1,
                 Name = s_productNames[r1, _rnd.Next(5)],
                 Price = _rnd.Next(500, 5000),
-                InStock = i == 1 ? 0 : _rnd.Next(4),
-                
-                
+                InStock = i == 1 ? 0 : _rnd.Next(4),      
             } ;
-
-    
             v .ImageRelativeName = @"\pictures\" +v.Name +".png";
             s_productsList.Add(v);
         }
