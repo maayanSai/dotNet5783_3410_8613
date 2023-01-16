@@ -86,11 +86,6 @@ public partial class ProductWindow : Window
             MessageBox.Show(ex.Message);
         }
     }
+    private void Button_Click(object sender, RoutedEventArgs e) =>new PicturesWindow().ShowDialog();
 
-    private void Button_Click(object sender, RoutedEventArgs e)
-    {
-        if (BtnAddOrUpdetProductContent == "Add")
-
-
-    }
 }
