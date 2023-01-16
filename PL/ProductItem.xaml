@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource self}}"
         Title="ProducItemtWindow" Height="450" Width="800" Background="Black">
-    <Window.Resources>        <Style TargetType="Label">
+    <Window.Resources>
+        <Style TargetType="Label">
             <Setter Property="FontSize" Value="16" />
             <Setter Property="FontFamily" Value="Segoe Print" />
             <Setter Property="FontWeight" Value="Bold" />
@@ -17,12 +18,17 @@
             <Setter Property="VerticalAlignment" Value="Top" />
             <Setter Property="Height" Value="42" />
             <Setter Property="Width" Value="91" />
-        </Style>        <Style TargetType="TextBox">
+        </Style>
+        <Style TargetType="TextBox">
             <Setter Property="Background" Value="Black" />
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Top" />
             <Setter Property="Height" Value="29" />
-            <Setter Property="Width" Value="123" />            <Setter Property="IsReadOnly" Value="True" />        </Style>    </Window.Resources>
+            <Setter Property="Width" Value="123" />
+            <Setter Property="IsReadOnly" Value="True" />
+
+        </Style>
+    </Window.Resources>
     <Grid>
         <Label  Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black" Name="ID" Content="Id:" HorizontalAlignment="Left" Height="42" Margin="209,78,0,0" VerticalAlignment="Top" Width="48"/>
         <TextBox Foreground="#FFEFCF81" Text="{Binding PB.ID}" IsReadOnly="true" Name="Id" HorizontalAlignment="Left" Height="29" Margin="300,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123"/>
@@ -34,7 +40,7 @@
         <TextBox Foreground="#FFEFCF81" Text="{Binding PB.Name}" x:Name="Name" HorizontalAlignment="Left" Height="29" Margin="300,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123" RenderTransformOrigin="0.473,0.77" />
         <TextBox Foreground="#FFEFCF81" Text="{Binding PB.Price, Mode=TwoWay}" x:Name="Price" HorizontalAlignment="Left" Height="29" Margin="300,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123"/>
         <TextBox Foreground="#FFEFCF81"  x:Name="InStock" Text="{Binding PB.isStock}"  HorizontalAlignment="Left" Height="29" Margin="300,267,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123" />
-        <Button  Name="BtnAddOrUpdetProduct"  Content="add to cart" HorizontalAlignment="Left" Height="29" Margin="514,319,0,0" VerticalAlignment="Top" Width="80" Click="Button_Click" Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black"/>
+        <Button  Name="BtnAddOrUpdetProduct"   Content="add to cart" HorizontalAlignment="Left" Height="29" Margin="514,319,0,0" VerticalAlignment="Top" Width="80" Click="Button_Click" Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black"/>
         <Button Content="view cart" HorizontalAlignment="Left" Margin="514,272,0,0" VerticalAlignment="Top" Height="24" Width="60" Click="Button_Click_1" />
         <Label Foreground="#FFEFCF81"    Content="Amaunt" HorizontalAlignment="Left" Margin="233,334,0,0" VerticalAlignment="Top" Height="35" Width="66"/>
         <TextBox HorizontalAlignment="Left"  IsReadOnly="False"  Foreground="#FFEFCF81"  Text="{Binding PB.Amount ,Mode=TwoWay}" Margin="299,319,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="29" />

@@ -23,24 +23,29 @@ namespace PL
         BO.Cart CB;
         public delegate BO.Cart? AddingToCrt(BO.Cart c, BO.ProductItem pro);
         AddingToCrt? addtocart;
+
         static readonly DependencyProperty PBDep = DependencyProperty.Register(nameof(PB), typeof(BO.ProductItem), typeof(ProductItem));
-        BO.ProductItem PB {  get=> (BO.ProductItem)GetValue(PBDep); set => SetValue(PBDep, value); }
-        
-        public ProductItem(BO.ProductItem pb,BO.Cart c, AddingToCrt add)
+        BO.ProductItem PB { get => (BO.ProductItem)GetValue(PBDep); set => SetValue(PBDep, value); }
+
+        public ProductItem(BO.ProductItem pb, BO.Cart c, AddingToCrt add)
         {
             InitializeComponent();
             CB = c;
-            PB=pb;
-            addtocart=add;
+            PB = pb;
+            addtocart = add;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //BO.OrderItem orderItem= new BO.OrderItem { Amount= 1,Name=PB.Name,Price=PB.Price,ProductID=PB.ID,Totalprice=PB.Price};
+
             e.Handled = true;
 
-            CB=addtocart(CB, PB);
-            PB=bl.Product.ItemProduct(PB.ID, CB);
+            addtocart(CB, PB);
+
+            //PB.Amount = CB.Items.FirstOrDefault(x => x.ProductID == PB.ID).Amount;
+            
+            PB = bl.Product.ItemProduct(PB.ID, CB);
+            //CB=addtocart(CB, PB);
 
 
         }
@@ -116,6 +121,6 @@ namespace PL
 
         }
 
-       
+
     }
 }

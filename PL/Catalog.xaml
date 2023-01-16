@@ -4,37 +4,31 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        DataContext="{Binding Path=ProducitemtList, RelativeSource={RelativeSource self}}"
+        DataContext="{Binding RelativeSource={RelativeSource self}}"
         Title="MainWindow" Height="450" Width="800">
     <Grid Background="Black">
+
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="287*"/>
-            <ColumnDefinition Width="113*"/>
+            <ColumnDefinition Width="11*"/>
+            <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="productItemDataGrid" MouseDoubleClick="productItemDataGrid_MouseDoubleClick" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,10,70,10">
-            <DataGrid.Columns>
-                <DataGridTextColumn x:Name="categoryColumn" Binding="{Binding Category}" Header="Category    " IsReadOnly="True" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="iDColumn" Binding="{Binding ID}" Header="ID    " IsReadOnly="True" Width="SizeToHeader"/>
-                <DataGridCheckBoxColumn x:Name="isStockColumn" Binding="{Binding isStock}" IsReadOnly="True" Header="is Stock" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name     " IsReadOnly="True" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="priceColumn" Binding="{Binding Price}" Header="Price" IsReadOnly="True" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="Amaunt" Binding="{Binding Amount}" Header="Amount     "   Width="SizeToHeader" />
-            </DataGrid.Columns>
-        </DataGrid>
         <Button Content="" HorizontalAlignment="Left" Height="61" VerticalAlignment="Top" Width="53" Foreground="#FFEFCF81" FontSize="20" Margin="163,363,0,0" FontFamily="Segoe Print" FontWeight="Bold" Grid.Column="1" Click="Button_Click">
             <Button.Background>
                 <ImageBrush ImageSource="/צילום מסך 2023-01-13 104936.png"/>
             </Button.Background>
         </Button>
-        <ComboBox HorizontalAlignment="Left" Name="SelectedCategory" Margin="400,0,0,402" Width="99" SelectionChanged="CategorySelectionChanged" SelectedIndex="5" Height="20" VerticalAlignment="Bottom"/>
-        <Button Content="Group by Category" HorizontalAlignment="Left" Height="33" Margin="29,22,0,0" VerticalAlignment="Top" Width="146" Click="Group_Click" Grid.Column="1"/>
-        <ListView Grid.ColumnSpan="2"  x:Name="groupListView" HorizontalAlignment="Left" Height="284" Margin="553,60,0,0" VerticalAlignment="Top" Width="213" d:ItemsSource="{d:SampleData ItemCount=5}">
+        <ComboBox HorizontalAlignment="Left" Name="SelectedCategory"  Margin="400,0,0,402" Width="99"  SelectedIndex="5" Height="20" VerticalAlignment="Bottom"/>
+        <Button Content="Group by Category" HorizontalAlignment="Center"  Height="33" Margin="0,22,0,0" VerticalAlignment="Top" Width="146" Click="Group_Click" Grid.Column="1"/>
+        <ListView  x:Name="groupListView"  ItemsSource="{Binding ProducitemtList,Mode =TwoWay}" HorizontalAlignment="Left" Height="200" Margin="30,39,0,0" VerticalAlignment="Top" Width="469"  MouseDoubleClick="MouseDoubleClick1">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
+
+
+
 
     </Grid>
 </Window>

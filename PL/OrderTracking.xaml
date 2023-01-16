@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         DataContext="{Binding  RelativeSource={RelativeSource self}}"
         Title="OrderTracking" Height="450" Width="800">
-    <Window.Resources>        <Style TargetType="Button">
+    <Window.Resources>
+        <Style TargetType="Button">
             <Setter Property="FontSize" Value="20" />
             <Setter Property="FontFamily" Value="Segoe Print" />
             <Setter Property="FontWeight" Value="Bold" />
@@ -17,10 +18,14 @@
             <Setter Property="VerticalAlignment" Value="Top" />
             <Setter Property="Height" Value="34" />
             <Setter Property="Width" Value="92" />
-        </Style>        <Style TargetType="TextBox">            <Setter Property="HorizontalAlignment" Value="Left" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Top" />
             <Setter Property="Height" Value="41" />
-            <Setter Property="Width" Value="174" />        </Style>    </Window.Resources>
+            <Setter Property="Width" Value="174" />
+        </Style>
+    </Window.Resources>
     <Grid Background="Black">
         <ListView x:Name="orderTrackingDataGrid" ItemsSource="{Binding Ot.Tracking}" Margin="253,204,203,116" RenderTransformOrigin="0.5,0.5">
             <ListView.RenderTransform>
