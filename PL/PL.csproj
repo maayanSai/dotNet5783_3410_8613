@@ -14,6 +14,30 @@
 
   <ItemGroup>
     <None Remove="ankle bracelet loops.png" />
+    <None Remove="climbing earings.png" />
+    <None Remove="clip earings.png" />
+    <None Remove="Diamond anklet.png" />
+    <None Remove="Diamond bracelet.png" />
+    <None Remove="diamond necklace.png" />
+    <None Remove="diamond ring.png" />
+    <None Remove="Double ankle.png" />
+    <None Remove="double bracelet.png" />
+    <None Remove="double ring.png" />
+    <None Remove="falling earings.png" />
+    <None Remove="family necklace.png" />
+    <None Remove="Hard ankle.png" />
+    <None Remove="Hard bracelet.png" />
+    <None Remove="hoop earings.png" />
+    <None Remove="knot ring.png" />
+    <None Remove="Link bracelet.png" />
+    <None Remove="long necklace.png" />
+    <None Remove="Pearl anklet.png" />
+    <None Remove="Pearl bracelet.png" />
+    <None Remove="pearl necklace.png" />
+    <None Remove="pearl ring.png" />
+    <None Remove="tight earings.png" />
+    <None Remove="tight necklace.png" />
+    <None Remove="wedding ring.png" />
     <None Remove="צילום מסך 2022-12-17 212806.png" />
     <None Remove="צילום מסך 2023-01-05 161035.png" />
     <None Remove="צילום מסך 2023-01-13 102450.png" />
@@ -36,6 +60,30 @@
 
   <ItemGroup>
     <Resource Include="ankle bracelet loops.png" />
+    <Resource Include="climbing earings.png" />
+    <Resource Include="clip earings.png" />
+    <Resource Include="Diamond anklet.png" />
+    <Resource Include="Diamond bracelet.png" />
+    <Resource Include="diamond necklace.png" />
+    <Resource Include="diamond ring.png" />
+    <Resource Include="Double ankle.png" />
+    <Resource Include="double bracelet.png" />
+    <Resource Include="double ring.png" />
+    <Resource Include="falling earings.png" />
+    <Resource Include="family necklace.png" />
+    <Resource Include="Hard ankle.png" />
+    <Resource Include="Hard bracelet.png" />
+    <Resource Include="hoop earings.png" />
+    <Resource Include="knot ring.png" />
+    <Resource Include="Link bracelet.png" />
+    <Resource Include="long necklace.png" />
+    <Resource Include="Pearl anklet.png" />
+    <Resource Include="Pearl bracelet.png" />
+    <Resource Include="pearl necklace.png" />
+    <Resource Include="pearl ring.png" />
+    <Resource Include="tight earings.png" />
+    <Resource Include="tight necklace.png" />
+    <Resource Include="wedding ring.png" />
     <Resource Include="צילום מסך 2022-12-17 212806.png" />
     <Resource Include="צילום מסך 2023-01-05 161035.png" />
     <Resource Include="צילום מסך 2023-01-13 102450.png" />

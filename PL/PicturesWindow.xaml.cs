@@ -19,9 +19,21 @@ namespace PL
     /// </summary>
     public partial class PicturesWindow : Window
     {
+        BlApi.IBl? bl = BlApi.Factory.Get();
+
         public PicturesWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
