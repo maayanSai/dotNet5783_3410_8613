@@ -89,7 +89,7 @@ public partial class ProductWindow : Window
 
     private void Button_Click(object sender, RoutedEventArgs e)
     {
-        if (BtnAddOrUpdetProductContent == "Add")
+        if (BtnAddOrUpdetProductContent == "Add") ;
 
 
     }

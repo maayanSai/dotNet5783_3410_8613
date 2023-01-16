@@ -42,77 +42,12 @@ namespace PL
 
             addtocart(CB, PB);
 
-            //PB.Amount = CB.Items.FirstOrDefault(x => x.ProductID == PB.ID).Amount;
-            
             PB = bl.Product.ItemProduct(PB.ID, CB);
-            //CB=addtocart(CB, PB);
+            
 
 
         }
-        //private void Button_Click(object sender, RoutedEventArgs e)
-        //{
-        //    e.Handled = true;
-
-        //    BO.OrderItem? p=CB.Items.FirstOrDefault(x => x.ProductID==PB.ID);
-        //    if (p!=null)
-        //    {
-        //        try
-        //        {
-        //            bl.Cart.Update(CB, PB.ID,PB.Amount);
-        //            PB=bl.Product.ItemProduct(PB.ID, CB);
-        //        }
-        //        catch (BO.BlMissingEntityException boexp)
-        //        {
-        //            MessageBox.Show(boexp.Message, "cant change for that amaunt", MessageBoxButton.OK, MessageBoxImage.Information);
-        //        }
-
-
-        //    }
-        //    else
-        //    {
-
-
-        //        try
-        //        {
-        //            bl.Cart.Add(CB, PB.ID);
-        //            try
-        //            {
-
-        //                bl.Cart.Update(CB, PB.ID, PB.Amount);
-        //                PB=bl.Product.ItemProduct(PB.ID, CB);
-        //            }
-
-        //            catch (BO.BlMissingEntityException boexp)
-        //            {
-        //                MessageBox.Show(boexp.Message, "cant change for that amaunt", MessageBoxButton.OK, MessageBoxImage.Information);
-        //                PB.Amount=0;
-        //                try
-        //                {
-        //                    bl.Cart.Update(CB, PB.ID, PB.Amount);
-        //                    PB=bl.Product.ItemProduct(PB.ID, CB);
-        //                }
-        //                catch (BO.BlMissingEntityException bo)
-        //                {
-        //                    PB.Amount=0;
-        //                    MessageBox.Show(bo.Message, "cant change for that amaunt", MessageBoxButton.OK, MessageBoxImage.Information);
-
-        //                }
-        //            }
-        //        }
-        //        catch (BO.BlMissingEntityException boexp)
-        //        {
-        //            MessageBox.Show(boexp.Message, "cant change for that amaunt", MessageBoxButton.OK, MessageBoxImage.Information);
-        //            PB.Amount=0;
-        //            BO.ProductItem p1 = PB;
-
-        //            PB=p1;
-        //        }
-
-
-
-        //    }
-
-        //}
+  
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
@@ -121,6 +56,7 @@ namespace PL
 
         }
 
-
+        ~ProductItem(){ PB = bl.Product.ItemProduct(PB.ID, CB); }
+            
     }
 }
