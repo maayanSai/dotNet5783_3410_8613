@@ -7,8 +7,7 @@
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource self}}"
         Title="ProductWindow" Height="450" Width="800" Background="Black">
-    <Window.Resources>
-        <Style TargetType="Label">
+    <Window.Resources>        <Style TargetType="Label">
             <Setter Property="FontSize" Value="16" />
             <Setter Property="FontFamily" Value="Segoe Print" />
             <Setter Property="FontWeight" Value="Bold" />
@@ -18,31 +17,30 @@
             <Setter Property="VerticalAlignment" Value="Top" />
             <Setter Property="Height" Value="42" />
             <Setter Property="Width" Value="91" />
-        </Style>
-        <Style TargetType="TextBox">
+        </Style>        <Style TargetType="TextBox">
             <Setter Property="Foreground" Value="#FFEFCF81" />
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Top" />
             <Setter Property="Height" Value="29" />
-            <Setter Property="Width" Value="123" />
-        </Style>
-    </Window.Resources>
+            <Setter Property="Width" Value="123" />        </Style>    </Window.Resources>
     <Grid>
-        <Label Name="ID" Content="Id:" Margin="209,78,0,0"/>
-        <Label Content="Name:" Margin="209,173,0,0"/>
-        <Label Content="Price:" Margin="209,222,0,0"/>
-        <Label Content="InStock:" Margin="209,267,0,0"/>
-        <Label Content="Category:" Margin="209,125,0,0"/>
-        <ComboBox Foreground="Black" FontFamily="Segoe Print" Name="CategoryForNewProduct" SelectedItem="{Binding Product.Category,Mode=TwoWay}" HorizontalAlignment="Left" Background="Black" Height="29" Margin="300,125,0,0" VerticalAlignment="Top" Width="123"/>
-        <TextBox Text="{Binding Product.ID}" IsReadOnly="{Binding Mode}" Name="Id" Margin="300,78,0,0"/>
-        <TextBox Text="{Binding Product.Name, Mode=TwoWay}" x:Name="Name" Margin="300,178,0,0"/>
-        <TextBox Text="{Binding Product.Price, Mode=TwoWay}" x:Name="Price" Margin="300,222,0,0"/>
-        <TextBox Text="{Binding Product.InStock, Mode=TwoWay}" x:Name="InStock" Margin="300,267,0,0"/>
-        <Button Name="BtnAddOrUpdetProduct"  Content="{Binding BtnAddOrUpdetProductContent, Mode=TwoWay}" HorizontalAlignment="Left" Height="29" Margin="514,319,0,0" VerticalAlignment="Top" Width="80" Click="ButtonAddOrApdet_Click" Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black"/>
+        <Button Name="BtnAddOrUpdetProduct"  Content="{Binding BtnAddOrUpdetProductContent, Mode=TwoWay}" HorizontalAlignment="Left" Height="29" Margin="656,329,0,0" VerticalAlignment="Top" Width="80" Click="ButtonAddOrApdet_Click" Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black"/>
         <Grid HorizontalAlignment="Left" Height="62" Margin="0,347,0,0" VerticalAlignment="Top" Width="101">
             <Grid.Background>
                 <ImageBrush ImageSource="/צילום מסך 2023-01-05 161035.png"/>
             </Grid.Background>
         </Grid>
+        <Label Name="ID" Content="Id:" Margin="66,67,0,0"/>
+        <Label Content="Name:" Margin="66,162,0,0"/>
+        <Label Content="Price:" Margin="66,211,0,0"/>
+        <Label Content="InStock:" Margin="66,256,0,0"/>
+        <Label Content="Category:" Margin="66,114,0,0"/>
+        <ComboBox Foreground="Black" FontFamily="Segoe Print" Name="CategoryForNewProduct" SelectedItem="{Binding Product.Category,Mode=TwoWay}" HorizontalAlignment="Left" Background="Black" Height="29" Margin="157,114,0,0" VerticalAlignment="Top" Width="123"/>
+        <TextBox Text="{Binding Product.ID}" IsReadOnly="{Binding Mode}" Name="Id" Margin="157,67,0,0"/>
+        <TextBox Text="{Binding Product.Name, Mode=TwoWay}" x:Name="Name" Margin="157,167,0,0"/>
+        <TextBox Text="{Binding Product.Price, Mode=TwoWay}" x:Name="Price" Margin="157,211,0,0"/>
+        <TextBox Text="{Binding Product.InStock, Mode=TwoWay}" x:Name="InStock" Margin="157,256,0,0"/>
+        <Image Source="{Binding Product.ImageRelativeName, Converter={StaticResource ImagePathToBitmap}}" HorizontalAlignment="Left" Height="305" Margin="301,43,0,0" VerticalAlignment="Top" Width="304"/>
+        <Button Content="{Binding BtnAddOrUpdetProductContent, Mode=TwoWay}" HorizontalAlignment="Left" Height="31" Margin="400,347,0,0" VerticalAlignment="Top" Width="93" Click="Button_Click"/>
     </Grid>
 </Window>

@@ -1,4 +1,4 @@
-<Window x:Class="PL.ProductItem"
+﻿<Window x:Class="PL.ProductItem"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,8 +7,7 @@
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource self}}"
         Title="ProducItemtWindow" Height="450" Width="800" Background="Black">
-    <Window.Resources>
-        <Style TargetType="Label">
+    <Window.Resources>        <Style TargetType="Label">
             <Setter Property="FontSize" Value="16" />
             <Setter Property="FontFamily" Value="Segoe Print" />
             <Setter Property="FontWeight" Value="Bold" />
@@ -18,17 +17,12 @@
             <Setter Property="VerticalAlignment" Value="Top" />
             <Setter Property="Height" Value="42" />
             <Setter Property="Width" Value="91" />
-        </Style>
-        <Style TargetType="TextBox">
+        </Style>        <Style TargetType="TextBox">
             <Setter Property="Background" Value="Black" />
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Top" />
             <Setter Property="Height" Value="29" />
-            <Setter Property="Width" Value="123" />
-            <Setter Property="IsReadOnly" Value="True" />
-
-        </Style>
-    </Window.Resources>
+            <Setter Property="Width" Value="123" />            <Setter Property="IsReadOnly" Value="True" />        </Style>    </Window.Resources>
     <Grid>
         <Label  Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black" Name="ID" Content="Id:" HorizontalAlignment="Left" Height="42" Margin="209,78,0,0" VerticalAlignment="Top" Width="48"/>
         <TextBox Foreground="#FFEFCF81" Text="{Binding PB.ID}" IsReadOnly="true" Name="Id" HorizontalAlignment="Left" Height="29" Margin="300,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123"/>
@@ -40,10 +34,23 @@
         <TextBox Foreground="#FFEFCF81" Text="{Binding PB.Name}" x:Name="Name" HorizontalAlignment="Left" Height="29" Margin="300,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123" RenderTransformOrigin="0.473,0.77" />
         <TextBox Foreground="#FFEFCF81" Text="{Binding PB.Price, Mode=TwoWay}" x:Name="Price" HorizontalAlignment="Left" Height="29" Margin="300,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123"/>
         <TextBox Foreground="#FFEFCF81"  x:Name="InStock" Text="{Binding PB.isStock}"  HorizontalAlignment="Left" Height="29" Margin="300,267,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123" />
-        <Button  Name="BtnAddOrUpdetProduct"   Content="add to cart" HorizontalAlignment="Left" Height="29" Margin="514,319,0,0" VerticalAlignment="Top" Width="80" Click="Button_Click" Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black"/>
-        <Button Content="view cart" HorizontalAlignment="Left" Margin="514,272,0,0" VerticalAlignment="Top" Height="24" Width="60" Click="Button_Click_1" />
-        <Label Foreground="#FFEFCF81"    Content="Amaunt" HorizontalAlignment="Left" Margin="233,334,0,0" VerticalAlignment="Top" Height="35" Width="66"/>
-        <TextBox HorizontalAlignment="Left"  IsReadOnly="False"  Foreground="#FFEFCF81"  Text="{Binding PB.Amount ,Mode=TwoWay}" Margin="299,319,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="29" />
+        <Button  Name="BtnAddOrUpdetProduct"  HorizontalAlignment="Left" Height="81" Margin="496,319,0,0" VerticalAlignment="Top" Width="82" Click="Button_Click" Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print">
+            <Button.Background>
+                <ImageBrush ImageSource="/צילום מסך 2023-01-13 105941.png"/>
+            </Button.Background>
+        </Button>
+        <Button Content="view cart" HorizontalAlignment="Left" Margin="686,29,0,0" VerticalAlignment="Top" Height="78" Width="82" Click="Button_Click_1" >
+            <Button.Background>
+                <ImageBrush ImageSource="/צילום מסך 2023-01-13 103224.png"/>
+            </Button.Background>
+        </Button>
+        <Label Foreground="#FFEFCF81"    Content="Amount:" Margin="205,313,0,0" Height="35" Width="80"/>
+        <TextBox  IsReadOnly="False"  Foreground="#FFEFCF81"  Text="{Binding PB.Amount ,Mode=TwoWay}" Margin="299,319,0,0" TextWrapping="Wrap" Width="124" Height="29" />
+        <Grid HorizontalAlignment="Left" Height="40" Margin="31,360,0,0" VerticalAlignment="Top" Width="70">
+            <Grid.Background>
+                <ImageBrush ImageSource="/צילום מסך 2023-01-05 161035.png"/>
+            </Grid.Background>
+        </Grid>
     </Grid>
 </Window>
 

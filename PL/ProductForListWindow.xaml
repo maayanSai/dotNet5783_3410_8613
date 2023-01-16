@@ -7,8 +7,7 @@
         mc:Ignorable="d"
         DataContext="{Binding Path=ProductList, RelativeSource={RelativeSource self}}"
         Title="ProductForListWindow" Height="450" Width="800">
-    <Window.Resources>
-        <Style TargetType="Button">
+    <Window.Resources>        <Style TargetType="Button">
             <Setter Property="FontSize" Value="12" />
             <Setter Property="FontFamily" Value="Segoe Print" />
             <Setter Property="FontWeight" Value="Bold" />
@@ -18,8 +17,7 @@
             <Setter Property="VerticalAlignment" Value="Top" />
             <Setter Property="Height" Value="34" />
             <Setter Property="Width" Value="92" />
-        </Style>
-    </Window.Resources>
+        </Style>    </Window.Resources>
     <Grid Name="MainGrid" Background="Black">
         <Grid.RowDefinitions>
             <RowDefinition Height="41"/>
@@ -36,15 +34,19 @@
                 <ColumnDefinition Width="81"/>
                 <ColumnDefinition Width="32"/>
             </Grid.ColumnDefinitions >
-            
-            <ComboBox Name="AttributeSelector" FontFamily="Segoe Print" SelectionChanged="SelectionChanged"  Foreground="Black" Grid.ColumnSpan="3"   Margin="372,3,27,7" SelectedIndex="5"/>
+
+            <ComboBox Name="AttributeSelector" FontFamily="Segoe Print" SelectionChanged="SelectionChanged"  Foreground="Black" Grid.ColumnSpan="2"   Margin="39,3,27,7" SelectedIndex="5" Grid.Column="1"/>
             <Label Grid.Column="0" FontFamily="Segoe Print" Foreground="#FFEFCF81" FontSize="20" Content="Category:" Margin="10,-4,166,-5" Grid.ColumnSpan="2"/>
         </Grid>
-        
-        <Button Content="Add new Product" Name="addNewProduct"  Margin="644,338,0,0" Padding="5" Click="NewProductButton_Click" Grid.Row="1" Width="146" HorizontalAlignment="Left"/>
+
+        <Button Margin="689,280,0,0" Padding="5" Click="NewProductButton_Click" Grid.Row="1" Width="55" HorizontalAlignment="Left" Height="55">
+            <Button.Background>
+                <ImageBrush ImageSource="/צילום מסך 2023-01-15 203147.png"/>
+            </Button.Background>
+        </Button>
         <Button Content="click to all product" Height="25" Margin="654,6,0,0"  Width="125" Click="ButtonAfterFiltering_Click" HorizontalAlignment="Left" />
 
-        <DataGrid x:Name="productForListDataGrid" ItemsSource="{Binding}"  AutoGenerateColumns="False" EnableRowVirtualization="True" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="20,18,16,62" Grid.Row="1" MouseDoubleClick="productForListDataGrid_MouseDoubleClick" RenderTransformOrigin="0.5,0.5">
+        <DataGrid x:Name="productForListDataGrid" ItemsSource="{Binding}"  AutoGenerateColumns="False" EnableRowVirtualization="True" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="133,31,162,33" Grid.Row="1" MouseDoubleClick="productForListDataGrid_MouseDoubleClick" RenderTransformOrigin="0.5,0.5" >
             <DataGrid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -54,11 +56,23 @@
                 </TransformGroup>
             </DataGrid.RenderTransform>
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="categoryColumn" Binding="{Binding Category}" Header="Category       " Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="iDColumn" Binding="{Binding ID}" Header="ID            " Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name                       " Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="categoryColumn" Binding="{Binding Category}" Header="Category       " Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="priceColumn" Binding="{Binding Price}" Header="Price      " Width="SizeToHeader"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Path=ImageRelativeName, Converter={StaticResource ImagePathToBitmap}}" Height="40"  Width="40"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <Grid HorizontalAlignment="Left" Height="44" Margin="10,318,0,0" Grid.Row="1" VerticalAlignment="Top" Width="69">
+            <Grid.Background>
+                <ImageBrush ImageSource="/צילום מסך 2023-01-05 161035.png"/>
+            </Grid.Background>
+        </Grid>
     </Grid>
 </Window>

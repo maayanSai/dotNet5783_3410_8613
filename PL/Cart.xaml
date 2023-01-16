@@ -8,7 +8,7 @@
      DataContext="{Binding RelativeSource={RelativeSource self}}"
         Title="Cart" Height="450" Width="800">
     <Grid >
-        <Grid x:Name="grid1"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="35,0,0,0" Height="384" Width="300">
+        <Grid x:Name="grid1"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="35,0,0,0" Height="330" Width="236">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -31,7 +31,7 @@
 
 
         </Grid>
-        <DataGrid x:Name="orderItemDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Cb.Items}" IsEnabled="False" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="475,25,42,64" >
+        <DataGrid x:Name="orderItemDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Cb.Items}" IsEnabled="False" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="400,52,42,245" >
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="amountColumn"  Binding="{Binding Amount}" Header="Amount" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name" Width="SizeToHeader"/>
@@ -40,7 +40,7 @@
                 <DataGridTextColumn x:Name="totalpriceColumn" Binding="{Binding Totalprice}" Header="Totalprice" Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Make an order" Margin="310,132,375,255" Click="Button_Click"/>
+        <Button Content="Make an order" Margin="637,352,48,35" Click="Button_Click"/>
     </Grid>
 
 

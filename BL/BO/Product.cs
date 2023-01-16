@@ -25,6 +25,7 @@ public class Product
     /// The amount of the product in stock
     /// </summary>
     public int InStock { get; set; }
+    public string? ImageRelativeName { get; set; }
     /// <summary>
     /// An action that prints the order
     /// </summary>

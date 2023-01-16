@@ -21,6 +21,8 @@ public class ProductForList
     /// The kind of the product
     /// </summary>
     public Category? Category { get; set; }
+    public string? ImageRelativeName { get; set; }
+
     /// <summary>
     /// An action that prints the orderItem
     /// </summary>
