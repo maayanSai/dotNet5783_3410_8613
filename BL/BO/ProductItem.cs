@@ -30,5 +30,6 @@ public class ProductItem
     /// </summary>
     /// <returns></returns>
       public bool isStock { get; set; }
+    public string? ImageRelativeName { get; set; }
     public override string ToString() => this.ToStringProperty();
 }

@@ -6,7 +6,9 @@
         mc:Ignorable="d"
         DataContext="{Binding Path=ProducitemtList, RelativeSource={RelativeSource self}}"
         Height="450" Width="800">
+
     <Grid>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
@@ -17,26 +19,31 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.ColumnSpan="2">
             <TextBlock Text="jewelry store" HorizontalAlignment="Center" Margin="10" FontSize="28"/>
+            <ComboBox HorizontalAlignment="Left" SelectionChanged="CategorySelectionChanged" Name="SelectedCategory"   Width="179"  SelectedIndex="5" Height="44" VerticalAlignment="Center" Margin="581,0,0,0"/>
         </Grid>
         <ScrollViewer Grid.Column="1" Grid.Row="1" Background="White">
             <StackPanel>
                 <TextBlock Text="Items" Margin="10" FontSize="22" FontWeight="Medium"/>
+
                 <StackPanel Margin="20 0">
-                    <ItemsControl x:Name="ProductItemList" ItemsSource="{Binding}">
+                    <ItemsControl x:Name="ProductItemList" ItemsSource="{Binding }">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Border Margin="10" Height="160" Width="110">
                                     <StackPanel>
-                                        <Border Width="100" Height="100" CornerRadius="5,5,5,5" Margin="5">
+                                        
+                                        <Border Width="100" Height="100"  CornerRadius="5,5,5,5" Margin="5">
                                             <Border.Effect>
-                                                <DropShadowEffect/>
+                                                <DropShadowEffect ShadowDepth="1"/>
                                             </Border.Effect>
                                             <Border.Background>
                                                 <ImageBrush ImageSource="{Binding Path=ImageRelativeName, Converter={StaticResource ImagePathToBitmap}}"/>
                                             </Border.Background>
+                                         
                                         </Border>
-                                        <TextBlock Margin="5" Text="{Binding Name}" FontSize="14" FontFamily="Segoe Print" FontWeight="Bold"  Foreground="Black" />
-                                        <TextBlock Margin="5 0 " Text="{Binding Price ,StringFormat={} {0:C}}" FontSize="14" FontFamily="Segoe Print" FontWeight="Bold" Foreground="Black" />
+                                        
+                                        <TextBlock Margin="5" Text="{Binding Name}" FontSize="14" FontFamily="Segoe Print" FontWeight="Bold"  Foreground="#FFEFCF81" />
+                                        <TextBlock Margin="5 0 " Text="{Binding Price ,StringFormat={} {0:C}}" FontSize="14" FontFamily="Segoe Print" FontWeight="Bold" Foreground="#FFEFCF81" />
                                     </StackPanel>
                                 </Border>
                             </DataTemplate>
@@ -50,8 +57,6 @@
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
-        <ComboBox Name="SelectedCategory" HorizontalAlignment="Left" SelectionChanged="CategorySelectionChanged" Margin="485,18,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+
     </Grid>
 </Window>
-
-

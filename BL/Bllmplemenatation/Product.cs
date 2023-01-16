@@ -213,7 +213,9 @@ internal class Product : IProduct
                                                    Category = (BO.Category?)item.Category,
                                                    Amount=cart?.Items?.FirstOrDefault(x => x?.ProductID==item.ID)?.Amount??0,
                                                    isStock=item.InStock>0,
+                                                   ImageRelativeName=item.ImageRelativeName,    
                                                };
+            
         }
         else
         {
@@ -226,6 +228,7 @@ internal class Product : IProduct
                       Category = (BO.Category?)item.Category,
                       Amount=cart?.Items?.FirstOrDefault(x => x?.ProductID==item.ID)?.Amount??0,
                       isStock=item.InStock>0,
+                      ImageRelativeName=item.ImageRelativeName,
                   };
             pro=pro.Where(fanc);
         }
