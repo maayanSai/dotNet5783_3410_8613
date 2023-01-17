@@ -15,130 +15,127 @@
                 <RowDefinition Height="21*"/>
                 <RowDefinition Height="25*"/>
             </Grid.RowDefinitions>
-            <Button HorizontalAlignment="Left" Tag="{Binding ImageBrush}" Height="110" Margin="598,152,0,0" VerticalAlignment="Top" Width="89" Grid.RowSpan="2">
+            <Button HorizontalAlignment="Left" Content="/pictures/hoop earings.png" Tag="{Binding ImageBrush}" Height="110" Margin="598,152,0,0" VerticalAlignment="Top" Width="89" Grid.RowSpan="2">
                 <Button.Background>
-                    <ImageBrush ImageSource="/hoop earings.png"/>
+                    <ImageBrush ImageSource="/pictures/hoop earings.png"/>
                 </Button.Background>
             </Button>
-            <Button HorizontalAlignment="Left" Height="110" Margin="363,10,0,0" VerticalAlignment="Top" Width="89">
+            <Button HorizontalAlignment="Left" Content="/pictures/Diamond anklet.png" Height="110" Margin="363,10,0,0" VerticalAlignment="Top" Width="89">
                 <Button.Background>
-                    <ImageBrush ImageSource="/Diamond anklet.png"/>
+                    <ImageBrush ImageSource="/pictures/Diamond anklet.png"/>
                 </Button.Background>
             </Button>
 
-            <Button  HorizontalAlignment="Left" Height="110" Margin="123,10,0,0" VerticalAlignment="Top" Width="89">
+            <Button  HorizontalAlignment="Left" Content="/pictures/climbing earings.png" Height="110" Margin="123,10,0,0" VerticalAlignment="Top" Width="89">
                 <Button.Background>
-                    <ImageBrush ImageSource="/climbing earings.png"/>
+                    <ImageBrush ImageSource="/pictures/climbing earings.png"/>
                 </Button.Background>
             </Button>
-            <Button  HorizontalAlignment="Left" Height="110" Margin="598,10,0,0" VerticalAlignment="Top" Width="89">
+            <Button  HorizontalAlignment="Left" Content="pictures/diamond necklace.png" Height="110" Margin="598,10,0,0" VerticalAlignment="Top" Width="89">
                 <Button.Background>
-                    <ImageBrush ImageSource="/diamond necklace.png"/>
+                    <ImageBrush ImageSource="/pictures/diamond necklace.png"/>
                 </Button.Background>
             </Button>
-            <Button HorizontalAlignment="Left" Height="110" Margin="718,90,0,0" VerticalAlignment="Top" Width="89" Grid.Row="1">
+            <Button HorizontalAlignment="Left" Content="/pictures/tight necklace.png" Height="110" Margin="718,90,0,0" VerticalAlignment="Top" Width="89" Grid.Row="1">
                 <Button.Background>
-                    <ImageBrush ImageSource="/tight necklace.png"/>
+                    <ImageBrush ImageSource="/pictures/tight necklace.png"/>
                 </Button.Background>
             </Button>
-            <Button HorizontalAlignment="Left" Height="110" Margin="718,152,0,0" VerticalAlignment="Top" Width="89" Grid.RowSpan="2">
+            <Button HorizontalAlignment="Left" Content="/pictures/knot ring.png" Height="110" Margin="718,152,0,0" VerticalAlignment="Top" Width="89" Grid.RowSpan="2">
                 <Button.Background>
-                    <ImageBrush ImageSource="/knot ring.png"/>
+                    <ImageBrush ImageSource="/pictures/knot ring.png"/>
                 </Button.Background>
             </Button>
-            <Button HorizontalAlignment="Left" Height="110" Margin="838,10,0,0" VerticalAlignment="Top" Width="89">
+            <Button HorizontalAlignment="Left" Content="/pictures/Double ankle.png" Height="110" Margin="838,10,0,0" VerticalAlignment="Top" Width="89">
                 <Button.Background>
-                    <ImageBrush ImageSource="/Double ankle.png"/>
+                    <ImageBrush ImageSource="/pictures/Double ankle.png"/>
                 </Button.Background>
             </Button>
-            <Button HorizontalAlignment="Left" Height="110" Margin="718,10,0,0" VerticalAlignment="Top" Width="89">
+            <Button HorizontalAlignment="Left" Content="/pictures/diamond ring.png" Height="110" Margin="718,10,0,0" VerticalAlignment="Top" Width="89">
                 <Button.Background>
-                    <ImageBrush ImageSource="/diamond ring.png"/>
+                    <ImageBrush ImageSource="/pictures/diamond ring.png"/>
                 </Button.Background>
             </Button>
-            <Button HorizontalAlignment="Left" Height="110" Margin="838,152,0,0" VerticalAlignment="Top" Width="89" Grid.RowSpan="2">
+            <Button HorizontalAlignment="Left" Content="/pictures/Link bracelet.png" Height="110" Margin="838,152,0,0" VerticalAlignment="Top" Width="89" Grid.RowSpan="2">
                 <Button.Background>
-                    <ImageBrush ImageSource="/Link bracelet.png"/>
+                    <ImageBrush ImageSource="/pictures/Link bracelet.png"/>
                 </Button.Background>
             </Button>
-            <Button HorizontalAlignment="Left" Height="110" Margin="483,90,0,0" VerticalAlignment="Top" Width="89" Grid.Row="1" Click="Button_Click_1">
+            <Button HorizontalAlignment="Left" Content="/pictures/Link bracelet.png" Height="110" Margin="483,90,0,0" VerticalAlignment="Top" Width="89" Grid.Row="1" Click="Button_Click_1">
                 <Button.Background>
-                    <ImageBrush ImageSource="/pearl ring.png" />
+                    <ImageBrush ImageSource="/pictures/pearl ring.png" />
                 </Button.Background>
             </Button>
-            <Button HorizontalAlignment="Left" Height="110" Margin="598,90,0,0" VerticalAlignment="Top" Width="89" RenderTransformOrigin="0.411,1.564" Grid.Row="1">
+            <Button HorizontalAlignment="Left" Content="/pictures/tight earings.png" Height="110" Margin="598,90,0,0" VerticalAlignment="Top" Width="89" RenderTransformOrigin="0.411,1.564" Grid.Row="1">
                 <Button.Background>
-                    <ImageBrush ImageSource="/tight earings.png"/>
+                    <ImageBrush ImageSource="/pictures/tight earings.png"/>
                 </Button.Background>
             </Button>
-            <Button HorizontalAlignment="Left" Height="110" Margin="363,90,0,0" VerticalAlignment="Top" Width="89" Grid.Row="1">
+            <Button HorizontalAlignment="Left" Content="/pictures/pearl necklace.png" Height="110" Margin="363,90,0,0" VerticalAlignment="Top" Width="89" Grid.Row="1">
                 <Button.Background>
-                    <ImageBrush ImageSource="/pearl necklace.png"/>
+                    <ImageBrush ImageSource="/pictures/pearl necklace.png"/>
                 </Button.Background>
             </Button>
-            <Button  HorizontalAlignment="Left" Margin="10,10,0,69" Width="89" Click="Button_Click">
+            <Button  HorizontalAlignment="Left" Content="/pictures/ankle bracelet loops.png" Margin="10,10,0,69" Width="89" Click="Button_Click">
                 <Button.Background>
-                    <ImageBrush ImageSource="/ankle bracelet loops.png"/>
+                    <ImageBrush ImageSource="/pictures/ankle bracelet loops.png"/>
                 </Button.Background>
             </Button>
-            <Button HorizontalAlignment="Left" Height="110" Margin="244,90,0,0" VerticalAlignment="Top" Width="89" Grid.Row="1">
+            <Button HorizontalAlignment="Left" Content="/pictures/Pearl bracelet.png" Height="110" Margin="244,90,0,0" VerticalAlignment="Top" Width="89" Grid.Row="1">
                 <Button.Background>
-                    <ImageBrush ImageSource="/Pearl bracelet.png"/>
+                    <ImageBrush ImageSource="/pictures/Pearl bracelet.png"/>
                 </Button.Background>
             </Button>
-            <Button HorizontalAlignment="Left" Height="110" Margin="123,90,0,0" VerticalAlignment="Top" Width="89" Grid.Row="1">
+            <Button HorizontalAlignment="Left" Content="/pictures/Pearl anklet.png" Height="110" Margin="123,90,0,0" VerticalAlignment="Top" Width="89" Grid.Row="1">
                 <Button.Background>
-                    <ImageBrush ImageSource="/Pearl anklet.png"/>
+                    <ImageBrush ImageSource="/pictures/Pearl anklet.png"/>
                 </Button.Background>
             </Button>
-            <Button Content="Button" HorizontalAlignment="Left" Height="110" Margin="10,90,0,0" VerticalAlignment="Top" Width="89" Grid.Row="1">
+            <Button Content="/pictures/long necklace.png" HorizontalAlignment="Left" Height="110" Margin="10,90,0,0" VerticalAlignment="Top" Width="89" Grid.Row="1">
                 <Button.Background>
-                    <ImageBrush ImageSource="/long necklace.png"/>
+                    <ImageBrush ImageSource="/pictures/long necklace.png"/>
                 </Button.Background>
             </Button>
-            <Button HorizontalAlignment="Left" Height="110" Margin="483,152,0,0" VerticalAlignment="Top" Width="89" Grid.RowSpan="2">
+            <Button HorizontalAlignment="Left" Content="/pictures/Hard bracelet.png" Height="110" Margin="483,152,0,0" VerticalAlignment="Top" Width="89" Grid.RowSpan="2">
                 <Button.Background>
-                    <ImageBrush ImageSource="/Hard bracelet.png"/>
+                    <ImageBrush ImageSource="/pictures/Hard bracelet.png"/>
                 </Button.Background>
             </Button>
-            <Button HorizontalAlignment="Left" Height="110" Margin="483,10,0,0" VerticalAlignment="Top" Width="89">
+            <Button HorizontalAlignment="Left" Content="/pictures/Diamond bracelet.png" Height="110" Margin="483,10,0,0" VerticalAlignment="Top" Width="89">
                 <Button.Background>
-                    <ImageBrush ImageSource="/Diamond bracelet.png"/>
+                    <ImageBrush ImageSource="/pictures/Diamond bracelet.png"/>
                 </Button.Background>
             </Button>
-            <Button HorizontalAlignment="Left" Height="110" Margin="363,152,0,0" VerticalAlignment="Top" Width="89" Grid.RowSpan="2">
+            <Button HorizontalAlignment="Left" Content="/pictures/Hard ankle.png" Height="110" Margin="363,152,0,0" VerticalAlignment="Top" Width="89" Grid.RowSpan="2">
                 <Button.Background>
-                    <ImageBrush ImageSource="/Hard ankle.png"/>
+                    <ImageBrush ImageSource="/pictures/Hard ankle.png"/>
                 </Button.Background>
             </Button>
-            <Button HorizontalAlignment="Left" Height="110" Margin="244,152,0,0" VerticalAlignment="Top" Width="89" Grid.RowSpan="2">
+            <Button HorizontalAlignment="Left" Content="/pictures/family necklace.png" Height="110" Margin="244,152,0,0" VerticalAlignment="Top" Width="89" Grid.RowSpan="2">
                 <Button.Background>
-                    <ImageBrush ImageSource="/family necklace.png"/>
+                    <ImageBrush ImageSource="/pictures/family necklace.png"/>
                 </Button.Background>
             </Button>
-            <Button HorizontalAlignment="Left" Height="110" Margin="123,152,0,0" VerticalAlignment="Top" Width="89" Grid.RowSpan="2">
+            <Button HorizontalAlignment="Left" Content="/pictures/falling earings.png" Height="110" Margin="123,152,0,0" VerticalAlignment="Top" Width="89" Grid.RowSpan="2">
                 <Button.Background>
-                    <ImageBrush ImageSource="/falling earings.png"/>
+                    <ImageBrush ImageSource="/pictures/falling earings.png"/>
                 </Button.Background>
             </Button>
-            <Button HorizontalAlignment="Left" Height="110" Margin="10,147,0,0" VerticalAlignment="Top" Width="89" Grid.RowSpan="2">
+            <Button HorizontalAlignment="Left" Content="/pictures/double ring.png" Height="110" Margin="10,147,0,0" VerticalAlignment="Top" Width="89" Grid.RowSpan="2">
                 <Button.Background>
-                    <ImageBrush ImageSource="/double ring.png"/>
+                    <ImageBrush ImageSource="/pictures/double ring.png"/>
                 </Button.Background>
             </Button>
-            <Button HorizontalAlignment="Left" Height="110" Margin="244,10,0,0" VerticalAlignment="Top" Width="89">
+            <Button HorizontalAlignment="Left" Content="/pictures/clip earings.png" Height="110" Margin="244,10,0,0" VerticalAlignment="Top" Width="89">
                 <Button.Background>
-                    <ImageBrush ImageSource="/clip earings.png"/>
+                    <ImageBrush ImageSource="/pictures/clip earings.png"/>
                 </Button.Background>
             </Button>
-            <Button HorizontalAlignment="Left" Height="110" Margin="838,90,0,0" Grid.Row="1" VerticalAlignment="Top" Width="89">
+            <Button HorizontalAlignment="Left" Content="/pictures/wedding ring.png" Height="110" Margin="838,90,0,0" Grid.Row="1" VerticalAlignment="Top" Width="89">
                 <Button.Background>
-                    <ImageBrush ImageSource="/wedding ring.png" />
+                    <ImageBrush ImageSource="/pictures/wedding ring.png" />
                 </Button.Background>
-
-
             </Button>
         </Grid>
-
     </Grid>
 </Window>
