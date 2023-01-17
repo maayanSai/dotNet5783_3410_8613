@@ -43,7 +43,7 @@
         
         <Grid HorizontalAlignment="Left" Height="58" Margin="10,350,0,0" VerticalAlignment="Top" Width="91">
             <Grid.Background>
-                <ImageBrush ImageSource="/daimon.png"/>
+                <ImageBrush ImageSource="pictures/daimon.png"/>
             </Grid.Background>
         </Grid>
     </Grid>

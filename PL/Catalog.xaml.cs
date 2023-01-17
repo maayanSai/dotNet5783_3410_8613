@@ -129,6 +129,9 @@ namespace PL
                 if (c == BO.Category.None)
                 {
                     ProducitemtList = new(bl?.Product.GetProductItem(Cb)!);
+                    CollectionViewProduct = (CollectionView)CollectionViewSource.GetDefaultView(ProducitemtList);
+                    propertyGroupDescription = new PropertyGroupDescription(group);
+                    CollectionViewProduct.GroupDescriptions.Add(propertyGroupDescription);
                 }
                 else
                     ProducitemtList = new(bl?.Product.GetProductItem(Cb, x => x.Category==c)!);
@@ -148,7 +151,11 @@ namespace PL
         private void Button_Click_1(object sender, MouseButtonEventArgs e)
         {
             e.Handled = true;
-            var p = (((Button)sender).Tag);
+            BO.ProductItem prod;
+         var p = (BO.ProductItem)((Button)sender).Tag;
+           
+            ProductItem pro = new ProductItem(p, Cb, AddToCart);
+            pro.ShowDialog();
             //  ProductItem windoProductItem = new ProductItem(p!, Cb, AddToCart);
             //  windoProductItem.ShowDialog();
         }

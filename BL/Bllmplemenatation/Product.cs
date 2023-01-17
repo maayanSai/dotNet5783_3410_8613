@@ -157,6 +157,7 @@ internal class Product : IProduct
             Amount = amount,
             isStock=p?.InStock>0,
             Category=(BO.Category?)p?.Category!,
+            ImageRelativeName=p?.ImageRelativeName
         };
         return proi;
     }

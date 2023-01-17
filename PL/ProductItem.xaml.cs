@@ -57,7 +57,7 @@ namespace PL
 
         }
 
-        ~ProductItem(){ PB = bl.Product.ItemProduct(PB.ID, CB); }
+        //~ProductItem(){ PB.Amount=bl.Product.ItemProduct(PB.ID, CB).Amount; }
             
     }
 }

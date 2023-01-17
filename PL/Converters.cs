@@ -7,10 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using System.Windows.Data;
-
-
-namespace PL;
-
+namespace PL
+{
  class ConvertImagePathToBitmap : IValueConverter
 {
     public object Convert(object value, Type targetType,object parameter,CultureInfo culture)
@@ -37,5 +35,21 @@ namespace PL;
     {
         throw new NotImplementedException();
     }
+}
+//public class ConvertIsBossToVisability : IValueConverter
+//    {
+//        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+//        {
+//            if (((bool)value)==true)
+//                return Visibility.Visible;
+//            else
+//                return Visibility.Collapsed;
+//        }
+
+//        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+//        {
+//            throw new NotImplementedException();
+//        }
+//    }
 }
 

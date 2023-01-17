@@ -34,23 +34,26 @@
         <TextBox Foreground="#FFEFCF81" Text="{Binding PB.Name}" x:Name="Name" HorizontalAlignment="Left" Height="29" Margin="300,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123" RenderTransformOrigin="0.473,0.77" />
         <TextBox Foreground="#FFEFCF81" Text="{Binding PB.Price, Mode=TwoWay}" x:Name="Price" HorizontalAlignment="Left" Height="29" Margin="300,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123"/>
         <TextBox Foreground="#FFEFCF81"  x:Name="InStock" Text="{Binding PB.isStock}"  HorizontalAlignment="Left" Height="29" Margin="300,267,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123" />
-        <Button  Name="BtnAddOrUpdetProduct"  HorizontalAlignment="Left" Height="81" Margin="496,319,0,0" VerticalAlignment="Top" Width="82" Click="Button_Click" Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print">
-            <Button.Background>
-                <ImageBrush ImageSource="/צילום מסך 2023-01-13 105941.png"/>
+        <Button  Name="BtnAddOrUpdetProduct" Content="הוספת מוצר"  HorizontalAlignment="Left" Height="81" Margin="496,319,0,0" VerticalAlignment="Top" Width="82" Click="Button_Click" Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print">
+            <Button.Background >
+                <ImageBrush />
+
             </Button.Background>
         </Button>
         <Button Content="view cart" HorizontalAlignment="Left" Margin="686,29,0,0" VerticalAlignment="Top" Height="78" Width="82" Click="Button_Click_1" >
             <Button.Background>
-                <ImageBrush ImageSource="/צילום מסך 2023-01-13 103224.png"/>
+                <ImageBrush />
             </Button.Background>
         </Button>
         <Label Foreground="#FFEFCF81"    Content="Amount:" Margin="205,313,0,0" Height="35" Width="80"/>
         <TextBox  IsReadOnly="False"  Foreground="#FFEFCF81"  Text="{Binding PB.Amount ,Mode=TwoWay}"  Margin="299,319,0,0" TextWrapping="Wrap" Width="124" Height="29"  />
         <Grid HorizontalAlignment="Left" Height="40" Margin="31,360,0,0" VerticalAlignment="Top" Width="70">
-            <Grid.Background>
-                <ImageBrush ImageSource="/צילום מסך 2023-01-05 161035.png"/>
-            </Grid.Background>
+            
         </Grid>
+     
+              
+
+
     </Grid>
 </Window>
 
