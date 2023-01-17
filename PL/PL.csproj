@@ -14,8 +14,10 @@
 
   <ItemGroup>
     <None Remove="ankle bracelet loops.png" />
+    <None Remove="cart.png" />
     <None Remove="climbing earings.png" />
     <None Remove="clip earings.png" />
+    <None Remove="daimon.png" />
     <None Remove="Diamond anklet.png" />
     <None Remove="Diamond bracelet.png" />
     <None Remove="diamond necklace.png" />
@@ -27,6 +29,7 @@
     <None Remove="family necklace.png" />
     <None Remove="Hard ankle.png" />
     <None Remove="Hard bracelet.png" />
+    <None Remove="home.png" />
     <None Remove="hoop earings.png" />
     <None Remove="knot ring.png" />
     <None Remove="Link bracelet.png" />
@@ -62,6 +65,7 @@
     <Resource Include="ankle bracelet loops.png" />
     <Resource Include="climbing earings.png" />
     <Resource Include="clip earings.png" />
+    <Resource Include="daimon.png" />
     <Resource Include="Diamond anklet.png" />
     <Resource Include="Diamond bracelet.png" />
     <Resource Include="diamond necklace.png" />
@@ -73,6 +77,7 @@
     <Resource Include="family necklace.png" />
     <Resource Include="Hard ankle.png" />
     <Resource Include="Hard bracelet.png" />
+    <Resource Include="home.png" />
     <Resource Include="hoop earings.png" />
     <Resource Include="knot ring.png" />
     <Resource Include="Link bracelet.png" />
@@ -84,19 +89,6 @@
     <Resource Include="tight earings.png" />
     <Resource Include="tight necklace.png" />
     <Resource Include="wedding ring.png" />
-    <Resource Include="צילום מסך 2022-12-17 212806.png" />
-    <Resource Include="צילום מסך 2023-01-05 161035.png" />
-    <Resource Include="צילום מסך 2023-01-13 102450.png" />
-    <Resource Include="צילום מסך 2023-01-13 103152.png" />
-    <Resource Include="צילום מסך 2023-01-13 103224.png" />
-    <Resource Include="צילום מסך 2023-01-13 104936.png" />
-    <Resource Include="צילום מסך 2023-01-13 105941.png" />
-    <Resource Include="צילום מסך 2023-01-13 110221.png" />
-    <Resource Include="צילום מסך 2023-01-15 202810.png" />
-    <Resource Include="צילום מסך 2023-01-15 203147.png" />
-    <Resource Include="צילום מסך 2023-01-15 214016.png" />
-    <Resource Include="צילום מסך 2023-01-15 214134.png" />
-    <Resource Include="צילום מסך 2023-01-15 214721.png" />
   </ItemGroup>
 
 </Project>

@@ -112,10 +112,9 @@ namespace PL
         {
             Cb = cb;
             InitializeComponent();
-
             ProducitemtList = new ObservableCollection<BO.ProductItem?>(bl.Product.GetProductItem(Cb));
-        
-            SelectedCategory.ItemsSource = Enum.GetValues(typeof(PL.Category));
+            SelectedCategory.ItemsSource = Enum.GetValues(typeof(BO.Category));
+
             CollectionViewProduct = (CollectionView)CollectionViewSource.GetDefaultView(ProducitemtList);
             propertyGroupDescription = new PropertyGroupDescription(group);
             CollectionViewProduct.GroupDescriptions.Add(propertyGroupDescription);
@@ -146,13 +145,12 @@ namespace PL
             new Cart(Cb).ShowDialog();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Click_1(object sender, MouseButtonEventArgs e)
         {
             e.Handled = true;
-            var  p=(((ListView)sender));
-           var x= p.SelectedIndex;
-          //  ProductItem windoProductItem = new ProductItem(p!, Cb, AddToCart);
-          //  windoProductItem.ShowDialog();
+            var p = (((Button)sender).Tag);
+            //  ProductItem windoProductItem = new ProductItem(p!, Cb, AddToCart);
+            //  windoProductItem.ShowDialog();
         }
     }
 }

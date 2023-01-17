@@ -9,11 +9,6 @@
         Title="ProductWindow" Height="450" Width="800" Background="Black">
     <Grid>
         <Button Name="BtnAddOrUpdetProduct"  Content="{Binding BtnAddOrUpdetProductContent, Mode=TwoWay}" HorizontalAlignment="Left" Height="29" Margin="656,329,0,0" VerticalAlignment="Top" Width="80" Click="ButtonAddOrApdet_Click" Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black"/>
-        <Grid HorizontalAlignment="Left" Height="62" Margin="0,347,0,0" VerticalAlignment="Top" Width="101">
-            <Grid.Background>
-                <ImageBrush ImageSource="/צילום מסך 2023-01-05 161035.png"/>
-            </Grid.Background>
-        </Grid>
         <Label Content="Id:" Margin="66,67,0,0"/>
         <Label Content="Name:" Margin="66,162,0,0"/>
         <Label Content="Price:" Margin="66,211,0,0"/>

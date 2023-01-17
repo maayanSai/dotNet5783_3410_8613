@@ -17,7 +17,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <TextBlock Text="jewelry store" FontFamily="Segoe Print" FontWeight="Bold"  Foreground="#FFEFCF81"  Background="Black" HorizontalAlignment="Left" Margin="236,1,0,5" FontSize="28" Grid.Column="1" Width="202"/>
-        <ComboBox HorizontalAlignment="Left" FontFamily="Segoe Print" SelectionChanged="CategorySelectionChanged" Name="SelectedCategory"   Width="168"  SelectedIndex="5" Height="30" VerticalAlignment="Center" Margin="565,0,0,0" Grid.Column="1"/>
+        <ComboBox HorizontalAlignment="Left" FontFamily="Segoe Print" SelectionChanged="CategorySelectionChanged" Name="SelectedCategory"   Width="168"  SelectedIndex="5" Height="30" VerticalAlignment="Center" Margin="547,0,0,0" Grid.Column="1"/>
         <ScrollViewer Grid.Row="1" Background="Black" Grid.ColumnSpan="2" Margin="10,0,0,0">
             <StackPanel>
 
@@ -27,15 +27,15 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Border Margin="10" Height="160" Width="110" Background="Black">
-                                    <StackPanel >
-                                        <ListView  MouseDoubleClick="Button_Click_1">
-                                            <Button Width="100" Height="100" >
+                                    <StackPanel>
+                                        <ListView Height="250"  Width="200">
+                                            <Button Width="100" Height="100" MouseDoubleClick="Button_Click_1" Tag="{Binding}">
                                                 <Button.Background >
                                                     <ImageBrush ImageSource="{Binding Path=ImageRelativeName, Converter={StaticResource ImagePathToBitmap}}"/>
                                                 </Button.Background>
                                             </Button>
-                                            <TextBlock Margin="5" Text="{Binding Name}" FontSize="14" FontFamily="Segoe Print" FontWeight="Bold" Foreground="#FFEFCF81" Background="Black"/>
-                                            <TextBlock Margin="5 0 " Text="{Binding Price ,StringFormat={} {0:C}}" FontSize="14" FontFamily="Segoe Print" FontWeight="Bold" Background="Black" Foreground="#FFEFCF81"  />
+                                            <TextBlock Margin="5" Text="{Binding Name}" FontFamily="Segoe Print" FontSize="10" FontWeight="Bold" Foreground="#FFEFCF81" Background="Black"/>
+                                            <TextBlock Margin="5 0 " Text="{Binding Price ,StringFormat={} {0:C}}" FontSize="10" FontFamily="Segoe Print" FontWeight="Bold" Background="Black" Foreground="#FFEFCF81"  />
                                         </ListView>
                                     </StackPanel>
                                 </Border>
@@ -60,11 +60,11 @@
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
-        <Button Content="" Height="61" VerticalAlignment="Top" Width="53" Foreground="#FFEFCF81" FontSize="20" Margin="649,10,0,0" FontFamily="Segoe Print" FontWeight="Bold" Grid.Column="1" Click="Button_Click" Grid.Row="1" RenderTransformOrigin="0.385,0.506">
+        <Button Content="Cart" Height="61" VerticalAlignment="Top" Width="53" Foreground="#FFEFCF81" FontSize="20" Margin="649,10,0,0" FontFamily="Segoe Print" FontWeight="Bold" Grid.Column="1" Click="Button_Click" Grid.Row="1" RenderTransformOrigin="0.385,0.506">
             <Button.Background>
-                <ImageBrush ImageSource="/צילום מסך 2023-01-13 104936.png"/>
+                <ImageBrush/>
             </Button.Background>
-        </Button>
 
+        </Button>
     </Grid>
 </Window>

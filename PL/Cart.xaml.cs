@@ -13,13 +13,12 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
 namespace PL
 {
     /// <summary>
     /// Interaction logic for Cart.xaml
     /// </summary>
-    
+
     public partial class Cart : Window
     {
 
@@ -38,7 +37,7 @@ namespace PL
                     {
                         bl.Cart.Update(c, pro.ID, pro.Amount);
 
-                       
+
 
 
 
@@ -66,7 +65,7 @@ namespace PL
                 try
                 {
                     c = bl.Cart.Update(c, pro.ID, pro.Amount);
-                    
+
                 }
 
 
@@ -82,7 +81,7 @@ namespace PL
 
 
             pro.Amount = bl.Product.ItemProduct(pro.ID, c).Amount;
-            
+
             Cb = c;
             return c;
         }
@@ -91,16 +90,13 @@ namespace PL
             get { return (BO.Cart)GetValue(cbdp); }
             set { SetValue(cbdp, value); }
         }
-
         public static readonly DependencyProperty cbdp =
                DependencyProperty.Register("Cb", typeof(BO.Cart), typeof(Window));
-
         public string category
         {
             get { return (string)GetValue(categorydp); }
             set { SetValue(categorydp, value); }
         }
-
         public static readonly DependencyProperty categorydp =
                DependencyProperty.Register("category", typeof(string), typeof(Window));
         public ObservableCollection<BO.OrderItem?> OrderItemtList
@@ -108,17 +104,14 @@ namespace PL
             get { return (ObservableCollection<BO.OrderItem?>)GetValue(OrderItemtListProperty); }
             set { SetValue(OrderItemtListProperty, value); }
         }
-
         public static readonly DependencyProperty OrderItemtListProperty =
                DependencyProperty.Register("OrderItemtList", typeof(ObservableCollection<BO.OrderItem?>), typeof(Window));
         public Cart(BO.Cart c)
         {
-
-            Cb=c;
-            OrderItemtList= new(c.Items);
+            Cb = c;
+            OrderItemtList = new(c.Items);
             InitializeComponent();
         }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -128,33 +121,33 @@ namespace PL
                 OrderItemWindow? orderWindow = new OrderItemWindow(orderid);
                 orderWindow.ShowDialog();
             }
-            catch (BO.BlMissingEntityException c) 
+            catch (BO.BlMissingEntityException c)
             {
-                MessageBox.Show(c.Message, "acnt make an order because of:"+c.Message, MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(c.Message, "acnt make an order because of:" + c.Message, MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (BO.BlAlreadyExistEntityException c)
             {
-                MessageBox.Show(c.Message, "acnt make an order because of:"+c.Message, MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(c.Message, "acnt make an order because of:" + c.Message, MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (BO.BlNullPropertyException c)
             {
-                MessageBox.Show(c.Message, "acnt make an order because of:"+c.Message, MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(c.Message, "acnt make an order because of:" + c.Message, MessageBoxButton.OK, MessageBoxImage.Information);
             }
-         
+
             catch (BO.BlWorngCategoryException c)
             {
-                MessageBox.Show(c.Message, "acnt make an order because of:"+c.Message, MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(c.Message, "acnt make an order because of:" + c.Message, MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (BO.BlInCorrectException c)
             {
-                MessageBox.Show(c.Message, "acnt make an order because of:"+c.Message, MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(c.Message, "acnt make an order because of:" + c.Message, MessageBoxButton.OK, MessageBoxImage.Information);
             }
 
         }
 
         private void orderItemDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            BO.ProductItem pro=bl.Product.ItemProduct(((BO.ProductItem)sender).ID,Cb);
+            BO.ProductItem pro = bl.Product.ItemProduct(((BO.ProductItem)sender).ID, Cb);
             ProductItem p = new ProductItem(pro, Cb, AddToCart);
             p.ShowDialog();
         }

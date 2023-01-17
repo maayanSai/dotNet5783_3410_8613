@@ -42,7 +42,7 @@
             <Label Grid.Column="0" Content="Ship Date:" Margin="3,0,0,0" Grid.Row="6" VerticalAlignment="Center" Height="42" Width="91"/>
             <Label Grid.Column="0" Content="Status:" Margin="3,0,0,0" Grid.Row="7" VerticalAlignment="Center" Height="42" Width="91"/>
             <Label Grid.Column="0" Content="Total Price:" Margin="3,0,0,0" Grid.Row="8" VerticalAlignment="Center" Height="42" Width="91"/>
-            
+
             <TextBox  Margin="3,0,99,0" Grid.Row="1" Text="{Binding Order.CustomerEmail, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
             <TextBox  Margin="3,0,99,0" Grid.Row="2" Text="{Binding Order.CustomerName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
             <TextBox Text="{Binding Order.DeliveryrDate, Mode=OneWay}" Margin="3,12,99,12" Grid.Row="3" />
@@ -67,9 +67,9 @@
                 <DataGridTextColumn x:Name="totalpriceColumn" Binding="{Binding Totalprice}" Header="Totalprice  " Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Grid HorizontalAlignment="Left" Height="37" Margin="722,360,0,0" VerticalAlignment="Top" Width="59">
+        <Grid HorizontalAlignment="Left" Height="54" Margin="676,336,0,0" VerticalAlignment="Top" Width="91" RenderTransformOrigin="7.64,0.828">
             <Grid.Background>
-                <ImageBrush ImageSource="/צילום מסך 2023-01-05 161035.png"/>
+                <ImageBrush ImageSource="/daimon.png"/>
             </Grid.Background>
         </Grid>
     </Grid>
