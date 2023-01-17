@@ -14,8 +14,10 @@
 
   <ItemGroup>
     <None Remove="ankle bracelet loops.png" />
+    <None Remove="cart.png" />
     <None Remove="climbing earings.png" />
     <None Remove="clip earings.png" />
+    <None Remove="daimon.png" />
     <None Remove="Diamond anklet.png" />
     <None Remove="Diamond bracelet.png" />
     <None Remove="diamond necklace.png" />
@@ -27,6 +29,7 @@
     <None Remove="family necklace.png" />
     <None Remove="Hard ankle.png" />
     <None Remove="Hard bracelet.png" />
+    <None Remove="home.png" />
     <None Remove="hoop earings.png" />
     <None Remove="knot ring.png" />
     <None Remove="Link bracelet.png" />
@@ -59,44 +62,33 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="ankle bracelet loops.png" />
-    <Resource Include="climbing earings.png" />
-    <Resource Include="clip earings.png" />
-    <Resource Include="Diamond anklet.png" />
-    <Resource Include="Diamond bracelet.png" />
-    <Resource Include="diamond necklace.png" />
-    <Resource Include="diamond ring.png" />
-    <Resource Include="Double ankle.png" />
-    <Resource Include="double bracelet.png" />
-    <Resource Include="double ring.png" />
-    <Resource Include="falling earings.png" />
-    <Resource Include="family necklace.png" />
-    <Resource Include="Hard ankle.png" />
-    <Resource Include="Hard bracelet.png" />
-    <Resource Include="hoop earings.png" />
-    <Resource Include="knot ring.png" />
-    <Resource Include="Link bracelet.png" />
-    <Resource Include="long necklace.png" />
-    <Resource Include="Pearl anklet.png" />
-    <Resource Include="Pearl bracelet.png" />
-    <Resource Include="pearl necklace.png" />
-    <Resource Include="pearl ring.png" />
-    <Resource Include="tight earings.png" />
-    <Resource Include="tight necklace.png" />
-    <Resource Include="wedding ring.png" />
-    <Resource Include="צילום מסך 2022-12-17 212806.png" />
-    <Resource Include="צילום מסך 2023-01-05 161035.png" />
-    <Resource Include="צילום מסך 2023-01-13 102450.png" />
-    <Resource Include="צילום מסך 2023-01-13 103152.png" />
-    <Resource Include="צילום מסך 2023-01-13 103224.png" />
-    <Resource Include="צילום מסך 2023-01-13 104936.png" />
-    <Resource Include="צילום מסך 2023-01-13 105941.png" />
-    <Resource Include="צילום מסך 2023-01-13 110221.png" />
-    <Resource Include="צילום מסך 2023-01-15 202810.png" />
-    <Resource Include="צילום מסך 2023-01-15 203147.png" />
-    <Resource Include="צילום מסך 2023-01-15 214016.png" />
-    <Resource Include="צילום מסך 2023-01-15 214134.png" />
-    <Resource Include="צילום מסך 2023-01-15 214721.png" />
+    <Resource Include="pictures\ankle bracelet loops.png" />
+    <Resource Include="pictures\climbing earings.png" />
+    <Resource Include="pictures\clip earings.png" />
+    <Resource Include="pictures\daimon.png" />
+    <Resource Include="pictures\Diamond anklet.png" />
+    <Resource Include="pictures\Diamond bracelet.png" />
+    <Resource Include="pictures\diamond necklace.png" />
+    <Resource Include="pictures\diamond ring.png" />
+    <Resource Include="pictures\Double ankle.png" />
+    <Resource Include="pictures\double bracelet.png" />
+    <Resource Include="pictures\double ring.png" />
+    <Resource Include="pictures\falling earings.png" />
+    <Resource Include="pictures\family necklace.png" />
+    <Resource Include="pictures\Hard ankle.png" />
+    <Resource Include="pictures\Hard bracelet.png" />
+    <Resource Include="pictures\home.png" />
+    <Resource Include="pictures\hoop earings.png" />
+    <Resource Include="pictures\knot ring.png" />
+    <Resource Include="pictures\Link bracelet.png" />
+    <Resource Include="pictures\long necklace.png" />
+    <Resource Include="pictures\Pearl anklet.png" />
+    <Resource Include="pictures\Pearl bracelet.png" />
+    <Resource Include="pictures\pearl necklace.png" />
+    <Resource Include="pictures\pearl ring.png" />
+    <Resource Include="pictures\tight earings.png" />
+    <Resource Include="pictures\tight necklace.png" />
+    <Resource Include="pictures\wedding ring.png" />
   </ItemGroup>
 
 </Project>

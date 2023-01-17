@@ -17,10 +17,11 @@
                 <DataGridTextColumn Binding="{Binding Amount}" Header="Amount " Width="SizeToHeader"/>
                 <DataGridTextColumn Binding="{Binding TotalPrice}" Header="Total Price " Width="SizeToHeader"/>
             </DataGrid.Columns>
+            
         </DataGrid>
-        <Grid HorizontalAlignment="Left" Height="51" Margin="10,349,0,0" VerticalAlignment="Top" Width="77">
+        <Grid HorizontalAlignment="Left" Height="54" Margin="10,339,0,0" VerticalAlignment="Top" Width="91">
             <Grid.Background>
-                <ImageBrush ImageSource="/צילום מסך 2023-01-05 161035.png"/>
+                <ImageBrush ImageSource="pictures/daimon.png"/>
             </Grid.Background>
         </Grid>
 

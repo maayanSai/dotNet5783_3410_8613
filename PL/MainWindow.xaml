@@ -9,10 +9,10 @@
 
     <Grid HorizontalAlignment="Center" Height="450" VerticalAlignment="Top" Width="800">
         <Grid.Background>
-            <ImageBrush ImageSource="/צילום מסך 2022-12-17 212806.png"/>
+            <ImageBrush ImageSource="pictures/home.png" />
         </Grid.Background>
         <Button Content="Admin" Click="ShowProductsButton_Click" Margin="704,264,0,143" Width="86" FontSize="20" />
-        <Button Content="New order" Click="Button_Click" Width="153" Margin="637,312,0,98" FontSize="20" />
+        <Button Content="Clients" Click="Button_Click" Width="103" Margin="687,312,0,98" FontSize="20" />
         <Button Content="Order Tracking" Click="tracking_Click" Margin="620,357,0,48" Width="170" FontSize="20" />
     </Grid>
 

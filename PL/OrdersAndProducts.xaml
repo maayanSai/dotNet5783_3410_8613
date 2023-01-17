@@ -14,7 +14,7 @@
         <Button Content="Orders" Click="Order_Click" Margin="177,153,0,169" FontSize="20" Width="180"/>
         <Grid HorizontalAlignment="Left" Height="54" Margin="10,339,0,0" VerticalAlignment="Top" Width="91">
             <Grid.Background>
-                <ImageBrush ImageSource="/צילום מסך 2023-01-05 161035.png"/>
+                <ImageBrush ImageSource="pictures/daimon.png"/>
             </Grid.Background>
         </Grid>
     </Grid>

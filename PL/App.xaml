@@ -5,6 +5,8 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <local:ConvertImagePathToBitmap x:Key="ImagePathToBitmap"/>
+        <local:ConvertImagePathToBitmap x:Key="ConvertIsBossToVisability"/>
+        
         <Style TargetType="Button">
             <Setter Property="FontFamily" Value="Segoe Print" />
             <Setter Property="FontWeight" Value="Bold" />

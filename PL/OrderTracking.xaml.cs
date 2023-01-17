@@ -48,16 +48,48 @@ namespace PL
 
         private void enter_Click(object sender, RoutedEventArgs e)
         {
-            BO.OrderTracking o = bl?.Order.Tracking(int.Parse(s!))!;
-            Ot = o;
+            try
+            {
+                BO.OrderTracking o = bl?.Order.Tracking(int.Parse(s!))!;
+                Ot = o;
+            }
+            catch (BO.BlInCorrectException a)
+            {
+
+            }
+            catch (BO.BlMissingEntityException a)
+            {
+
+            }
+            catch (BO.BlNullPropertyException a)
+            {
+
+            }
+
         }
 
         private void Order_click(object sender, RoutedEventArgs e)
         {
             e.Handled = true;
-            Order? O = bl?.Order.ItemOrder(Ot!.ID);
-            OrderItemWindow? orderWindow = new OrderItemWindow(O!.ID);
-            orderWindow.ShowDialog();
+            try
+            {
+                Order? O = bl?.Order.ItemOrder(Ot!.ID);
+                OrderItemWindow? orderWindow = new OrderItemWindow(O!.ID);
+                orderWindow.ShowDialog();
+            }
+           catch(BO.BlInCorrectException a)
+            {
+
+            }
+            catch (BO.BlMissingEntityException a)
+            {
+
+            }
+            catch (BO.BlNullPropertyException a)
+            {
+
+            }
+
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,21 @@ namespace PL
     public partial class PicturesWindow : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
+        public ObservableCollection<string> PictursPathList
+        {
+            get { return (ObservableCollection<string>)GetValue(PictursPathListdp); }
+            set { SetValue(PictursPathListdp, value); }
+        }
+
+        public static readonly DependencyProperty PictursPathListdp =
+               DependencyProperty.Register("PictursPathList", typeof(ObservableCollection<string>), typeof(Window));
+
 
         public PicturesWindow()
         {
+            
+
+
             InitializeComponent();
         }
 
@@ -33,7 +46,8 @@ namespace PL
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-
+            //var v = ((Button)sender).Tag;
+            
         }
 
     }
