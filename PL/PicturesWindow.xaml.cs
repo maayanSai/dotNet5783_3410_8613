@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,7 @@ namespace PL
     public partial class PicturesWindow : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
+        //Directory.GetFiles("C:\Users\Maayan\source\repos\maayanSai\dotNet5783_3410_8613\pictures");
         public ObservableCollection<string> PictursPathList
         {
             get { return (ObservableCollection<string>)GetValue(PictursPathListdp); }
@@ -46,9 +48,15 @@ namespace PL
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            //var v = ((Button)sender).Tag;
+            var v = ((Button)sender).Tag;
+            
+           
             
         }
 
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -41,7 +41,7 @@
                     <ImageBrush ImageSource="/pictures/tight necklace.png"/>
                 </Button.Background>
             </Button>
-            <Button HorizontalAlignment="Left" Content="/pictures/knot ring.png" Height="110" Margin="718,152,0,0" VerticalAlignment="Top" Width="89" Grid.RowSpan="2">
+            <Button HorizontalAlignment="Left" Content="/pictures/knot ring.png" Height="110" Margin="718,152,0,0" VerticalAlignment="Top" Width="89" Grid.RowSpan="2" Click="Button_Click_2">
                 <Button.Background>
                     <ImageBrush ImageSource="/pictures/knot ring.png"/>
                 </Button.Background>
@@ -131,7 +131,7 @@
                     <ImageBrush ImageSource="/pictures/clip earings.png"/>
                 </Button.Background>
             </Button>
-            <Button HorizontalAlignment="Left" Content="/pictures/wedding ring.png" Height="110" Margin="838,90,0,0" Grid.Row="1" VerticalAlignment="Top" Width="89">
+            <Button HorizontalAlignment="Left" Content="/pictures/wedding ring.png" Height="110" Margin="838,90,0,0" Grid.Row="1" VerticalAlignment="Top" Width="89" Click="">
                 <Button.Background>
                     <ImageBrush ImageSource="/pictures/wedding ring.png" />
                 </Button.Background>
