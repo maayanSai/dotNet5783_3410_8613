@@ -5,45 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         DataContext="{Binding Path=ProducitemtList, RelativeSource={RelativeSource self}}"
-        Height="450" Width="800">
+        Height="450" Width="800" Background="Black">
 
     <Grid>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="170"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="57"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.ColumnSpan="2">
-            <TextBlock Text="jewelry store" HorizontalAlignment="Center" Margin="10" FontSize="28"/>
-            <ComboBox HorizontalAlignment="Left" SelectionChanged="CategorySelectionChanged" Name="SelectedCategory"   Width="179"  SelectedIndex="5" Height="44" VerticalAlignment="Center" Margin="581,0,0,0"/>
-        </Grid>
-        <ScrollViewer Grid.Column="1" Grid.Row="1" Background="White">
+        <TextBlock Text="jewelry store" FontFamily="Segoe Print" FontWeight="Bold"  Foreground="#FFEFCF81"  Background="Black" HorizontalAlignment="Left" Margin="236,1,0,5" FontSize="28" Grid.Column="1" Width="202"/>
+        <ComboBox HorizontalAlignment="Left" FontFamily="Segoe Print" SelectionChanged="CategorySelectionChanged" Name="SelectedCategory"   Width="168"  SelectedIndex="5" Height="30" VerticalAlignment="Center" Margin="565,0,0,0" Grid.Column="1"/>
+        <ScrollViewer Grid.Row="1" Background="Black" Grid.ColumnSpan="2" Margin="10,0,0,0">
             <StackPanel>
-                <TextBlock Text="Items" Margin="10" FontSize="22" FontWeight="Medium"/>
 
+                <TextBlock FontFamily="Segoe Print" FontWeight="Bold"  Foreground="#FFEFCF81"  Background="Black" Text="Catalog:" Margin="10" FontSize="22"/>
                 <StackPanel Margin="20 0">
-                    <ItemsControl x:Name="ProductItemList" ItemsSource="{Binding }">
+                    <ItemsControl x:Name="ProductItemList" ItemsSource="{Binding}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border Margin="10" Height="160" Width="110">
-                                    <StackPanel>
-                                        
-                                        <Border Width="100" Height="100"  CornerRadius="5,5,5,5" Margin="5">
-                                            <Border.Effect>
-                                                <DropShadowEffect ShadowDepth="1"/>
-                                            </Border.Effect>
-                                            <Border.Background>
-                                                <ImageBrush ImageSource="{Binding Path=ImageRelativeName, Converter={StaticResource ImagePathToBitmap}}"/>
-                                            </Border.Background>
-                                         
-                                        </Border>
-                                        
-                                        <TextBlock Margin="5" Text="{Binding Name}" FontSize="14" FontFamily="Segoe Print" FontWeight="Bold"  Foreground="#FFEFCF81" />
-                                        <TextBlock Margin="5 0 " Text="{Binding Price ,StringFormat={} {0:C}}" FontSize="14" FontFamily="Segoe Print" FontWeight="Bold" Foreground="#FFEFCF81" />
+                                <Border Margin="10" Height="160" Width="110" Background="Black">
+                                    <StackPanel >
+                                        <ListView  MouseDoubleClick="Button_Click_1">
+                                            <Button Width="100" Height="100" >
+                                                <Button.Background >
+                                                    <ImageBrush ImageSource="{Binding Path=ImageRelativeName, Converter={StaticResource ImagePathToBitmap}}"/>
+                                                </Button.Background>
+                                            </Button>
+                                            <TextBlock Margin="5" Text="{Binding Name}" FontSize="14" FontFamily="Segoe Print" FontWeight="Bold" Foreground="#FFEFCF81" Background="Black"/>
+                                            <TextBlock Margin="5 0 " Text="{Binding Price ,StringFormat={} {0:C}}" FontSize="14" FontFamily="Segoe Print" FontWeight="Bold" Background="Black" Foreground="#FFEFCF81"  />
+                                        </ListView>
                                     </StackPanel>
                                 </Border>
                             </DataTemplate>
@@ -53,10 +46,25 @@
                                 <WrapPanel/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
+                        <ItemsControl.GroupStyle>
+                            <GroupStyle>
+                                <GroupStyle.HeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock FontFamily="Segoe Print" FontWeight="Bold"  Foreground="#FFEFCF81"  Background="Black"  FontSize="15"
+                         Text="{Binding Path=Name}"/>
+                                    </DataTemplate>
+                                </GroupStyle.HeaderTemplate>
+                            </GroupStyle>
+                        </ItemsControl.GroupStyle>
                     </ItemsControl>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
+        <Button Content="" Height="61" VerticalAlignment="Top" Width="53" Foreground="#FFEFCF81" FontSize="20" Margin="649,10,0,0" FontFamily="Segoe Print" FontWeight="Bold" Grid.Column="1" Click="Button_Click" Grid.Row="1" RenderTransformOrigin="0.385,0.506">
+            <Button.Background>
+                <ImageBrush ImageSource="/צילום מסך 2023-01-13 104936.png"/>
+            </Button.Background>
+        </Button>
 
     </Grid>
 </Window>

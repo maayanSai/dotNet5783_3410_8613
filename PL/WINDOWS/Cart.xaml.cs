@@ -19,10 +19,73 @@ namespace PL
     /// <summary>
     /// Interaction logic for Cart.xaml
     /// </summary>
+    
     public partial class Cart : Window
     {
-        BlApi.IBl? bl = BlApi.Factory.Get();
 
+        BlApi.IBl? bl = BlApi.Factory.Get();
+        public BO.Cart AddToCart(BO.Cart c, BO.ProductItem? pro)
+        {
+            BO.ProductItem? keep = bl.Product.GetProductItem(Cb, x => x.ID == pro.ID).First();
+
+
+            if (keep.Amount == 0)
+            {
+                try
+                {
+                    bl.Cart.Add(c, pro.ID);
+                    try
+                    {
+                        bl.Cart.Update(c, pro.ID, pro.Amount);
+
+                       
+
+
+
+                    }
+
+                    catch (BO.BlMissingEntityException add1)
+                    {
+                        bl.Cart.Update(c, pro.ID, keep.Amount);
+
+                        pro.Amount = bl.Product.ItemProduct(pro.ID, c).Amount;
+
+                        MessageBox.Show(add1.Message, "cant add", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    }
+                }
+                catch (BO.BlMissingEntityException add)
+                {
+                    MessageBox.Show(add.Message, "cant add", MessageBoxButton.OK, MessageBoxImage.Information);
+                    pro.Amount = bl.Product.ItemProduct(pro.ID, c).Amount;
+                }
+
+            }
+            else
+            {
+                try
+                {
+                    c = bl.Cart.Update(c, pro.ID, pro.Amount);
+                    
+                }
+
+
+
+                catch (BO.BlMissingEntityException update)
+                {
+                    MessageBox.Show(update.Message, "cant add", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+
+
+            }
+
+
+
+            pro.Amount = bl.Product.ItemProduct(pro.ID, c).Amount;
+            
+            Cb = c;
+            return c;
+        }
         public BO.Cart Cb
         {
             get { return (BO.Cart)GetValue(cbdp); }
@@ -87,6 +150,13 @@ namespace PL
                 MessageBox.Show(c.Message, "acnt make an order because of:"+c.Message, MessageBoxButton.OK, MessageBoxImage.Information);
             }
 
+        }
+
+        private void orderItemDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            BO.ProductItem pro=bl.Product.ItemProduct(((BO.ProductItem)sender).ID,Cb);
+            ProductItem p = new ProductItem(pro, Cb, AddToCart);
+            p.ShowDialog();
         }
     }
 }

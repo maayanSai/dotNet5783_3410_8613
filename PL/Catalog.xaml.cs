@@ -24,6 +24,9 @@ namespace PL
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
         public BO.Cart Cb;
+        public CollectionView CollectionViewProduct { set; get; }
+        private readonly string group = "Category";
+        PropertyGroupDescription propertyGroupDescription;
         public BO.Cart AddToCart(BO.Cart c, BO.ProductItem? pro)
         {
             BO.ProductItem? keep = bl.Product.GetProductItem(Cb,x=>x.ID==pro.ID).First();
@@ -113,6 +116,9 @@ namespace PL
             ProducitemtList = new ObservableCollection<BO.ProductItem?>(bl.Product.GetProductItem(Cb));
         
             SelectedCategory.ItemsSource = Enum.GetValues(typeof(PL.Category));
+            CollectionViewProduct = (CollectionView)CollectionViewSource.GetDefaultView(ProducitemtList);
+            propertyGroupDescription = new PropertyGroupDescription(group);
+            CollectionViewProduct.GroupDescriptions.Add(propertyGroupDescription);
         }
 
         private void CategorySelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -135,35 +141,19 @@ namespace PL
             }
         }
 
-        private void productItemDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            e.Handled=true;
-            BO.ProductItem? pil = (BO.ProductItem?)((DataGrid)sender).SelectedItem;
-            ProductItem windoProductItem = new ProductItem(pil!, Cb, AddToCart);
-            windoProductItem.ShowDialog();
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             new Cart(Cb).ShowDialog();
         }
 
- 
-
-        private void Group_Click(object sender, RoutedEventArgs e)
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            var p = bl?.Product.GetProductItem(Cb);
+            e.Handled = true;
+            var  p=(((ListView)sender));
+           var x= p.SelectedIndex;
+          //  ProductItem windoProductItem = new ProductItem(p!, Cb, AddToCart);
+          //  windoProductItem.ShowDialog();
         }
-
-        private void MouseDoubleClick1(object sender, MouseButtonEventArgs e)
-        {
-            e.Handled=true;
-            BO.ProductItem? pil = (BO.ProductItem?)((ListView)sender).SelectedItem;
-            ProductItem windoProductItem = new ProductItem(pil!, Cb, AddToCart);
-            windoProductItem.ShowDialog();
-        }
-
-     
     }
 }
 
