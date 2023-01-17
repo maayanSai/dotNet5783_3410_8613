@@ -110,7 +110,7 @@ namespace PL
             Cb = cb;
             InitializeComponent();
 
-            ProducitemtList= new ObservableCollection<BO.ProductItem?>(bl.Product.GetProductItem(Cb)); 
+            ProducitemtList = new ObservableCollection<BO.ProductItem?>(bl.Product.GetProductItem(Cb));
         
             SelectedCategory.ItemsSource = Enum.GetValues(typeof(PL.Category));
         }
