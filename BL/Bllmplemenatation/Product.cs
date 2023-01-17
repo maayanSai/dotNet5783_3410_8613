@@ -32,7 +32,7 @@ internal class Product : IProduct
         {
             DO.Product p1 = new()
             {
-                ID = p.ID,
+               ID = p.ID,
                 Name = p?.Name ?? throw new BO.BlNullPropertyException("Empty name"),
                 Price = p?.Price ?? 0,
                 Category = (DO.Category?)p?.Category ?? throw new BO.BlWorngCategoryException("Wrong category "),
