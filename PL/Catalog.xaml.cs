@@ -164,25 +164,9 @@ namespace PL
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            //IEnumerable<IGrouping<BO., BO.ProductItem?>> ProductGroup = from pru in bl?.Product.GetProductItem(Cb)! 
-            //                                                           group pru by pru.Category;
-            //List<ProductItem> products = new();
-
-            //foreach (var group in ProductGroup)
-            //{
-            //    foreach (var parcel in group)
-            //    {
-            //        products.Add(parcel);
-            //    }
-            //}
-            //ProducitemtList = products;
-
-            //CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ProducitemtList);
-            //if (view.GroupDescriptions.Count < 1) // prevent from do it more then once 
-            //{
-            //    PropertyGroupDescription groupDescription = new PropertyGroupDescription("SenderID");
-            //    view.GroupDescriptions.Add(groupDescription);
-            //}
+            CollectionViewProduct = (CollectionView)CollectionViewSource.GetDefaultView(ProducitemtList);
+            propertyGroupDescription = new PropertyGroupDescription(group);
+            CollectionViewProduct.GroupDescriptions.Add(propertyGroupDescription);
         }
     }
 }

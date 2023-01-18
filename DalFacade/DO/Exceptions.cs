@@ -31,6 +31,23 @@ public class DalAlreadyExistsException : Exception
     }
 
 }
+//public class DalMissingIdException : Exception
+//{
+//    public int EntityId;
+//    public string EntityName;
+//    public DalMissingIdException(int id, string name) : base()
+//    {
+//        EntityId = id;
+//        EntityName = name;
+//    }
+
+//    public override string ToString()
+//    {
+//        return EntityName + "whith the id: " + EntityId + " is allredy exist";
+
+//    }
+
+//}
 [Serializable]
 public class DalConfigException : Exception
 {
