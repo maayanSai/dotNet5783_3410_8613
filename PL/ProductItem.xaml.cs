@@ -35,22 +35,39 @@ public partial class ProductItem : Window
         addtocart = add;
     }
 
-    private void Add_Click(object sender, RoutedEventArgs e)
-    {
-        e.Handled = true;
-        addtocart!(CB, PB);
-        try
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            PB = bl!.Product.ItemProduct(PB.ID, CB);
+            PB.Amount++;
+            e.Handled = true;
+
+            addtocart(CB, PB);
+
+            PB = bl.Product.ItemProduct(PB.ID, CB);
+
+            
+
+
         }
-        catch (BO.BlInCorrectException exp)
+  
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(exp.Message, "can not found the product", MessageBoxButton.OK, MessageBoxImage.Information);
+            Cart cartwindow = new Cart(CB);
+            cartwindow.ShowDialog();
+
         }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            PB.Amount--;
+            e.Handled = true;
+
+            addtocart(CB, PB);
+
+            PB = bl.Product.ItemProduct(PB.ID, CB);
+        }
+
+        //~ProductItem(){ PB.Amount=bl.Product.ItemProduct(PB.ID, CB).Amount; }
+
     }
-    private void ViewCart_Click(object sender, RoutedEventArgs e)
-    {
-        Cart cartwindow = new(CB);
-        cartwindow.ShowDialog();
-    }   
 }

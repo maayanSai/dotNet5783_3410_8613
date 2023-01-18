@@ -45,12 +45,13 @@
             </Button.Background>
         </Button>
         <Label Foreground="#FFEFCF81"    Content="Amount:" Margin="205,313,0,0" Height="35" Width="80"/>
-        <TextBox  IsReadOnly="False"  Foreground="#FFEFCF81"  Text="{Binding PB.Amount ,Mode=TwoWay}"  Margin="299,319,0,0" TextWrapping="Wrap" Width="124" Height="29"  />
+        <TextBox  IsReadOnly="False" IsEnabled="False" Foreground="#FFEFCF81"  Text="{Binding PB.Amount ,Mode=TwoWay}"  Margin="299,319,0,0" TextWrapping="Wrap" Width="124" Height="29"  />
+        <Button Grid.Column="1" Content="-" Margin="0,319,0,0" VerticalAlignment="Top" Height="34" Width="51" Click="Button_Click_2"/>
         <Grid HorizontalAlignment="Left" Height="40" Margin="31,360,0,0" VerticalAlignment="Top" Width="70">
-            
+
         </Grid>
-     
-              
+
+
 
 
     </Grid>
