@@ -50,5 +50,6 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <Button Content="add" Margin="676,284,0,0" Grid.Row="1" VerticalAlignment="Top" Click="NewProductButton_Click" Height="58" Width="79"/>
     </Grid>
 </Window>

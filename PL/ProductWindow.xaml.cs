@@ -1,16 +1,21 @@
 ﻿namespace PL;
 
 using BO;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 /// <summary>
 /// Interaction logic for ProductWindow.xaml
 /// </summary>
 public partial class ProductWindow : Window
 {
+    public delegate void update(string productImagepPth,int id);
+    update upd;
     public delegate void AddingOrUpdate(int proId);
     AddingOrUpdate? add;
     BlApi.IBl? bl = BlApi.Factory.Get();
@@ -47,7 +52,7 @@ public partial class ProductWindow : Window
     /// Constructive action to update products
     /// </summary>
     /// <param name="id"></param>
-    public ProductWindow(int id)
+    public ProductWindow(int id, update upd1)
     {
         InitializeComponent();
         Mode=true;
@@ -55,7 +60,7 @@ public partial class ProductWindow : Window
         BtnAddOrUpdetProductContent = "Updete";
         CategoryForNewProduct.ItemsSource = Enum.GetValues(typeof(BO.Category));// for the comboBox
         Product = bl!.Product.ItemProduct(id);//getting the details from bl about the  
-
+        upd=upd1;   
     }
     /// <summary>
     /// A button that adds or updates products
@@ -64,6 +69,26 @@ public partial class ProductWindow : Window
     /// <param name="e"></param>
     private void ButtonAddOrApdet_Click(object sender, RoutedEventArgs e)
     {
+        if (Product.ImageRelativeName != null)
+        {
+            string imageName = Product.ImageRelativeName.Substring(Product.ImageRelativeName.LastIndexOf("\\"));
+            if (!File.Exists(Environment.CurrentDirectory[..^4] + imageName))
+            {
+                File.Copy(Product.ImageRelativeName, Environment.CurrentDirectory[..^4]  + imageName);
+                var v = Product;
+                Product = v;
+            }
+            Product.ImageRelativeName = imageName;
+           
+
+            try
+            {
+                bl.Product.Update(Product);
+                upd(Product.ImageRelativeName, Product.ID);
+            }
+            catch(Exception exp)
+            { }
+        }
         try
         {
           
@@ -85,7 +110,16 @@ public partial class ProductWindow : Window
         {
             MessageBox.Show(ex.Message);
         }
-    }
-    private void Button_Click(object sender, RoutedEventArgs e) =>new PicturesWindow().ShowDialog();
 
+    }
+
+    private void image_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                image.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+                Product.ImageRelativeName = openFileDialog.FileName;
+            }
+    }
 }

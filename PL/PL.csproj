@@ -63,6 +63,9 @@
 
   <ItemGroup>
     <Resource Include="ankle bracelet loops.png" />
+    <Resource Include="climbing earings.png" />
+    <Resource Include="Diamond anklet.png" />
+    <Resource Include="diamond necklace.png" />
     <Resource Include="hoop earings.png" />
     <Resource Include="pictures\ankle bracelet loops.png" />
     <Resource Include="pictures\climbing earings.png" />

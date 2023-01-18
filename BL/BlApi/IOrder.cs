@@ -36,6 +36,7 @@ public interface IOrder
     /// <returns></returns>
     OrderTracking? Tracking(int id);
 
+    public IEnumerable<StatisticksOrderByMonth> GetStatisticksOrderByMonths();
     OrderForList GetOrderForList (int id);
 
 }

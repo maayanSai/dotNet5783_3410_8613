@@ -2,6 +2,7 @@
 using BlApi;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Schema;
 
 
 /// <summary>
@@ -188,6 +189,7 @@ internal class Product : IProduct
                 Price = p?.Price ?? 0,
                 InStock = p?.InStock ?? 0,
                 Category = (DO.Category?)p?.Category ?? throw new BO.BlInCorrectException("product name"),
+                ImageRelativeName=p.ImageRelativeName,
             };
             dal?.Product.Update(dp);
         }
