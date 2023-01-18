@@ -52,7 +52,7 @@ namespace PL
         public StatisticksOrdersWindow()
 
         {
-            statisticksOrderByMonths = bl.Order.GetStatisticksOrderByMonths()!;
+            statisticksOrderByMonths = bl?.Order.GetStatisticksOrderByMonths()!;
             CollectionViewblStatisticksOrderByMonths = CollectionViewSource.GetDefaultView(statisticksOrderByMonths);
 
             propertyGroupDescription = new PropertyGroupDescription(groupName);

@@ -108,7 +108,7 @@ internal class Product : IProduct
         }
         catch (DO.UnFoundException exp)
         {
-            throw new BO.BlMissingEntityException("product des not exsist", exp);
+            throw new BO.BlMissingEntityException("product does not exsist", exp);
         }
         BO.Product bopro = new()
         {
@@ -233,11 +233,21 @@ internal class Product : IProduct
                       isStock=item.InStock>0,
                       ImageRelativeName=item.ImageRelativeName,
                   };
-            pro=pro.Where(fanc);
+            pro=pro.Where(fanc!);
         }
-    
-
-      
         return pro;
     }
+   public BO.ProductForList? GetProduct(int id) 
+   {
+        try
+        {
+            var p = GetProducts(x => x?.ID == id).First();
+            return p;
+        }
+        catch(BO.BlInCorrectException)
+        {
+            throw new BO.BlInCorrectException("incorrect id");
+        }
+    }
+
 }

@@ -12,22 +12,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PL
+namespace PL;
+
+/// <summary>
+/// Interaction logic for OrdersAndProducts.xaml
+/// </summary>
+public partial class OrdersAndProducts : Window
 {
-    /// <summary>
-    /// Interaction logic for OrdersAndProducts.xaml
-    /// </summary>
-    public partial class OrdersAndProducts : Window
+    public OrdersAndProducts()
     {
-        public OrdersAndProducts()
-        {
-            InitializeComponent();
-        }
-
-        private void Order_Click(object sender, RoutedEventArgs e) => new OrderForListWindow().Show();
- 
-
-        private void Product_Click(object sender, RoutedEventArgs e) => new ProductListWindow().Show();
-
+        InitializeComponent();
     }
+    private void Order_Click(object sender, RoutedEventArgs e) => new OrderForListWindow().Show();
+    private void Product_Click(object sender, RoutedEventArgs e) => new ProductListWindow().Show();
+
 }

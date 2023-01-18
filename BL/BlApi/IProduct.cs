@@ -1,5 +1,4 @@
 ﻿namespace BlApi;
-using BO;
 
 /// <summary>
 /// interface IProduct
@@ -10,25 +9,27 @@ public interface IProduct
     /// Product list request 
     /// </summary>
     /// <returns></returns>
-    IEnumerable<ProductForList?> GetProducts(Func<ProductForList?, bool>? func = null);
+    IEnumerable<BO.ProductForList?> GetProducts(Func<BO.ProductForList?, bool>? func = null);
+    BO.ProductForList? GetProduct(int id);
+
     /// <summary>
     /// Product details request- Gets a product ID
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    Product ItemProduct(int id);
+    BO.Product ItemProduct(int id);
     /// <summary>
     /// Product details request- Gets a product ID and Cart
     /// </summary>
     /// <param name="id"></param>
     /// <param name="cart"></param>
     /// <returns></returns>
-    ProductItem ItemProduct(int id, Cart cart);
+    BO.ProductItem ItemProduct(int id, BO.Cart cart);
     /// <summary>
     /// Adding a product
     /// </summary>
     /// <param name="p"></param>
-    void Add(Product p);
+    void Add(BO.Product p);
     /// <summary>
     /// Product deletion
     /// </summary>
@@ -38,7 +39,7 @@ public interface IProduct
     /// Update product datas
     /// </summary>
     /// <param name="p"></param>
-    void Update(Product p);
-    IEnumerable<ProductForList?> GetListedProductByCategory(Category c);
+    void Update(BO.Product p);
+    IEnumerable<BO.ProductForList?> GetListedProductByCategory(BO.Category c);
     public IEnumerable<BO.ProductItem?> GetProductItem(BO.Cart cart, Func<BO.ProductItem, bool>? fanc = null);
 }

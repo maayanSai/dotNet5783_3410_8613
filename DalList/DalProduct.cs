@@ -26,7 +26,7 @@ internal class DalProduct : IProduct
     public Product? GetById(int id)
     {
         Product? P = DataSource.s_productsList.FirstOrDefault(x => x?.ID == id);
-
+        
         return P;
     }
     /// <summary>
@@ -37,7 +37,7 @@ internal class DalProduct : IProduct
     {
         if (DataSource.s_productsList.Count == 0)
             throw new UnFoundException("the list is empty"); 
-        return filter is null ? DataSource.s_productsList.Select(order => order) : DataSource.s_productsList.Where(filter);
+        return filter is null ? DataSource.s_productsList.Select(product => product) : DataSource.s_productsList.Where(filter);
     }
     /// <summary>
     /// Product deletion
@@ -60,6 +60,7 @@ internal class DalProduct : IProduct
         var v = from item in DataSource.s_productsList
                 orderby item?.ID
                 select item;
+        
     }
     /// <summary>
     /// Returns a product by terms of

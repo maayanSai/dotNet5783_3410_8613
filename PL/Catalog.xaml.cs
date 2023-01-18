@@ -1,5 +1,4 @@
-﻿using BO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -14,176 +13,129 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static PL.ProductWindow;
 
-namespace PL
+namespace PL;
+
+/// <summary>
+/// Interaction logic for ProductItem.xaml
+/// </summary>
+public partial class Catalog : Window
 {
+    BlApi.IBl? bl = BlApi.Factory.Get();
+    public BO.Cart Cb;
     /// <summary>
-    /// Interaction logic for ProductItem.xaml
+    /// grouping by category
     /// </summary>
-    public partial class Catalog : Window
+    public CollectionView CollectionViewProduct { set; get; }
+    private readonly string group = "Category";
+    PropertyGroupDescription propertyGroupDescription;
+    public BO.Cart AddToCart(BO.Cart c, BO.ProductItem? pro)
     {
-        BlApi.IBl? bl = BlApi.Factory.Get();
-        public BO.Cart Cb;
-        public CollectionView CollectionViewProduct { set; get; }
-        private readonly string group = "Category";
-        PropertyGroupDescription propertyGroupDescription;
-        public BO.Cart AddToCart(BO.Cart c, BO.ProductItem? pro)
+        int amuont = 0;
+        try
         {
-            BO.ProductItem? keep = bl.Product.GetProductItem(Cb,x=>x.ID==pro.ID).First();
-            
-
-                if (keep.Amount==0)
-                {
+            BO.ProductItem? keep = bl?.Product.ItemProduct(pro!.ID, Cb);
+            amuont = keep!.Amount;
+        }
+        catch(BO.BlMissingEntityException exp)
+        {
+            MessageBox.Show(exp.Message, "can not find entity", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        if (amuont==0)
+        {
+            try
+            {
+                bl?.Cart.Add(c, pro!.ID);
                 try
                 {
-                    bl.Cart.Add(c, pro.ID);
-                    try
-                    {
-                        bl.Cart.Update(c, pro.ID, pro.Amount);
-
-                        int index = ProducitemtList.IndexOf(ProducitemtList.FirstOrDefault(x => x.ID==pro.ID));
-                        ProducitemtList.RemoveAt(index);
-                        ProducitemtList.Insert(index, pro);
-
-
-
-                    }
-
-                    catch (BO.BlMissingEntityException add1)
-                    {
-                        bl.Cart.Update(c, pro.ID, keep.Amount);
-
-                        pro.Amount=bl.Product.ItemProduct(pro.ID, c).Amount;   
-                      
-                        MessageBox.Show(add1.Message, "cant add", MessageBoxButton.OK, MessageBoxImage.Information);
-                        
-                    }
-                }
-                catch (BO.BlMissingEntityException add)
-                {
-                    MessageBox.Show(add.Message, "cant add", MessageBoxButton.OK, MessageBoxImage.Information);
-                    pro.Amount=bl.Product.ItemProduct(pro.ID, c).Amount    ;
-                }
-                  
-                }
-                else
-                {
-                    try
-                    {
-                        c=bl.Cart.Update(c, pro.ID, pro.Amount);
-                    //pro.Amount=c.Items.Find(x => x.ProductID==pro.ID).Amount;
-                    //ProducitemtLisst.Remove(ProducitemtLisst.FirstOrDefault(x => x.ID==pro.ID));
-                    //ProducitemtLisst.Add(pro);
-                    int index = ProducitemtList.IndexOf(ProducitemtList.FirstOrDefault(x => x.ID==pro.ID));
+                    bl?.Cart.Update(c, pro!.ID, pro.Amount);
+                    int index = ProducitemtList.IndexOf(ProducitemtList.FirstOrDefault(x => x?.ID==pro!.ID));
                     ProducitemtList.RemoveAt(index);
                     ProducitemtList.Insert(index, pro);
                 }
-
-                
-
-                catch (BO.BlMissingEntityException update)
-                    {
-                        MessageBox.Show(update.Message, "cant add", MessageBoxButton.OK, MessageBoxImage.Information);
-                     }
-
-
-                 }
-                
-            
-           
-            pro.Amount=bl.Product.ItemProduct(pro.ID, c).Amount;
-           int index1 = ProducitemtList.IndexOf(ProducitemtList.FirstOrDefault(x => x.ID==pro.ID));
-            ProducitemtList.RemoveAt(index1);
-            ProducitemtList.Insert(index1,pro);
-            Cb=c;
-            return c;
-        }
-
-       
-        public ObservableCollection<BO.ProductItem?> ProducitemtList
-        {
-            get { return (ObservableCollection<BO.ProductItem?>)GetValue(ProductItemProperty); }
-            set { SetValue(ProductItemProperty, value); }
-        }
-
-        public static readonly DependencyProperty ProductItemProperty =
-               DependencyProperty.Register("ProducitemtList", typeof(ObservableCollection<BO.ProductItem?>), typeof(Window));
-        public Catalog(BO.Cart cb)
-        {
-            Cb = cb;
-            InitializeComponent();
-            ProducitemtList = new ObservableCollection<BO.ProductItem?>(bl.Product.GetProductItem(Cb));
-            SelectedCategory.ItemsSource = Enum.GetValues(typeof(BO.Category));
-
-            CollectionViewProduct = (CollectionView)CollectionViewSource.GetDefaultView(ProducitemtList);
-            propertyGroupDescription = new PropertyGroupDescription(group);
-            CollectionViewProduct.GroupDescriptions.Add(propertyGroupDescription);
-        }
-
-        private void CategorySelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            e.Handled = true;
-            BO.Category c = (BO.Category)SelectedCategory.SelectedItem;
-            try
-            {
-             
-                if (c == BO.Category.None)
+                catch (BO.BlMissingEntityException add1)
                 {
-                    ProducitemtList = new(bl?.Product.GetProductItem(Cb)!);
+                    bl?.Cart.Update(c, pro!.ID, amuont);
+                    pro!.Amount=bl!.Product.ItemProduct(pro.ID, c).Amount;   
+                    MessageBox.Show(add1.Message, "cant add", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-                else
-                    ProducitemtList = new(bl?.Product.GetProductItem(Cb, x => x.Category == c)!);
-
-
-
-
             }
-
-            catch (Exception ex)
+            catch (BO.BlMissingEntityException add)
             {
-                MessageBox.Show(ex.Message);
-            }
+                MessageBox.Show(add.Message, "cant add", MessageBoxButton.OK, MessageBoxImage.Information);
+                pro!.Amount=bl!.Product.ItemProduct(pro.ID, c).Amount    ;
+            }      
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        else
         {
-            new Cart(Cb).ShowDialog();
+           try
+           {
+                c = bl!.Cart.Update(c, pro!.ID, pro.Amount)!;
+                int index = ProducitemtList.IndexOf(ProducitemtList.FirstOrDefault(x => x?.ID==pro.ID));
+                ProducitemtList.RemoveAt(index);
+                ProducitemtList.Insert(index, pro);
+           }
+           catch (BO.BlMissingEntityException update)
+           {
+                MessageBox.Show(update.Message, "cant add", MessageBoxButton.OK, MessageBoxImage.Information);
+           }
         }
-
-        private void Button_Click_1(object sender, MouseButtonEventArgs e)
+        pro!.Amount=bl!.Product.ItemProduct(pro.ID, c).Amount;
+        int index1 = ProducitemtList.IndexOf(ProducitemtList.FirstOrDefault(x => x?.ID==pro.ID));
+        ProducitemtList.RemoveAt(index1);
+        ProducitemtList.Insert(index1,pro);
+        Cb=c;
+        return c;
+    }
+    public ObservableCollection<BO.ProductItem?> ProducitemtList
+    {
+        get { return (ObservableCollection<BO.ProductItem?>)GetValue(ProductItemProperty); }
+        set { SetValue(ProductItemProperty, value); }
+    }
+    public static readonly DependencyProperty ProductItemProperty =
+           DependencyProperty.Register("ProducitemtList", typeof(ObservableCollection<BO.ProductItem?>), typeof(Window));
+    public Catalog(BO.Cart cb)
+    {
+        Cb = cb;
+        InitializeComponent();
+        ProducitemtList = new ObservableCollection<BO.ProductItem?>(bl!.Product.GetProductItem(Cb));
+        SelectedCategory.ItemsSource = Enum.GetValues(typeof(BO.Category));
+        CollectionViewProduct = (CollectionView)CollectionViewSource.GetDefaultView(ProducitemtList);
+        propertyGroupDescription = new PropertyGroupDescription(group);
+        CollectionViewProduct.GroupDescriptions.Add(propertyGroupDescription);
+    }
+    private void CategorySelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        e.Handled = true;
+        BO.Category c = (BO.Category)SelectedCategory.SelectedItem;
+        try
         {
-            e.Handled = true;
-            BO.ProductItem prod;
-         var p = (BO.ProductItem)((Button)sender).Tag;
-           
-            ProductItem pro = new ProductItem(p, Cb, AddToCart);
-            pro.ShowDialog();
-            //  ProductItem windoProductItem = new ProductItem(p!, Cb, AddToCart);
-            //  windoProductItem.ShowDialog();
+            if (c == BO.Category.None)
+                ProducitemtList = new(bl?.Product.GetProductItem(Cb)!);
+            else
+                ProducitemtList = new(bl?.Product.GetProductItem(Cb, x => x.Category == c)!);
         }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        catch (Exception ex)
         {
-            //IEnumerable<IGrouping<BO., BO.ProductItem?>> ProductGroup = from pru in bl?.Product.GetProductItem(Cb)! 
-            //                                                           group pru by pru.Category;
-            //List<ProductItem> products = new();
-
-            //foreach (var group in ProductGroup)
-            //{
-            //    foreach (var parcel in group)
-            //    {
-            //        products.Add(parcel);
-            //    }
-            //}
-            //ProducitemtList = products;
-
-            //CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ProducitemtList);
-            //if (view.GroupDescriptions.Count < 1) // prevent from do it more then once 
-            //{
-            //    PropertyGroupDescription groupDescription = new PropertyGroupDescription("SenderID");
-            //    view.GroupDescriptions.Add(groupDescription);
-            //}
+            MessageBox.Show(ex.Message);
         }
+    }
+
+    private void Cart_Button(object sender, RoutedEventArgs e) => new Cart(Cb).ShowDialog();
+    private void OpenProductItem_Click(object sender, MouseButtonEventArgs e)
+    {
+        e.Handled = true;
+        var p = (BO.ProductItem)((Button)sender).Tag;  
+        ProductItem pro = new(p, Cb, AddToCart);
+        pro.ShowDialog();
+    }
+
+    private void Grouping_Button(object sender, RoutedEventArgs e)
+    {
+        CollectionViewProduct = (CollectionView)CollectionViewSource.GetDefaultView(ProducitemtList);
+        propertyGroupDescription = new PropertyGroupDescription(group);
+        CollectionViewProduct.GroupDescriptions.Add(propertyGroupDescription);
     }
 }
 
