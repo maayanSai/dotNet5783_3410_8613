@@ -39,7 +39,7 @@
                 <ImageBrush />
             </Button.Background>
         </Button>
-        <Button Content="view cart" HorizontalAlignment="Left" Margin="686,29,0,0" VerticalAlignment="Top" Height="78" Width="82" Click="Button_Click_1" >
+        <Button Content="view cart" HorizontalAlignment="Left" Margin="686,29,0,0" VerticalAlignment="Top" Height="78" Width="82" Click="ViewCart_Click" >
             <Button.Background>
                 <ImageBrush />
             </Button.Background>

@@ -29,79 +29,8 @@ public partial class Cart : Window
         int amuont=0;
         try
         {
-
-            BO.ProductItem? keep = bl.Product.GetProductItem(Cb, x => x.ID == pro.ID).First();
-
-
-            if (keep.Amount == 0)
-            {
-                try
-                {
-                    bl.Cart.Add(c, pro.ID);
-                    try
-                    {
-                        bl.Cart.Update(c, pro.ID, pro.Amount);
-                    }
-
-                    catch (BO.BlMissingEntityException add1)
-                    {
-                        bl.Cart.Update(c, pro.ID, keep.Amount);
-
-                        pro.Amount = bl.Product.ItemProduct(pro.ID, c).Amount;
-
-                        MessageBox.Show(add1.Message, "cant change amaunt", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                    catch (BO.BlInCorrectException ex)
-                    {
-                        MessageBox.Show(ex.Message, " invalid amaunt", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                    }
-                }
-                catch (BO.BlInCorrectException ex)
-                {
-                    MessageBox.Show(ex.Message, " invalid amaunt", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                }
-                catch (BO.BlMissingEntityException add)
-                {
-                    MessageBox.Show(add.Message, "cant add", MessageBoxButton.OK, MessageBoxImage.Information);
-                    pro.Amount = bl.Product.ItemProduct(pro.ID, c).Amount;
-                }
-
-            }
-            else
-            {
-                try
-                {
-                    c = bl.Cart.Update(c, pro.ID, pro.Amount);
-
-                }
-
-
-
-                catch (BO.BlMissingEntityException update)
-                {
-                    MessageBox.Show(update.Message, "cant add", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                catch (BO.BlInCorrectException ex)
-                {
-                    MessageBox.Show(ex.Message, " invalid amaunt", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                }
-
-
-            }
-
-
-
-            pro.Amount = bl.Product.ItemProduct(pro.ID, c).Amount;
-
-            Cb = c;
-            return c;
-=======
             BO.ProductItem keepProduct = bl?.Product.ItemProduct(pro!.ID, Cb)!;
             amuont = keepProduct.Amount;
->>>>>>> 03d2ecfbb001748faaf47812d655e764b3f6fae0
         }
         catch(BO.BlMissingEntityException exp)
         {

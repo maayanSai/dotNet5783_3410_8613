@@ -12,28 +12,28 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PL
+namespace PL;
+
+/// <summary>
+/// Interaction logic for ProductItem.xaml
+/// </summary>
+public partial class ProductItem : Window
 {
-    /// <summary>
-    /// Interaction logic for ProductItem.xaml
-    /// </summary>
-    public partial class ProductItem : Window
+    readonly BlApi.IBl? bl = BlApi.Factory.Get();
+    readonly BO.Cart CB;
+    public delegate BO.Cart? AddingToCrt(BO.Cart c, BO.ProductItem pro);
+    readonly AddingToCrt? addtocart;
+
+    static readonly DependencyProperty PBDep = DependencyProperty.Register(nameof(PB), typeof(BO.ProductItem), typeof(ProductItem));
+    BO.ProductItem PB { get => (BO.ProductItem)GetValue(PBDep); set => SetValue(PBDep, value); }
+
+    public ProductItem(BO.ProductItem pb, BO.Cart c, AddingToCrt add)
     {
-        BlApi.IBl? bl = BlApi.Factory.Get();
-        BO.Cart CB;
-        public delegate BO.Cart? AddingToCrt(BO.Cart c, BO.ProductItem pro);
-        AddingToCrt? addtocart;
-
-        static readonly DependencyProperty PBDep = DependencyProperty.Register(nameof(PB), typeof(BO.ProductItem), typeof(ProductItem));
-        BO.ProductItem PB { get => (BO.ProductItem)GetValue(PBDep); set => SetValue(PBDep, value); }
-
-        public ProductItem(BO.ProductItem pb, BO.Cart c, AddingToCrt add)
-        {
-            InitializeComponent();
-            CB = c;
-            PB = pb;
-            addtocart = add;
-        }
+        InitializeComponent();
+        CB = c;
+        PB = pb;
+        addtocart = add;
+    }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
