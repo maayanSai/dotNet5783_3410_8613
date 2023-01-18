@@ -1,6 +1,8 @@
 ﻿namespace BlImplementation;
 using BlApi;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Text;
 
 /// <summary>
 /// The order-logical entity
@@ -216,10 +218,11 @@ internal class Order : IOrder
     }
     public IEnumerable<BO.StatisticksOrderByMonth> GetStatisticksOrderByMonths()
     {
+        List<string> month = new() { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
         return from order in dal!.Order.GetAll()
                let _order = order.GetValueOrDefault()
                let orderDate = _order.OrderDate.GetValueOrDefault()
-               group order by orderDate.Month.ToString("MMMM") into newGroup
+               group order by orderDate.Month.ToString(month[orderDate.Month-1]) into newGroup 
                select new BO.StatisticksOrderByMonth
                {
                    MonthName = newGroup.Key,
