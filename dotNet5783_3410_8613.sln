@@ -10,9 +10,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalList", "DalList\DalList.csproj", "{2C313A67-DABA-4102-B5C0-A80260164CF6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalTest", "DalTest\DalTest.csproj", "{40B69FFC-72EC-4ADD-8D55-892A938B6002}"
-	ProjectSection(ProjectDependencies) = postProject
-		{0C081245-9A6B-4859-A4C9-296AFB3355AA} = {0C081245-9A6B-4859-A4C9-296AFB3355AA}
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlTest", "BlTest\BlTest.csproj", "{76919342-D7F3-41E8-A0D2-19C063348708}"
 EndProject
@@ -27,11 +24,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{CFF1CEB7-733
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BL", "BL\BL.csproj", "{8CC7E02F-8802-4BF4-98AC-0A03A660A8A2}"
-	ProjectSection(ProjectDependencies) = postProject
-		{0C081245-9A6B-4859-A4C9-296AFB3355AA} = {0C081245-9A6B-4859-A4C9-296AFB3355AA}
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalXml", "DalXml\DalXml.csproj", "{0C081245-9A6B-4859-A4C9-296AFB3355AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -127,18 +119,6 @@ Global
 		{8CC7E02F-8802-4BF4-98AC-0A03A660A8A2}.Release|x64.Build.0 = Release|Any CPU
 		{8CC7E02F-8802-4BF4-98AC-0A03A660A8A2}.Release|x86.ActiveCfg = Release|Any CPU
 		{8CC7E02F-8802-4BF4-98AC-0A03A660A8A2}.Release|x86.Build.0 = Release|Any CPU
-		{0C081245-9A6B-4859-A4C9-296AFB3355AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0C081245-9A6B-4859-A4C9-296AFB3355AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0C081245-9A6B-4859-A4C9-296AFB3355AA}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{0C081245-9A6B-4859-A4C9-296AFB3355AA}.Debug|x64.Build.0 = Debug|Any CPU
-		{0C081245-9A6B-4859-A4C9-296AFB3355AA}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{0C081245-9A6B-4859-A4C9-296AFB3355AA}.Debug|x86.Build.0 = Debug|Any CPU
-		{0C081245-9A6B-4859-A4C9-296AFB3355AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0C081245-9A6B-4859-A4C9-296AFB3355AA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0C081245-9A6B-4859-A4C9-296AFB3355AA}.Release|x64.ActiveCfg = Release|Any CPU
-		{0C081245-9A6B-4859-A4C9-296AFB3355AA}.Release|x64.Build.0 = Release|Any CPU
-		{0C081245-9A6B-4859-A4C9-296AFB3355AA}.Release|x86.ActiveCfg = Release|Any CPU
-		{0C081245-9A6B-4859-A4C9-296AFB3355AA}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

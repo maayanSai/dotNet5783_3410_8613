@@ -171,6 +171,8 @@ internal class Cart : ICart
             Amount = cart.Items.Select(x => x?.Amount ?? throw new BO.BlNullPropertyException("OrderItem does not exist")).Sum(),
         };
         orderId = dal!.Order.Add(ord); // There is no need to check that there is no exception for adding an order
+        if (cart.Items.Count <= 0)
+            throw new BO.BlInCorrectException("cant make an order because the cart is empty");
         foreach (var bordi in cart.Items)
         {
             DO.OrderItem dOrdi = new()
