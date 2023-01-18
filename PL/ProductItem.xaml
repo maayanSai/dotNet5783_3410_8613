@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource self}}"
         Title="ProducItemtWindow" Height="450" Width="800" Background="Black">
-    <Window.Resources>        <Style TargetType="Label">
+    <Window.Resources>
+        <Style TargetType="Label">
             <Setter Property="FontSize" Value="16" />
             <Setter Property="FontFamily" Value="Segoe Print" />
             <Setter Property="FontWeight" Value="Bold" />
@@ -17,29 +18,39 @@
             <Setter Property="VerticalAlignment" Value="Top" />
             <Setter Property="Height" Value="42" />
             <Setter Property="Width" Value="91" />
-        </Style>        <Style TargetType="TextBox">
+        </Style>
+        <Style TargetType="TextBox">
             <Setter Property="Background" Value="Black" />
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Top" />
             <Setter Property="Height" Value="29" />
-            <Setter Property="Width" Value="123" />            <Setter Property="IsReadOnly" Value="True" />        </Style>    </Window.Resources>
+            <Setter Property="Width" Value="123" />
+            <Setter Property="IsReadOnly" Value="True" />
+
+        </Style>
+    </Window.Resources>
     <Grid>
-        <Label  Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black" Content="Id:" HorizontalAlignment="Left" Height="42" Margin="209,78,0,0" VerticalAlignment="Top" Width="48"/>
-        <TextBox Foreground="#FFEFCF81" Text="{Binding PB.ID}" IsReadOnly="true" HorizontalAlignment="Left" Height="29" Margin="300,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123"/>
-        <Label Foreground="#FFEFCF81"  FontSize="16" FontFamily="Segoe Print"  Background="Black" Content="Category:" HorizontalAlignment="Left" Height="39" Margin="209,125,0,0" VerticalAlignment="Top" Width="91"/>
-        <TextBox Foreground="#FFEFCF81" FontFamily="Segoe Print" Name="CategoryForNewProduct" Text="{Binding PB.Category,Mode=TwoWay}" HorizontalAlignment="Left" Height="29" Margin="300,125,0,0" VerticalAlignment="Top" Width="123"/>
-        <Label Content="Name" Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black"  HorizontalAlignment="Left" Height="39" Margin="209,173,0,0" VerticalAlignment="Top" Width="76"/>
-        <Label Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black" Content="Price:" HorizontalAlignment="Left" Height="40" Margin="209,222,0,0" VerticalAlignment="Top" Width="76"/>
-        <Label Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black" Content="InStock:" HorizontalAlignment="Left" Height="39" Margin="209,267,0,0" VerticalAlignment="Top" Width="86"/>
-        <TextBox Foreground="#FFEFCF81" Text="{Binding PB.Name}" x:Name="Name" HorizontalAlignment="Left" Height="29" Margin="300,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123" RenderTransformOrigin="0.473,0.77" />
-        <TextBox Foreground="#FFEFCF81" Text="{Binding PB.Price, Mode=TwoWay}" HorizontalAlignment="Left" Height="29" Margin="300,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123"/>
-        <TextBox Foreground="#FFEFCF81"  x:Name="InStock" Text="{Binding PB.isStock}"  HorizontalAlignment="Left" Height="29" Margin="300,267,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123" />
-        <Button  Name="BtnAddOrUpdetProduct" Content="הוספת מוצר"  HorizontalAlignment="Left" Height="81" Margin="496,319,0,0" VerticalAlignment="Top" Width="82" Click="Add_Click" Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="89*"/>
+            <ColumnDefinition Width="71*"/>
+        </Grid.ColumnDefinitions>
+        <Label  Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black" Name="ID" Content="Id:" Height="42" Margin="209,78,0,0" Width="48"/>
+        <TextBox Foreground="#FFEFCF81" Text="{Binding PB.ID}" IsReadOnly="true" Name="Id" Height="29" Margin="300,78,0,0" TextWrapping="Wrap" Width="123"/>
+        <Label Foreground="#FFEFCF81"  FontSize="16" FontFamily="Segoe Print"  Background="Black" Content="Category:" Height="39" Margin="209,125,0,0" Width="91"/>
+        <TextBox Foreground="#FFEFCF81" FontFamily="Segoe Print" Name="CategoryForNewProduct" Text="{Binding PB.Category,Mode=TwoWay}" Height="29" Margin="300,125,0,0" Width="123"/>
+        <Label Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black" Content="Name:" Height="39" Margin="209,173,0,0" Width="76"/>
+        <Label Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black" Content="Price:" Height="40" Margin="209,222,0,0" Width="76"/>
+        <Label Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black" Content="InStock:" Height="39" Margin="209,267,0,0" Width="86"/>
+        <TextBox Foreground="#FFEFCF81" Text="{Binding PB.Name}" x:Name="Name" Height="29" Margin="300,178,0,0" TextWrapping="Wrap" Width="123" RenderTransformOrigin="0.473,0.77" />
+        <TextBox Foreground="#FFEFCF81" Text="{Binding PB.Price, Mode=TwoWay}" x:Name="Price" Height="29" Margin="300,222,0,0" TextWrapping="Wrap" Width="123"/>
+        <TextBox Foreground="#FFEFCF81"  x:Name="InStock" Text="{Binding PB.isStock}" Height="29" Margin="300,267,0,0" TextWrapping="Wrap" Width="123" />
+        <Button  Name="BtnAddOrUpdetProduct" Content="+" Height="34" Margin="70,319,0,0" VerticalAlignment="Top" Width="46" Click="Button_Click" Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print" Grid.Column="1">
             <Button.Background >
                 <ImageBrush />
+
             </Button.Background>
         </Button>
-        <Button Content="view cart" HorizontalAlignment="Left" Margin="686,29,0,0" VerticalAlignment="Top" Height="78" Width="82" Click="ViewCart_Click" >
+        <Button Content="view cart" Margin="241,29,0,0" VerticalAlignment="Top" Height="78" Width="82" Click="Button_Click_1" Grid.Column="1" >
             <Button.Background>
                 <ImageBrush />
             </Button.Background>

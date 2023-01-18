@@ -58,8 +58,22 @@ namespace PL
                         MessageBox.Show(add1.Message, "cant add", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     }
+                    catch(BO.BlInCorrectException add1)
+                    {
+                        bl.Cart.Update(c, pro.ID, keep.Amount);
+
+                        pro.Amount = bl.Product.ItemProduct(pro.ID, c).Amount;
+
+                        MessageBox.Show(add1.Message, "cant add", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    }
                 }
                 catch (BO.BlMissingEntityException add)
+                {
+                    MessageBox.Show(add.Message, "cant add", MessageBoxButton.OK, MessageBoxImage.Information);
+                    pro.Amount = bl.Product.ItemProduct(pro.ID, c).Amount;
+                }
+                catch (BO.BlInCorrectException add)
                 {
                     MessageBox.Show(add.Message, "cant add", MessageBoxButton.OK, MessageBoxImage.Information);
                     pro.Amount = bl.Product.ItemProduct(pro.ID, c).Amount;
@@ -85,7 +99,10 @@ namespace PL
                 {
                     MessageBox.Show(update.Message, "cant add", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-
+                catch (BO.BlInCorrectException update)
+                {
+                    MessageBox.Show(update.Message, "cant add", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
 
             }
 
