@@ -6,6 +6,7 @@ namespace Dal;
 
 internal class OrderItem : IOrderItem
 {
+    string s_orderItem = "orderItem";
     public int Add(DO.OrderItem oi)
     {
         oi.ID = s_NextOrderItemNumber; //We will insert the ID into the object

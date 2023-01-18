@@ -34,13 +34,18 @@ namespace PL
             update=updateOrder;
             Order =bl?.Order.ItemOrder(id)!;
             var a = Order.Items;
+
             IsBoss = Visibility.Visible;
+            
+
+
         }
         public OrderItemWindow(int id)
         {
             Order=bl?.Order.ItemOrder(id)!;
             InitializeComponent();
             IsBoss = Visibility.Collapsed;
+
         }
         private void ShippingUpdate_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {

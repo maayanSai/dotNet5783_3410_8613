@@ -22,7 +22,7 @@
             <StackPanel>
                 <TextBlock FontFamily="Segoe Print" FontWeight="Bold"  Foreground="#FFEFCF81"  Background="Black" Text="Catalog:" Margin="10" FontSize="22"/>
                 <StackPanel Margin="20 0">
-                    <ItemsControl x:Name="ProductItemList" ItemsSource="{Binding}">
+                    <ItemsControl x:Name="ProductItemList" ItemsSource="{Binding}" Height="295">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Border Margin="10" Height="160" Width="110" Background="Black">
@@ -49,8 +49,7 @@
                             <GroupStyle>
                                 <GroupStyle.HeaderTemplate>
                                     <DataTemplate>
-                                        <TextBlock FontFamily="Segoe Print" FontWeight="Bold"  Foreground="#FFEFCF81"  Background="Black"  FontSize="15"
-                         Text="{Binding Path=Name}"/>
+                                        <TextBlock FontFamily="Segoe Print" FontWeight="Bold"  Foreground="#FFEFCF81"  Background="Black"  FontSize="15" Text="{Binding Name}"/>
                                     </DataTemplate>
                                 </GroupStyle.HeaderTemplate>
                             </GroupStyle>
