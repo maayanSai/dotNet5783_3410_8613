@@ -20,23 +20,16 @@ public partial class ProductListWindow : Window
     {
         try
         {
-            var v = bl.Product.ItemProduct(id);
-            BO.ProductForList p = new BO.ProductForList {ID=v.ID,ImageRelativeName=v.ImageRelativeName,Category=v.Category,Name=v.Name,Price=v.Price };
-            var a =ProductList.FirstOrDefault(x=>x.ID==p.ID);
+            var v = bl?.Product.ItemProduct(id);
+            BO.ProductForList p = new (){ID=v!.ID,ImageRelativeName=v.ImageRelativeName,Category=v.Category,Name=v.Name,Price=v.Price };
+            var a =ProductList.FirstOrDefault(x=>x?.ID==p.ID);
             int index = ProductList.IndexOf(a);
-
             ProductList.RemoveAt(index);
             ProductList.Insert(index, p);   
-           
-          
-            
-
-
-
         }
-        catch(BO.BlAlreadyExistEntityException ex)
+        catch(BO.BlInCorrectException exp)
         {
-
+            MessageBox.Show(exp.Message, "can not found the product", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
     /// <summary>
@@ -55,7 +48,6 @@ public partial class ProductListWindow : Window
     {
         InitializeComponent();
         ProductList = new(bl?.Product.GetProducts()!);
-      
         AttributeSelector.ItemsSource = Enum.GetValues(typeof(BO.Category));
     }
     /// <summary>
@@ -67,9 +59,15 @@ public partial class ProductListWindow : Window
     
     public void AddToOb(int proId)
     {
+        try
+        {
+            ProductList.Add(bl?.Product.GetProduct(proId));
+        }
+        catch(BO.BlInCorrectException exp)
+        {
+            MessageBox.Show(exp.Message, "can not add the product", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
 
-        ProductList.Add(bl.Product.GetProducts(x => x?.ID==proId).First());
-        
     }
     private void SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
@@ -98,7 +96,6 @@ public partial class ProductListWindow : Window
         new ProductWindow(AddToOb).ShowDialog();
     }
    
-
     /// <summary>
     /// A button that returns all products after filtering
     /// </summary>

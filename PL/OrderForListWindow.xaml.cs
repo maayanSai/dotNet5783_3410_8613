@@ -1,5 +1,4 @@
-﻿using BO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -16,8 +15,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace PL;
-
-
 
 /// <summary>
 /// Interaction logic for OrderForListWindow.xaml
@@ -42,29 +39,24 @@ public partial class OrderForListWindow : Window
             set { SetValue(OrdersDep, value); }
         }
         public static readonly DependencyProperty OrderItemViewSourceDp = DependencyProperty.Register("OrderItemViewSource", typeof(ObservableCollection<BO.OrderItem>), typeof(OrderForListWindow));
-        public ObservableCollection<OrderForList> OrderList
+        public ObservableCollection<BO.OrderForList> OrderList
         {
-            get { return (ObservableCollection<OrderForList>)GetValue(OrdersDep); }
+            get { return (ObservableCollection<BO.OrderForList>)GetValue(OrdersDep); }
             set  { SetValue(OrdersDep, value); }
         }
-        public static readonly DependencyProperty OrdersDep = DependencyProperty.Register("OrderList", typeof(IEnumerable<OrderForList>), typeof(OrderForListWindow));
-       
-            public OrderForListWindow()
+        public static readonly DependencyProperty OrdersDep = DependencyProperty.Register("OrderList", typeof(IEnumerable<BO.OrderForList>), typeof(OrderForListWindow));
+        public OrderForListWindow()
         {
             InitializeComponent();
-            OrderList = new (bl?.Order.GetOrders()!);
+            OrderList = new (bl!.Order.GetOrders()!);
         }
-        
-
        private void OrderForListDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             e.Handled= true;
-            BO.OrderForList? O = (OrderForList)((DataGrid)sender).SelectedItem;
-            OrderItemWindow? orderWindow = new OrderItemWindow(O.ID, Update);
+            BO.OrderForList? O = (BO.OrderForList)((DataGrid)sender).SelectedItem;
+            OrderItemWindow? orderWindow = new(O.ID, Update);
             orderWindow.ShowDialog(); 
-
-
-    }
+       }
 
     private void Button_Click(object sender, RoutedEventArgs e)
     {

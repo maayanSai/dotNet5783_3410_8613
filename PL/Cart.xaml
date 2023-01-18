@@ -7,37 +7,37 @@
         mc:Ignorable="d"
      DataContext="{Binding RelativeSource={RelativeSource self}}"
         Title="Cart" Height="450" Width="800">
-    <Grid >
-        <Grid x:Name="grid1"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="35,0,0,0" Height="330" Width="236">
+    <Grid Background="Black" >
+        <Grid x:Name="grid1"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="35,0,0,0" Height="330" Width="333">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" MinWidth="124"/>
+                <ColumnDefinition Width="139" MinWidth="120"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" MinHeight="95"/>
                 <RowDefinition Height="0"/>
-                <RowDefinition Height="64"/>
-                <RowDefinition Height="Auto" MinHeight="90"/>
-                <RowDefinition Height="Auto" MinHeight="94.92"/>
+                <RowDefinition Height="Auto" MinHeight="58"/>
+                <RowDefinition Height="Auto" MinHeight="56"/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
-            <Label Grid.Column="0" Content="Customer Adress:" HorizontalAlignment="Left" Margin="3,0,0,0" VerticalAlignment="Center" Height="26" Width="103"/>
-            <TextBox x:Name="customerAdressTextBox" Grid.Column="1" HorizontalAlignment="Center" Height="18" Text="{Binding Cb.CustomerAdress, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Grid.Column="0" Content="Customer Email:" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="26" Width="95"/>
-            <TextBox x:Name="customerEmailTextBox" Grid.Column="1" HorizontalAlignment="Center" Height="18" Grid.Row="2" Text="{Binding Cb.CustomerEmail, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Content="Customer Name:" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center" Height="26" Width="98"/>
-            <TextBox x:Name="customerNameTextBox" Grid.Column="1" HorizontalAlignment="Center" Height="18" Grid.Row="3" Text="{Binding Cb.CustomerName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Grid.Column="0" Content="Total Price:" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="4" VerticalAlignment="Center" Height="26" Width="67"/>
-            <TextBox x:Name="totalPriceTextBox" Grid.Column="1" HorizontalAlignment="Center" Height="18" Grid.Row="4" Text="{Binding Cb.TotalPrice, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Grid.Column="0" Content="Customer Adress:" Margin="3,0,0,0" VerticalAlignment="Center" Height="26" Width="110"/>
+            <TextBox x:Name="customerAdressTextBox" Grid.Column="1" HorizontalAlignment="Center" Height="30" Text="{Binding Cb.CustomerAdress, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="152"/>
+            <Label Grid.Column="0" Content="Customer Email:" Margin="3,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="26" Width="110"/>
+            <TextBox x:Name="customerEmailTextBox" Grid.Column="1" HorizontalAlignment="Center" Height="30" Grid.Row="2" Text="{Binding Cb.CustomerEmail, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="150"/>
+            <Label Content="Customer Name:" Grid.Row="3" Height="26" Width="110" Margin="3,17,0,0"/>
+            <TextBox x:Name="customerNameTextBox" Grid.Column="1" HorizontalAlignment="Center" Height="30" Grid.Row="3" Text="{Binding Cb.CustomerName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="260"/>
+            <Label Content="Total Price:" Margin="0,28,0,0" Grid.Row="4" Height="26" Width="110" HorizontalAlignment="Center"/>
+            <TextBox x:Name="totalPriceTextBox" Grid.Column="1" Height="30" Grid.Row="4" Text="{Binding Cb.TotalPrice, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Width="163" Margin="0,24,0,0" RenderTransformOrigin="0.894,0.276"/>
         </Grid>
-        <DataGrid x:Name="orderItemDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Cb.Items}" IsEnabled="False" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="400,52,42,245" SelectionChanged="orderItemDataGrid_SelectionChanged" >
+        <DataGrid x:Name="orderItemDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Cb.Items}" IsEnabled="False" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="400,52,42,245" SelectionChanged="OrderItemDataGrid_SelectionChanged" >
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="amountColumn"  Binding="{Binding Amount}" Header="Amount" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="priceColumn" Binding="{Binding Price}" Header="Price" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="productIDColumn" Binding="{Binding ProductID}" Header="Product ID" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="totalpriceColumn" Binding="{Binding Totalprice}" Header="Totalprice" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="productIDColumn" Binding="{Binding ProductID}" Header="Product ID     " Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Name            " Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="amountColumn"  Binding="{Binding Amount}" Header="Amount  " Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="priceColumn" Binding="{Binding Price}" Header="Price   " Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="totalpriceColumn" Binding="{Binding Totalprice}" Header="Totalprice  " Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Make an order" Margin="637,352,48,35" Click="Button_Click"/>
+        <Button Content="Make an order" Margin="637,352,0,35" Click="MakeAnOrder" Width="121" FontSize="14"/>
     </Grid>
 </Window>

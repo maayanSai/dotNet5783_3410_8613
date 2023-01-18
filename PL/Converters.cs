@@ -9,26 +9,28 @@ using System.Windows.Media.Imaging;
 using System.Windows.Data;
 using System.Windows;
 
-namespace PL
+namespace PL;
+/// <summary>
+/// Convert class
+/// </summary>
+class ConvertImagePathToBitmap : IValueConverter
 {
- class ConvertImagePathToBitmap : IValueConverter
-{
-    public object Convert(object value, Type targetType,object parameter,CultureInfo culture)
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         try
         {
             string imageRelativeName = (string)value;
             string currenDir = Environment.CurrentDirectory[..^4];
             string imageFullName = currenDir + imageRelativeName;
-            BitmapImage bitmapImage = new BitmapImage(new Uri(imageFullName));
+            BitmapImage bitmapImage = new (new Uri(imageFullName));
             return bitmapImage;
         }
-        catch(Exception ex)
+        catch (Exception)
         {
             string imageRelativeName = @"\pictures\IMG_FAILURE.png";
             string currenDir = Environment.CurrentDirectory[..^4];
             string imageFullName = currenDir + imageRelativeName;
-            BitmapImage bitmapImage = new BitmapImage(new Uri(imageFullName));
+            BitmapImage bitmapImage = new(new Uri(imageFullName));
             return bitmapImage;
         }
     }
@@ -38,20 +40,5 @@ namespace PL
         throw new NotImplementedException();
     }
 }
-    public class ConvertIsBossToVisability : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (((bool)value) == true)
-                return Visibility.Visible;
-            else
-                return Visibility.Collapsed;
-        }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-}
 

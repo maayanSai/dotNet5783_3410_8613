@@ -1,6 +1,5 @@
 ﻿namespace BlImplementation;
 using BlApi;
-using BO;
 using System.Collections.Generic;
 
 /// <summary>
@@ -73,7 +72,7 @@ internal class Order : IOrder
     {
         DO.Order? orderD;
         if (id < 0)
-            throw new Exception("id is negative");
+            throw new BO.BlInCorrectException("id is negative");
         try
         {
             orderD = dal?.Order.GetById(delegate (DO.Order? x) { return x?.ID == id; });
@@ -93,8 +92,6 @@ internal class Order : IOrder
             Totalprice = x?.Price * x?.Amount ?? 0
 
         }).ToList();
-
-
         return new BO.Order
         {
             ID = orderD?.ID ?? throw new BO.BlNullPropertyException("missing order id"),
@@ -207,10 +204,8 @@ internal class Order : IOrder
         else throw new BO.BlIncorrectDatesException("order date is missing");
         if (order.ShipDate != null)
             tracking.Add(new Tuple<DateTime?, string?>(order.ShipDate, " the order has been sent"));
-        // else throw new BO.BlNullPropertyException("Ship date is missing");
         if (order.DeliveryrDate != null)
             tracking.Add(new Tuple<DateTime?, string?>(order.DeliveryrDate, " the order has been delivered"));
-        //else throw new BO.BlNullPropertyException("Delivery Date is missing");
         BO.OrderTracking ortk = new()
         {
             ID = id,
@@ -219,13 +214,13 @@ internal class Order : IOrder
         };
         return ortk;
     }
-    public IEnumerable<StatisticksOrderByMonth> GetStatisticksOrderByMonths()
+    public IEnumerable<BO.StatisticksOrderByMonth> GetStatisticksOrderByMonths()
     {
         return from order in dal!.Order.GetAll()
                let _order = order.GetValueOrDefault()
                let orderDate = _order.OrderDate.GetValueOrDefault()
                group order by orderDate.Month.ToString("MMMM") into newGroup
-               select new StatisticksOrderByMonth
+               select new BO.StatisticksOrderByMonth
                {
                    MonthName = newGroup.Key,
                    CountOrders = newGroup.Count(),

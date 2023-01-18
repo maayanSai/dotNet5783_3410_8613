@@ -13,82 +13,75 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using BO;
 
-namespace PL
+namespace PL;
+
+/// <summary>
+/// Interaction logic for OrderTracking.xaml
+/// </summary>
+public partial class OrderTracking : Window
 {
+    readonly BlApi.IBl? bl = BlApi.Factory.Get();
     /// <summary>
-    /// Interaction logic for OrderTracking.xaml
+    /// constructive action
     /// </summary>
-    public partial class OrderTracking : Window
+    public ObservableCollection<BO.OrderTracking?> OrderT
     {
-        BlApi.IBl? bl = BlApi.Factory.Get();
-      
-        /// <summary>
-        /// constructive action
-        /// </summary>
-        public ObservableCollection<BO.OrderTracking?> orderTracking
+        get { return (ObservableCollection<BO.OrderTracking?>)GetValue(orderTrackingProperty); }
+        set { SetValue(orderTrackingProperty, value); }
+    }
+
+    public static readonly DependencyProperty orderTrackingProperty =
+           DependencyProperty.Register("ProductList", typeof(ObservableCollection<BO.OrderTracking?>), typeof(OrderTracking));
+
+    public static readonly DependencyProperty sDp = DependencyProperty.Register(nameof(S), typeof(string), typeof(OrderTracking));
+    public string? S { get => (string)GetValue(sDp); set => SetValue(sDp, value); }
+
+    public static readonly DependencyProperty OtDp = DependencyProperty.Register(nameof(Ot), typeof(BO.OrderTracking), typeof(OrderTracking));
+    public BO.OrderTracking? Ot { get => (BO.OrderTracking)GetValue(OtDp); set => SetValue(OtDp, value); }
+    public OrderTracking()
+    {
+        InitializeComponent();
+    }
+    private void Enter_Click(object sender, RoutedEventArgs e)
+    {
+        try
         {
-            get { return (ObservableCollection<BO.OrderTracking?>)GetValue(orderTrackingProperty); }
-            set { SetValue(orderTrackingProperty, value); }
+            BO.OrderTracking o = bl?.Order.Tracking(int.Parse(S!))!;
+            Ot = o;
         }
-
-        public static readonly DependencyProperty orderTrackingProperty =
-               DependencyProperty.Register("ProductList", typeof(ObservableCollection<BO.OrderTracking?>), typeof(OrderTracking));
-
-        public static readonly DependencyProperty sDp = DependencyProperty.Register(nameof(s), typeof(string), typeof(OrderTracking));
-        public string? s { get => (string)GetValue(sDp); set => SetValue(sDp, value); }
-
-        public static readonly DependencyProperty OtDp = DependencyProperty.Register(nameof(Ot), typeof(BO.OrderTracking), typeof(OrderTracking));
-        public BO.OrderTracking? Ot { get => (BO.OrderTracking)GetValue(OtDp); set => SetValue(OtDp, value); }
-        public OrderTracking()
+        catch (BO.BlInCorrectException exp)
         {
-            InitializeComponent();
+            MessageBox.Show(exp.Message,"can not tracking the order" ,MessageBoxButton.OK, MessageBoxImage.Information);
         }
-
-        private void enter_Click(object sender, RoutedEventArgs e)
+        catch (BO.BlMissingEntityException exp)
         {
-            try
-            {
-                BO.OrderTracking o = bl?.Order.Tracking(int.Parse(s!))!;
-                Ot = o;
-            }
-            catch (BO.BlInCorrectException a)
-            {
-
-            }
-            catch (BO.BlMissingEntityException a)
-            {
-
-            }
-            catch (BO.BlNullPropertyException a)
-            {
-
-            }
-            
+            MessageBox.Show(exp.Message, "can not tracking the order", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+    }
 
-        private void Order_click(object sender, RoutedEventArgs e)
+    private void Order_click(object sender, RoutedEventArgs e)
+    {
+        e.Handled = true;
+        try
         {
-            e.Handled = true;
-            try
-            {
-                Order? O = bl?.Order.ItemOrder(Ot!.ID);
-                OrderItemWindow? orderWindow = new OrderItemWindow(O!.ID);
-                orderWindow.ShowDialog();
-            }
-           catch(BO.BlInCorrectException a)
-            {
+            BO.Order? O = bl?.Order.ItemOrder(Ot!.ID);
+            OrderItemWindow? orderWindow = new(O!.ID);
+            orderWindow.ShowDialog();
+        }
+        catch(BO.BlInCorrectException exp)
+        {
+            MessageBox.Show(exp.Message, "can not found the order", MessageBoxButton.OK, MessageBoxImage.Information);
 
-            }
-            catch (BO.BlMissingEntityException a)
-            {
+        }
+        catch (BO.BlMissingEntityException exp)
+        {
+            MessageBox.Show(exp.Message, "can not found the order", MessageBoxButton.OK, MessageBoxImage.Information);
 
-            }
-            catch (BO.BlNullPropertyException a)
-            {
-
-            }
+        }
+        catch (BO.BlNullPropertyException exp)
+        {
+            MessageBox.Show(exp.Message, "can not found the order", MessageBoxButton.OK, MessageBoxImage.Information);
 
         }
     }

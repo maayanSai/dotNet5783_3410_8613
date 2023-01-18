@@ -1,13 +1,11 @@
-﻿namespace PL;
-
-using BO;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+namespace PL;
 
 /// <summary>
 /// Interaction logic for ProductWindow.xaml
@@ -15,7 +13,7 @@ using System.Windows.Media.Imaging;
 public partial class ProductWindow : Window
 {
     public delegate void update(string productImagepPth,int id);
-    update upd;
+    update? upd;
     public delegate void AddingOrUpdate(int proId);
     AddingOrUpdate? add;
     BlApi.IBl? bl = BlApi.Factory.Get();
@@ -24,29 +22,21 @@ public partial class ProductWindow : Window
     /// Constructive action to add products
     /// </summary>
 
-  
-    static readonly DependencyProperty ProductDep = DependencyProperty.Register(nameof(Product), typeof(Product), typeof(ProductWindow));
-    Product Product {  get=> (Product)GetValue(ProductDep); set => SetValue(ProductDep, value); }
+    static readonly DependencyProperty ProductDep = DependencyProperty.Register(nameof(Product), typeof(BO.Product), typeof(ProductWindow));
+    BO.Product Product {  get=> (BO.Product)GetValue(ProductDep); set => SetValue(ProductDep, value); }
 
     static readonly DependencyProperty ModeDep = DependencyProperty.Register(nameof(Mode), typeof(bool), typeof(ProductWindow));
     bool Mode { get => (bool)GetValue(ModeDep); set => SetValue(ModeDep, value); }
-
-
-  
     string BtnAddOrUpdetProductContent { get => (string)GetValue(BtnAddOrUpdetProductContentDp); set => SetValue(BtnAddOrUpdetProductContentDp, value); }
-
     static readonly DependencyProperty BtnAddOrUpdetProductContentDp = DependencyProperty.Register(nameof(BtnAddOrUpdetProductContent), typeof(string), typeof(ProductWindow));
-
     public ProductWindow(AddingOrUpdate ad)
     {
         InitializeComponent();
-        Product = new Product();  
+        Product = new BO.Product();  
         Mode= false;
         CategoryForNewProduct.ItemsSource = Enum.GetValues(typeof(BO.Category));
-
         BtnAddOrUpdetProductContent = "Add";
-       add = ad;
-        
+        add = ad;    
     }
     /// <summary>
     /// Constructive action to update products
@@ -55,11 +45,17 @@ public partial class ProductWindow : Window
     public ProductWindow(int id, update upd1)
     {
         InitializeComponent();
-        Mode=true;
-            
+        Mode=true;      
         BtnAddOrUpdetProductContent = "Updete";
         CategoryForNewProduct.ItemsSource = Enum.GetValues(typeof(BO.Category));// for the comboBox
-        Product = bl!.Product.ItemProduct(id);//getting the details from bl about the  
+        try
+        {
+            Product = bl!.Product.ItemProduct(id); //getting the details from bl about the  
+        }
+        catch (BO.BlInCorrectException exp)
+        {
+            MessageBox.Show(exp.Message, "can not found the product", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
         upd=upd1;   
     }
     /// <summary>
@@ -79,47 +75,44 @@ public partial class ProductWindow : Window
                 Product = v;
             }
             Product.ImageRelativeName = imageName;
-           
-
             try
             {
-                bl.Product.Update(Product);
-                upd(Product.ImageRelativeName, Product.ID);
+                bl!.Product.Update(Product);
+                upd!(Product.ImageRelativeName, Product.ID);
             }
-            catch(Exception exp)
-            { }
+            catch(BO.BlInCorrectException exp)
+            {
+                MessageBox.Show(exp.Message, "can not update the product", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
         try
         {
-          
             if (BtnAddOrUpdetProductContent == "Add")
             {
                 bl!.Product.Add(Product);
-                add(Product.ID);
+                add!(Product.ID);
                 MessageBox.Show("Product Add succefully", "succefully", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
             else
             {
-                    bl!.Product.Update(Product);
-                    MessageBox.Show("Product Updet succefully", "succefully", MessageBoxButton.OK, MessageBoxImage.Information);
+                bl!.Product.Update(Product);
+                MessageBox.Show("Product Updet succefully", "succefully", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
         }
-        catch (Exception ex)
+        catch (BO.BlInCorrectException exp)
         {
-            MessageBox.Show(ex.Message);
+            MessageBox.Show(exp.Message, "can not update the product", MessageBoxButton.OK, MessageBoxImage.Information);
         }
-
     }
-
     private void image_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            if (openFileDialog.ShowDialog() == true)
-            {
-                image.Source = new BitmapImage(new Uri(openFileDialog.FileName));
-                Product.ImageRelativeName = openFileDialog.FileName;
-            }
+        OpenFileDialog openFileDialog = new();
+        if (openFileDialog.ShowDialog() == true)
+        {
+            image.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+            Product.ImageRelativeName = openFileDialog.FileName;
+        }
     }
 }

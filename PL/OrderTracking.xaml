@@ -33,7 +33,7 @@
             </ListView.RenderTransform>
         </ListView>
 
-        <Button Content="enter"  Margin="253,46,0,0" Click="enter_Click"/>
+        <Button Content="enter"  Margin="253,46,0,0" Click="Enter_Click"/>
         <Button Content="Order" Margin="659,333,0,0" Click="Order_click"/>
 
         <TextBox  Margin="72,43,0,0" Text="{Binding s, Mode=TwoWay}" />

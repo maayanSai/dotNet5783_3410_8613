@@ -22,11 +22,10 @@ namespace PL
     public partial class OrderItemWindow : Window
     {
         public delegate void UpdateOrder(int proId);
-
         UpdateOrder? update;
         BlApi.IBl? bl = BlApi.Factory.Get();
         static readonly DependencyProperty OrderctDep = DependencyProperty.Register(nameof(Order), typeof(BO.Order), typeof(OrderItemWindow));
-       BO.Order Order { get => (BO.Order)GetValue(OrderctDep); set => SetValue(OrderctDep, value); }
+        BO.Order Order { get => (BO.Order)GetValue(OrderctDep); set => SetValue(OrderctDep, value); }
         static readonly DependencyProperty IsBossDep = DependencyProperty.Register(nameof(IsBoss), typeof(Visibility), typeof(OrderItemWindow));
         Visibility IsBoss { get => (Visibility)GetValue(IsBossDep); set => SetValue(IsBossDep, value); }
         public OrderItemWindow(int id, UpdateOrder updateOrder)
@@ -48,18 +47,14 @@ namespace PL
             IsBoss = Visibility.Collapsed;
 
         }
-
-     
-
         private void ShippingUpdate_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             e.Handled=true;
             try
             {
-                var a = bl.Order.Updateshipping(Order.ID);
-                Order=a;
-             
-                update(Order.ID);
+                var a = bl?.Order.Updateshipping(Order.ID);
+                Order=a!;
+                update!(Order.ID);
             }
             catch (Exception ex)
             {
@@ -73,18 +68,12 @@ namespace PL
             {
                 var a = bl?.Order.Updatesupply(Order.ID);
                 Order=a!;
-
                 update!(Order.ID);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private void orderItemDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }
