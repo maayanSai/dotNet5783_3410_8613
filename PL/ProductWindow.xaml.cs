@@ -3,6 +3,7 @@
 using BO;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -86,6 +87,17 @@ public partial class ProductWindow : Window
             MessageBox.Show(ex.Message);
         }
     }
-    private void Button_Click(object sender, RoutedEventArgs e) =>new PicturesWindow().ShowDialog();
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+       if(Product.ImageRelativeName!=null)
+       {
+            string imageName = Product.ImageRelativeName.Substring(Product.ImageRelativeName.LastIndexOf("\\"));
+            if (!File.Exists(Environment.CurrentDirectory[..^4] + @"\pictures\" + imageName))
+            {
+                File.Copy(Product.ImageRelativeName, Environment.CurrentDirectory[..^4] + @"\pictures\" + imageName);
+            }
+            Product.ImageRelativeName = imageName;
+       }
+    }
 
 }

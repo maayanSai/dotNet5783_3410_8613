@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -22,36 +23,37 @@ namespace PL
     public partial class PicturesWindow : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
-        //Directory.GetFiles("C:\Users\Maayan\source\repos\maayanSai\dotNet5783_3410_8613\pictures");
+
         public ObservableCollection<string> PictursPathList
         {
             get { return (ObservableCollection<string>)GetValue(PictursPathListdp); }
             set { SetValue(PictursPathListdp, value); }
         }
 
-        public static readonly DependencyProperty PictursPathListdp =
+        static readonly DependencyProperty PictursPathListdp =
                DependencyProperty.Register("PictursPathList", typeof(ObservableCollection<string>), typeof(Window));
 
+        string Pictures { get => (string)GetValue(PictursPathListdp); set => SetValue(PictursPathListdp, value); }
 
         public PicturesWindow()
         {
-            
-
-
             InitializeComponent();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if(openFileDialog.ShowDialog()==true)
+            {
+                image.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+                //Pictures.ImageRelativeName = openFileDialog.FileName;
+            }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             var v = ((Button)sender).Tag;
-            
-           
-            
+
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)

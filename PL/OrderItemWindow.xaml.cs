@@ -27,8 +27,8 @@ namespace PL
         BlApi.IBl? bl = BlApi.Factory.Get();
         static readonly DependencyProperty OrderctDep = DependencyProperty.Register(nameof(Order), typeof(BO.Order), typeof(OrderItemWindow));
        BO.Order Order { get => (BO.Order)GetValue(OrderctDep); set => SetValue(OrderctDep, value); }
-        static readonly DependencyProperty IsBossDep = DependencyProperty.Register(nameof(IsBoss), typeof(bool), typeof(OrderItemWindow));
-        bool IsBoss { get => (bool)GetValue(IsBossDep); set => SetValue(IsBossDep, value); }
+        static readonly DependencyProperty IsBossDep = DependencyProperty.Register(nameof(IsBoss), typeof(Visibility), typeof(OrderItemWindow));
+        Visibility IsBoss { get => (Visibility)GetValue(IsBossDep); set => SetValue(IsBossDep, value); }
         public OrderItemWindow(int id, UpdateOrder updateOrder)
         {
             InitializeComponent();
@@ -37,7 +37,7 @@ namespace PL
             var a = Order.Items;
            
             
-            IsBoss=true;
+            IsBoss=Visibility.Collapsed;
 
 
         }
@@ -45,7 +45,7 @@ namespace PL
         {
             Order=bl?.Order.ItemOrder(id)!;
             InitializeComponent();
-            IsBoss=false;
+            IsBoss=Visibility.Hidden;
 
         }
 

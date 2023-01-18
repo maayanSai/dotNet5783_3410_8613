@@ -156,8 +156,8 @@ namespace PL
            
             ProductItem pro = new ProductItem(p, Cb, AddToCart);
             pro.ShowDialog();
-            //  ProductItem windoProductItem = new ProductItem(p!, Cb, AddToCart);
-            //  windoProductItem.ShowDialog();
+            ProductItem windoProductItem = new ProductItem(p!, Cb, AddToCart);
+            windoProductItem.ShowDialog();
         }
     }
 }

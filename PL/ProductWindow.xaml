@@ -22,6 +22,6 @@
         <TextBox Text="{Binding Product.Price, Mode=TwoWay}" Margin="157,211,0,0"/>
         <TextBox Text="{Binding Product.InStock, Mode=TwoWay}"  Margin="157,256,0,0"/>
         <Image Source="{Binding Product.ImageRelativeName, Converter={StaticResource ImagePathToBitmap}}" HorizontalAlignment="Left" Height="305" Margin="301,43,0,0" VerticalAlignment="Top" Width="304"/>
-        <Button Content="{Binding BtnAddOrUpdetProductContent, Mode=TwoWay}" HorizontalAlignment="Left" Height="31" Margin="400,347,0,0" VerticalAlignment="Top" Width="93" Click="Button_Click"/>
+        <Button Content="{Binding BtnAddOrUpdetProductContent, Mode=TwoWay}" HorizontalAlignment="Left" Height="31" Margin="400,347,0,0" VerticalAlignment="Top" Width="93" Click="Button_Click" Name="button"/>
     </Grid>
 </Window>

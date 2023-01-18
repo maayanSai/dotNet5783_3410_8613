@@ -53,7 +53,7 @@
             <TextBox Margin="3,7,99,0" Grid.Row="8" Text="{Binding Order.TotalPrice, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" RenderTransformOrigin="0.506,-0.454" Grid.Column="1" VerticalAlignment="Top"/>
             <TextBox Margin="3,0,99,0" Text="{Binding Order.CustomerAdress, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
             <Button Grid.Column="1" Content="update"  MouseDoubleClick="DeliveryUpdate_MouseDoubleClick" Margin="158,5,0,5" Grid.Row="3" Width="50" />
-            <Button Grid.Column="1" Content="update" Visibility="{Binding}" MouseDoubleClick="ShippingUpdate_MouseDoubleClick" Margin="158,4,0,6" Grid.Row="6" Width="50"/>
+            <Button Grid.Column="1" Content="update" Visibility="{Binding IsBoss, Converter={StaticResource ConvertIsBossToVisability}}" MouseDoubleClick="ShippingUpdate_MouseDoubleClick" Margin="158,4,0,6" Grid.Row="6" Width="50"/>
         </Grid>
 
 

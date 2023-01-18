@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using System.Windows.Data;
+using System.Windows;
+
 namespace PL
 {
  class ConvertImagePathToBitmap : IValueConverter
