@@ -36,11 +36,6 @@ namespace PL
                     try
                     {
                         bl.Cart.Update(c, pro.ID, pro.Amount);
-
-
-
-
-
                     }
 
                     catch (BO.BlMissingEntityException add1)
@@ -49,9 +44,18 @@ namespace PL
 
                         pro.Amount = bl.Product.ItemProduct(pro.ID, c).Amount;
 
-                        MessageBox.Show(add1.Message, "cant add", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show(add1.Message, "cant change amaunt", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    catch (BO.BlInCorrectException ex)
+                    {
+                        MessageBox.Show(ex.Message, " invalid amaunt", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     }
+                }
+                catch (BO.BlInCorrectException ex)
+                {
+                    MessageBox.Show(ex.Message, " invalid amaunt", MessageBoxButton.OK, MessageBoxImage.Information);
+
                 }
                 catch (BO.BlMissingEntityException add)
                 {
@@ -73,6 +77,11 @@ namespace PL
                 catch (BO.BlMissingEntityException update)
                 {
                     MessageBox.Show(update.Message, "cant add", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (BO.BlInCorrectException ex)
+                {
+                    MessageBox.Show(ex.Message, " invalid amaunt", MessageBoxButton.OK, MessageBoxImage.Information);
+
                 }
 
 

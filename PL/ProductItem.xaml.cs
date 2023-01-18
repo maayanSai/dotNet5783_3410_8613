@@ -37,7 +37,7 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            PB.Amount++;
             e.Handled = true;
 
             addtocart(CB, PB);
@@ -57,7 +57,17 @@ namespace PL
 
         }
 
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            PB.Amount--;
+            e.Handled = true;
+
+            addtocart(CB, PB);
+
+            PB = bl.Product.ItemProduct(PB.ID, CB);
+        }
+
         //~ProductItem(){ PB.Amount=bl.Product.ItemProduct(PB.ID, CB).Amount; }
-            
+
     }
 }

@@ -9,9 +9,7 @@ internal class OrderItem : IOrderItem
     string s_orderItem = "orderItem";
     public int Add(DO.OrderItem oi)
     {
-        oi.ID = s_orderItem.s_NextOrderItemNumber; //We will insert the ID into the object
-        s_orderItem.Add(oi); // We will insert the order into the last empty place in the array
-        return oi.ID;
+        throw new NotImplementedException();
     }
 
     public void Delete(int id)

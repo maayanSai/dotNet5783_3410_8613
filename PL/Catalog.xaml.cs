@@ -42,6 +42,7 @@ namespace PL
                         bl.Cart.Update(c, pro.ID, pro.Amount);
 
                         int index = ProducitemtList.IndexOf(ProducitemtList.FirstOrDefault(x => x.ID==pro.ID));
+
                         ProducitemtList.RemoveAt(index);
                         ProducitemtList.Insert(index, pro);
 
@@ -58,14 +59,28 @@ namespace PL
                         MessageBox.Show(add1.Message, "cant add", MessageBoxButton.OK, MessageBoxImage.Information);
                         
                     }
+                    catch (BO.BlInCorrectException ex)
+
+                    {
+                        bl.Cart.Update(c, pro.ID, keep.Amount);
+
+                        pro.Amount=bl.Product.ItemProduct(pro.ID, c).Amount;
+                        MessageBox.Show(ex.Message, " invalid amaunt", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    }
                 }
                 catch (BO.BlMissingEntityException add)
                 {
                     MessageBox.Show(add.Message, "cant add", MessageBoxButton.OK, MessageBoxImage.Information);
                     pro.Amount=bl.Product.ItemProduct(pro.ID, c).Amount    ;
                 }
-                  
+                catch (BO.BlInCorrectException ex)
+                {
+                    MessageBox.Show(ex.Message, " invalid amaunt", MessageBoxButton.OK, MessageBoxImage.Information);
+                    pro.Amount=bl.Product.ItemProduct(pro.ID, c).Amount;
                 }
+
+            }
                 else
                 {
                     try
@@ -74,9 +89,9 @@ namespace PL
                     //pro.Amount=c.Items.Find(x => x.ProductID==pro.ID).Amount;
                     //ProducitemtLisst.Remove(ProducitemtLisst.FirstOrDefault(x => x.ID==pro.ID));
                     //ProducitemtLisst.Add(pro);
-                    int index = ProducitemtList.IndexOf(ProducitemtList.FirstOrDefault(x => x.ID==pro.ID));
-                    ProducitemtList.RemoveAt(index);
-                    ProducitemtList.Insert(index, pro);
+                    //int index = ProducitemtList.IndexOf(ProducitemtList.FirstOrDefault(x => x.ID==pro.ID));
+                    //ProducitemtList.RemoveAt(index);
+                    //ProducitemtList.Insert(index, pro);
                 }
 
                 
@@ -85,9 +100,14 @@ namespace PL
                     {
                         MessageBox.Show(update.Message, "cant add", MessageBoxButton.OK, MessageBoxImage.Information);
                      }
+                catch (BO.BlInCorrectException ex)
+                {
+                    MessageBox.Show(ex.Message, " invalid amaunt", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                }
 
 
-                 }
+            }
                 
             
            
@@ -158,8 +178,7 @@ namespace PL
            
             ProductItem pro = new ProductItem(p, Cb, AddToCart);
             pro.ShowDialog();
-            ProductItem windoProductItem = new ProductItem(p!, Cb, AddToCart);
-            windoProductItem.ShowDialog();
+           
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
