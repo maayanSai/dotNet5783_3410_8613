@@ -65,4 +65,12 @@ public partial class OrderForListWindow : Window
 
 
     }
+
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+        StatisticksOrdersWindow p = new StatisticksOrdersWindow();
+            this.Content = p;
+    }
+
+
 }

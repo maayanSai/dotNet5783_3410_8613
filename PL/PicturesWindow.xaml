@@ -16,7 +16,7 @@
             </ListView.View>
             <Image x:Name="image" Height="100" Width="100">
                 <Image.OpacityMask>
-                    <ImageBrush ImageSource="{Binding}"/>
+                    <ImageBrush ImageSource="{Binding }"/>
                 </Image.OpacityMask>
             </Image>
         </ListView>

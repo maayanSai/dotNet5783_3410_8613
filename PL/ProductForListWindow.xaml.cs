@@ -16,6 +16,29 @@ namespace PL;
 public partial class ProductListWindow : Window
 {
     BlApi.IBl? bl = BlApi.Factory.Get();
+    void update (string str, int id)
+    {
+        try
+        {
+            var v = bl.Product.ItemProduct(id);
+            BO.ProductForList p = new BO.ProductForList {ID=v.ID,ImageRelativeName=v.ImageRelativeName,Category=v.Category,Name=v.Name,Price=v.Price };
+            var a =ProductList.FirstOrDefault(x=>x.ID==p.ID);
+            int index = ProductList.IndexOf(a);
+
+            ProductList.RemoveAt(index);
+            ProductList.Insert(index, p);   
+           
+          
+            
+
+
+
+        }
+        catch(BO.BlAlreadyExistEntityException ex)
+        {
+
+        }
+    }
     /// <summary>
     /// constructive action
     /// </summary>
@@ -104,7 +127,7 @@ public partial class ProductListWindow : Window
         e.Handled= true;
         BO.ProductForList? p = (BO.ProductForList)((DataGrid)sender).SelectedItem;
         
-        ProductWindow windoProduct = new ProductWindow(p.ID);
+        ProductWindow windoProduct = new ProductWindow(p.ID, update);
         windoProduct.ShowDialog();
         BO.ProductForList element = ProductList.First(x => x?.ID == p.ID)!;
         int index = ProductList.IndexOf(element);

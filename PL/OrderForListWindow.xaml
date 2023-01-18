@@ -17,13 +17,14 @@
                 <DataGridTextColumn Binding="{Binding Amount}" Header="Amount " Width="SizeToHeader"/>
                 <DataGridTextColumn Binding="{Binding TotalPrice}" Header="Total Price " Width="SizeToHeader"/>
             </DataGrid.Columns>
-            
+
         </DataGrid>
         <Grid HorizontalAlignment="Left" Height="54" Margin="10,339,0,0" VerticalAlignment="Top" Width="91">
             <Grid.Background>
                 <ImageBrush ImageSource="pictures/daimon.png"/>
             </Grid.Background>
         </Grid>
+        <Button Content="Button" Margin="672,93,0,0" VerticalAlignment="Top" Width="86" Click="Button_Click"/>
 
 
     </Grid>

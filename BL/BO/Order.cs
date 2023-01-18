@@ -49,5 +49,14 @@ public class Order
     /// To String Property
     /// </summary>
     /// <returns></returns>
+ 
     public override string ToString() => this.ToStringProperty();
+}
+public struct StatisticksOrderByMonth
+{
+    public string MonthName { get; set; }
+
+    public int CountOrders { get; set; }
+
+    public double? OrdersTotalPrice { get; set; }
 }

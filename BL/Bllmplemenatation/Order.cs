@@ -1,5 +1,6 @@
 ﻿namespace BlImplementation;
 using BlApi;
+using BO;
 using System.Collections.Generic;
 
 /// <summary>
@@ -217,6 +218,22 @@ internal class Order : IOrder
             Tracking = tracking,
         };
         return ortk;
+    }
+    public IEnumerable<StatisticksOrderByMonth> GetStatisticksOrderByMonths()
+    {
+        return from order in dal!.Order.GetAll()
+               let _order = order.GetValueOrDefault()
+               let orderDate = _order.OrderDate.GetValueOrDefault()
+               group order by orderDate.Month.ToString("MMMM") into newGroup
+               select new StatisticksOrderByMonth
+               {
+                   MonthName = newGroup.Key,
+                   CountOrders = newGroup.Count(),
+                   OrdersTotalPrice = (from order in newGroup
+                                       let totalPriceOfOrder = dal.OrderItem?.GetAll(orderItem => orderItem?.ID == order?.ID)
+                                       .Sum(orderItem => orderItem?.Price)
+                                       select totalPriceOfOrder).Sum()
+               };
     }
 
 }
