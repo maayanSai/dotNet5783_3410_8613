@@ -35,9 +35,9 @@ namespace PL
             update=updateOrder;
             Order =bl?.Order.ItemOrder(id)!;
             var a = Order.Items;
-           
+
+            IsBoss = Visibility.Visible;
             
-            IsBoss=Visibility.Collapsed;
 
 
         }
@@ -45,7 +45,7 @@ namespace PL
         {
             Order=bl?.Order.ItemOrder(id)!;
             InitializeComponent();
-            IsBoss=Visibility.Hidden;
+            IsBoss = Visibility.Collapsed;
 
         }
 
