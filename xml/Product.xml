@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfProduct xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Product>
+    <ID>100000</ID>
+    <Name>family necklace</Name>
+    <Price>2365</Price>
+    <Category>Necklace</Category>
+    <InStock>2</InStock>
+    <ImageRelativeName>\pictures\family necklace.png</ImageRelativeName>
+  </Product>
+  <Product>
+    <ID>100001</ID>
+    <Name>tight earings</Name>
+    <Price>2192</Price>
+    <Category>Earings</Category>
+    <InStock>0</InStock>
+    <ImageRelativeName>\pictures\tight earings.png</ImageRelativeName>
+  </Product>
+  <Product>
+    <ID>100002</ID>
+    <Name>double bracelet</Name>
+    <Price>4723</Price>
+    <Category>Bracelet</Category>
+    <InStock>1</InStock>
+    <ImageRelativeName>\pictures\double bracelet.png</ImageRelativeName>
+  </Product>
+  <Product>
+    <ID>100003</ID>
+    <Name>tight necklace</Name>
+    <Price>4491</Price>
+    <Category>Necklace</Category>
+    <InStock>2</InStock>
+    <ImageRelativeName>\pictures\tight necklace.png</ImageRelativeName>
+  </Product>
+  <Product>
+    <ID>100004</ID>
+    <Name>climbing earings</Name>
+    <Price>4898</Price>
+    <Category>Earings</Category>
+    <InStock>0</InStock>
+    <ImageRelativeName>\pictures\climbing earings.png</ImageRelativeName>
+  </Product>
+  <Product>
+    <ID>100005</ID>
+    <Name>Hard ankle</Name>
+    <Price>4828</Price>
+    <Category>FootBracelet</Category>
+    <InStock>2</InStock>
+    <ImageRelativeName>\pictures\Hard ankle.png</ImageRelativeName>
+  </Product>
+  <Product>
+    <ID>100006</ID>
+    <Name>ankle bracelet loops</Name>
+    <Price>3536</Price>
+    <Category>FootBracelet</Category>
+    <InStock>0</InStock>
+    <ImageRelativeName>\pictures\ankle bracelet loops.png</ImageRelativeName>
+  </Product>
+  <Product>
+    <ID>100007</ID>
+    <Name>knot ring</Name>
+    <Price>871</Price>
+    <Category>Ring</Category>
+    <InStock>1</InStock>
+    <ImageRelativeName>\pictures\knot ring.png</ImageRelativeName>
+  </Product>
+  <Product>
+    <ID>100008</ID>
+    <Name>Diamond anklet</Name>
+    <Price>2915</Price>
+    <Category>FootBracelet</Category>
+    <InStock>0</InStock>
+    <ImageRelativeName>\pictures\Diamond anklet.png</ImageRelativeName>
+  </Product>
+  <Product>
+    <ID>100009</ID>
+    <Name>Hard ankle</Name>
+    <Price>3992</Price>
+    <Category>FootBracelet</Category>
+    <InStock>3</InStock>
+    <ImageRelativeName>\pictures\Hard ankle.png</ImageRelativeName>
+  </Product>
+  <Product>
+    <ID>100010</ID>
+    <Name>Link bracelet</Name>
+    <Price>2578</Price>
+    <Category>Bracelet</Category>
+    <InStock>0</InStock>
+    <ImageRelativeName>\pictures\Link bracelet.png</ImageRelativeName>
+  </Product>
+  <Product>
+    <ID>100011</ID>
+    <Name>pearl ring</Name>
+    <Price>1336</Price>
+    <Category>Ring</Category>
+    <InStock>1</InStock>
+    <ImageRelativeName>\pictures\pearl ring.png</ImageRelativeName>
+  </Product>
+  <Product>
+    <ID>100012</ID>
+    <Name>ankle bracelet loops</Name>
+    <Price>1799</Price>
+    <Category>FootBracelet</Category>
+    <InStock>3</InStock>
+    <ImageRelativeName>\pictures\ankle bracelet loops.png</ImageRelativeName>
+  </Product>
+  <Product>
+    <ID>100013</ID>
+    <Name>pearl ring</Name>
+    <Price>3144</Price>
+    <Category>Ring</Category>
+    <InStock>3</InStock>
+    <ImageRelativeName>\pictures\pearl ring.png</ImageRelativeName>
+  </Product>
+  <Product>
+    <ID>100014</ID>
+    <Name>Hard ankle</Name>
+    <Price>4444</Price>
+    <Category>FootBracelet</Category>
+    <InStock>0</InStock>
+    <ImageRelativeName>\pictures\Hard ankle.png</ImageRelativeName>
+  </Product>
+  <Product>
+    <ID>100015</ID>
+    <Name>Diamond anklet</Name>
+    <Price>3819</Price>
+    <Category>FootBracelet</Category>
+    <InStock>1</InStock>
+    <ImageRelativeName>\pictures\Diamond anklet.png</ImageRelativeName>
+  </Product>
+  <Product>
+    <ID>100016</ID>
+    <Name>falling earings</Name>
+    <Price>2209</Price>
+    <Category>Earings</Category>
+    <InStock>2</InStock>
+    <ImageRelativeName>\pictures\falling earings.png</ImageRelativeName>
+  </Product>
+  <Product>
+    <ID>100017</ID>
+    <Name>Pearl bracelet</Name>
+    <Price>1350</Price>
+    <Category>Bracelet</Category>
+    <InStock>3</InStock>
+    <ImageRelativeName>\pictures\Pearl bracelet.png</ImageRelativeName>
+  </Product>
+  <Product>
+    <ID>100018</ID>
+    <Name>pearl ring</Name>
+    <Price>2360</Price>
+    <Category>Ring</Category>
+    <InStock>1</InStock>
+    <ImageRelativeName>\pictures\pearl ring.png</ImageRelativeName>
+  </Product>
+  <Product>
+    <ID>100019</ID>
+    <Name>Hard ankle</Name>
+    <Price>1096</Price>
+    <Category>FootBracelet</Category>
+    <InStock>2</InStock>
+    <ImageRelativeName>\pictures\Hard ankle.png</ImageRelativeName>
+  </Product>
+</ArrayOfProduct>

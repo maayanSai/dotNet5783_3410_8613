@@ -123,13 +123,6 @@ internal static class DataSource
         s_createAndInitProducts();
         s_createAndInitOrders();
         s_createAndInitOrderItem();
-        //string a = "s_products";
-        //string b= "s_orders";
-        //string c = "s_orderItems";
-
-        //XMLTools.SaveListToXMLSerializer(s_productsList, a);
-        //XMLTools.SaveListToXMLSerializer(s_productsList, b);
-        //XMLTools.SaveListToXMLSerializer(s_productsList, c);
     }
 }
 

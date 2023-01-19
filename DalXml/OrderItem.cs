@@ -1,12 +1,11 @@
-﻿
-using DO;
+﻿using DO;
 using DalApi;
 
 namespace Dal;
 
 internal class OrderItem : IOrderItem
 {
-    string s_orderItem = "orderItem";
+    string s_orderItem = "OrderItem";
     public int Add(DO.OrderItem oi)
     {
         throw new NotImplementedException();
