@@ -24,9 +24,7 @@
                 <ImageBrush ImageSource="pictures/daimon.png"/>
             </Grid.Background>
         </Grid>
-        <Button Content="Button" Margin="672,93,0,0" VerticalAlignment="Top" Width="86" Click="Button_Click"/>
-
-
+        <Button Content="Statisticks" Margin="689,376,0,0" VerticalAlignment="Top" Width="86" Click="Statisticks_Click"/>
     </Grid>
 
 

@@ -38,6 +38,7 @@ internal class Product : IProduct
                 Price = p?.Price ?? 0,
                 Category = (DO.Category?)p?.Category ?? throw new BO.BlWorngCategoryException("Wrong category "),
                 InStock = p.InStock,
+                ImageRelativeName = p?.ImageRelativeName,
             };
             dal?.Product.Add(p1);
         }
@@ -189,7 +190,7 @@ internal class Product : IProduct
                 Price = p?.Price ?? 0,
                 InStock = p?.InStock ?? 0,
                 Category = (DO.Category?)p?.Category ?? throw new BO.BlInCorrectException("product name"),
-                ImageRelativeName=p.ImageRelativeName,
+                ImageRelativeName = p.ImageRelativeName,
             };
             dal?.Product.Update(dp);
         }

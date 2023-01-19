@@ -36,7 +36,7 @@
             <Label Grid.Column="0" Content="Customer Adress:" Margin="3,0,0,0" VerticalAlignment="Center" Grid.ColumnSpan="2" Width="150" Height="42"/>
             <Label Grid.Column="0" Content="Customer Email:" Margin="3,0,0,0" Grid.Row="1" VerticalAlignment="Center" Height="42" Width="117"/>
             <Label Grid.Column="0" Content="Customer Name:" Margin="3,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="42" Width="117"/>
-            <Label Grid.Column="0" Content="Deliveryr Date:" Margin="3,0,0,0" Grid.Row="3" VerticalAlignment="Center" Height="42" Width="117"/>
+            <Label Grid.Column="0" Content="Delivery Date:" Margin="3,0,0,0" Grid.Row="3" VerticalAlignment="Center" Height="42" Width="117"/>
             <Label Grid.Column="0" Content="ID:" Margin="3,0,0,0" Grid.Row="4" VerticalAlignment="Center" Height="42" Width="91"/>
             <Label Grid.Column="0" Content="Order Date:" Margin="3,0,0,0" Grid.Row="5" VerticalAlignment="Center" Height="42" Width="91"/>
             <Label Grid.Column="0" Content="Ship Date:" Margin="3,0,0,0" Grid.Row="6" VerticalAlignment="Center" Height="42" Width="91"/>
@@ -52,8 +52,8 @@
             <TextBox Margin="3,12,99,12" Grid.Row="7" Text="{Binding Order.Status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
             <TextBox Margin="3,7,99,0" Grid.Row="8" Text="{Binding Order.TotalPrice, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" RenderTransformOrigin="0.506,-0.454" Grid.Column="1" VerticalAlignment="Top"/>
             <TextBox Margin="3,0,99,0" Text="{Binding Order.CustomerAdress, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-            <Button Grid.Column="1" Content="update" Visibility="{Binding IsBoss}"  MouseDoubleClick="DeliveryUpdate_MouseDoubleClick" Margin="158,5,0,5" Grid.Row="3" Width="50" />
-            <Button Grid.Column="1" Content="update" Visibility="{Binding IsBoss}" MouseDoubleClick="ShippingUpdate_MouseDoubleClick" Margin="158,4,0,6" Grid.Row="6" Width="50"/>
+            <Button Grid.Column="1" Content="update" Visibility="{Binding IsBoss}"   Margin="158,5,0,5" Grid.Row="3" Width="50" Click="DeliveryUpdate_Click" />
+            <Button Grid.Column="1" Content="update" Visibility="{Binding IsBoss}"  Margin="158,4,0,6" Grid.Row="6" Width="50" Click="ShippingUpdate_Click"/>
         </Grid>
 
 

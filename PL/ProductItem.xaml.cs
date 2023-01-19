@@ -19,10 +19,10 @@ namespace PL
     /// </summary>
     public partial class ProductItem : Window
     {
-        BlApi.IBl? bl = BlApi.Factory.Get();
-        BO.Cart CB;
+        readonly BlApi.IBl? bl = BlApi.Factory.Get();
+        readonly BO.Cart CB;
         public delegate BO.Cart? AddingToCrt(BO.Cart c, BO.ProductItem pro);
-        AddingToCrt? addtocart;
+        readonly AddingToCrt? addtocart;
 
         static readonly DependencyProperty PBDep = DependencyProperty.Register(nameof(PB), typeof(BO.ProductItem), typeof(ProductItem));
         BO.ProductItem PB { get => (BO.ProductItem)GetValue(PBDep); set => SetValue(PBDep, value); }
@@ -35,39 +35,27 @@ namespace PL
             addtocart = add;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Add_Button(object sender, RoutedEventArgs e)
         {
             PB.Amount++;
             e.Handled = true;
-
-            addtocart(CB, PB);
-
-            PB = bl.Product.ItemProduct(PB.ID, CB);
-
-
-
-
+            addtocart!(CB, PB);
+            PB = bl!.Product.ItemProduct(PB.ID, CB);
         }
 
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Cart_Button(object sender, RoutedEventArgs e)
         {
             Cart cartwindow = new Cart(CB);
+            //CB.Items = bl.Product.GetProductItem();
             cartwindow.ShowDialog();
-
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void Delete_Button(object sender, RoutedEventArgs e)
         {
             PB.Amount--;
             e.Handled = true;
-
-            addtocart(CB, PB);
-
-            PB = bl.Product.ItemProduct(PB.ID, CB);
+            addtocart!(CB, PB);
+            PB = bl!.Product.ItemProduct(PB.ID, CB);
         }
-
-        //~ProductItem(){ PB.Amount=bl.Product.ItemProduct(PB.ID, CB).Amount; }
-
     }
 }

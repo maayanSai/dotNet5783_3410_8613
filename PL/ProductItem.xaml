@@ -44,20 +44,20 @@
         <TextBox Foreground="#FFEFCF81" Text="{Binding PB.Name}" x:Name="Name" Height="29" Margin="300,178,0,0" TextWrapping="Wrap" Width="123" RenderTransformOrigin="0.473,0.77" />
         <TextBox Foreground="#FFEFCF81" Text="{Binding PB.Price, Mode=TwoWay}" x:Name="Price" Height="29" Margin="300,222,0,0" TextWrapping="Wrap" Width="123"/>
         <TextBox Foreground="#FFEFCF81"  x:Name="InStock" Text="{Binding PB.isStock}" Height="29" Margin="300,267,0,0" TextWrapping="Wrap" Width="123" />
-        <Button  Name="BtnAddOrUpdetProduct" Content="+" Height="34" Margin="70,319,0,0" VerticalAlignment="Top" Width="46" Click="Button_Click" Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print" Grid.Column="1">
+        <Button  Name="BtnAddOrUpdetProduct" Content="+" Height="47" Margin="56,313,0,0" VerticalAlignment="Top" Width="41" Click="Add_Button" Foreground="#FFEFCF81" FontSize="20" FontFamily="Segoe Print" Grid.Column="1">
             <Button.Background >
                 <ImageBrush />
 
             </Button.Background>
         </Button>
-        <Button Content="view cart" Margin="241,29,0,0" VerticalAlignment="Top" Height="78" Width="82" Click="Button_Click_1" Grid.Column="1" >
+        <Button Margin="241,46,0,0" VerticalAlignment="Top" Height="61" Width="63" Click="Cart_Button" Grid.Column="1" >
             <Button.Background>
-                <ImageBrush />
+                <ImageBrush ImageSource="/cart.png" />
             </Button.Background>
         </Button>
         <Label Foreground="#FFEFCF81"    Content="Amount:" Margin="205,313,0,0" Height="35" Width="80"/>
         <TextBox  IsReadOnly="False" IsEnabled="False" Foreground="#FFEFCF81"  Text="{Binding PB.Amount ,Mode=TwoWay}"  Margin="299,319,0,0" TextWrapping="Wrap" Width="124" Height="29"  />
-        <Button Grid.Column="1" Content="-" Margin="0,319,0,0" VerticalAlignment="Top" Height="34" Width="51" Click="Button_Click_2"/>
+        <Button Grid.Column="1" FontSize="20" Content="-" Margin="10,313,0,0" VerticalAlignment="Top" Height="47" FontFamily="22" Width="41" Click="Delete_Button"/>
         <Grid HorizontalAlignment="Left" Height="40" Margin="31,360,0,0" VerticalAlignment="Top" Width="70">
 
         </Grid>

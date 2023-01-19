@@ -22,7 +22,7 @@ namespace PL
     public partial class OrderItemWindow : Window
     {
         public delegate void UpdateOrder(int proId);
-        UpdateOrder? update;
+        readonly UpdateOrder? update;
         BlApi.IBl? bl = BlApi.Factory.Get();
         static readonly DependencyProperty OrderctDep = DependencyProperty.Register(nameof(Order), typeof(BO.Order), typeof(OrderItemWindow));
         BO.Order Order { get => (BO.Order)GetValue(OrderctDep); set => SetValue(OrderctDep, value); }
@@ -34,45 +34,58 @@ namespace PL
             update=updateOrder;
             Order =bl?.Order.ItemOrder(id)!;
             var a = Order.Items;
-
             IsBoss = Visibility.Visible;
-            
-
-
         }
         public OrderItemWindow(int id)
         {
             Order=bl?.Order.ItemOrder(id)!;
             InitializeComponent();
             IsBoss = Visibility.Collapsed;
+        }
 
-        }
-        private void ShippingUpdate_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            e.Handled=true;
-            try
-            {
-                var a = bl?.Order.Updateshipping(Order.ID);
-                Order=a!;
-                update!(Order.ID);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-        private void DeliveryUpdate_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void DeliveryUpdate_Click(object sender, RoutedEventArgs e)
         {
             e.Handled = true;
             try
             {
                 var a = bl?.Order.Updatesupply(Order.ID);
-                Order=a!;
+                Order = a!;
                 update!(Order.ID);
             }
-            catch (Exception ex)
+            catch (BO.BlInCorrectException exp)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(exp.Message, "can not update entity", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (BO.BlMissingEntityException exp)
+            {
+                MessageBox.Show(exp.Message, "can not update entity", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (BO.BlNullPropertyException exp)
+            {
+                MessageBox.Show(exp.Message, "can not update entity", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void ShippingUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            e.Handled = true;
+            try
+            {
+                var a = bl?.Order.Updateshipping(Order.ID);
+                Order = a!;
+                update!(Order.ID);
+            }
+            catch (BO.BlInCorrectException exp)
+            {
+                MessageBox.Show(exp.Message, "can not update entity", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (BO.BlMissingEntityException exp)
+            {
+                MessageBox.Show(exp.Message, "can not update entity", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (BO.BlNullPropertyException exp)
+            {
+                MessageBox.Show(exp.Message, "can not update entity", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }

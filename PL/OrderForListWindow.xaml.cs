@@ -30,9 +30,7 @@ public partial class OrderForListWindow : Window
             int index = OrderList.IndexOf(o);
             OrderList.RemoveAt(index);
             OrderList.Add(bl?.Order.GetOrderForList(orderId)!);
-
         }
-
         public ObservableCollection<BO.OrderItem> OrderItemViewSource
         {
             get { return (ObservableCollection<BO.OrderItem>)GetValue(OrdersDep); }
@@ -58,11 +56,9 @@ public partial class OrderForListWindow : Window
             orderWindow.ShowDialog(); 
        }
 
-    private void Button_Click(object sender, RoutedEventArgs e)
+    private void Statisticks_Click(object sender, RoutedEventArgs e)
     {
-        StatisticksOrdersWindow p = new StatisticksOrdersWindow();
-            this.Content = p;
+        StatisticksOrdersWindow p = new();
+        Content = p;
     }
-
-
 }

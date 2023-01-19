@@ -10,6 +10,7 @@ public partial class MainWindow : Window
     public BO.Cart c;
     public BO.OrderTracking Ot;
     BlApi.IBl? bl = BlApi.Factory.Get();
+
     /// <summary>
     /// constructive action
     /// </summary>

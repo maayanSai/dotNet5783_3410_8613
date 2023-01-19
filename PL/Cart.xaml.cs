@@ -21,11 +21,9 @@ namespace PL;
 
 public partial class Cart : Window
 {
-
-    BlApi.IBl? bl = BlApi.Factory.Get();
+    readonly BlApi.IBl? bl = BlApi.Factory.Get();
     public BO.Cart AddToCart(BO.Cart c, BO.ProductItem? pro)
     {
-       
         int amuont=0;
         try
         {
@@ -80,7 +78,7 @@ public partial class Cart : Window
     }
     public static readonly DependencyProperty CartDp =
            DependencyProperty.Register("Cb", typeof(BO.Cart), typeof(Window));
-    public string category
+    public string Category
     {
         get { return (string)GetValue(categorydp); }
         set { SetValue(categorydp, value); }
@@ -106,7 +104,7 @@ public partial class Cart : Window
         {
             int orderid = bl!.Cart.MakeAnOrder(Cb);
             MessageBox.Show("the order orderd sexxsesfully", "the order orderd sexxsesfully", MessageBoxButton.OK, MessageBoxImage.Information);
-            OrderItemWindow? orderWindow = new OrderItemWindow(orderid);
+            OrderItemWindow? orderWindow = new (orderid);
             orderWindow.ShowDialog();
         }
         catch (BO.BlMissingEntityException c)
@@ -135,13 +133,12 @@ public partial class Cart : Window
         try
         {
             BO.ProductItem pro = bl!.Product.ItemProduct(((BO.ProductItem)sender).ID, Cb);
-            ProductItem p = new ProductItem(pro, Cb, AddToCart);
+            ProductItem p = new(pro, Cb, AddToCart);
             p.ShowDialog();
         }
         catch(BO.BlMissingEntityException exp)
         {
             MessageBox.Show(exp.Message, "can not find entity" + exp.Message, MessageBoxButton.OK, MessageBoxImage.Information);
-
         }
     }
 }

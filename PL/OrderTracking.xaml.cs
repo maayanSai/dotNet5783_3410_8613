@@ -72,17 +72,14 @@ public partial class OrderTracking : Window
         catch(BO.BlInCorrectException exp)
         {
             MessageBox.Show(exp.Message, "can not found the order", MessageBoxButton.OK, MessageBoxImage.Information);
-
         }
         catch (BO.BlMissingEntityException exp)
         {
             MessageBox.Show(exp.Message, "can not found the order", MessageBoxButton.OK, MessageBoxImage.Information);
-
         }
         catch (BO.BlNullPropertyException exp)
         {
             MessageBox.Show(exp.Message, "can not found the order", MessageBoxButton.OK, MessageBoxImage.Information);
-
         }
     }
 }

@@ -15,13 +15,13 @@ namespace PL;
 /// </summary>
 public partial class ProductListWindow : Window
 {
-    BlApi.IBl? bl = BlApi.Factory.Get();
-    void update (string str, int id)
+    readonly BlApi.IBl? bl = BlApi.Factory.Get();
+    void Update (string str, int id)
     {
         try
         {
             var v = bl?.Product.ItemProduct(id);
-            BO.ProductForList p = new (){ID=v!.ID,ImageRelativeName=v.ImageRelativeName,Category=v.Category,Name=v.Name,Price=v.Price };
+            BO.ProductForList p = new (){ID=v!.ID,ImageRelativeName=str,Category=v.Category,Name=v.Name,Price=v.Price };
             var a =ProductList.FirstOrDefault(x=>x?.ID==p.ID);
             int index = ProductList.IndexOf(a);
             ProductList.RemoveAt(index);
@@ -43,7 +43,6 @@ public partial class ProductListWindow : Window
 
     public static readonly DependencyProperty ProductListProperty =
            DependencyProperty.Register("ProductList", typeof(ObservableCollection<BO.ProductForList?>), typeof(Window));
-  
     public ProductListWindow()
     {
         InitializeComponent();
@@ -119,22 +118,17 @@ public partial class ProductListWindow : Window
     /// <param name="sender"></param>
     /// <param name="e"></param>
 
-    private void productForListDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+    private void ProductForListDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
         e.Handled= true;
         BO.ProductForList? p = (BO.ProductForList)((DataGrid)sender).SelectedItem;
         
-        ProductWindow windoProduct = new ProductWindow(p.ID, update);
+        ProductWindow windoProduct = new ProductWindow(p.ID, Update);
         windoProduct.ShowDialog();
         BO.ProductForList element = ProductList.First(x => x?.ID == p.ID)!;
         int index = ProductList.IndexOf(element);
         ProductList.RemoveAt(index);
         ProductList.Add(bl?.Product.GetProducts(x => x?.ID ==p.ID).First());
-      
     }
 
-    private void productForListDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-
-    }
 }

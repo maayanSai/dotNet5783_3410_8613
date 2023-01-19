@@ -13,10 +13,10 @@ namespace PL;
 public partial class ProductWindow : Window
 {
     public delegate void update(string productImagepPth,int id);
-    update? upd;
+    readonly update? upd;
     public delegate void AddingOrUpdate(int proId);
-    AddingOrUpdate? add;
-    BlApi.IBl? bl = BlApi.Factory.Get();
+    readonly AddingOrUpdate? add;
+    readonly BlApi.IBl? bl = BlApi.Factory.Get();
 
     /// <summary>
     /// Constructive action to add products
@@ -36,7 +36,8 @@ public partial class ProductWindow : Window
         Mode= false;
         CategoryForNewProduct.ItemsSource = Enum.GetValues(typeof(BO.Category));
         BtnAddOrUpdetProductContent = "Add";
-        add = ad;    
+        add = ad;
+        
     }
     /// <summary>
     /// Constructive action to update products
@@ -65,26 +66,29 @@ public partial class ProductWindow : Window
     /// <param name="e"></param>
     private void ButtonAddOrApdet_Click(object sender, RoutedEventArgs e)
     {
-        if (Product.ImageRelativeName != null)
-        {
+        //if (Product.ImageRelativeName != null)
+        //{
             string imageName = Product.ImageRelativeName.Substring(Product.ImageRelativeName.LastIndexOf("\\"));
-            if (!File.Exists(Environment.CurrentDirectory[..^4] + imageName))
+            if (!File.Exists(Environment.CurrentDirectory[..^4] + @"\pictures\" + imageName))
             {
-                File.Copy(Product.ImageRelativeName, Environment.CurrentDirectory[..^4]  + imageName);
+                File.Copy(Product.ImageRelativeName, Environment.CurrentDirectory[..^4] + @"\pictures\" + imageName);
                 var v = Product;
                 Product = v;
             }
             Product.ImageRelativeName = imageName;
             try
             {
-                bl!.Product.Update(Product);
-                upd!(Product.ImageRelativeName, Product.ID);
+                if (BtnAddOrUpdetProductContent == "Update")
+                {
+                    bl!.Product.Update(Product);
+                    upd!(Product.ImageRelativeName, Product.ID);
+                }
             }
-            catch(BO.BlInCorrectException exp)
+            catch (BO.BlInCorrectException exp)
             {
                 MessageBox.Show(exp.Message, "can not update the product", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-        }
+        //}
         try
         {
             if (BtnAddOrUpdetProductContent == "Add")
@@ -98,6 +102,7 @@ public partial class ProductWindow : Window
             {
                 bl!.Product.Update(Product);
                 MessageBox.Show("Product Updet succefully", "succefully", MessageBoxButton.OK, MessageBoxImage.Information);
+                upd!(Product.ImageRelativeName!, Product.ID);
                 this.Close();
             }
         }
@@ -106,7 +111,7 @@ public partial class ProductWindow : Window
             MessageBox.Show(exp.Message, "can not update the product", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
-    private void image_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    private void Image_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
         OpenFileDialog openFileDialog = new();
         if (openFileDialog.ShowDialog() == true)

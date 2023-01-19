@@ -13,6 +13,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="add cart.png" />
+    <None Remove="add.png" />
     <None Remove="ankle bracelet loops.png" />
     <None Remove="cart.png" />
     <None Remove="climbing earings.png" />
@@ -62,7 +64,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="add cart.png" />
+    <Resource Include="add.png" />
     <Resource Include="ankle bracelet loops.png" />
+    <Resource Include="cart.png" />
     <Resource Include="climbing earings.png" />
     <Resource Include="Diamond anklet.png" />
     <Resource Include="diamond necklace.png" />

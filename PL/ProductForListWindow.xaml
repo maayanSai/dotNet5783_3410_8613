@@ -27,7 +27,7 @@
             <ComboBox Name="AttributeSelector" FontFamily="Segoe Print" SelectionChanged="SelectionChanged"  Foreground="Black"   Margin="123,5,72,5" SelectedIndex="5"/>
             <Label Grid.Column="0" FontFamily="Segoe Print" Foreground="#FFEFCF81" FontSize="20" Content="Category:" Margin="10,-4,0,0" Width="113"/>
         </Grid>
-        <DataGrid x:Name="productForListDataGrid" ItemsSource="{Binding}"  AutoGenerateColumns="False" EnableRowVirtualization="True" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="161,11,199,23" MouseDoubleClick="productForListDataGrid_MouseDoubleClick" RenderTransformOrigin="0.5,0.5" SelectionChanged="productForListDataGrid_SelectionChanged" Grid.Row="1" >
+        <DataGrid x:Name="productForListDataGrid" ItemsSource="{Binding}"  AutoGenerateColumns="False" EnableRowVirtualization="True" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="161,11,199,23" MouseDoubleClick="ProductForListDataGrid_MouseDoubleClick" RenderTransformOrigin="0.5,0.5" Grid.Row="1" >
             <DataGrid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -50,6 +50,10 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="add" Margin="676,284,0,0" Grid.Row="1" VerticalAlignment="Top" Click="NewProductButton_Click" Height="58" Width="79"/>
+        <Button  Margin="662,294,0,0" Grid.Row="1" VerticalAlignment="Top" Click="NewProductButton_Click" Height="62" Width="69">
+            <Button.Background>
+                <ImageBrush ImageSource="/add.png"/>
+            </Button.Background>
+        </Button>
     </Grid>
 </Window>
