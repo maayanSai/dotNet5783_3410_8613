@@ -16,6 +16,7 @@ internal class DalOrder : IOrder
     {
         // The ID of the order will be according to the last empty place in the array
         ord.ID = DataSource.s_NextOrderNumber; ; //We will insert the ID into the object
+        //DataSource.nextOrderId();
         DataSource.s_ordersList.Add(ord); // We will insert the order into the last empty place in the array
         return ord.ID;
     }

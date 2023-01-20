@@ -17,10 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PL", "PL\PL.csproj", "{712B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{CFF1CEB7-7336-47A4-BD83-5801B8D1677B}"
 	ProjectSection(SolutionItems) = preProject
+		xml\config.xml = xml\config.xml
 		xml\dal-config.xml = xml\dal-config.xml
-		xml\Order.xml = xml\Order.xml
-		xml\OrderItem.xml = xml\OrderItem.xml
-		xml\Product.xml = xml\Product.xml
+		xml\order.xml = xml\order.xml
+		xml\orderItem.xml = xml\orderItem.xml
+		xml\product.xml = xml\product.xml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BL", "BL\BL.csproj", "{8CC7E02F-8802-4BF4-98AC-0A03A660A8A2}"
