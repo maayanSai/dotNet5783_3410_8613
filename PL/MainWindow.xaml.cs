@@ -41,4 +41,9 @@ public partial class MainWindow : Window
     private void Admin_Click(object sender, RoutedEventArgs e) => new OrdersAndProducts().Show();
     private void Catalog_Click(object sender, RoutedEventArgs e)=>new Catalog(c).ShowDialog();
     private void Tracking_Click(object sender, RoutedEventArgs e) =>new OrderTracking().ShowDialog();
+
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+        new SimulatorWindow().Show();
+    }
 }

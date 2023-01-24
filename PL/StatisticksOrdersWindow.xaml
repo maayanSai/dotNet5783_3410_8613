@@ -12,7 +12,7 @@
     <Grid Background="White">
 
         <ListView Name="ordersLv"  FontFamily="Elephant" ItemsSource="{Binding statisticksOrderByMonths}"
-                  HorizontalAlignment="Center" Foreground="Black" Background="{x:Null}" BorderBrush="{x:Null}">
+                  HorizontalAlignment="Center" Foreground="Black" Background="{x:Null}" BorderBrush="{x:Null}" Width="184">
 
             <ListView.View>
                 <GridView>

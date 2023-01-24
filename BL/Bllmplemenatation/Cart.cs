@@ -1,6 +1,8 @@
 ﻿namespace BlImplementation;
 using BlApi;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
+
 
 /// <summary>
 /// Implementation of CART
@@ -19,6 +21,7 @@ internal class Cart : ICart
     /// <returns></returns>
     /// <exception cref="BO.Exceptions.BlInvalidInputException"></exception>
     /// <exception cref="Exception"></exception>
+    [MethodImpl(MethodImplOptions.Synchronized)]    
     public BO.Cart Update(BO.Cart cart, int id, int amount)
     {
         BO.OrderItem? boOrdi = cart.Items?.FirstOrDefault(x => x?.ProductID == id);
@@ -36,7 +39,10 @@ internal class Cart : ICart
             DO.Product? p;
             try
             {
-               p =dal.Product.GetById(id);
+                lock (dal)
+                {
+                    p = dal.Product.GetById(id);
+                }
             }
               catch (DO.UnFoundException exp)
             {
@@ -77,6 +83,7 @@ internal class Cart : ICart
     /// <param name="id"></param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
+    [MethodImpl(MethodImplOptions.Synchronized)]    
     public BO.Cart Add(BO.Cart cart, int id)
     {
         if (id <= 0)
@@ -84,7 +91,10 @@ internal class Cart : ICart
         DO.Product? pro;
         try
         {
-            pro = dal?.Product.GetById(delegate (DO.Product? x) { return x?.ID == id; });
+            lock (dal)
+            {
+                pro = dal?.Product.GetById(delegate (DO.Product? x) { return x?.ID == id; });
+            }
         }
         catch (DO.UnFoundException exp)
         {
@@ -134,12 +144,16 @@ internal class Cart : ICart
     /// <exception cref="Exceptions.BODoesNotExistException"></exception>
     /// <exception cref="Exceptions.BlInvalidInputException"></exception>
     /// <exception cref="Exception"></exception>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public int MakeAnOrder(BO.Cart cart)
     {
         //All the products exist (according to the ID card, although it is possible that they exist with zero quantity
         try
         {
-            cart.Items?.ForEach(x => dal?.Product.GetById(x!.ProductID));
+            lock (dal)
+            {
+                cart.Items?.ForEach(x => dal?.Product.GetById(x!.ProductID));
+            }
         }
         catch (DO.UnFoundException exp)
         {
@@ -170,7 +184,10 @@ internal class Cart : ICart
             DeliveryrDate = null,
             Amount = cart.Items.Select(x => x?.Amount ?? throw new BO.BlNullPropertyException("OrderItem does not exist")).Sum(),
         };
-        orderId = dal!.Order.Add(ord); // There is no need to check that there is no exception for adding an order
+        lock (dal)
+        {
+            orderId = dal!.Order.Add(ord); // There is no need to check that there is no exception for adding an order
+        }
         if (cart.Items.Count <= 0)
             throw new BO.BlInCorrectException("cant make an order because the cart is empty");
         foreach (var bordi in cart.Items)
@@ -187,7 +204,10 @@ internal class Cart : ICart
             DO.Product? p;
             try
             {
-                p = dal?.Product.GetById(dOrdi.ProductID);
+                lock (dal)
+                {
+                    p = dal?.Product.GetById(dOrdi.ProductID);
+                }
             }
             catch (DO.UnFoundException exp)
             {

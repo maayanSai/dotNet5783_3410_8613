@@ -3,7 +3,7 @@ using BlApi;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Schema;
-
+using System.Runtime.CompilerServices;
 
 /// <summary>
 /// A logical entity-item
@@ -19,6 +19,7 @@ internal class Product : IProduct
     /// <exception cref="BO.Exceptions.BlInvalidInputException"></exception>
     /// <exception cref="Exceptions.BlInvalidInputException"></exception>
     /// <exception cref="Exceptions.BOAlreadyExistsException"></exception>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Add(BO.Product p)
     {
         if (p.ID <= 0) // if id is negative
@@ -40,13 +41,17 @@ internal class Product : IProduct
                 InStock = p.InStock,
                 ImageRelativeName = p?.ImageRelativeName,
             };
-            dal?.Product.Add(p1);
+            lock (dal)
+            {
+                dal?.Product.Add(p1);
+            }
         }
         catch (DO.DalAlreadyExistsException exp)
         {
             throw new BO.BlAlreadyExistEntityException("The pruduct is allredy exssists", exp);
         }
     }
+
     /// <summary>
     /// Product deletion (for admin screen)
     /// </summary>
@@ -55,27 +60,36 @@ internal class Product : IProduct
     /// <exception cref="BO.BlNullPropertyException"></exception>
     /// <exception cref="BlMissingEntityException"></exception>
     /// <exception cref="BO.BlMissingEntityException"></exception>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Delete(int id)
     {
         if (id <= 0) // if id is negative
             throw new BO.BlInCorrectException("negative id");
-        if (dal!.OrderItem.GetAll().Where(orderItem => orderItem?.ProductID == id).Any())
-            throw new BO.BlAlreadyExistEntityException("the product is exsist in order/s so that can not be deleated");
+        lock (dal)
+        {
+            if (dal!.OrderItem.GetAll().Where(orderItem => orderItem?.ProductID == id).Any())
+                throw new BO.BlAlreadyExistEntityException("the product is exsist in order/s so that can not be deleated");
+        }
         try
         {
-            dal?.Product.Delete(id);
+            lock (dal)
+            {
+                dal?.Product.Delete(id);
+            }
         }
         catch (DO.UnFoundException exp)
         {
             throw new BO.BlMissingEntityException("The product doesnt exsist", exp);//לשנות לסוג אקספשיון הנדרש
         }
     }
+
     /// <summary>
     /// Product list request (for manager screen and buyer's catalog screen)
     /// </summary>
     /// <returns></returns>
     /// <exception cref="Exceptions.BlNullPropertyException"></exception>
     /// <exception cref="Exception"></exception>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<BO.ProductForList?> GetProducts(Func<BO.ProductForList?, bool>? func = null)
     {
         IEnumerable<BO.ProductForList?> pro = from DO.Product item in dal!.Product.GetAll()
@@ -89,6 +103,7 @@ internal class Product : IProduct
                                               };
         return func is null ? pro : pro.Where(func);
     }
+
     /// <summary>
     /// Product details request (for admin screen and for)
     /// </summary>
@@ -98,6 +113,7 @@ internal class Product : IProduct
     /// <exception cref="BO.BlMissingEntityException"></exception>
     /// <exception cref="BO.BlNullPropertyException"></exception>
     /// <exception cref="BlWorngCategoryException"></exception>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.Product ItemProduct(int id)
     {
         if (id <= 0)
@@ -105,7 +121,10 @@ internal class Product : IProduct
         DO.Product? dopro;
         try
         {
-            dopro = dal?.Product.GetById(id);
+            lock (dal)
+            {
+                dopro = dal?.Product.GetById(id);
+            }
         }
         catch (DO.UnFoundException exp)
         {
@@ -131,6 +150,8 @@ internal class Product : IProduct
     /// <exception cref="BO.BlInCorrectException"></exception>
     /// <exception cref="BO.BlMissingEntityException"></exception>
     /// <exception cref="BO.BlNullPropertyException"></exception>
+    [MethodImpl(MethodImplOptions.Synchronized)]
+    
     public BO.ProductItem ItemProduct(int id, BO.Cart cart)
     {
         if (id <= 0)
@@ -138,7 +159,10 @@ internal class Product : IProduct
         DO.Product? p;
         try
         {
-            p = dal?.Product.GetById(id);
+            lock (dal)
+            {
+                p = dal?.Product.GetById(id);
+            }
         }
         catch (DO.UnFoundException exp)
         {
@@ -163,6 +187,7 @@ internal class Product : IProduct
         };
         return proi;
     }
+
     /// <summary>
     /// Update product data (for admin screen)
     /// </summary>
@@ -170,6 +195,7 @@ internal class Product : IProduct
     /// <exception cref="BO.BlInCorrectException"></exception>
     /// <exception cref="BO.BlNullPropertyException"></exception>
     /// <exception cref="BlMissingEntityException"></exception>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Update(BO.Product p)
     {
         //input validation
@@ -192,34 +218,44 @@ internal class Product : IProduct
                 Category = (DO.Category?)p?.Category ?? throw new BO.BlInCorrectException("product name"),
                 ImageRelativeName = p.ImageRelativeName,
             };
-            dal?.Product.Update(dp);
+            lock (dal)
+            {
+                dal?.Product.Update(dp);
+            }
         }
         catch (DO.UnFoundException exp)
         {
             throw new BO.BlMissingEntityException("the product dosnt exsist", exp);
         }
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<BO.ProductForList?> GetListedProductByCategory(BO.Category c)
     {
         return GetProducts().Where(x => x?.Category == c);
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<BO.ProductItem?> GetProductItem(BO.Cart cart,Func<BO.ProductItem,bool>?fanc=null)
     {
         IEnumerable<BO.ProductItem?> pro;
         if (fanc==null)
         {
-           pro = from DO.Product item in dal!.Product.GetAll()
-                                               select new BO.ProductItem()
-                                               {
-                                                   ID = item.ID,
-                                                   Name = item.Name,
-                                                   Price = item.Price,
-                                                   Category = (BO.Category?)item.Category,
-                                                   Amount=cart?.Items?.FirstOrDefault(x => x?.ProductID==item.ID)?.Amount??0,
-                                                   isStock=item.InStock>0,
-                                                   ImageRelativeName=item.ImageRelativeName,    
-                                               };
-            
+            lock (dal)
+            {
+                pro = from DO.Product item in dal!.Product.GetAll()
+                      select new BO.ProductItem()
+                      {
+                          ID = item.ID,
+                          Name = item.Name,
+                          Price = item.Price,
+                          Category = (BO.Category?)item.Category,
+                          Amount = cart?.Items?.FirstOrDefault(x => x?.ProductID == item.ID)?.Amount ?? 0,
+                          isStock = item.InStock > 0,
+                          ImageRelativeName = item.ImageRelativeName,
+                      };
+            }
+
         }
         else
         {
@@ -238,7 +274,9 @@ internal class Product : IProduct
         }
         return pro;
     }
-   public BO.ProductForList? GetProduct(int id) 
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
+    public BO.ProductForList? GetProduct(int id) 
    {
         try
         {
@@ -250,5 +288,4 @@ internal class Product : IProduct
             throw new BO.BlInCorrectException("incorrect id");
         }
     }
-
 }

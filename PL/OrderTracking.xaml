@@ -36,8 +36,8 @@
         <Button Content="enter"  Margin="253,46,0,0" Click="Enter_Click"/>
         <Button Content="Order" Margin="659,333,0,0" Click="Order_click"/>
 
-        <TextBox  Margin="72,43,0,0" Text="{Binding s, Mode=TwoWay}" />
-        <TextBox  Margin="72,108,0,0" Text="{Binding Ot.Status, Mode=OneWay}"/>
+        <TextBox  Margin="72,43,0,0" Text="{Binding S, Mode=TwoWay}" />
+        <TextBox  Margin="72,108,0,0" IsEnabled="False" Text="{Binding Ot.Status, Mode=OneWay}"/>
         
         <Label Content="ID:" HorizontalAlignment="Left" Height="43" VerticalAlignment="Top" Width="40" Foreground="#FFEFCF81" FontSize="20"  FontFamily="Segoe Print" Background="Black" FontWeight="Bold" Margin="27,37,0,0" />
         

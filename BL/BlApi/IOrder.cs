@@ -1,5 +1,4 @@
 ﻿namespace BlApi;
-using BO;
 
 /// <summary>
 /// interface IOrder
@@ -10,33 +9,35 @@ public interface IOrder
     /// Order list request
     /// </summary>
     /// <returns></returns>
-    IEnumerable<OrderForList?> GetOrders();
+    IEnumerable<BO.OrderForList?> GetOrders();
     /// <summary>
     /// Order details request
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    Order ItemOrder(int id);
+    BO.Order ItemOrder(int id);
     /// <summary>
     /// Order shipping update
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    Order? Updateshipping(int id);
+    BO.Order? Updateshipping(int id);
     /// <summary>
     /// Order supply update
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    Order? Updatesupply(int id);
+    BO.Order? Updatesupply(int id);
     /// <summary>
     /// Order tracking 
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    OrderTracking? Tracking(int id);
+    BO.OrderTracking? Tracking(int id);
+   
+    public BO.Order? OrderEldest();
 
-    public IEnumerable<StatisticksOrderByMonth> GetStatisticksOrderByMonths();
-    OrderForList GetOrderForList (int id);
+    public IEnumerable<BO.StatisticksOrderByMonth> GetStatisticksOrderByMonths();
+    BO.OrderForList GetOrderForList (int id);
 
 }

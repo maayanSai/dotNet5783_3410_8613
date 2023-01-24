@@ -1,5 +1,6 @@
 ﻿namespace Dal;
 using DalApi;
+using System.Runtime.CompilerServices;
 using DO;
 
 /// <summary>
@@ -13,6 +14,7 @@ internal class DalProduct : IProduct
     /// <param name="p"></param>
     /// <returns></returns>
     /// <exception cref="DalAlreadyExistsException"></exception>
+    [MethodImpl(MethodImplOptions.Synchronized)]    /// 
     public int Add(Product p)
     {
         if ((DataSource.s_productsList.Exists(x => x?.ID == p.ID)))
@@ -23,6 +25,7 @@ internal class DalProduct : IProduct
             return p.ID;
         }
     }
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public Product? GetById(int id)
     {
         Product? P = DataSource.s_productsList.FirstOrDefault(x => x?.ID == id);
@@ -33,6 +36,7 @@ internal class DalProduct : IProduct
     /// Returns a collection of products
     /// </summary>
     /// <returns></returns>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<Product?> GetAll(Func<Product?, bool>? filter)
     {
         if (DataSource.s_productsList.Count == 0)
@@ -44,6 +48,7 @@ internal class DalProduct : IProduct
     /// </summary>
     /// <param name="id"></param>
     /// <exception cref="DalMissingIdException"></exception>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Delete(int id)
     {
         if (DataSource.s_productsList.RemoveAll(x => x?.ID == id)==0)
@@ -53,6 +58,7 @@ internal class DalProduct : IProduct
     /// Product update
     /// </summary>
     /// <param name="p"></param>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Update(Product p)
     {
         Delete(p.ID); // if not found - exception is thrown from this method
@@ -68,5 +74,6 @@ internal class DalProduct : IProduct
     /// <param name="id"></param>
     /// <returns></returns>
     /// <exception cref="DalMissingIdException"></exception>
+    [MethodImpl(MethodImplOptions.Synchronized)]    /// 
     public Product? GetById(Func<Product?, bool>? filter)=> filter is null ? throw new UnFoundException("there is no func") : DataSource.s_productsList.First(x => filter(x));
 }
