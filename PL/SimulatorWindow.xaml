@@ -1,0 +1,29 @@
+﻿<Window x:Class="PL.SimulatorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        
+        DataContext="{Binding RelativeSource={RelativeSource self}}"
+        Title="Simulator" Height="450" WindowStyle="None" Width="800">
+
+    <Grid>
+        <TextBlock x:Name="clock"  HorizontalAlignment="Left" Text="{Binding time}" IsEnabled="False"  Margin="665,29,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="35" Width="47"/>
+        <Label Content="status" Margin="39,314,0,0"/>
+        <Label Content="next status" Margin="390,314,0,0" RenderTransformOrigin="2.319,0.619"/>
+        <Label Content="id of an order" Margin="39,113,0,0" Width="161"/>
+        <Label  Margin="39,375,0,0" Foreground=" #FFEFCF81" Content="{Binding order.Status}" RenderTransformOrigin="0.066,0.239"/>
+        <Label  Margin="390,375,0,0" Foreground=" #FFEFCF81" Content="{Binding orderStatus}" RenderTransformOrigin="0.011,3.952"/>
+        <Label  Margin="39,185,0,0" Foreground=" #FFEFCF81" Content="{Binding order.ID}" RenderTransformOrigin="0.066,0.239" Width="161"/>
+        <Button Content="close" Margin="39,37,0,0" VerticalAlignment="Top" Height="45" Width="70" Click="Button_Click"/>
+        <Label  Content="accepting time:" Margin="39,248,0,0" Width="111"/>
+        <Label  Margin="169,248,0,0" Foreground=" #FFEFCF81" Content="{Binding  acceptTime}" RenderTransformOrigin="0.011,3.952" Width="206"/>
+        <Label  Margin="565,248,0,0" Foreground=" #FFEFCF81" Content="{Binding endTreetmentTime}" RenderTransformOrigin="0.011,3.952" Width="210"/>
+        <Label   Content="Treetment end-time:" Margin="390,249,0,0" Width="141"/>
+        <Label Foreground=" #FFEFCF81" Margin="350,113,0,0" Content="{Binding updateStatus}" RenderTransformOrigin="0.011,3.952" Width="362"/>
+
+
+    </Grid>
+</Window>

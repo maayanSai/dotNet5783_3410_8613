@@ -1,5 +1,6 @@
 ﻿namespace Dal;
 using DalApi;
+using System.Runtime.CompilerServices;
 using DO;
 
 /// <summary>
@@ -12,10 +13,12 @@ internal class DalOrder : IOrder
     /// </summary>
     /// <param name="ord"></param>
     /// <returns></returns>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public int Add(Order ord)
     {
         // The ID of the order will be according to the last empty place in the array
         ord.ID = DataSource.s_NextOrderNumber; ; //We will insert the ID into the object
+        //DataSource.nextOrderId();
         DataSource.s_ordersList.Add(ord); // We will insert the order into the last empty place in the array
         return ord.ID;
     }
@@ -23,6 +26,7 @@ internal class DalOrder : IOrder
     /// Returns a collection of orders
     /// </summary>
     /// <returns></returns>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<Order?> GetAll(Func<Order?, bool>? filter)
     {
         if (DataSource.s_ordersList.Count == 0)
@@ -34,6 +38,7 @@ internal class DalOrder : IOrder
     /// </summary>
     /// <param name="id"></param>
     /// <exception cref="DalMissingIdException"></exception>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Delete(int id)
     {
         if (DataSource.s_ordersList.RemoveAll(x => x?.ID == id) == 0)
@@ -43,6 +48,8 @@ internal class DalOrder : IOrder
     /// Update Invitation
     /// </summary>
     /// <param name="ord"></param>
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Update(Order ord)
     {
         Delete(ord.ID); // if not found - exception is thrown from this method
@@ -54,6 +61,8 @@ internal class DalOrder : IOrder
     /// <param name="id"></param>
     /// <returns></returns>
     /// <exception cref="DalMissingIdException"></exception>
+
+    [MethodImpl(MethodImplOptions.Synchronized)]    /// 
     public Order? GetById(Func<Order?, bool>? filter) 
     {
       return filter is null ? throw new UnFoundException("there is no func") : DataSource.s_ordersList.FirstOrDefault(x => filter(x));

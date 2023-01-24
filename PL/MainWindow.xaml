@@ -14,6 +14,7 @@
         <Button Content="Admin" Click="Admin_Click" Margin="704,264,0,143" Width="86" FontSize="20" />
         <Button Content="Clients" Click="Catalog_Click" Width="103" Margin="687,312,0,98" FontSize="20" />
         <Button Content="Order Tracking" Click="Tracking_Click" Margin="620,357,0,48" Width="170" FontSize="20" />
+        <Button Content="Simulator" Margin="65,54,0,0" VerticalAlignment="Top" Click="Button_Click"/>
     </Grid>
 
 

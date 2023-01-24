@@ -1,43 +1,45 @@
-﻿using DO;
-using DalApi;
+﻿using DalApi;
+using System.Runtime.CompilerServices;
+
 
 namespace Dal;
 
-internal class Product : IProduct
+internal class DalProduct : IProduct
 {
-    string s_products = "Products";
+    string s_products = "product";
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public int Add(DO.Product pro)
     {
         List<DO.Product?> listProducts = XMLTools.LoadListFromXMLSerializer<DO.Product>(s_products);
         if ((listProducts.FirstOrDefault(x => x?.ID == pro.ID) != null))
-            throw new DalAlreadyExistsException(pro.ID, "product");
+            throw new DO.DalAlreadyExistsException(pro.ID, "product");
         listProducts.Add(pro);
         XMLTools.SaveListToXMLSerializer(listProducts, s_products);
         return pro.ID;
     }
-
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Delete(int id)
     {
         List<DO.Product?> listProducts = XMLTools.LoadListFromXMLSerializer<DO.Product>(s_products);
         if (listProducts.RemoveAll(x => x?.ID == id) == 0)
-            throw new UnFoundException("the product for the id: " + id + " does not exsist");
+            throw new DO.UnFoundException("the product for the id: " + id + " does not exsist");
         XMLTools.SaveListToXMLSerializer(listProducts, s_products);
     }
-
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<DO.Product?> GetAll(Func<DO.Product?, bool>? filter = null)
     {
         List<DO.Product?> listProducts = XMLTools.LoadListFromXMLSerializer<DO.Product>(s_products);
         if (listProducts.Count == 0)
-            throw new UnFoundException("the list is empty");
+            throw new DO.UnFoundException("the list is empty");
         return filter is null ? listProducts.Select(product => product) : listProducts.Where(filter);
     }
-
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public DO.Product? GetById(Func<DO.Product?, bool>? filter)
     {
         List<DO.Product?> listProducts = XMLTools.LoadListFromXMLSerializer<DO.Product>(s_products);
-        return filter is null ? throw new UnFoundException("there is no func") : listProducts.First(x => filter(x));
+        return filter is null ? throw new DO.UnFoundException("there is no func") : listProducts.First(x => filter(x));
     }
-
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public DO.Product? GetById(int id)
     {
         List<DO.Product?> listProducts = XMLTools.LoadListFromXMLSerializer<DO.Product>(s_products);
@@ -46,7 +48,7 @@ internal class Product : IProduct
 
 
     }
-
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Update(DO.Product pro)
     {
         List<DO.Product?> listProducts = XMLTools.LoadListFromXMLSerializer<DO.Product>(s_products);

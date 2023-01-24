@@ -11,7 +11,6 @@ public interface IProduct
     /// <returns></returns>
     IEnumerable<BO.ProductForList?> GetProducts(Func<BO.ProductForList?, bool>? func = null);
     BO.ProductForList? GetProduct(int id);
-
     /// <summary>
     /// Product details request- Gets a product ID
     /// </summary>
