@@ -1,12 +1,10 @@
-﻿namespace BlImplementation;
-using BlApi;
-using BO;
-using DO;
+﻿using BlApi;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Security.Cryptography;
 using System.Runtime.CompilerServices;
 using System.Text;
+namespace BlImplementation;
 
 /// <summary>
 /// The order-logical entity
@@ -26,7 +24,6 @@ internal class Order : IOrder
         lock (dal)
         {
             return dal!.Order.GetAll().Select(order =>
-
         {
             lock (dal)
             {
@@ -44,8 +41,8 @@ internal class Order : IOrder
         });
         }
     }
-    [MethodImpl(MethodImplOptions.Synchronized)]
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.OrderForList GetOrderForList(int id)
     {
         lock (dal)
@@ -90,7 +87,6 @@ internal class Order : IOrder
     /// <exception cref="BO.BlMissingEntityException"></exception>
     /// <exception cref="BO.BlNullPropertyException"></exception>
     [MethodImpl(MethodImplOptions.Synchronized)]
-    /// 
     public BO.Order ItemOrder(int id)
     {
         DO.Order? orderD;
@@ -111,15 +107,13 @@ internal class Order : IOrder
         lock (dal)
         {
             var items = dal?.OrderItem?.GetAll((delegate (DO.OrderItem? x) { return x?.OrderID == orderD?.ID; })).Select(x => new BO.OrderItem
-
             {
                 ID = x?.ID ?? throw new BO.BlNullPropertyException("missing order item id"),
                 ProductID = x?.ProductID ?? throw new BO.BlNullPropertyException("missing product id"),
                 Price = x?.Price ?? 0,
-                Name = dal?.Product.GetById(x?.ProductID ?? throw new BO.BlNullPropertyException("missing product id"))?.Name,//האיי די תמיד יהיה תקין
+                Name = dal?.Product.GetById(x?.ProductID ?? throw new BO.BlNullPropertyException("missing product id"))?.Name,
                 Amount = x?.Amount ?? 0,
                 Totalprice = x?.Price * x?.Amount ?? 0
-
             }).ToList();
 
             return new BO.Order
@@ -184,7 +178,6 @@ internal class Order : IOrder
     /// <exception cref="Exception"></exception>
     /// <exception cref="BO.Exceptions.BODoesNotExistException"></exception>
     [MethodImpl(MethodImplOptions.Synchronized)]
-    /// 
     public BO.Order? Updatesupply(int id)
     {
         DO.Order order;

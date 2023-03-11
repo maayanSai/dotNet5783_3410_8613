@@ -1,7 +1,7 @@
-﻿namespace BlImplementation;
-using BlApi;
+﻿using BlApi;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
+namespace BlImplementation;
 
 
 /// <summary>
@@ -128,10 +128,7 @@ internal class Cart : ICart
                 }
                   else
                     throw new BO.BlMissingEntityException("Product not in stock for that amaunt-cant add no more");
-
             }
-            
-            
         }
         else
             throw new BO.BlMissingEntityException("Product not in stock");
@@ -182,7 +179,6 @@ internal class Cart : ICart
             OrderDate = DateTime.Now,
             ShipDate = null,
             DeliveryrDate = null,
-            Amount = cart.Items.Select(x => x?.Amount ?? throw new BO.BlNullPropertyException("OrderItem does not exist")).Sum(),
         };
         lock (dal)
         {

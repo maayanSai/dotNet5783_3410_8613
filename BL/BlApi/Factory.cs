@@ -1,6 +1,4 @@
-﻿using System.Xml;
-
-namespace BlApi;
+﻿namespace BlApi;
 
 /// <summary>
 /// static class Factory

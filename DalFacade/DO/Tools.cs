@@ -1,5 +1,5 @@
-﻿namespace DO;
-using System.Reflection;
+﻿using System.Reflection;
+namespace DO;
 
 /// <summary>
 /// To String Property

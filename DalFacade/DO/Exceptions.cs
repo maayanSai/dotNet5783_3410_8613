@@ -1,15 +1,12 @@
 ﻿namespace DO;
-public class UnFoundException : Exception
-{
-    public UnFoundException (string msg):base(msg)
-    { }
-
-}
 
 /// <summary>
-/// Exception
+/// Un Found
 /// </summary>
-
+public class UnFoundException : Exception
+{
+    public UnFoundException (string msg):base(msg) { }
+}
 
 /// <summary>
 /// Already Exists
@@ -24,11 +21,7 @@ public class DalAlreadyExistsException : Exception
         EntityName = name;
     }
 
-    public override string ToString()
-    {
-        return EntityName +"whith the id: " +EntityId+" is allredy exist";
-
-    }
+    public override string ToString()=> EntityName + "whith the id: " + EntityId + " is allredy exist";
 
 }
 //public class DalMissingIdException : Exception

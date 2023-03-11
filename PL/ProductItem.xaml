@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        DataContext="{Binding RelativeSource={RelativeSource self}}"
+        DataContext="{Binding  RelativeSource={RelativeSource self}}"
         Title="ProducItemtWindow" Height="450" Width="800" Background="Black">
     <Window.Resources>
         <Style TargetType="Label">
@@ -35,15 +35,15 @@
             <ColumnDefinition Width="71*"/>
         </Grid.ColumnDefinitions>
         <Label  Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black" Name="ID" Content="Id:" Height="42" Margin="209,78,0,0" Width="48"/>
-        <TextBox Foreground="#FFEFCF81" Text="{Binding PB.ID}" IsReadOnly="true" Name="Id" Height="29" Margin="300,78,0,0" TextWrapping="Wrap" Width="123"/>
+        <TextBox Foreground="#FFEFCF81" Text="{Binding PBForWindow.ID}" IsReadOnly="true" Name="Id" Height="29" Margin="300,78,0,0" TextWrapping="Wrap" Width="123"/>
         <Label Foreground="#FFEFCF81"  FontSize="16" FontFamily="Segoe Print"  Background="Black" Content="Category:" Height="39" Margin="209,125,0,0" Width="91"/>
-        <TextBox Foreground="#FFEFCF81" FontFamily="Segoe Print" Name="CategoryForNewProduct" Text="{Binding PB.Category,Mode=TwoWay}" Height="29" Margin="300,125,0,0" Width="123"/>
+        <TextBox Foreground="#FFEFCF81" FontFamily="Segoe Print" Name="CategoryForNewProduct" Text="{Binding PBForWindow.Category,Mode=TwoWay}" Height="29" Margin="300,125,0,0" Width="123"/>
         <Label Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black" Content="Name:" Height="39" Margin="209,173,0,0" Width="76"/>
         <Label Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black" Content="Price:" Height="40" Margin="209,222,0,0" Width="76"/>
         <Label Foreground="#FFEFCF81" FontSize="16" FontFamily="Segoe Print"  Background="Black" Content="InStock:" Height="39" Margin="209,267,0,0" Width="86"/>
-        <TextBox Foreground="#FFEFCF81" Text="{Binding PB.Name}" x:Name="Name" Height="29" Margin="300,178,0,0" TextWrapping="Wrap" Width="123" RenderTransformOrigin="0.473,0.77" />
-        <TextBox Foreground="#FFEFCF81" Text="{Binding PB.Price, Mode=TwoWay}" x:Name="Price" Height="29" Margin="300,222,0,0" TextWrapping="Wrap" Width="123"/>
-        <TextBox Foreground="#FFEFCF81"  x:Name="InStock" Text="{Binding PB.isStock}" Height="29" Margin="300,267,0,0" TextWrapping="Wrap" Width="123" />
+        <TextBox Foreground="#FFEFCF81" Text="{Binding PBForWindow.Name}" x:Name="Name" Height="29" Margin="300,178,0,0" TextWrapping="Wrap" Width="123" RenderTransformOrigin="0.473,0.77" />
+        <TextBox Foreground="#FFEFCF81" Text="{Binding PBForWindow.Price, Mode=TwoWay}" x:Name="Price" Height="29" Margin="300,222,0,0" TextWrapping="Wrap" Width="123"/>
+        <TextBox Foreground="#FFEFCF81"  x:Name="InStock" Text="{Binding  PBForWindow.isStock}" Height="29" Margin="300,267,0,0" TextWrapping="Wrap" Width="123" />
         <Button  Name="BtnAddOrUpdetProduct" Content="+" Height="47" Margin="56,313,0,0" VerticalAlignment="Top" Width="41" Click="Add_Button" Foreground="#FFEFCF81" FontSize="20" FontFamily="Segoe Print" Grid.Column="1">
             <Button.Background >
                 <ImageBrush />
@@ -56,7 +56,7 @@
             </Button.Background>
         </Button>
         <Label Foreground="#FFEFCF81"    Content="Amount:" Margin="205,313,0,0" Height="35" Width="80"/>
-        <TextBox  IsReadOnly="False" IsEnabled="False" Foreground="#FFEFCF81"  Text="{Binding PB.Amount ,Mode=TwoWay}"  Margin="299,319,0,0" TextWrapping="Wrap" Width="124" Height="29"  />
+        <TextBox  IsReadOnly="False" IsEnabled="False" Foreground="#FFEFCF81"  Text="{Binding  PBForWindow.Amount ,Mode=TwoWay}"  Margin="299,319,0,0" TextWrapping="Wrap" Width="124" Height="29"  />
         <Button Grid.Column="1" FontSize="20" Content="-" Margin="10,313,0,0" VerticalAlignment="Top" Height="47" FontFamily="22" Width="41" Click="Delete_Button"/>
         <Grid HorizontalAlignment="Left" Height="40" Margin="31,360,0,0" VerticalAlignment="Top" Width="70">
 

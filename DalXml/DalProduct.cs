@@ -53,6 +53,7 @@ internal class DalProduct : IProduct
     {
         List<DO.Product?> listProducts = XMLTools.LoadListFromXMLSerializer<DO.Product>(s_products);
         Delete(pro.ID); // if not found - exception is thrown from this method
+        listProducts = XMLTools.LoadListFromXMLSerializer<DO.Product>(s_products);
         listProducts.Add(pro);
         var v = from item in listProducts
                 orderby item?.ID

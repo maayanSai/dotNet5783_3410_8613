@@ -17,7 +17,7 @@
         <Label  Margin="178,282,0,0" Background="White" Foreground="Black" Content="{Binding order.Status}" RenderTransformOrigin="0.066,0.239" Width="87" Height="32"/>
         <Label  Margin="611,280,0,0" Background="White" Foreground="Black" Content="{Binding orderStatus}" RenderTransformOrigin="0.011,3.952" Width="87" Height="32"/>
         <Label  Margin="337,118,0,0" Background="White" Foreground="Black" Content="{Binding order.ID}" RenderTransformOrigin="0.066,0.239" Width="63" Height="32"/>
-        <Button FontSize="20" Content="X" Margin="730,20,0,0" VerticalAlignment="Top" Height="39" Width="45" Click="Button_Click"/>
+        <Button FontSize="20" Content="X" Margin="730,20,0,0" VerticalAlignment="Top" Height="39" Width="45" Click="StopSimulator_Click"/>
         <Label  Content="Accepting Time:" FontSize="15" Margin="112,201,0,0" Width="142"/>
         <Label  Margin="112,238,0,0" Foreground=" #FFEFCF81" Content="{Binding  acceptTime}" RenderTransformOrigin="0.011,3.952" Width="217"/>
         <Label  Margin="505,238,0,0" Foreground=" #FFEFCF81" Content="{Binding endTreetmentTime}" RenderTransformOrigin="0.011,3.952" Width="210"/>

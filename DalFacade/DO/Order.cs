@@ -36,11 +36,11 @@ public struct Order
     /// <summary>
     /// amount of product
     /// </summary>
-    public int Amount { get; set; }
-    /// <summary>
-    /// An action that prints the order
-    /// </summary>
-    /// <returns></returns>
+    //public int Amount { get; set; }
+    ///// <summary>
+    ///// An action that prints the order
+    ///// </summary>
+    ///// <returns></returns>
     public override string ToString() => this.ToStringProperty();
 }
 

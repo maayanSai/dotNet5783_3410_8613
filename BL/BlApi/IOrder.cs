@@ -34,10 +34,10 @@ public interface IOrder
     /// <param name="id"></param>
     /// <returns></returns>
     BO.OrderTracking? Tracking(int id);
-   
+    BO.OrderForList GetOrderForList(int id);
     public BO.Order? OrderEldest();
 
     public IEnumerable<BO.StatisticksOrderByMonth> GetStatisticksOrderByMonths();
-    BO.OrderForList GetOrderForList (int id);
+
 
 }

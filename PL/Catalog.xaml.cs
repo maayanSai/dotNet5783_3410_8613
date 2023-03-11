@@ -141,9 +141,15 @@ public partial class Catalog : Window
     private void Image_Click(object sender, MouseButtonEventArgs e)
     {
         e.Handled = true;
-        var p = (BO.ProductItem)((Button)sender).Tag;
-        ProductItem pro = new (p, Cb, AddToCart);
-        pro.ShowDialog();
+        BO.ProductItem productItem = (BO.ProductItem)((Button)sender).Tag;
+       
+        int index = ProducitemtList.IndexOf(productItem);
+        ProductItem productItemWindow = new (productItem, Cb, AddToCart);
+        productItemWindow.ShowDialog();
+        
+        ProducitemtList.RemoveAt(index);
+        ProducitemtList.Insert(index, productItem);
+       
     }
     private void Gruoping_Click(object sender, RoutedEventArgs e)
     {

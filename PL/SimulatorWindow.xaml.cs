@@ -18,8 +18,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
-
 namespace PL
 {
     /// <summary>
@@ -27,9 +25,37 @@ namespace PL
     /// </summary>
     public partial class SimulatorWindow : Window
     {
+        void accepting(object? repAccept)
+        {
+            updateStatus="";
+            order = ((ReportAcceptingObject)repAccept).Order;
+            orderStatus=((ReportAcceptingObject)repAccept).Order.Status+1;
+            acceptTime=((ReportAcceptingObject)repAccept).AcceptTime.ToString();
+            endTreetmentTime=((ReportAcceptingObject)repAccept).TimeEndTreetment.ToString();
+        }
+        void endTreetment(object? reportEndTreetment)
+        {
+            order=((ReportEndTreetment)reportEndTreetment).Order;
+            updateStatus=((ReportEndTreetment)reportEndTreetment).TreemenMassage;
+        }
+        void EndSimulator(object? str)
+        {
+            updateStatus=(string)str;
+            Simulator.Simulator.ReportAccept1-=reportProgress;
+            Simulator.Simulator.ReportEndTreetment2-=reportProgress;
+            Simulator.Simulator.End3-=reportProgress;
+            Thread.Sleep(3000);
+            backroundWorker.CancelAsync();
+        }
+        void UpdateClock(object? stopw)
+        {
+            time=((Stopwatch)stopw).Elapsed.ToString(@"hh\:mm\:ss");
+        }
+
+
         readonly static BlApi.IBl? bl = BlApi.Factory.Get();
         private Stopwatch stopwatch;
-        BackgroundWorker timeWorker;
+        BackgroundWorker backroundWorker;
         private bool isTimerRun;
         bool isSimulatorThreadEndWork=false;
 
@@ -56,64 +82,38 @@ namespace PL
         {
             actions=new();
             InitializeComponent();
-            timeWorker = new BackgroundWorker();
-            timeWorker.DoWork+=timeWorker_DoWork;
-            timeWorker.ProgressChanged += TimeWorker_ProgressChanged;
-            timeWorker.RunWorkerCompleted+=TimeWorker_WorkerCompleted;
-            timeWorker.WorkerReportsProgress = true;
-            timeWorker.WorkerSupportsCancellation = true;
+            backroundWorker = new BackgroundWorker();
+            backroundWorker.DoWork+=BackroundWorker_DoWork;
+            backroundWorker.ProgressChanged += BackroundWorker_ProgressChanged;
+            backroundWorker.RunWorkerCompleted+=BackroundWorker_WorkerCompleted;
+            backroundWorker.WorkerReportsProgress = true;
+            backroundWorker.WorkerSupportsCancellation = true;
             stopwatch=new();
             stopwatch.Start();
-            timeWorker.RunWorkerAsync();
+            backroundWorker.RunWorkerAsync();
         }
         public void AddAction(int key, Action<object?> value) => actions.Add(key, value);
-        private void TimeWorker_WorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
+        private void BackroundWorker_WorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
         {
             stopwatch.Stop();
            Thread.Sleep(3000);
             this.Close();
         }
-        private void TimeWorker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
+        private void BackroundWorker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
         {
             if (actions.ContainsKey(e.ProgressPercentage))
                 actions[e.ProgressPercentage]?.Invoke(e.UserState);
         }
-        private void timeWorker_DoWork(object? sender, DoWorkEventArgs e)
+        private void BackroundWorker_DoWork(object? sender, DoWorkEventArgs e)
         { 
-            if(timeWorker.CancellationPending==false)
+            if(backroundWorker.CancellationPending==false)
             {
-                //הפעלת סימולטור והרשמות של הרפורט פרוגרס לאירועים שלו
+
                
                 Simulator.Simulator.ReportAccept1 += reportProgress;
                 Simulator.Simulator.ReportEndTreetment2 += reportProgress;
                 Simulator.Simulator.End3 += reportProgress;
-                 void accepting(object? repAccept)
-                {
-                    updateStatus="";
-                    order = ((ReportAcceptingObject)repAccept).Order;
-                    orderStatus=((ReportAcceptingObject)repAccept).Order.Status+1;
-                    acceptTime=((ReportAcceptingObject)repAccept).AcceptTime.ToString();
-                    endTreetmentTime=((ReportAcceptingObject)repAccept).TimeEndTreetment.ToString();
-                }
-                void endTreetment(object? reportEndTreetment)
-                {
-                    order=((ReportEndTreetment)reportEndTreetment).Order;
-                    updateStatus=((ReportEndTreetment)reportEndTreetment).TreemenMassage;
-                }
-                 void EndSimulator(object? str)
-                {
-                    updateStatus=(string)str;
-                    Simulator.Simulator.ReportAccept1-=reportProgress;
-                    Simulator.Simulator.ReportEndTreetment2-=reportProgress;
-                    Simulator.Simulator.End3-=reportProgress;
-                    Thread.Sleep(3000);
-                    timeWorker.CancelAsync();
-                }
-                void UpdateClock(object? stopw)
-                {
-                    time=((Stopwatch)stopw).Elapsed.ToString(@"hh\:mm\:ss");
-                }
-
+                
                 //List of functions for the dictionary
                 AddAction(1,  accepting);
                 AddAction(2, (Action<object?>) endTreetment);
@@ -121,15 +121,15 @@ namespace PL
                 AddAction(4, (Action<object?>)UpdateClock);
                 Simulator.Simulator.activate();
 
-                while (timeWorker.CancellationPending==false)
+                while (backroundWorker.CancellationPending==false)
                 {
-                    timeWorker.ReportProgress(4,stopwatch);
+                    backroundWorker.ReportProgress(4,stopwatch);
                     Thread.Sleep(1000);
                 }
             }
         }
-        private void reportProgress(int progressPercentage, object? userState) => timeWorker.ReportProgress(progressPercentage, userState);
-        private void Button_Click(object? sender, RoutedEventArgs e)
+        private void reportProgress(int progressPercentage, object? userState) => backroundWorker.ReportProgress(progressPercentage, userState);
+        private void StopSimulator_Click(object? sender, RoutedEventArgs e)
         {
             Simulator.Simulator.stopSimulator();
         }

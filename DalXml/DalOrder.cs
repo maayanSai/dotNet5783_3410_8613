@@ -58,6 +58,7 @@ internal class DalOrder : IOrder
     {
         List<DO.Order?> listOrders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
         Delete(ord.ID); // if not found - exception is thrown from this method
+        listOrders = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_orders);
         listOrders.Add(ord);
         XMLTools.SaveListToXMLSerializer(listOrders!, s_orders);
     }

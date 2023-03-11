@@ -1,7 +1,6 @@
-﻿namespace Dal;
-using DO;
-using System;
-using System.Xml.Linq;
+﻿using DO;
+
+namespace Dal;
 
 /// <summary>
 /// DataSource
@@ -14,11 +13,14 @@ internal static class DataSource
     static DataSource() { s_Initialize(); }
     private static readonly Random _rnd = new(); // lottery variable
 
-    internal static List<Product?> s_productsList = new(); // An array of orders
-    internal static List<Order?> s_ordersList = new(); // An array of items
+    internal static List<Product?> s_productsList = new();     // An array of orders
+    internal static List<Order?> s_ordersList = new();         // An array of items
     internal static List<OrderItem?> s_orderItemsList = new(); // array of products
-    //internal static List<int?> config = new();
-    //internal static List<int?> config1 = new();
+    //
+    internal static List<int?> config = new();
+    internal static List<int?> config1 = new();
+    //
+
     internal const int _startOrderNumber = 1000;
     private static int s_nextOrderNumber = _startOrderNumber;
     internal static int s_NextOrderNumber { get => s_nextOrderNumber++; }
@@ -26,50 +28,50 @@ internal static class DataSource
     internal const int _startOrderItemNumber = 1000;
     private static int s_nextOrderItemNumber = _startOrderItemNumber;
     internal static int s_NextOrderItemNumber { get => s_nextOrderItemNumber++; }
-    //public static  void start()
-    //{
-    //    config.Add( _startOrderNumber);
-    //    config.Add(_startOrderItemNumber);
 
-        
-    //    XMLTools.SaveListToXMLSerializer(config, "config");
-    //}
+    //
+    public static void start()
+    {
+        config.Add(_startOrderNumber);
+        config.Add(_startOrderItemNumber);
 
 
-    //public static int nextOrderId()
-    //{
-         
-    //    config  = XMLTools.LoadListFromXMLSerializer<int>("config");
-    //    int? id = config?.First();
-        
-    //    premontOrderNumber();
-    //    return id??throw new Exception();
-    //}
-    //static void premontOrderNumber()
-    //{
-    //    config = XMLTools.LoadListFromXMLSerializer<int>("config");
-    //    int? id = config?.First();
-    //    config1=new() { id+1, config?.Last() };
-    //    XMLTools.SaveListToXMLSerializer(config1, "config");
-    //}
-    //public static int nextOrderItemId()
-    //{
-    //    config  = XMLTools.LoadListFromXMLSerializer<int>("config");
-    //    int? id = config?.Last();
-
-    //    premontOrderItemNumber();
-    //    return id??throw new Exception();
-    //}
-    //static void premontOrderItemNumber()
-    //{
-    //    config = XMLTools.LoadListFromXMLSerializer<int>("config");
-    //    int? id = config?.Last();
-    //    config1=new() { config?.First(), id+1};
-    //    XMLTools.SaveListToXMLSerializer(config1, "config");
-    //}
+        XMLTools.SaveListToXMLSerializer(config, "config");
+    }
 
 
+    public static int nextOrderId()
+    {
 
+        config  = XMLTools.LoadListFromXMLSerializer<int>("config");
+        int? id = config?.First();
+
+        premontOrderNumber();
+        return id??throw new Exception();
+    }
+    static void premontOrderNumber()
+    {
+        config = XMLTools.LoadListFromXMLSerializer<int>("config");
+        int? id = config?.First();
+        config1=new() { id+1, config?.Last() };
+        XMLTools.SaveListToXMLSerializer(config1, "config");
+    }
+    public static int nextOrderItemId()
+    {
+        config  = XMLTools.LoadListFromXMLSerializer<int>("config");
+        int? id = config?.Last();
+
+        premontOrderItemNumber();
+        return id??throw new Exception();
+    }
+    static void premontOrderItemNumber()
+    {
+        config = XMLTools.LoadListFromXMLSerializer<int>("config");
+        int? id = config?.Last();
+        config1=new() { config?.First(), id+1 };
+        XMLTools.SaveListToXMLSerializer(config1, "config");
+    }
+    //
     /// <summary>
     /// Matrix of product names
     /// </summary>
@@ -95,7 +97,6 @@ internal static class DataSource
     {
         for (int i = 0; i < 20; i++) // We will initialize 20 products
         {
-          
             int r1 = _rnd.Next(5);
             Product v=new Product
             {
@@ -117,7 +118,7 @@ internal static class DataSource
         Order order;
         for (int i = 0; i < 20; i++)
         {
-            //nextOrderId();
+            nextOrderId();
             int days = _rnd.Next(21, 200);
             int x = _rnd.Next(3);
             order = new()
@@ -144,13 +145,12 @@ internal static class DataSource
     {
         int x;
         for (int i = 0; i < 20; i++)
-        {
-            
+        {   
             x = _rnd.Next(1, 5);
             OrderItem oi = new();
             for (int j = 0; j < x; j++)
             {
-                //nextOrderItemId();
+                nextOrderItemId();
                 oi.ID = s_NextOrderItemNumber;
                 oi.Amount = _rnd.Next(1, 4);
                 oi.OrderID = 1000 + i;
@@ -168,13 +168,15 @@ internal static class DataSource
     /// </summary>
     private static void s_Initialize()
     {
-        //start();
+        start();
         s_createAndInitProducts();
         s_createAndInitOrders();
         s_createAndInitOrderItem();
-        //XMLTools.SaveListToXMLSerializer(s_productsList, "product");
-        //XMLTools.SaveListToXMLSerializer(s_ordersList, "order");
-        //XMLTools.SaveListToXMLSerializer(s_orderItemsList, "orderItem");
+
+        //XML
+        XMLTools.SaveListToXMLSerializer(s_productsList, "product");
+        XMLTools.SaveListToXMLSerializer(s_ordersList, "order");
+        XMLTools.SaveListToXMLSerializer(s_orderItemsList, "orderItem");
     }
 }
 
