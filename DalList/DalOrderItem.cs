@@ -1,9 +1,10 @@
-﻿namespace Dal;
+﻿
 using DalApi;
 using DO;
 using System.Runtime.CompilerServices;
 using System.Collections.Generic;
 using System.Data;
+namespace Dal;
 
 /// <summary>
 /// Implementing the functions of order details
@@ -19,7 +20,6 @@ internal class DalOrderItem : IOrderItem
     public int Add(OrderItem oi)
     {
         oi.ID = DataSource.s_NextOrderItemNumber; //We will insert the ID into the object
-        //DataSource.nextOrderItemId();
         DataSource.s_orderItemsList.Add(oi); // We will insert the order into the last empty place in the array
         return oi.ID;
     }

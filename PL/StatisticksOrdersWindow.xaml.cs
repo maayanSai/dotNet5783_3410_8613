@@ -28,9 +28,6 @@ namespace PL
 
         private string groupName = "MonthName";
         PropertyGroupDescription propertyGroupDescription;
-
-
-
         public ICollectionView CollectionViewblStatisticksOrderByMonths
         {
             get { return (ICollectionView)GetValue(CollectionViewblStatisticksOrderByMonthsProperty); }

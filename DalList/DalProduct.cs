@@ -14,7 +14,7 @@ internal class DalProduct : IProduct
     /// <param name="p"></param>
     /// <returns></returns>
     /// <exception cref="DalAlreadyExistsException"></exception>
-    [MethodImpl(MethodImplOptions.Synchronized)]    /// 
+    [MethodImpl(MethodImplOptions.Synchronized)]   
     public int Add(Product p)
     {
         if ((DataSource.s_productsList.Exists(x => x?.ID == p.ID)))
@@ -66,7 +66,6 @@ internal class DalProduct : IProduct
         var v = from item in DataSource.s_productsList
                 orderby item?.ID
                 select item;
-        
     }
     /// <summary>
     /// Returns a product by terms of
@@ -74,6 +73,6 @@ internal class DalProduct : IProduct
     /// <param name="id"></param>
     /// <returns></returns>
     /// <exception cref="DalMissingIdException"></exception>
-    [MethodImpl(MethodImplOptions.Synchronized)]    /// 
+    [MethodImpl(MethodImplOptions.Synchronized)]    
     public Product? GetById(Func<Product?, bool>? filter)=> filter is null ? throw new UnFoundException("there is no func") : DataSource.s_productsList.First(x => filter(x));
 }

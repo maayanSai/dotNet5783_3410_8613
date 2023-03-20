@@ -11,14 +11,14 @@ public class ReportAcceptingObject
 }
 public class ReportEndTreetment
 {
-    public string TreemenMassage;
+    public string? TreemenMassage;
     public BO.Order? Order;
 }
 
 public static class Simulator
 {
     readonly static BlApi.IBl? bl = BlApi.Factory.Get();
-    private static bool active;
+    private static volatile bool active;
     private static readonly Random _rnd = new();
     public delegate void reportAccepting( object? repAccpting );
     private static event Action<int, object?>? reportAccept1;
@@ -27,7 +27,7 @@ public static class Simulator
         add => reportAccept1 += value;
         remove => reportAccept1 -= value;
     }
-    public delegate void reportEndTreetment( object? repEndTreeting);//
+    public delegate void reportEndTreetment( object? repEndTreeting);
     private static event Action<int, object?>? reportEndTreetment2;
     public static event Action<int, object?>? ReportEndTreetment2
     {

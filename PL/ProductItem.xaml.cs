@@ -24,38 +24,56 @@ namespace PL
         public delegate BO.Cart? AddingToCrt(BO.Cart c, BO.ProductItem pro);
         readonly AddingToCrt? addtocart;
 
-        static readonly DependencyProperty PBDep = DependencyProperty.Register(nameof(PB), typeof(BO.ProductItem), typeof(ProductItem));
-        BO.ProductItem PB { get => (BO.ProductItem)GetValue(PBDep); set => SetValue(PBDep, value); }
+        static readonly DependencyProperty PBkkeperDep = DependencyProperty.Register(nameof(PBKeeper), typeof(BO.ProductItem), typeof(ProductItem));
+        BO.ProductItem PBKeeper { get => (BO.ProductItem)GetValue(PBkkeperDep); set => SetValue(PBkkeperDep, value); }
+
+        static readonly DependencyProperty PBForWindowDep = DependencyProperty.Register(nameof(PBForWindow), typeof(BO.ProductItem), typeof(ProductItem));
+        BO.ProductItem PBForWindow { get => (BO.ProductItem)GetValue(PBForWindowDep); set => SetValue(PBForWindowDep, value); }
+
 
         public ProductItem(BO.ProductItem pb, BO.Cart c, AddingToCrt add)
         {
             InitializeComponent();
             CB = c;
-            PB = pb;
+            PBKeeper = pb;
+            PBForWindow = new BO.ProductItem { ID = pb.ID, Amount=pb.Amount, Category=pb.Category, isStock=pb.isStock, ImageRelativeName=pb.ImageRelativeName, Name=pb.Name, Price=pb.Price};
             addtocart = add;
         }
 
         private void Add_Button(object sender, RoutedEventArgs e)
         {
-            PB.Amount++;
+            PBForWindow.Amount++;
             e.Handled = true;
-            addtocart!(CB, PB);
-            PB = bl!.Product.ItemProduct(PB.ID, CB);
+            addtocart!(CB, PBForWindow);
+            PBForWindow = bl!.Product.ItemProduct(PBForWindow.ID, CB);
+            PBKeeper.Amount = PBForWindow.Amount;
+            PBKeeper.isStock = PBForWindow.isStock;
         }
 
         private void Cart_Button(object sender, RoutedEventArgs e)
         {
             Cart cartwindow = new Cart(CB);
-            //CB.Items = bl.Product.GetProductItem();
+            
             cartwindow.ShowDialog();
+            
+            
+                  BO.ProductItem p= bl?.Product.ItemProduct(PBKeeper.ID, CB)!;
+            PBKeeper.Amount = p.Amount;
+            PBKeeper.isStock = p.isStock;
+            PBForWindow = p;
+            
+          
         }
 
         private void Delete_Button(object sender, RoutedEventArgs e)
         {
-            PB.Amount--;
+            PBForWindow.Amount--;
             e.Handled = true;
-            addtocart!(CB, PB);
-            PB = bl!.Product.ItemProduct(PB.ID, CB);
+            addtocart!(CB, PBForWindow);
+            PBForWindow = bl!.Product.ItemProduct(PBForWindow.ID, CB);
+            PBKeeper.Amount = PBForWindow.Amount;
+            PBKeeper.isStock = PBForWindow.isStock;
+
         }
     }
 }

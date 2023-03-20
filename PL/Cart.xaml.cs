@@ -127,6 +127,7 @@ public partial class Cart : Window
         {
             MessageBox.Show(c.Message, "can not make an order because of:" + c.Message, MessageBoxButton.OK, MessageBoxImage.Information);
         }
+        this.Close();
     }
     private void OrderItemDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
