@@ -1,5 +1,9 @@
 # dotNet5783_3410_8613
-A project in c# where we created a store of jewelry,using  the layers model( DAL, BL, PL)
+A store management system provides the manager and customer with a whole purchase process experience -
+The customer can browse, order items and track the order's delivery from the store. The manager, in addition,
+can view the stocks in the store, and manage and update the order status.
+Developed in the .NET framework using C# and WPF, following the layers architecture and various design patterns.
+
 
 
 
